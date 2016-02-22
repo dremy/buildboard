@@ -1,5 +1,7 @@
 // bower:scss
 // endbower
+@import "compass/css3/opacity";
+@import "global/variables";
 
 .browsehappy {
   margin: 0.2em 0;
@@ -10,6 +12,38 @@
 
 body {
   padding: 0;
+}
+
+.navbar-default {
+  background: $logo-gray;
+  .navbar-nav > li {
+    & > a {
+      color: $white;
+      &:hover {
+        color: $white;
+        background: lighten($logo-gray, 5%);
+      }
+    }
+    &.active > a {
+      color: darken($white,10%);
+      background: lighten($logo-gray, 10%);
+      &:hover {
+        background: lighten($logo-gray, 5%);
+        color: $white;
+      }
+    }
+  }
+}
+
+.navbar-brand {
+  padding: 5px 15px;
+}
+
+.logo {
+  height: 40px;
+  &:hover {
+    @include opacity(0.5);
+  }
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
