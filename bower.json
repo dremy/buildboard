@@ -1,0 +1,14 @@
+{
+  "name": "BuildBoard",
+  "description": "A tool for builders, flippers, and developers to organize and communicate around their investments.",
+  "version": "0.0.1",
+  "homepage": "https://github.com/dremy/buildboard",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "1.4.x",
+    "angular-mocks": "1.4.x",
+    "jquery": "~2.1.1",
+    "bootstrap": "~3.1.1"
+  }
+}
