@@ -1,7 +1,6 @@
 {
   "name": "buildboard",
-  "description": "A tool for builders, flippers, and developers to organize and communicate around th
-eir investments.",
+  "description": "A tool for builders, flippers, and developers to organize and communicate around their investments.",
   "version": "0.0.0",
   "homepage": "https://github.com/dremy/buildboard",
   "license": "MIT",
