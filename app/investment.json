@@ -1,0 +1,51 @@
+[{
+  "investment": {
+    "investmentType": "property",
+    "use": "Single Family",
+    "identifiers": {
+      "nid": 213141,
+      "zpid": 48822168
+    },
+    "listDate": "1990-11-14T00:39:54.081Z",
+    "photos": {
+      "count": "5",
+      "url": [
+        "http://photos3.zillowstatic.com/p_d/ISxfaaymf5mwrt0000000000.jpg",
+        "http://photos1.zillowstatic.com/p_d/ISp98yfgbxdzrt0000000000.jpg",
+        "http://photos3.zillowstatic.com/p_d/ISxbb4jqxtzizt0000000000.jpg",
+        "http://photos2.zillowstatic.com/p_d/ISh36mx97p52st0000000000.jpg",
+        "http://photos1.zillowstatic.com/p_d/ISp59s0ktlrlzt0000000000.jpg"
+      ]
+    },
+    "address": {
+      "street": "914 S Warsaw St",
+      "zipcode": "98108",
+      "city": "Seattle",
+      "state": "WA",
+      "latitude": "47.544309",
+      "longitude": "-122.320457"
+    },
+    "lotDetails": {
+      "lotAreaSqFt": "1088",
+      "lotWidth": "25",
+      "lotDepth": "40"
+    },
+    "propertyDetails": {
+      "bedrooms": "2",
+      "bathrooms": "1.0",
+      "finishedSqFt": "1188",
+      "foundation": "Slab",
+      "roof": "tile",
+      "cooling": "N/A",
+      "heating": "Radiant Heat",
+      "view": "Water",
+      "yearBuilt": "1902",
+      "numFloors": "1",
+      "parkingType": "Off-street"
+    },
+    "taxAssessment": {
+      "taxAssessmentYear": "2014",
+      "taxAssessmentAmount": "128000.0"
+    }
+  }
+}]

@@ -1,6 +1,6 @@
 // bower:scss
 // endbower
-@import "compass/css3/opacity";
+// @import "compass/css3";
 @import "global/variables";
 
 .browsehappy {
@@ -42,7 +42,7 @@ body {
 .logo {
   height: 40px;
   &:hover {
-    @include opacity(0.5);
+//    @include opacity(0.5);
   }
 }
 

@@ -44,11 +44,6 @@ body {
 .logo {
   height: 40px;
 }
-/* line 44, main.scss */
-.logo:hover {
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
-  opacity: 0.5;
-}
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 /* line 50, main.scss */

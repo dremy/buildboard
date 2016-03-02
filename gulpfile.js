@@ -2,6 +2,7 @@
 'use strict';
 
 var gulp = require('gulp');
+var compass = require('gulp-compass');
 var $ = require('gulp-load-plugins')();
 var openURL = require('open');
 var lazypipe = require('lazypipe');
@@ -48,6 +49,7 @@ var styles = lazypipe()
     outputStyle: 'expanded',
     precision: 10
   })
+  .pipe(compass)
   .pipe($.autoprefixer, 'last 1 version')
   .pipe(gulp.dest, '.tmp/styles');
 
