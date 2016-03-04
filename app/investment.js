@@ -1,4 +1,4 @@
-{
+var investment = {
   "investment": {
     "title": "914 S Warsaw St Seattle, WA", // = investment.property.address
     "iid": "213141", //Investment ID = NID
@@ -113,7 +113,7 @@
   }
 }
 
-//List View
+/*List View
 investment
   .title
   .iid
@@ -154,5 +154,5 @@ investment
     .units.count
   .lot
     .areaSqFt
-
+*/
 
