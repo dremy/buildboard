@@ -1,4 +1,4 @@
-[{
+{
   "investment": {
     "title": "914 S Warsaw St Seattle, WA", // = investment.property.address
     "iid": "213141", //Investment ID = NID
@@ -111,32 +111,32 @@
       }
     }
   }
-}]
+}
 
 //List View
 investment
   .title
-  .details
-    .type
-    .tags
-    .status
+  .iid
+  .type
+  .tags
+  .status
+  .targetValue
+  .acquisition // Proposal
+    .invested
+    // If status = Pending
+    .targetClose | countdown in days {"option for weeks, months"}
+  .exit  
+    // If status = Owned, Project In Progess, Closed
+    .targetExit | countdown in days {"option for weeks, months"}
+    // If status = Listed
     .targetValue
-    .acquisition // Proposal
-      .invested
-      // If status = Pending
-      .targetClose | countdown in days {"option for weeks, months"}
-    .exit  
-      // If status = Owned, Project In Progess, Closed
-      .targetExit | countdown in days {"option for weeks, months"}
-      // If status = Listed
-      .targetValue
-      .targetTakeHome
-      .listPrice
-      .listDate // In days since
-      // If status = Sold
-      .exitAmount
-      .takeHome
-      .targetTakeHome 
+    .targetTakeHome
+    .listPrice
+    .listDate // In days since
+    // If status = Sold
+    .exitAmount
+    .takeHome
+    .targetTakeHome 
   .notifications
     .count
   .documents //Paper Icon
@@ -154,4 +154,5 @@ investment
     .units.count
   .lot
     .areaSqFt
+
 
