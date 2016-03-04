@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Buildboard by dremy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Buildboard</h1>
+      <h2 class="project-tagline">Build More.</h2>
+      <a href="https://github.com/dremy/buildboard" class="btn">View on GitHub</a>
+      <a href="https://github.com/dremy/buildboard/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/dremy/buildboard/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h3>
+<a id="welcome-to-the-buildboard-api-page" class="anchor" href="#welcome-to-the-buildboard-api-page" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Welcome to the BuildBoard API Page.</h3>
+
+<p>This page serves as the central point for digesting the BuildBoard APIs and Services.</p>
+
+<h3>
+<a id="investment-api" class="anchor" href="#investment-api" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Investment API</h3>
+
+<p><code>
+[{
+  "investment": {
+    "title": "914 S Warsaw St Seattle, WA", // = investment.property.address
+    "iid": "213141", //Investment ID = NID
+    "type": "property",
+    "tags": "yr1, burien, ",
+    "status": "Closed", //Interested, Active, Pending, Closed, Owned, Project In Progress, Listed      
+    "loops": [
+      {
+        "lid": "25814", //Loop ID = NID
+        "title": "Dremy Investments, LLC" //investment.details.loop[0].title
+      }
+    ],
+    "acquisition": {
+      "type": "Construction Loan",
+      "principal": 125000, //investment.details.financing.principal
+      "currency": "USD",
+      "invested": 12000, //sum of each(investment.details.payments[0].amount);
+      "down": 0.16,
+      "earnestMoneyDown": 5000,
+      "terms": 360, //investment.details.financing.terms in months
+      "targetCloseDate": "1990-11-14T00:39:54.081Z",       
+    },
+    "exit": {
+      "targetExitDate": "1990-11-14T00:39:54.081Z",
+      "listPrice": 320000,
+      "listDate": "1990-11-14T00:39:54.081Z",
+      "exitDate": null,
+      "exitAmount": 329000,
+      "targetValue": 32000,
+      "targetTakeHome": 45000,
+      "closingPercent": 0.06,
+      "closingCosts": null,
+      "takeHome": 83000,
+    },
+    "payments": [
+      {
+        "pid": "12058",
+        "type": "Earnest Money Down",
+        "amount": 5000, //investment.details.payments[0].amount
+        "currency": "USD",
+        "date": "1990-11-14T00:39:54.081Z"          
+      },
+      {
+        "pid": "89473",
+        "type": "Down",
+        "amount": 7000,
+        "currency": "USD",
+        "date": "1990-11-14T00:39:54.081Z"
+      }
+    ],
+    "documents": {
+      "count": "4",
+      "documentId": [
+        "391231",
+        "13231",
+        "42342",
+        "76824"
+      ]
+    },
+    "lot": { //investment.lotDetails.lotAreaSqFt
+      "AreaSqFt": "1088",
+      "Width": "25",
+      "Depth": "40"
+    },
+    "property": {
+      "zpid": 48822168,
+      "address": { 
+        "street": "914 S Warsaw St", //investment.propertyDetails.address.street
+        "zipcode": "98108",
+        "city": "Seattle",
+        "state": "WA",
+        "latitude": "47.544309",
+        "longitude": "-122.320457"
+      },
+      "photos": {
+        "count": "5",
+        "url": [
+          "http://photos3.zillowstatic.com/p_d/ISxfaaymf5mwrt0000000000.jpg", //investment.propertyDetails.photos.url[0]
+          "http://photos1.zillowstatic.com/p_d/ISp98yfgbxdzrt0000000000.jpg",
+          "http://photos3.zillowstatic.com/p_d/ISxbb4jqxtzizt0000000000.jpg",
+          "http://photos2.zillowstatic.com/p_d/ISh36mx97p52st0000000000.jpg",
+          "http://photos1.zillowstatic.com/p_d/ISp59s0ktlrlzt0000000000.jpg"
+        ]
+      },
+      "use": "Single Family", //investment.propertyDetails.use
+      "units": {
+        "count": "2",
+        "ids": [
+          "23142",
+          "65786"
+        ],
+      },
+      "areaSqFt": "1188",
+      "bedrooms": "2",
+      "bathrooms": "1.0",
+      "garage": "0",
+      "finishedSqFt": "1188",
+      "foundation": "Slab",
+      "roof": "tile",
+      "cooling": "N/A",
+      "heating": "Radiant Heat",
+      "view": "Water",
+      "yearBuilt": "1902",
+      "numFloors": "1",
+      "parkingType": "Off-street",
+      "recentListDate": "1990-11-14T00:39:54.081Z",
+       "taxes": {
+        "taxAssessmentYear": "2014",
+        "taxAssessmentAmount": "128000.0"
+      }
+    }
+  }
+}]
+</code>
+This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here <a href="https://guides.github.com/features/mastering-markdown/">using GitHub Flavored Markdown</a>, select a template crafted by a designer, and publish. After your page is generated, you can check out the new <code>gh-pages</code> branch locally. If you’re using GitHub Desktop, simply sync your repository and you’ll see the new branch.</p>
+
+<h3>
+<a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Designer Templates</h3>
+
+<p>We’ve crafted some handsome templates for you to use. Go ahead and click 'Continue to layouts' to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved.</p>
+
+<h3>
+<a id="creating-pages-manually" class="anchor" href="#creating-pages-manually" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Creating pages manually</h3>
+
+<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+
+<h3>
+<a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+
+<p>You can <a href="https://help.github.com/articles/basic-writing-and-formatting-syntax/#mentioning-users-and-teams" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor’s GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+
+<h3>
+<a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Support or Contact</h3>
+
+<p>Having trouble with Pages? Check out our <a href="https://help.github.com/pages">documentation</a> or <a href="https://github.com/contact">contact support</a> and we’ll help you sort it out.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/dremy/buildboard">Buildboard</a> is maintained by <a href="https://github.com/dremy">dremy</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-74645472-2");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
