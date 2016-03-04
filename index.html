@@ -27,123 +27,122 @@
 <h3>
 <a id="investment-api" class="anchor" href="#investment-api" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Investment API</h3>
 
-<p><code>
-[{
-  "investment": {
-    "title": "914 S Warsaw St Seattle, WA", // = investment.property.address
-    "iid": "213141", //Investment ID = NID
-    "type": "property",
-    "tags": "yr1, burien, ",
-    "status": "Closed", //Interested, Active, Pending, Closed, Owned, Project In Progress, Listed      
-    "loops": [
+<div class="highlight highlight-source-json"><pre>[{
+  <span class="pl-s"><span class="pl-pds">"</span>investment<span class="pl-pds">"</span></span>: {
+    <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>914 S Warsaw St Seattle, WA<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>iid<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>213141<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>type<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>property<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>tags<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>yr1, burien, <span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>status<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Closed<span class="pl-pds">"</span></span>,      
+    <span class="pl-s"><span class="pl-pds">"</span>loops<span class="pl-pds">"</span></span>: [
       {
-        "lid": "25814", //Loop ID = NID
-        "title": "Dremy Investments, LLC" //investment.details.loop[0].title
+        <span class="pl-s"><span class="pl-pds">"</span>lid<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>25814<span class="pl-pds">"</span></span>, <span class="pl-ii">//Loop</span> <span class="pl-ii">ID</span> <span class="pl-ii">=</span> <span class="pl-ii">NID</span>
+        <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Dremy Investments, LLC<span class="pl-pds">"</span></span>
       }
     ],
-    "acquisition": {
-      "type": "Construction Loan",
-      "principal": 125000, //investment.details.financing.principal
-      "currency": "USD",
-      "invested": 12000, //sum of each(investment.details.payments[0].amount);
-      "down": 0.16,
-      "earnestMoneyDown": 5000,
-      "terms": 360, //investment.details.financing.terms in months
-      "targetCloseDate": "1990-11-14T00:39:54.081Z",       
+    <span class="pl-s"><span class="pl-pds">"</span>acquisition<span class="pl-pds">"</span></span>: {
+      <span class="pl-s"><span class="pl-pds">"</span>type<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Construction Loan<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>principal<span class="pl-pds">"</span></span>: <span class="pl-c1">125000</span>,
+      <span class="pl-s"><span class="pl-pds">"</span>currency<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>USD<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>invested<span class="pl-pds">"</span></span>: <span class="pl-c1">12000</span>,
+      <span class="pl-s"><span class="pl-pds">"</span>down<span class="pl-pds">"</span></span>: <span class="pl-c1">0.16</span>,
+      <span class="pl-s"><span class="pl-pds">"</span>earnestMoneyDown<span class="pl-pds">"</span></span>: <span class="pl-c1">5000</span>,
+      <span class="pl-s"><span class="pl-pds">"</span>terms<span class="pl-pds">"</span></span>: <span class="pl-c1">360</span>,
+      <span class="pl-s"><span class="pl-pds">"</span>targetCloseDate<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>1990-11-14T00:39:54.081Z<span class="pl-pds">"</span></span>     
     },
-    "exit": {
-      "targetExitDate": "1990-11-14T00:39:54.081Z",
-      "listPrice": 320000,
-      "listDate": "1990-11-14T00:39:54.081Z",
-      "exitDate": null,
-      "exitAmount": 329000,
-      "targetValue": 32000,
-      "targetTakeHome": 45000,
-      "closingPercent": 0.06,
-      "closingCosts": null,
-      "takeHome": 83000,
+    <span class="pl-s"><span class="pl-pds">"</span>exit<span class="pl-pds">"</span></span>: {
+      <span class="pl-s"><span class="pl-pds">"</span>targetExitDate<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>1990-11-14T00:39:54.081Z<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>listPrice<span class="pl-pds">"</span></span>: <span class="pl-c1">320000</span>,
+      <span class="pl-s"><span class="pl-pds">"</span>listDate<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>1990-11-14T00:39:54.081Z<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>exitDate<span class="pl-pds">"</span></span>: <span class="pl-c1">null</span>,
+      <span class="pl-s"><span class="pl-pds">"</span>exitAmount<span class="pl-pds">"</span></span>: <span class="pl-c1">329000</span>,
+      <span class="pl-s"><span class="pl-pds">"</span>targetValue<span class="pl-pds">"</span></span>: <span class="pl-c1">32000</span>,
+      <span class="pl-s"><span class="pl-pds">"</span>targetTakeHome<span class="pl-pds">"</span></span>: <span class="pl-c1">45000</span>,
+      <span class="pl-s"><span class="pl-pds">"</span>closingPercent<span class="pl-pds">"</span></span>: <span class="pl-c1">0.06</span>,
+      <span class="pl-s"><span class="pl-pds">"</span>closingCosts<span class="pl-pds">"</span></span>: <span class="pl-c1">null</span>,
+      <span class="pl-s"><span class="pl-pds">"</span>takeHome<span class="pl-pds">"</span></span>: <span class="pl-c1">83000</span>
     },
-    "payments": [
+    <span class="pl-s"><span class="pl-pds">"</span>payments<span class="pl-pds">"</span></span>: [
       {
-        "pid": "12058",
-        "type": "Earnest Money Down",
-        "amount": 5000, //investment.details.payments[0].amount
-        "currency": "USD",
-        "date": "1990-11-14T00:39:54.081Z"          
+        <span class="pl-s"><span class="pl-pds">"</span>pid<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>12058<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>type<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Earnest Money Down<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>amount<span class="pl-pds">"</span></span>: <span class="pl-c1">5000</span>,
+        <span class="pl-s"><span class="pl-pds">"</span>currency<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>USD<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>date<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>1990-11-14T00:39:54.081Z<span class="pl-pds">"</span></span>          
       },
       {
-        "pid": "89473",
-        "type": "Down",
-        "amount": 7000,
-        "currency": "USD",
-        "date": "1990-11-14T00:39:54.081Z"
+        <span class="pl-s"><span class="pl-pds">"</span>pid<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>89473<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>type<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Down<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>amount<span class="pl-pds">"</span></span>: <span class="pl-c1">7000</span>,
+        <span class="pl-s"><span class="pl-pds">"</span>currency<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>USD<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>date<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>1990-11-14T00:39:54.081Z<span class="pl-pds">"</span></span>
       }
     ],
-    "documents": {
-      "count": "4",
-      "documentId": [
-        "391231",
-        "13231",
-        "42342",
-        "76824"
+    <span class="pl-s"><span class="pl-pds">"</span>documents<span class="pl-pds">"</span></span>: {
+      <span class="pl-s"><span class="pl-pds">"</span>count<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>4<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>documentId<span class="pl-pds">"</span></span>: [
+        <span class="pl-s"><span class="pl-pds">"</span>391231<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>13231<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>42342<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>76824<span class="pl-pds">"</span></span>
       ]
     },
-    "lot": { //investment.lotDetails.lotAreaSqFt
-      "AreaSqFt": "1088",
-      "Width": "25",
-      "Depth": "40"
+    <span class="pl-s"><span class="pl-pds">"</span>lot<span class="pl-pds">"</span></span>: {
+      <span class="pl-s"><span class="pl-pds">"</span>AreaSqFt<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>1088<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>Width<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>25<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>Depth<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>40<span class="pl-pds">"</span></span>
     },
-    "property": {
-      "zpid": 48822168,
-      "address": { 
-        "street": "914 S Warsaw St", //investment.propertyDetails.address.street
-        "zipcode": "98108",
-        "city": "Seattle",
-        "state": "WA",
-        "latitude": "47.544309",
-        "longitude": "-122.320457"
+    <span class="pl-s"><span class="pl-pds">"</span>property<span class="pl-pds">"</span></span>: {
+      <span class="pl-s"><span class="pl-pds">"</span>zpid<span class="pl-pds">"</span></span>: <span class="pl-c1">48822168</span>,
+      <span class="pl-s"><span class="pl-pds">"</span>address<span class="pl-pds">"</span></span>: { 
+        <span class="pl-s"><span class="pl-pds">"</span>street<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>914 S Warsaw St<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>zipcode<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>98108<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>city<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Seattle<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>state<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>WA<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>latitude<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>47.544309<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>longitude<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>-122.320457<span class="pl-pds">"</span></span>
       },
-      "photos": {
-        "count": "5",
-        "url": [
-          "http://photos3.zillowstatic.com/p_d/ISxfaaymf5mwrt0000000000.jpg", //investment.propertyDetails.photos.url[0]
-          "http://photos1.zillowstatic.com/p_d/ISp98yfgbxdzrt0000000000.jpg",
-          "http://photos3.zillowstatic.com/p_d/ISxbb4jqxtzizt0000000000.jpg",
-          "http://photos2.zillowstatic.com/p_d/ISh36mx97p52st0000000000.jpg",
-          "http://photos1.zillowstatic.com/p_d/ISp59s0ktlrlzt0000000000.jpg"
+      <span class="pl-s"><span class="pl-pds">"</span>photos<span class="pl-pds">"</span></span>: {
+        <span class="pl-s"><span class="pl-pds">"</span>count<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>5<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>url<span class="pl-pds">"</span></span>: [
+          <span class="pl-s"><span class="pl-pds">"</span>http://photos3.zillowstatic.com/p_d/ISxfaaymf5mwrt0000000000.jpg<span class="pl-pds">"</span></span>,
+          <span class="pl-s"><span class="pl-pds">"</span>http://photos1.zillowstatic.com/p_d/ISp98yfgbxdzrt0000000000.jpg<span class="pl-pds">"</span></span>,
+          <span class="pl-s"><span class="pl-pds">"</span>http://photos3.zillowstatic.com/p_d/ISxbb4jqxtzizt0000000000.jpg<span class="pl-pds">"</span></span>,
+          <span class="pl-s"><span class="pl-pds">"</span>http://photos2.zillowstatic.com/p_d/ISh36mx97p52st0000000000.jpg<span class="pl-pds">"</span></span>,
+          <span class="pl-s"><span class="pl-pds">"</span>http://photos1.zillowstatic.com/p_d/ISp59s0ktlrlzt0000000000.jpg<span class="pl-pds">"</span></span>
         ]
       },
-      "use": "Single Family", //investment.propertyDetails.use
-      "units": {
-        "count": "2",
-        "ids": [
-          "23142",
-          "65786"
+      <span class="pl-s"><span class="pl-pds">"</span>use<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Single Family<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>units<span class="pl-pds">"</span></span>: {
+        <span class="pl-s"><span class="pl-pds">"</span>count<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>ids<span class="pl-pds">"</span></span>: [
+          <span class="pl-s"><span class="pl-pds">"</span>23142<span class="pl-pds">"</span></span>,
+          <span class="pl-s"><span class="pl-pds">"</span>65786<span class="pl-pds">"</span></span>
         ],
       },
-      "areaSqFt": "1188",
-      "bedrooms": "2",
-      "bathrooms": "1.0",
-      "garage": "0",
-      "finishedSqFt": "1188",
-      "foundation": "Slab",
-      "roof": "tile",
-      "cooling": "N/A",
-      "heating": "Radiant Heat",
-      "view": "Water",
-      "yearBuilt": "1902",
-      "numFloors": "1",
-      "parkingType": "Off-street",
-      "recentListDate": "1990-11-14T00:39:54.081Z",
-       "taxes": {
-        "taxAssessmentYear": "2014",
-        "taxAssessmentAmount": "128000.0"
+      <span class="pl-s"><span class="pl-pds">"</span>areaSqFt<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>1188<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>bedrooms<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>bathrooms<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>1.0<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>garage<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>0<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>finishedSqFt<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>1188<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>foundation<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Slab<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>roof<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>tile<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>cooling<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>N/A<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>heating<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Radiant Heat<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>view<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Water<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>yearBuilt<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>1902<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>numFloors<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>parkingType<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Off-street<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>recentListDate<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>1990-11-14T00:39:54.081Z<span class="pl-pds">"</span></span>,
+       <span class="pl-s"><span class="pl-pds">"</span>taxes<span class="pl-pds">"</span></span>: {
+        <span class="pl-s"><span class="pl-pds">"</span>taxAssessmentYear<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2014<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>taxAssessmentAmount<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>128000.0<span class="pl-pds">"</span></span>
       }
     }
   }
-}]
-</code>
-This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here <a href="https://guides.github.com/features/mastering-markdown/">using GitHub Flavored Markdown</a>, select a template crafted by a designer, and publish. After your page is generated, you can check out the new <code>gh-pages</code> branch locally. If you’re using GitHub Desktop, simply sync your repository and you’ll see the new branch.</p>
+}]</pre></div>
+
+<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here <a href="https://guides.github.com/features/mastering-markdown/">using GitHub Flavored Markdown</a>, select a template crafted by a designer, and publish. After your page is generated, you can check out the new <code>gh-pages</code> branch locally. If you’re using GitHub Desktop, simply sync your repository and you’ll see the new branch.</p>
 
 <h3>
 <a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Designer Templates</h3>
