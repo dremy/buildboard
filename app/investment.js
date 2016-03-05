@@ -131,6 +131,21 @@ investment
 
   
  */
+
+// Conditional logic to set in the event
+function (investment) {
+  switch (this.type) {
+    // If its a property.
+    case "property":
+      break;
+    // If its a note.
+    case "note":
+      break;
+    }
+}
+
+
+
 var loopCorporation = {
   "loop": {
     "id": "14894", 
@@ -178,18 +193,6 @@ var loopCorporation = {
   }
 }
 
-// Conditional logic to set in the event
-function (investment) {
-  switch (this.type) {
-    // If its a property.
-    case "property":
-      break;
-    // If its a note.
-    case "note":
-      break;
-    }
-}
-
 function (loop) {
     // Set User Count.
     for (var i = 0; i < this.membership.users.user.length; i++) {
@@ -217,23 +220,16 @@ function (loop) {
 }
 
 /* ADD INVESTMENT - LOOP
-investment
-  .type = property, note, [loop]
+loop
   .title = "Dremy Investments, LLC"
   .logo = "http://photos1.zillowstatic.com/p_d/ISp98yfgbxdzrt0000000000.jpg"
-  .loop
-    .type = casual, sole propertiership, corporation, partnership
-    .incorporationType = LLC, S-Corps, C-Corps, LP, LLP
-    .user
-      .singular = person, member, partner
-      .plural = people, members, partners
-      .count = 4
-        .users[0]
-
-
-
-
-  
+  .type = casual, sole propertiership, corporation, partnership
+  .incorporationType = LLC, S-Corps, C-Corps, LP, LLP
+  .user
+    .singular = person, member, partner
+    .plural = people, members, partners
+    .count = 4
+      .users[0]  
  */
 
 /* LIST INVESTMENT
