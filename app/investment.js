@@ -131,10 +131,9 @@ investment
 
   
  */
-var investmentLoopCorporation = {
-  "investment": {
-    "id": "14894",
-    "type": "loop", 
+var loopCorporation = {
+  "loop": {
+    "id": "14894", 
     "title": "drēmy Investments, LLC",
     "logo": "http://photos1.zillowstatic.com/p_d/ISp98yfgbxdzrt0000000000.jpg",
     "acquisition": {
@@ -146,37 +145,35 @@ var investmentLoopCorporation = {
       "date": null,
       "amount": 20000,
     },
-    "loop": {
-      "type": "corporation", //investment.loop.type
-      "corporationType": "LLC",
-      "totalShares": 1000,
-      "users": {
-        "singular": "member", //investment.loop.users.singular
-        "plural": "members",
-        "count": "4",
-        "user": [
-          {
-            "uid": "2", //investment.loop.users.user[0].uid
-            "share": .25,
-            "payment": 5500
-          },
-          {
-            "uid": "527",
-            "share": .25,
-            "payment": 5500
-          },            
-          {
-            "uid": "793",
-            "share": .25,           
-            "payment": 5500
-          },
-          {
-            "uid": "1416",
-            "share": .25,
-            "payment": 5500
-          },
-        ]
-      }
+    "type": "corporation", //investment.loop.type
+    "corporationType": "LLC",
+    "totalShares": 1000,
+    "users": {
+      "singular": "member", //investment.loop.users.singular
+      "plural": "members",
+      "count": "4",
+      "user": [
+        {
+          "uid": "2", //investment.loop.users.user[0].uid
+          "share": .25,
+          "payment": 5500 //Maybe change to payment ID
+        },
+        {
+          "uid": "527",
+          "share": .25,
+          "payment": 5500
+        },            
+        {
+          "uid": "793",
+          "share": .25,           
+          "payment": 5500
+        },
+        {
+          "uid": "1416",
+          "share": .25,
+          "payment": 5500
+        },
+      ]
     }
   }
 }
@@ -190,31 +187,32 @@ function (investment) {
     // If its a note.
     case "note":
       break;
-    // If its a loop.
-    case "loop":
-      // Set User Count.
-      for (var i = 0; i < this.loop.users.user.length; i++) {
-        this.loop.users.count = i;
-      };
-      // If the Loop type is...
-      switch (this.loop.type) {
-        case "casual":
-          // Set the language to use for users.
-          this.loop.users.singular = "person";
-          this.loop.users.plural = "people";        
-          break;
-        case "corporation":
-          var incorporationType = ["LLC", "S-Corps", "C-Corps"];
-          this.loop.users.singular = "member";
-          this.loop.users.plural = "members";
-          break;
-        case "partnership":
-          var incorporationType = ["LP", "LLP", "GP"];
-          this.loop.users.singular = "partner";
-          this.loop.users.plural = "partners";
-          break;
-      }
-      break;
+    }
+}
+
+function (loop) {
+    // Set User Count.
+    for (var i = 0; i < this.membership.users.user.length; i++) {
+      this.membership.users.count = i;
+    };
+    // If the Loop type is...
+    switch (this.type) {
+      case "casual":
+        // Set the language to use for users.
+        this.loop.users.singular = "person";
+        this.loop.users.plural = "people";        
+        break;
+      case "corporation":
+        var incorporationType = ["LLC", "S-Corps", "C-Corps"];
+        this.loop.users.singular = "member";
+        this.loop.users.plural = "members";
+        break;
+      case "partnership":
+        var incorporationType = ["LP", "LLP", "GP"];
+        this.loop.users.singular = "partner";
+        this.loop.users.plural = "partners";
+        break;
+    }
   };  
 }
 
