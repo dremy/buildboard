@@ -12,56 +12,92 @@ body {
 }
 
 /* line 17, main.scss */
-.navbar-default {
-  background: #354043;
-}
-/* line 20, main.scss */
-.navbar-default .navbar-nav > li > a {
-  color: #FFF;
-}
-/* line 22, main.scss */
-.navbar-default .navbar-nav > li > a:hover {
-  color: #FFF;
-  background: #404e51;
-}
-/* line 27, main.scss */
-.navbar-default .navbar-nav > li.active > a {
-  color: #e6e6e6;
-  background: #4c5b5f;
-}
-/* line 30, main.scss */
-.navbar-default .navbar-nav > li.active > a:hover {
-  background: #404e51;
-  color: #FFF;
+.navbar {
+  border-radius: 0px;
 }
 
-/* line 38, main.scss */
+/* line 21, main.scss */
+.navbar-default {
+  background: linear-gradient(to right, #296ad4 0%, #1e89e5 100%);
+  padding: 10px 0;
+}
+/* line 24, main.scss */
+.navbar-default .navbar-nav {
+  float: right;
+}
+/* line 26, main.scss */
+.navbar-default .navbar-nav > li {
+  margin: 0px 5px;
+}
+/* line 28, main.scss */
+.navbar-default .navbar-nav > li > a {
+  color: #FFF;
+  line-height: 10px;
+}
+/* line 31, main.scss */
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+  color: #FFF;
+  background: #5287de;
+}
+/* line 39, main.scss */
+.navbar-default .navbar-nav > .sign-in > a {
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #FFF;
+  background: #4ca1ea;
+}
+/* line 46, main.scss */
+.navbar-default .navbar-nav > .active > a {
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  color: #FFF;
+  background-color: transparent;
+}
+/* line 50, main.scss */
+.navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+  color: #FFF;
+  background-color: transparent;
+}
+/* line 58, main.scss */
+.navbar-default .navbar-toggle {
+  border-color: #FFF;
+}
+/* line 60, main.scss */
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+  background-color: #4ca1ea;
+}
+/* line 64, main.scss */
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #FFF;
+}
+
+/* line 70, main.scss */
 .navbar-brand {
   padding: 5px 15px;
 }
 
-/* line 42, main.scss */
+/* line 74, main.scss */
 .logo {
   height: 40px;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
-/* line 50, main.scss */
-.header,
-.marketing,
-.footer {
+/* line 82, main.scss */
+.marketing {
   padding-left: 15px;
   padding-right: 15px;
 }
 
 /* Custom page header */
-/* line 58, main.scss */
+/* line 88, main.scss */
 .header {
   border-bottom: 1px solid #e5e5e5;
   margin-bottom: 10px;
   /* Make the masthead heading the same height as the navigation */
 }
-/* line 63, main.scss */
+/* line 93, main.scss */
 .header h3 {
   margin-top: 0;
   margin-bottom: 0;
@@ -70,49 +106,55 @@ body {
 }
 
 /* Custom page footer */
-/* line 72, main.scss */
+/* line 102, main.scss */
 .footer {
   padding-top: 19px;
   color: #777;
   border-top: 1px solid #e5e5e5;
 }
 
-/* line 78, main.scss */
+/* line 108, main.scss */
 .container-narrow > hr {
   margin: 30px 0;
 }
 
 /* Main marketing message and sign up button */
-/* line 83, main.scss */
+/* line 113, main.scss */
 .jumbotron {
   text-align: center;
   border-bottom: 1px solid #e5e5e5;
 }
-/* line 87, main.scss */
+/* line 117, main.scss */
 .jumbotron .btn {
   font-size: 21px;
   padding: 14px 24px;
 }
 
 /* Supporting marketing content */
-/* line 94, main.scss */
+/* line 124, main.scss */
 .marketing {
   margin: 40px 0;
 }
-/* line 97, main.scss */
+/* line 127, main.scss */
 .marketing p + h4 {
   margin-top: 28px;
 }
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-  /* line 104, main.scss */
+  /* line 134, main.scss */
   .container {
     max-width: 730px;
+    margin: 0  auto;
+  }
+
+  /* line 139, main.scss */
+  .container-wide {
+    max-width: 960px;
   }
 
   /* Remove the padding we set earlier */
-  /* line 109, main.scss */
+  /* line 144, main.scss */
   .header,
   .marketing,
   .footer {
@@ -121,13 +163,13 @@ body {
   }
 
   /* Space out the masthead */
-  /* line 116, main.scss */
+  /* line 151, main.scss */
   .header {
     margin-bottom: 30px;
   }
 
   /* Remove the bottom border on the jumbotron for visual effect */
-  /* line 120, main.scss */
+  /* line 155, main.scss */
   .jumbotron {
     border-bottom: 0;
   }

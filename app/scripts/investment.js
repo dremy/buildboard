@@ -4,7 +4,8 @@ var investment = {
     "iid": "213141", //Investment ID = NID
     "type": "property",
     "tags": "yr1, burien, ",
-    "status": "Closed", //Interested, Active, Pending, Closed, Owned, Project In Progress, Listed      
+    "status": "Closed", //Interested, Proposed, Active, Pending
+    "own": true, //false
     "loops": [
       {
         "lid": "25814", //Loop ID = NID
@@ -241,7 +242,6 @@ var activityPost = {
 var photo = {
   "photo": {
     "phid": "6165087384",
-    "uid": "5127845",
     "postDate": "1990-11-14T00:39:54.081Z",
     "url": "http://photos1.zillowstatic.com/p_d/ISp98yfgbxdzrt0000000000.jpg",
     "title": "914 S Warsaw St Rear View",

@@ -16,7 +16,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'angular-drupal'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -24,6 +25,21 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         controllerAs: 'main'
+      })
+      .when('/features', {
+        templateUrl: 'views/features.html',
+        controller: 'FeaturesCtrl',
+        controllerAs: 'features'
+      })
+      .when('/sign-in', {
+        templateUrl: 'views/signin.html',
+        controller: 'SigninCtrl',
+        controllerAs: 'about'
+      })      
+      .when('/activity', {
+        templateUrl: 'views/activity.html',
+        controller: 'ActivityCtrl',
+        controllerAs: 'activity'
       })
       .when('/about', {
         templateUrl: 'views/about.html',
@@ -33,4 +49,36 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-  });
+  })
+  .run(['drupal', function(drupal) {
+    
+    drupal.node_load(1).then(function(node) {
+      console.log(node.title);
+    });
+
+    /*var node = {
+      type: "property",
+      title: "Something new",
+      language: "und",
+      body: {
+        und: [ { value: 'How are you?' }]
+      }
+    };
+
+    drupal.node_save(node).then(function(data) {
+      alert('Created node:' + data.nid);
+    });*/
+
+  }]);
+
+
+// The angular-drupal configuration settings for my simple app.
+angular
+  .module('angular-drupal').config(function($provide) {
+
+    $provide.value('drupalSettings', {
+      sitePath: 'http://api.buildboard.io',
+      endpoint: 'investment/v1'
+    });
+
+});

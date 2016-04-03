@@ -10,7 +10,7 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -23,9 +23,9 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="header">
+    <header class="header">
       <div class="navbar navbar-default" role="navigation">
-        <div class="container">
+        <div class="container container-wide">
           <div class="navbar-header">
 
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
@@ -35,30 +35,32 @@
               <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" href="#/"><img class="logo" src="images/logo-icon-white-300x73.png" alt="BuildBoard Logo" title="Build Board Logo"></a>
+            <a class="navbar-brand" href="#/"><img class="logo" src="images/logo-white-300x43.png" alt="BuildBoard Logo" title="Build Board Logo"></a>
           </div>
 
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#/">Find</a></li>
-              <li><a ng-href="#/about">Create</a></li>
-              <li><a ng-href="#/">Add</a></li>
+              <li class="active"><a href="#/features">Features</a></li>
+              <li><a ng-href="#/developers">Developers</a></li>
+              <li><a ng-href="#/flippers">Flippers</a></li>
+              <li class="sign-in"><a ng-href="#/sign-in">Sign In</a></li>
             </ul>
           </div>
         </div>
       </div>
-    </div>
+    </header>
 
-    <div class="container">
-    <div ng-view=""></div>
-    </div>
+    <section class="container container-wide">
+      <div ng-view=""></div>
+    </section>
 
-    <div class="footer">
-      <div class="container">
+    <footer class="footer">
+      <div class="container container-wide">
         <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
+        <li><a ng-href="#/about">About</a></li>
       </div>
-    </div>
+    </footer>
 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -74,23 +76,24 @@
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="/bower_components/jquery/dist/jquery.js"></script>
-    <script src="/bower_components/angular/angular.js"></script>
-    <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="/bower_components/angular-animate/angular-animate.js"></script>
-    <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="/bower_components/angular-messages/angular-messages.js"></script>
-    <script src="/bower_components/angular-resource/angular-resource.js"></script>
-    <script src="/bower_components/angular-route/angular-route.js"></script>
-    <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="/bower_components/angular-touch/angular-touch.js"></script>
-    <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/activity.js"></script>
         <script src="scripts/controllers/about.js"></script>
         <!-- endbuild -->
 </body>

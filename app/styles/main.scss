@@ -1,6 +1,6 @@
 // bower:scss
 // endbower
-// @import "compass/css3";
+@import "compass/css3";
 @import "global/variables";
 
 .browsehappy {
@@ -14,23 +14,55 @@ body {
   padding: 0;
 }
 
+.navbar {
+  border-radius: 0px;
+}
+
 .navbar-default {
-  background: $logo-gray;
-  .navbar-nav > li {
-    & > a {
-      color: $white;
-      &:hover {
+  background: linear-gradient(to right, $primary-blue 0%, $secondary-blue 100%);
+  padding: 10px 0;
+  .navbar-nav {
+    float: right;
+    > li {
+      margin: 0px 5px;
+      > a {
         color: $white;
-        background: lighten($logo-gray, 5%);
+        line-height: 10px;        
+        &:hover,
+        &:focus {
+          color: $white;
+          background: lighten($primary-blue, 10%);
+        }
       }
     }
-    &.active > a {
-      color: darken($white,10%);
-      background: lighten($logo-gray, 10%);
-      &:hover {
-        background: lighten($logo-gray, 5%);
-        color: $white;
+    > .sign-in {
+      > a {
+        @include border-radius(4px);
+        border: 1px solid $white;
+        background: lighten($secondary-blue, 10%);    
       }
+    }
+    > .active {
+      > a {
+        @include border-radius(4px);
+        color: $white;
+        background-color: transparent; //lighten($primary-blue, 10%);
+        &:hover,
+        &:focus {
+          color: $white;
+          background-color: transparent; //lighten($primary-blue, 10%);
+        }
+      }
+    }
+  }
+  .navbar-toggle {
+    border-color: $white;
+    &:hover,
+    &:focus {
+      background-color: lighten($secondary-blue, 10%);
+    }
+    .icon-bar {
+      background-color: $white;
     }
   }
 }
@@ -47,9 +79,7 @@ body {
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
+.marketing {
   padding-left: 15px;
   padding-right: 15px;
 }
@@ -103,6 +133,11 @@ body {
 @media screen and (min-width: 768px) {
   .container {
     max-width: 730px;
+    margin: 0  auto;
+  }
+
+  .container-wide {
+    max-width: 960px;
   }
 
   /* Remove the padding we set earlier */
