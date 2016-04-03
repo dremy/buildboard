@@ -35,7 +35,7 @@ body {
         }
       }
     }
-    > .sign-in {
+    > .nav-login {
       > a {
         @include border-radius(4px);
         border: 1px solid $white;
@@ -114,10 +114,10 @@ body {
   text-align: center;
   border-bottom: 1px solid #e5e5e5;
 
-  .btn {
+  /*.btn {
     font-size: 21px;
     padding: 14px 24px;
-  }
+  }*/
 }
 
 /* Supporting marketing content */
@@ -127,6 +127,87 @@ body {
   p + h4 {
     margin-top: 28px;
   }
+}
+.form-register,
+.form-login {
+  .long-label input {
+    padding-left: 95px;
+  }
+  input {
+    padding-left: 55px;
+    &:focus,
+    &.valid {
+      padding-left: 0px;
+    }
+  }
+  .form-submit {
+    margin: 0 auto;
+    width: 160px;
+    display: block;
+  }
+}
+
+.content-intro {
+  text-align: center;
+  p {
+    font-size: 1.5em;
+  }
+  ul {
+    width: 220px;
+    margin: 0 auto;
+    text-align: left;
+    li {
+      list-style-type: disc;
+    }
+  }
+}
+
+.btn {
+  @include box-shadow(none);
+  &:hover,
+  &:focus {
+    @include box-shadow(none);
+    color: $white;
+    &.blue {
+      background-color: $primary-blue;
+    }
+  }
+}
+
+input:not([type]):focus:not([readonly]),
+input[type=text]:focus:not([readonly]),
+input[type=password]:focus:not([readonly]),
+input[type=email]:focus:not([readonly]),
+input[type=url]:focus:not([readonly]),
+input[type=time]:focus:not([readonly]),
+input[type=date]:focus:not([readonly]),
+input[type=datetime]:focus:not([readonly]),
+input[type=datetime-local]:focus:not([readonly]),
+input[type=tel]:focus:not([readonly]),
+input[type=number]:focus:not([readonly]),
+input[type=search]:focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+  border-bottom: 1px solid $material-blue;
+  box-shadow: 0 1px 0 0 $material-blue;
+  & + label {
+    color: $material-blue;
+  }
+}
+
+.original-blue-text {
+  color: $original-blue;
+}
+
+.original-blue {
+  background-color: $original-blue;
+}
+
+.primary-blue-text {
+  color: $primary-blue;
+}
+
+.secondary-blue-text {
+  color: $secondary-blue;
 }
 
 /* Responsive: Portrait tablets and up */

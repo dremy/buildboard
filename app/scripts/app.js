@@ -31,11 +31,16 @@ angular
         controller: 'FeaturesCtrl',
         controllerAs: 'features'
       })
-      .when('/sign-in', {
-        templateUrl: 'views/signin.html',
-        controller: 'SigninCtrl',
-        controllerAs: 'about'
+      .when('/user/login', {
+        templateUrl: 'views/login.html',
+        controller: 'LoginCtrl',
+        controllerAs: 'login'
       })      
+      .when('/user/register', {
+        templateUrl: 'views/register.html',
+        controller: 'RegisterCtrl',
+        controllerAs: 'register'
+      })
       .when('/activity', {
         templateUrl: 'views/activity.html',
         controller: 'ActivityCtrl',

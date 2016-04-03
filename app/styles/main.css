@@ -40,7 +40,7 @@ body {
   background: #5287de;
 }
 /* line 39, main.scss */
-.navbar-default .navbar-nav > .sign-in > a {
+.navbar-default .navbar-nav > .nav-login > a {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
@@ -123,11 +123,10 @@ body {
 .jumbotron {
   text-align: center;
   border-bottom: 1px solid #e5e5e5;
-}
-/* line 117, main.scss */
-.jumbotron .btn {
-  font-size: 21px;
-  padding: 14px 24px;
+  /*.btn {
+    font-size: 21px;
+    padding: 14px 24px;
+  }*/
 }
 
 /* Supporting marketing content */
@@ -140,21 +139,136 @@ body {
   margin-top: 28px;
 }
 
+/* line 133, main.scss */
+.form-register .long-label input,
+.form-login .long-label input {
+  padding-left: 95px;
+}
+/* line 136, main.scss */
+.form-register input,
+.form-login input {
+  padding-left: 55px;
+}
+/* line 138, main.scss */
+.form-register input:focus, .form-register input.valid,
+.form-login input:focus,
+.form-login input.valid {
+  padding-left: 0px;
+}
+/* line 143, main.scss */
+.form-register .form-submit,
+.form-login .form-submit {
+  margin: 0 auto;
+  width: 160px;
+  display: block;
+}
+
+/* line 150, main.scss */
+.content-intro {
+  text-align: center;
+}
+/* line 152, main.scss */
+.content-intro p {
+  font-size: 1.5em;
+}
+/* line 155, main.scss */
+.content-intro ul {
+  width: 220px;
+  margin: 0 auto;
+  text-align: left;
+}
+/* line 159, main.scss */
+.content-intro ul li {
+  list-style-type: disc;
+}
+
+/* line 165, main.scss */
+.btn {
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+/* line 167, main.scss */
+.btn:hover, .btn:focus {
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #FFF;
+}
+/* line 171, main.scss */
+.btn:hover.blue, .btn:focus.blue {
+  background-color: #296ad4;
+}
+
+/* line 177, main.scss */
+input:not([type]):focus:not([readonly]),
+input[type=text]:focus:not([readonly]),
+input[type=password]:focus:not([readonly]),
+input[type=email]:focus:not([readonly]),
+input[type=url]:focus:not([readonly]),
+input[type=time]:focus:not([readonly]),
+input[type=date]:focus:not([readonly]),
+input[type=datetime]:focus:not([readonly]),
+input[type=datetime-local]:focus:not([readonly]),
+input[type=tel]:focus:not([readonly]),
+input[type=number]:focus:not([readonly]),
+input[type=search]:focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+  border-bottom: 1px solid #2196F3;
+  box-shadow: 0 1px 0 0 #2196F3;
+}
+/* line 192, main.scss */
+input:not([type]):focus:not([readonly]) + label,
+input[type=text]:focus:not([readonly]) + label,
+input[type=password]:focus:not([readonly]) + label,
+input[type=email]:focus:not([readonly]) + label,
+input[type=url]:focus:not([readonly]) + label,
+input[type=time]:focus:not([readonly]) + label,
+input[type=date]:focus:not([readonly]) + label,
+input[type=datetime]:focus:not([readonly]) + label,
+input[type=datetime-local]:focus:not([readonly]) + label,
+input[type=tel]:focus:not([readonly]) + label,
+input[type=number]:focus:not([readonly]) + label,
+input[type=search]:focus:not([readonly]) + label,
+textarea.materialize-textarea:focus:not([readonly]) + label {
+  color: #2196F3;
+}
+
+/* line 197, main.scss */
+.original-blue-text {
+  color: #48aafe;
+}
+
+/* line 201, main.scss */
+.original-blue {
+  background-color: #48aafe;
+}
+
+/* line 205, main.scss */
+.primary-blue-text {
+  color: #296ad4;
+}
+
+/* line 209, main.scss */
+.secondary-blue-text {
+  color: #1e89e5;
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-  /* line 134, main.scss */
+  /* line 215, main.scss */
   .container {
     max-width: 730px;
     margin: 0  auto;
   }
 
-  /* line 139, main.scss */
+  /* line 220, main.scss */
   .container-wide {
     max-width: 960px;
   }
 
   /* Remove the padding we set earlier */
-  /* line 144, main.scss */
+  /* line 225, main.scss */
   .header,
   .marketing,
   .footer {
@@ -163,13 +277,13 @@ body {
   }
 
   /* Space out the masthead */
-  /* line 151, main.scss */
+  /* line 232, main.scss */
   .header {
     margin-bottom: 30px;
   }
 
   /* Remove the bottom border on the jumbotron for visual effect */
-  /* line 155, main.scss */
+  /* line 236, main.scss */
   .jumbotron {
     border-bottom: 0;
   }
