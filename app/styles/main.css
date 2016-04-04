@@ -240,18 +240,43 @@ body {
   color: #2196F3;
 }
 
-/* line 213, main.scss */
-.card-action a {
+/* line 214, main.scss */
+.card .card-action a.blue-text:not(.btn):not(.btn-large):not(.btn-floating) {
   color: #2196F3;
 }
-
-/* line 217, main.scss */
-.card-title {
+/* line 218, main.scss */
+.card .card-title {
   background: linear-gradient(rgba(0, 0, 0, 0), #000000);
   width: 100%;
 }
-
 /* line 222, main.scss */
+.card.card-add {
+  border: 1px dashed #ccc;
+  background: #f5f5f5;
+  padding-top: 120px;
+  box-shadow: none;
+  padding-bottom: 20px;
+  min-height: 360px;
+}
+/* line 229, main.scss */
+.card.card-add:hover {
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+/* line 232, main.scss */
+a .card.card-add {
+  color: #333;
+}
+/* line 234, main.scss */
+a .card.card-add:hover {
+  color: #555;
+  background: #f3f3f3;
+}
+/* line 239, main.scss */
+.card.card-add .glyphicon-plus {
+  font-size: 4em;
+}
+
+/* line 245, main.scss */
 input:not([type]):focus:not([readonly]),
 input[type=text]:focus:not([readonly]),
 input[type=password]:focus:not([readonly]),
@@ -268,7 +293,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
   border-bottom: 1px solid #2196F3;
   box-shadow: 0 1px 0 0 #2196F3;
 }
-/* line 237, main.scss */
+/* line 260, main.scss */
 input:not([type]):focus:not([readonly]) + label,
 input[type=text]:focus:not([readonly]) + label,
 input[type=password]:focus:not([readonly]) + label,
@@ -285,41 +310,41 @@ textarea.materialize-textarea:focus:not([readonly]) + label {
   color: #2196F3;
 }
 
-/* line 242, main.scss */
+/* line 265, main.scss */
 .original-blue-text {
   color: #48aafe;
 }
 
-/* line 246, main.scss */
+/* line 269, main.scss */
 .original-blue {
   background-color: #48aafe;
 }
 
-/* line 250, main.scss */
+/* line 273, main.scss */
 .primary-blue-text {
   color: #296ad4;
 }
 
-/* line 254, main.scss */
+/* line 277, main.scss */
 .secondary-blue-text {
   color: #1e89e5;
 }
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-  /* line 260, main.scss */
+  /* line 283, main.scss */
   .container {
     max-width: 730px;
     margin: 0  auto;
   }
 
-  /* line 265, main.scss */
+  /* line 288, main.scss */
   .container-wide {
     max-width: 960px;
   }
 
   /* Remove the padding we set earlier */
-  /* line 270, main.scss */
+  /* line 293, main.scss */
   .header,
   .marketing,
   .footer {
@@ -328,13 +353,13 @@ textarea.materialize-textarea:focus:not([readonly]) + label {
   }
 
   /* Space out the masthead */
-  /* line 277, main.scss */
+  /* line 300, main.scss */
   .header {
     margin-bottom: 30px;
   }
 
   /* Remove the bottom border on the jumbotron for visual effect */
-  /* line 281, main.scss */
+  /* line 304, main.scss */
   .jumbotron {
     border-bottom: 0;
   }

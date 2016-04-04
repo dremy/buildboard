@@ -210,13 +210,36 @@ body {
   }
 }
 
-.card-action a {
-  color: $material-blue;
-}
+.card {
+  .card-action a.blue-text:not(.btn):not(.btn-large):not(.btn-floating) {
+    color: $material-blue;
+  }
 
-.card-title {
-  background: linear-gradient(transparent, #000);
-  width: 100%;
+  .card-title {
+    background: linear-gradient(transparent, #000);
+    width: 100%;
+  }
+  &.card-add {
+    border: 1px dashed #ccc;
+    background: #f5f5f5;
+    padding-top: 120px;
+    box-shadow: none;    
+    padding-bottom: 20px;
+    min-height: 360px;
+    &:hover {
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    }
+    a & {
+      color: #333;
+      &:hover {
+        color: #555;
+        background: #f3f3f3;
+      }
+    }
+    .glyphicon-plus {
+      font-size: 4em;
+    }
+  }
 }
 
 input:not([type]):focus:not([readonly]),
