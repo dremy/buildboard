@@ -139,23 +139,54 @@ body {
   margin-top: 28px;
 }
 
-/* line 133, main.scss */
+/* line 134, main.scss */
+.form-register hr,
+.form-login hr {
+  display: none;
+}
+/* line 138, main.scss */
+.form-register .hr,
+.form-login .hr {
+  box-sizing: border-box;
+  margin: 24px 0 24px;
+  color: #999;
+  position: relative;
+  display: block;
+  height: 0;
+  width: 100%;
+  border-top: 1px #ccc solid;
+  text-align: center;
+}
+/* line 148, main.scss */
+.form-register .hr span.center-align,
+.form-login .hr span.center-align {
+  box-sizing: border-box;
+  display: inline-block;
+  position: relative;
+  top: -0.65em;
+  padding: 2px 10px;
+  margin: 0 auto;
+  background-color: white;
+  line-height: 1em;
+  font-size: 20px;
+}
+/* line 160, main.scss */
 .form-register .long-label input,
 .form-login .long-label input {
   padding-left: 95px;
 }
-/* line 136, main.scss */
+/* line 163, main.scss */
 .form-register input,
 .form-login input {
   padding-left: 55px;
 }
-/* line 138, main.scss */
+/* line 165, main.scss */
 .form-register input:focus, .form-register input.valid,
 .form-login input:focus,
 .form-login input.valid {
   padding-left: 0px;
 }
-/* line 143, main.scss */
+/* line 170, main.scss */
 .form-register .form-submit,
 .form-login .form-submit {
   margin: 0 auto;
@@ -163,44 +194,64 @@ body {
   display: block;
 }
 
-/* line 150, main.scss */
+/* line 177, main.scss */
 .content-intro {
   text-align: center;
 }
-/* line 152, main.scss */
+/* line 179, main.scss */
 .content-intro p {
   font-size: 1.5em;
 }
-/* line 155, main.scss */
+/* line 182, main.scss */
 .content-intro ul {
   width: 220px;
   margin: 0 auto;
   text-align: left;
 }
-/* line 159, main.scss */
+/* line 186, main.scss */
 .content-intro ul li {
   list-style-type: disc;
 }
 
-/* line 165, main.scss */
+/* line 192, main.scss */
 .btn {
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-/* line 167, main.scss */
+/* line 194, main.scss */
 .btn:hover, .btn:focus {
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
   box-shadow: none;
   color: #FFF;
 }
-/* line 171, main.scss */
+/* line 198, main.scss */
 .btn:hover.blue, .btn:focus.blue {
   background-color: #296ad4;
 }
 
-/* line 177, main.scss */
+/* line 205, main.scss */
+.tabs .tab a.active {
+  border-bottom: 3px solid #2196F3;
+}
+/* line 208, main.scss */
+.tabs .tab a.blue-text {
+  color: #2196F3;
+}
+
+/* line 213, main.scss */
+.card-action a {
+  color: #2196F3;
+}
+
+/* line 217, main.scss */
+.card-title {
+  background: linear-gradient(rgba(0, 0, 0, 0), #000000);
+  width: 100%;
+}
+
+/* line 222, main.scss */
 input:not([type]):focus:not([readonly]),
 input[type=text]:focus:not([readonly]),
 input[type=password]:focus:not([readonly]),
@@ -217,7 +268,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
   border-bottom: 1px solid #2196F3;
   box-shadow: 0 1px 0 0 #2196F3;
 }
-/* line 192, main.scss */
+/* line 237, main.scss */
 input:not([type]):focus:not([readonly]) + label,
 input[type=text]:focus:not([readonly]) + label,
 input[type=password]:focus:not([readonly]) + label,
@@ -234,41 +285,41 @@ textarea.materialize-textarea:focus:not([readonly]) + label {
   color: #2196F3;
 }
 
-/* line 197, main.scss */
+/* line 242, main.scss */
 .original-blue-text {
   color: #48aafe;
 }
 
-/* line 201, main.scss */
+/* line 246, main.scss */
 .original-blue {
   background-color: #48aafe;
 }
 
-/* line 205, main.scss */
+/* line 250, main.scss */
 .primary-blue-text {
   color: #296ad4;
 }
 
-/* line 209, main.scss */
+/* line 254, main.scss */
 .secondary-blue-text {
   color: #1e89e5;
 }
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-  /* line 215, main.scss */
+  /* line 260, main.scss */
   .container {
     max-width: 730px;
     margin: 0  auto;
   }
 
-  /* line 220, main.scss */
+  /* line 265, main.scss */
   .container-wide {
     max-width: 960px;
   }
 
   /* Remove the padding we set earlier */
-  /* line 225, main.scss */
+  /* line 270, main.scss */
   .header,
   .marketing,
   .footer {
@@ -277,13 +328,13 @@ textarea.materialize-textarea:focus:not([readonly]) + label {
   }
 
   /* Space out the masthead */
-  /* line 232, main.scss */
+  /* line 277, main.scss */
   .header {
     margin-bottom: 30px;
   }
 
   /* Remove the bottom border on the jumbotron for visual effect */
-  /* line 236, main.scss */
+  /* line 281, main.scss */
   .jumbotron {
     border-bottom: 0;
   }

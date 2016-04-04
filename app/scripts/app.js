@@ -41,6 +41,16 @@ angular
         controller: 'RegisterCtrl',
         controllerAs: 'register'
       })
+      .when('/portfolio', {
+        templateUrl: 'views/portfolio.html',
+        controller: 'PortfolioCtrl',
+        controllerAs: 'portfolio'
+      })
+      .when('/property', {
+        templateUrl: 'views/property.html',
+        controller: 'PropertyCtrl',
+        controllerAs: 'property'
+      })
       .when('/activity', {
         templateUrl: 'views/activity.html',
         controller: 'ActivityCtrl',

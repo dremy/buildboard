@@ -40,7 +40,23 @@
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '1761433604092838',
+          xfbml      : true,
+          version    : 'v2.5'
+        });
+      };
 
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
     <!-- Add your site or application content here -->
     <header class="header">
       <div class="navbar navbar-default" role="navigation">
@@ -79,7 +95,7 @@
         <p>Made with <span class="glyphicon glyphicon-heart"></span> by drēmy Investments, LLC</p>
         <div class="row">
           <div class="col s4">
-            <p>Item</p>
+            <p></p>
           </div>
           <ul class="footer-primary-menu col s4">
             <li><a ng-href="#/about">About</a></li>
@@ -123,11 +139,25 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/activity.js"></script>
-        <script src="scripts/controllers/about.js"></script>
-        <!-- endbuild -->
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/activity.js"></script>
+    <script src="scripts/controllers/about.js"></script>
+    <script src="scripts/controllers/register.js"></script>
+    <script src="scripts/controllers/login.js"></script>
+    <script src="scripts/controllers/portfolio.js"></script>
+    <script src="scripts/controllers/property.js"></script>
+    <!-- endbuild -->
+    <script>
+      $(document).ready(function(){
+        $('ul.tabs').tabs();
+        var tab = $('ul.tabs .tab');
+        tab.click(function(){
+            tab.removeClass("active");
+            $(this).addClass("active");
+        });
+      });
+    </script>
 </body>
 </html>

@@ -4,11 +4,11 @@
  * @ngdoc function
  * @name buildboardApp.controller:AboutCtrl
  * @description
- * # ActivityCtrl
+ * # RegisterCtrl
  * Controller of the buildboardApp
  */
 angular.module('buildboardApp')
-  .controller('ActivityCtrl', function () {
+  .controller('RegisterCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
