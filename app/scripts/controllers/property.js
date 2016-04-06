@@ -8,10 +8,8 @@
  * Controller of the buildboardApp
  */
 angular.module('buildboardApp')
-  .controller('PropertyCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('PropertyCtrl', PropertyCtrl);
+
+  function PropertyCtrl($scope) {
+
+  }

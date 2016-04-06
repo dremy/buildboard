@@ -16,6 +16,7 @@ body {
 
 .navbar {
   border-radius: 0px;
+  border: none;
 }
 
 .navbar-default {
@@ -86,8 +87,6 @@ body {
 
 /* Custom page header */
 .header {
-  border-bottom: 1px solid #e5e5e5;
-  margin-bottom: 10px;
 
   /* Make the masthead heading the same height as the navigation */
   h3 {
@@ -96,6 +95,17 @@ body {
     line-height: 40px;
     padding-bottom: 19px;
   }
+}
+
+/* Custom page utility bar */
+.utility-bar {
+  background: #f5f5f5;
+  border-bottom: 1px solid #e5e5e5;
+//  background: lighten($secondary-blue, 50%);
+//  border-bottom: 1px solid lighten($primary-blue, 50%);  
+  padding: 15px;
+  color: #777;
+  margin-top: -20px;
 }
 
 /* Custom page footer */
@@ -211,13 +221,34 @@ body {
 }
 
 .card {
-  .card-action a.blue-text:not(.btn):not(.btn-large):not(.btn-floating) {
-    color: $material-blue;
+  .card-action {
+    a {
+      &.blue-text:not(.btn):not(.btn-large):not(.btn-floating) {
+        color: $material-blue;
+      }
+      i {
+        vertical-align: top;
+      }
+      span {
+        top:2px;
+        display: inline-block;
+      }
+    }
   }
 
-  .card-title {
-    background: linear-gradient(transparent, #000);
-    width: 100%;
+  .card-image {
+    .card-title {
+      background: linear-gradient(transparent, #000);
+      width: 100%;
+      padding-bottom: 30px;
+    }
+    .card-subtitle {
+      color: $white;
+      padding: 0px 0px 10px 23px;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+    }
   }
   &.card-add {
     border: 1px dashed #ccc;
@@ -225,11 +256,11 @@ body {
     padding-top: 120px;
     box-shadow: none;    
     padding-bottom: 20px;
-    min-height: 360px;
+    min-height: 315px;
     &:hover {
       box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
     }
-    a & {
+    button & {
       color: #333;
       &:hover {
         color: #555;
@@ -239,6 +270,17 @@ body {
     .glyphicon-plus {
       font-size: 4em;
     }
+  }
+}
+
+button.add-card {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  &:hover {
+    background: transparent;
   }
 }
 
@@ -297,9 +339,10 @@ textarea.materialize-textarea:focus:not([readonly]) {
     padding-right: 0;
   }
   /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
+  .container-first {
+    margin-top: 30px;
   }
+
   /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {
     border-bottom: 0;

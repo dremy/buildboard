@@ -64,14 +64,14 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-  })
-  .run(['drupal', function(drupal) {
+  });
+  /*.run(['drupal', function(drupal) {
     
     drupal.node_load(1).then(function(node) {
       console.log(node.title);
     });
 
-    /*var node = {
+    var node = {
       type: "property",
       title: "Something new",
       language: "und",
@@ -84,13 +84,11 @@ angular
       alert('Created node:' + data.nid);
     });*/
 
-  }]);
-
 
 // The angular-drupal configuration settings for my simple app.
 angular
   .module('angular-drupal').config(function($provide) {
-
+    // Name our endpoint for Angular Drupal
     $provide.value('drupalSettings', {
       sitePath: 'http://api.buildboard.io',
       endpoint: 'investment/v1'

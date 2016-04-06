@@ -14,32 +14,33 @@ body {
 /* line 17, main.scss */
 .navbar {
   border-radius: 0px;
+  border: none;
 }
 
-/* line 21, main.scss */
+/* line 22, main.scss */
 .navbar-default {
   background: linear-gradient(to right, #296ad4 0%, #1e89e5 100%);
   padding: 10px 0;
 }
-/* line 24, main.scss */
+/* line 25, main.scss */
 .navbar-default .navbar-nav {
   float: right;
 }
-/* line 26, main.scss */
+/* line 27, main.scss */
 .navbar-default .navbar-nav > li {
   margin: 0px 5px;
 }
-/* line 28, main.scss */
+/* line 29, main.scss */
 .navbar-default .navbar-nav > li > a {
   color: #FFF;
   line-height: 10px;
 }
-/* line 31, main.scss */
+/* line 32, main.scss */
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
   color: #FFF;
   background: #5287de;
 }
-/* line 39, main.scss */
+/* line 40, main.scss */
 .navbar-default .navbar-nav > .nav-login > a {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
@@ -47,7 +48,7 @@ body {
   border: 1px solid #FFF;
   background: #4ca1ea;
 }
-/* line 46, main.scss */
+/* line 47, main.scss */
 .navbar-default .navbar-nav > .active > a {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
@@ -55,49 +56,47 @@ body {
   color: #FFF;
   background-color: transparent;
 }
-/* line 50, main.scss */
+/* line 51, main.scss */
 .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
   color: #FFF;
   background-color: transparent;
 }
-/* line 58, main.scss */
+/* line 59, main.scss */
 .navbar-default .navbar-toggle {
   border-color: #FFF;
 }
-/* line 60, main.scss */
+/* line 61, main.scss */
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
   background-color: #4ca1ea;
 }
-/* line 64, main.scss */
+/* line 65, main.scss */
 .navbar-default .navbar-toggle .icon-bar {
   background-color: #FFF;
 }
 
-/* line 70, main.scss */
+/* line 71, main.scss */
 .navbar-brand {
   padding: 5px 15px;
 }
 
-/* line 74, main.scss */
+/* line 75, main.scss */
 .logo {
   height: 40px;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
-/* line 82, main.scss */
+/* line 83, main.scss */
 .marketing {
   padding-left: 15px;
   padding-right: 15px;
 }
 
 /* Custom page header */
-/* line 88, main.scss */
+/* line 89, main.scss */
 .header {
-  border-bottom: 1px solid #e5e5e5;
-  margin-bottom: 10px;
   /* Make the masthead heading the same height as the navigation */
 }
-/* line 93, main.scss */
+/* line 92, main.scss */
 .header h3 {
   margin-top: 0;
   margin-bottom: 0;
@@ -105,21 +104,31 @@ body {
   padding-bottom: 19px;
 }
 
+/* Custom page utility bar */
+/* line 101, main.scss */
+.utility-bar {
+  background: #f5f5f5;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 15px;
+  color: #777;
+  margin-top: -20px;
+}
+
 /* Custom page footer */
-/* line 102, main.scss */
+/* line 112, main.scss */
 .footer {
   padding-top: 19px;
   color: #777;
   border-top: 1px solid #e5e5e5;
 }
 
-/* line 108, main.scss */
+/* line 118, main.scss */
 .container-narrow > hr {
   margin: 30px 0;
 }
 
 /* Main marketing message and sign up button */
-/* line 113, main.scss */
+/* line 123, main.scss */
 .jumbotron {
   text-align: center;
   border-bottom: 1px solid #e5e5e5;
@@ -130,21 +139,21 @@ body {
 }
 
 /* Supporting marketing content */
-/* line 124, main.scss */
+/* line 134, main.scss */
 .marketing {
   margin: 40px 0;
 }
-/* line 127, main.scss */
+/* line 137, main.scss */
 .marketing p + h4 {
   margin-top: 28px;
 }
 
-/* line 134, main.scss */
+/* line 144, main.scss */
 .form-register hr,
 .form-login hr {
   display: none;
 }
-/* line 138, main.scss */
+/* line 148, main.scss */
 .form-register .hr,
 .form-login .hr {
   box-sizing: border-box;
@@ -157,7 +166,7 @@ body {
   border-top: 1px #ccc solid;
   text-align: center;
 }
-/* line 148, main.scss */
+/* line 158, main.scss */
 .form-register .hr span.center-align,
 .form-login .hr span.center-align {
   box-sizing: border-box;
@@ -170,23 +179,23 @@ body {
   line-height: 1em;
   font-size: 20px;
 }
-/* line 160, main.scss */
+/* line 170, main.scss */
 .form-register .long-label input,
 .form-login .long-label input {
   padding-left: 95px;
 }
-/* line 163, main.scss */
+/* line 173, main.scss */
 .form-register input,
 .form-login input {
   padding-left: 55px;
 }
-/* line 165, main.scss */
+/* line 175, main.scss */
 .form-register input:focus, .form-register input.valid,
 .form-login input:focus,
 .form-login input.valid {
   padding-left: 0px;
 }
-/* line 170, main.scss */
+/* line 180, main.scss */
 .form-register .form-submit,
 .form-login .form-submit {
   margin: 0 auto;
@@ -194,89 +203,120 @@ body {
   display: block;
 }
 
-/* line 177, main.scss */
+/* line 187, main.scss */
 .content-intro {
   text-align: center;
 }
-/* line 179, main.scss */
+/* line 189, main.scss */
 .content-intro p {
   font-size: 1.5em;
 }
-/* line 182, main.scss */
+/* line 192, main.scss */
 .content-intro ul {
   width: 220px;
   margin: 0 auto;
   text-align: left;
 }
-/* line 186, main.scss */
+/* line 196, main.scss */
 .content-intro ul li {
   list-style-type: disc;
 }
 
-/* line 192, main.scss */
+/* line 202, main.scss */
 .btn {
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-/* line 194, main.scss */
+/* line 204, main.scss */
 .btn:hover, .btn:focus {
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
   box-shadow: none;
   color: #FFF;
 }
-/* line 198, main.scss */
+/* line 208, main.scss */
 .btn:hover.blue, .btn:focus.blue {
   background-color: #296ad4;
 }
 
-/* line 205, main.scss */
+/* line 215, main.scss */
 .tabs .tab a.active {
   border-bottom: 3px solid #2196F3;
 }
-/* line 208, main.scss */
+/* line 218, main.scss */
 .tabs .tab a.blue-text {
   color: #2196F3;
 }
 
-/* line 214, main.scss */
+/* line 226, main.scss */
 .card .card-action a.blue-text:not(.btn):not(.btn-large):not(.btn-floating) {
   color: #2196F3;
 }
-/* line 218, main.scss */
-.card .card-title {
+/* line 229, main.scss */
+.card .card-action a i {
+  vertical-align: top;
+}
+/* line 232, main.scss */
+.card .card-action a span {
+  top: 2px;
+  display: inline-block;
+}
+/* line 240, main.scss */
+.card .card-image .card-title {
   background: linear-gradient(rgba(0, 0, 0, 0), #000000);
   width: 100%;
+  padding-bottom: 30px;
 }
-/* line 222, main.scss */
+/* line 245, main.scss */
+.card .card-image .card-subtitle {
+  color: #FFF;
+  padding: 0px 0px 10px 23px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+/* line 253, main.scss */
 .card.card-add {
   border: 1px dashed #ccc;
   background: #f5f5f5;
   padding-top: 120px;
   box-shadow: none;
   padding-bottom: 20px;
-  min-height: 360px;
+  min-height: 315px;
 }
-/* line 229, main.scss */
+/* line 260, main.scss */
 .card.card-add:hover {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
-/* line 232, main.scss */
-a .card.card-add {
+/* line 263, main.scss */
+button .card.card-add {
   color: #333;
 }
-/* line 234, main.scss */
-a .card.card-add:hover {
+/* line 265, main.scss */
+button .card.card-add:hover {
   color: #555;
   background: #f3f3f3;
 }
-/* line 239, main.scss */
+/* line 270, main.scss */
 .card.card-add .glyphicon-plus {
   font-size: 4em;
 }
 
-/* line 245, main.scss */
+/* line 276, main.scss */
+button.add-card {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+/* line 282, main.scss */
+button.add-card:hover {
+  background: transparent;
+}
+
+/* line 287, main.scss */
 input:not([type]):focus:not([readonly]),
 input[type=text]:focus:not([readonly]),
 input[type=password]:focus:not([readonly]),
@@ -293,7 +333,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
   border-bottom: 1px solid #2196F3;
   box-shadow: 0 1px 0 0 #2196F3;
 }
-/* line 260, main.scss */
+/* line 302, main.scss */
 input:not([type]):focus:not([readonly]) + label,
 input[type=text]:focus:not([readonly]) + label,
 input[type=password]:focus:not([readonly]) + label,
@@ -310,41 +350,41 @@ textarea.materialize-textarea:focus:not([readonly]) + label {
   color: #2196F3;
 }
 
-/* line 265, main.scss */
+/* line 307, main.scss */
 .original-blue-text {
   color: #48aafe;
 }
 
-/* line 269, main.scss */
+/* line 311, main.scss */
 .original-blue {
   background-color: #48aafe;
 }
 
-/* line 273, main.scss */
+/* line 315, main.scss */
 .primary-blue-text {
   color: #296ad4;
 }
 
-/* line 277, main.scss */
+/* line 319, main.scss */
 .secondary-blue-text {
   color: #1e89e5;
 }
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-  /* line 283, main.scss */
+  /* line 325, main.scss */
   .container {
     max-width: 730px;
     margin: 0  auto;
   }
 
-  /* line 288, main.scss */
+  /* line 330, main.scss */
   .container-wide {
     max-width: 960px;
   }
 
   /* Remove the padding we set earlier */
-  /* line 293, main.scss */
+  /* line 335, main.scss */
   .header,
   .marketing,
   .footer {
@@ -353,13 +393,13 @@ textarea.materialize-textarea:focus:not([readonly]) + label {
   }
 
   /* Space out the masthead */
-  /* line 300, main.scss */
-  .header {
-    margin-bottom: 30px;
+  /* line 342, main.scss */
+  .container-first {
+    margin-top: 30px;
   }
 
   /* Remove the bottom border on the jumbotron for visual effect */
-  /* line 304, main.scss */
+  /* line 347, main.scss */
   .jumbotron {
     border-bottom: 0;
   }

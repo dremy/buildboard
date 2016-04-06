@@ -1,0 +1,36 @@
+<h3>Add Property</h3>
+    <div class="row">  
+      <div class="input-field col s6">
+          <i class="material-icons blue-text">view_module location_on</i>
+          <input placeholder="555 S Main St" ng-model="propertyAddress"/>
+          <label for="location">Location</label>
+      </div>
+      <div class="input-field col s6">
+          <i class="material-icons blue-text">view_module location_on</i>
+          <input placeholder="Zip" ng-model="propertyCityStateZip"/>
+          <label for="zip">Zip</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+          <input placeholder="img/XXXX.jpg" ng-model="propertyPhoto"/>
+          <label for="photo">Photo</label>
+      </div>
+      <div class="input-field col s12">
+          <textarea ng-model="propertyTeaser">
+          </textarea>
+          <label for="teaser">Teaser</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s6">
+        <button class="btn btn-large wave-effect blue" ng-disabled="propertyAddress==''" ng-click="addProperty()">
+          Add
+        </button>
+      </div>
+      <div class="col s6">
+        <button class="btn btn-large wave-effect red" ng-click="cancelProperty()">
+          Cancel
+        </button>
+      </div>
+    </div>
