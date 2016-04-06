@@ -81,7 +81,6 @@ angular.module('buildboardApp')
       $scope.properties[selected].featurePhoto = $scope.propertyPhoto;
       $scope.properties[selected].teaser = $scope.propertyTeaser;
       setView('propertiesList');
-      console.log("save");
     }
   }
 

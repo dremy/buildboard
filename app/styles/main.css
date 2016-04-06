@@ -180,22 +180,6 @@ body {
   font-size: 20px;
 }
 /* line 170, main.scss */
-.form-register .long-label input,
-.form-login .long-label input {
-  padding-left: 95px;
-}
-/* line 173, main.scss */
-.form-register input,
-.form-login input {
-  padding-left: 55px;
-}
-/* line 175, main.scss */
-.form-register input:focus, .form-register input.valid,
-.form-login input:focus,
-.form-login input.valid {
-  padding-left: 0px;
-}
-/* line 180, main.scss */
 .form-register .form-submit,
 .form-login .form-submit {
   margin: 0 auto;
@@ -203,72 +187,72 @@ body {
   display: block;
 }
 
-/* line 187, main.scss */
+/* line 177, main.scss */
 .content-intro {
   text-align: center;
 }
-/* line 189, main.scss */
+/* line 179, main.scss */
 .content-intro p {
   font-size: 1.5em;
 }
-/* line 192, main.scss */
+/* line 182, main.scss */
 .content-intro ul {
   width: 220px;
   margin: 0 auto;
   text-align: left;
 }
-/* line 196, main.scss */
+/* line 186, main.scss */
 .content-intro ul li {
   list-style-type: disc;
 }
 
-/* line 202, main.scss */
+/* line 192, main.scss */
 .btn {
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-/* line 204, main.scss */
+/* line 194, main.scss */
 .btn:hover, .btn:focus {
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
   box-shadow: none;
   color: #FFF;
 }
-/* line 208, main.scss */
+/* line 198, main.scss */
 .btn:hover.blue, .btn:focus.blue {
   background-color: #296ad4;
 }
 
-/* line 215, main.scss */
+/* line 205, main.scss */
 .tabs .tab a.active {
   border-bottom: 3px solid #2196F3;
 }
-/* line 218, main.scss */
+/* line 208, main.scss */
 .tabs .tab a.blue-text {
   color: #2196F3;
 }
 
-/* line 226, main.scss */
+/* line 216, main.scss */
 .card .card-action a.blue-text:not(.btn):not(.btn-large):not(.btn-floating) {
   color: #2196F3;
 }
-/* line 229, main.scss */
+/* line 219, main.scss */
 .card .card-action a i {
   vertical-align: top;
 }
-/* line 232, main.scss */
+/* line 222, main.scss */
 .card .card-action a span {
   top: 2px;
   display: inline-block;
 }
-/* line 240, main.scss */
+/* line 230, main.scss */
 .card .card-image .card-title {
   background: linear-gradient(rgba(0, 0, 0, 0), #000000);
   width: 100%;
   padding-bottom: 30px;
 }
-/* line 245, main.scss */
+/* line 235, main.scss */
 .card .card-image .card-subtitle {
   color: #FFF;
   padding: 0px 0px 10px 23px;
@@ -276,7 +260,7 @@ body {
   left: 0;
   bottom: 0;
 }
-/* line 253, main.scss */
+/* line 243, main.scss */
 .card.card-add {
   border: 1px dashed #ccc;
   background: #f5f5f5;
@@ -285,25 +269,25 @@ body {
   padding-bottom: 20px;
   min-height: 315px;
 }
-/* line 260, main.scss */
+/* line 250, main.scss */
 .card.card-add:hover {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
-/* line 263, main.scss */
+/* line 253, main.scss */
 button .card.card-add {
   color: #333;
 }
-/* line 265, main.scss */
+/* line 255, main.scss */
 button .card.card-add:hover {
   color: #555;
   background: #f3f3f3;
 }
-/* line 270, main.scss */
+/* line 260, main.scss */
 .card.card-add .glyphicon-plus {
   font-size: 4em;
 }
 
-/* line 276, main.scss */
+/* line 266, main.scss */
 button.add-card {
   width: 100%;
   margin: 0;
@@ -311,12 +295,12 @@ button.add-card {
   border: none;
   background: transparent;
 }
-/* line 282, main.scss */
+/* line 272, main.scss */
 button.add-card:hover {
   background: transparent;
 }
 
-/* line 287, main.scss */
+/* line 277, main.scss */
 input:not([type]):focus:not([readonly]),
 input[type=text]:focus:not([readonly]),
 input[type=password]:focus:not([readonly]),
@@ -333,7 +317,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
   border-bottom: 1px solid #2196F3;
   box-shadow: 0 1px 0 0 #2196F3;
 }
-/* line 302, main.scss */
+/* line 292, main.scss */
 input:not([type]):focus:not([readonly]) + label,
 input[type=text]:focus:not([readonly]) + label,
 input[type=password]:focus:not([readonly]) + label,
@@ -350,41 +334,76 @@ textarea.materialize-textarea:focus:not([readonly]) + label {
   color: #2196F3;
 }
 
-/* line 307, main.scss */
+/* line 298, main.scss */
+.long-label .ng-not-empty,
+.long-label input:placeholder-shown {
+  padding-left: 95px;
+}
+
+/* line 304, main.scss */
+.medium-label .ng-not-empty,
+.medium-label input:placeholder-shown {
+  padding-left: 75px;
+}
+
+/* line 310, main.scss */
+.small-label .ng-not-empty,
+.small-label input:placeholder-shown {
+  padding-left: 35px;
+}
+
+/* line 315, main.scss */
+input.ng-not-empty,
+input:placeholder-shown {
+  padding-left: 55px;
+}
+/* line 318, main.scss */
+input.ng-not-empty:focus, input.ng-not-empty.valid,
+input:placeholder-shown:focus,
+input:placeholder-shown.valid {
+  padding-left: 0px;
+}
+
+/* line 324, main.scss */
+.input-field .prefix.active.blue-text {
+  color: #2196F3;
+}
+
+/* line 328, main.scss */
 .original-blue-text {
   color: #48aafe;
 }
 
-/* line 311, main.scss */
+/* line 332, main.scss */
 .original-blue {
   background-color: #48aafe;
 }
 
-/* line 315, main.scss */
+/* line 336, main.scss */
 .primary-blue-text {
   color: #296ad4;
 }
 
-/* line 319, main.scss */
+/* line 340, main.scss */
 .secondary-blue-text {
   color: #1e89e5;
 }
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-  /* line 325, main.scss */
+  /* line 346, main.scss */
   .container {
     max-width: 730px;
     margin: 0  auto;
   }
 
-  /* line 330, main.scss */
+  /* line 351, main.scss */
   .container-wide {
     max-width: 960px;
   }
 
   /* Remove the padding we set earlier */
-  /* line 335, main.scss */
+  /* line 356, main.scss */
   .header,
   .marketing,
   .footer {
@@ -393,13 +412,13 @@ textarea.materialize-textarea:focus:not([readonly]) + label {
   }
 
   /* Space out the masthead */
-  /* line 342, main.scss */
+  /* line 363, main.scss */
   .container-first {
     margin-top: 30px;
   }
 
   /* Remove the bottom border on the jumbotron for visual effect */
-  /* line 347, main.scss */
+  /* line 368, main.scss */
   .jumbotron {
     border-bottom: 0;
   }
