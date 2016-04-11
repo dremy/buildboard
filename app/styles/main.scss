@@ -189,6 +189,7 @@ body {
   }
 }
 
+/* Buttons */
 .btn {
   @include box-shadow(none);
   &:hover,
@@ -198,9 +199,17 @@ body {
     &.blue {
       background-color: $primary-blue;
     }
+    &.red {
+      background-color: darken($material-red, 20%);
+    }
   }
 }
 
+.btn-vertical {
+  line-height: 1.2em;
+}
+
+/* Tabs */
 .tabs .tab a {
   &.active {
     border-bottom: 3px solid $material-blue;
@@ -210,9 +219,14 @@ body {
   }
 }
 
+/* Cards  */
 .card {
   .card-action {
-    a {
+    button {
+      &:hover {
+        background: $white;
+        color: darken($material-blue, 20%);
+      }
       &.blue-text:not(.btn):not(.btn-large):not(.btn-floating) {
         color: $material-blue;
       }
@@ -274,6 +288,19 @@ button.add-card {
   }
 }
 
+.property-type {
+  
+}
+.property-units {
+
+}
+.property-tag {
+  i {
+    vertical-align: middle;
+  }
+}
+
+/* Forms */
 input:not([type]):focus:not([readonly]),
 input[type=text]:focus:not([readonly]),
 input[type=password]:focus:not([readonly]),
@@ -289,6 +316,10 @@ input[type=search]:focus:not([readonly]),
 textarea.materialize-textarea:focus:not([readonly]) {
   border-bottom: 1px solid $material-blue;
   box-shadow: 0 1px 0 0 $material-blue;
+  &.ng-dirty {
+    border-bottom: 1px solid $material-red;
+    box-shadow: 0 1px 0 0 $material-red;
+  }
   & + label {
     color: $material-blue;
   }
@@ -325,6 +356,7 @@ input:placeholder-shown {
   color: $material-blue;
 }
 
+/* Colors */
 .original-blue-text {
   color: $original-blue;
 }

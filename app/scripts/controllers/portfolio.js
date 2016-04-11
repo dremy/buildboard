@@ -39,7 +39,9 @@ angular.module('buildboardApp')
 
     function startAddProperty() {
       $scope.propertyAddress = '';
-      $scope.propertyCityStateZip = '';
+      $scope.propertyCity = '';
+      $scope.propertyState = '';
+      $scope.propertyZip = '';
       $scope.propertyPhoto = '';      
       $scope.propertyTeaser = '';
       setView('addProperty');
@@ -51,13 +53,17 @@ angular.module('buildboardApp')
 
     function addProperty() {
       var propertyAddress = $scope.propertyAddress;
-      var propertyCityStateZip = $scope.propertyCityStateZip;
+      var propertyCity = $scope.propertyCity;
+      var propertyState = $scope.propertyState;
+      var propertyZip = $scope.propertyZip; 
       var propertyPhoto = $scope.propertyPhoto;      
       var propertyTeaser = $scope.propertyTeaser;
 
       var property = {
-        "title": propertyAddress,
-        "subtitle": propertyCityStateZip,
+        "address": propertyAddress,
+        "city": propertyCity,
+        "state": propertyState,
+        "zip": propertyZip,
         "featurePhoto": propertyPhoto,
         "teaser": propertyTeaser 
       }
@@ -68,16 +74,20 @@ angular.module('buildboardApp')
 
     function startEditProperty(index) {
       selected = index;
-      $scope.propertyAddress = $scope.properties[index].title;
-      $scope.propertyCityStateZip = $scope.properties[index].subtitle;
+      $scope.propertyAddress = $scope.properties[index].address;
+      $scope.propertyCity = $scope.properties[index].city;
+      $scope.propertyState = $scope.properties[index].state;
+      $scope.propertyZip = $scope.properties[index].zip;
       $scope.propertyPhoto = $scope.properties[index].featurePhoto;      
       $scope.propertyTeaser = $scope.properties[index].teaser;      
       setView('editProperty');
     }
 
     function saveProperty() {
-      $scope.properties[selected].title = $scope.propertyAddress;
-      $scope.properties[selected].subtitle = $scope.propertyCityStateZip;
+      $scope.properties[selected].address = $scope.propertyAddress;
+      $scope.properties[selected].city = $scope.propertyCity;
+      $scope.properties[selected].state = $scope.propertyState;
+      $scope.properties[selected].zip = $scope.propertyZip;
       $scope.properties[selected].featurePhoto = $scope.propertyPhoto;
       $scope.properties[selected].teaser = $scope.propertyTeaser;
       setView('propertiesList');

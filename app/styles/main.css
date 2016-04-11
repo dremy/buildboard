@@ -206,53 +206,70 @@ body {
   list-style-type: disc;
 }
 
-/* line 192, main.scss */
+/* Buttons */
+/* line 193, main.scss */
 .btn {
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-/* line 194, main.scss */
+/* line 195, main.scss */
 .btn:hover, .btn:focus {
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
   box-shadow: none;
   color: #FFF;
 }
-/* line 198, main.scss */
+/* line 199, main.scss */
 .btn:hover.blue, .btn:focus.blue {
   background-color: #296ad4;
 }
+/* line 202, main.scss */
+.btn:hover.red, .btn:focus.red {
+  background-color: #ba160a;
+}
 
-/* line 205, main.scss */
+/* line 208, main.scss */
+.btn-vertical {
+  line-height: 1.2em;
+}
+
+/* Tabs */
+/* line 214, main.scss */
 .tabs .tab a.active {
   border-bottom: 3px solid #2196F3;
 }
-/* line 208, main.scss */
+/* line 217, main.scss */
 .tabs .tab a.blue-text {
   color: #2196F3;
 }
 
-/* line 216, main.scss */
-.card .card-action a.blue-text:not(.btn):not(.btn-large):not(.btn-floating) {
+/* Cards  */
+/* line 226, main.scss */
+.card .card-action button:hover {
+  background: #FFF;
+  color: #0960a5;
+}
+/* line 230, main.scss */
+.card .card-action button.blue-text:not(.btn):not(.btn-large):not(.btn-floating) {
   color: #2196F3;
 }
-/* line 219, main.scss */
-.card .card-action a i {
+/* line 233, main.scss */
+.card .card-action button i {
   vertical-align: top;
 }
-/* line 222, main.scss */
-.card .card-action a span {
+/* line 236, main.scss */
+.card .card-action button span {
   top: 2px;
   display: inline-block;
 }
-/* line 230, main.scss */
+/* line 244, main.scss */
 .card .card-image .card-title {
   background: linear-gradient(rgba(0, 0, 0, 0), #000000);
   width: 100%;
   padding-bottom: 30px;
 }
-/* line 235, main.scss */
+/* line 249, main.scss */
 .card .card-image .card-subtitle {
   color: #FFF;
   padding: 0px 0px 10px 23px;
@@ -260,7 +277,7 @@ body {
   left: 0;
   bottom: 0;
 }
-/* line 243, main.scss */
+/* line 257, main.scss */
 .card.card-add {
   border: 1px dashed #ccc;
   background: #f5f5f5;
@@ -269,25 +286,25 @@ body {
   padding-bottom: 20px;
   min-height: 315px;
 }
-/* line 250, main.scss */
+/* line 264, main.scss */
 .card.card-add:hover {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
-/* line 253, main.scss */
+/* line 267, main.scss */
 button .card.card-add {
   color: #333;
 }
-/* line 255, main.scss */
+/* line 269, main.scss */
 button .card.card-add:hover {
   color: #555;
   background: #f3f3f3;
 }
-/* line 260, main.scss */
+/* line 274, main.scss */
 .card.card-add .glyphicon-plus {
   font-size: 4em;
 }
 
-/* line 266, main.scss */
+/* line 280, main.scss */
 button.add-card {
   width: 100%;
   margin: 0;
@@ -295,12 +312,18 @@ button.add-card {
   border: none;
   background: transparent;
 }
-/* line 272, main.scss */
+/* line 286, main.scss */
 button.add-card:hover {
   background: transparent;
 }
 
-/* line 277, main.scss */
+/* line 298, main.scss */
+.property-tag i {
+  vertical-align: middle;
+}
+
+/* Forms */
+/* line 304, main.scss */
 input:not([type]):focus:not([readonly]),
 input[type=text]:focus:not([readonly]),
 input[type=password]:focus:not([readonly]),
@@ -317,7 +340,24 @@ textarea.materialize-textarea:focus:not([readonly]) {
   border-bottom: 1px solid #2196F3;
   box-shadow: 0 1px 0 0 #2196F3;
 }
-/* line 292, main.scss */
+/* line 319, main.scss */
+input:not([type]):focus:not([readonly]).ng-dirty,
+input[type=text]:focus:not([readonly]).ng-dirty,
+input[type=password]:focus:not([readonly]).ng-dirty,
+input[type=email]:focus:not([readonly]).ng-dirty,
+input[type=url]:focus:not([readonly]).ng-dirty,
+input[type=time]:focus:not([readonly]).ng-dirty,
+input[type=date]:focus:not([readonly]).ng-dirty,
+input[type=datetime]:focus:not([readonly]).ng-dirty,
+input[type=datetime-local]:focus:not([readonly]).ng-dirty,
+input[type=tel]:focus:not([readonly]).ng-dirty,
+input[type=number]:focus:not([readonly]).ng-dirty,
+input[type=search]:focus:not([readonly]).ng-dirty,
+textarea.materialize-textarea:focus:not([readonly]).ng-dirty {
+  border-bottom: 1px solid #F44336;
+  box-shadow: 0 1px 0 0 #F44336;
+}
+/* line 323, main.scss */
 input:not([type]):focus:not([readonly]) + label,
 input[type=text]:focus:not([readonly]) + label,
 input[type=password]:focus:not([readonly]) + label,
@@ -334,76 +374,77 @@ textarea.materialize-textarea:focus:not([readonly]) + label {
   color: #2196F3;
 }
 
-/* line 298, main.scss */
+/* line 329, main.scss */
 .long-label .ng-not-empty,
 .long-label input:placeholder-shown {
   padding-left: 95px;
 }
 
-/* line 304, main.scss */
+/* line 335, main.scss */
 .medium-label .ng-not-empty,
 .medium-label input:placeholder-shown {
   padding-left: 75px;
 }
 
-/* line 310, main.scss */
+/* line 341, main.scss */
 .small-label .ng-not-empty,
 .small-label input:placeholder-shown {
   padding-left: 35px;
 }
 
-/* line 315, main.scss */
+/* line 346, main.scss */
 input.ng-not-empty,
 input:placeholder-shown {
   padding-left: 55px;
 }
-/* line 318, main.scss */
+/* line 349, main.scss */
 input.ng-not-empty:focus, input.ng-not-empty.valid,
 input:placeholder-shown:focus,
 input:placeholder-shown.valid {
   padding-left: 0px;
 }
 
-/* line 324, main.scss */
+/* line 355, main.scss */
 .input-field .prefix.active.blue-text {
   color: #2196F3;
 }
 
-/* line 328, main.scss */
+/* Colors */
+/* line 360, main.scss */
 .original-blue-text {
   color: #48aafe;
 }
 
-/* line 332, main.scss */
+/* line 364, main.scss */
 .original-blue {
   background-color: #48aafe;
 }
 
-/* line 336, main.scss */
+/* line 368, main.scss */
 .primary-blue-text {
   color: #296ad4;
 }
 
-/* line 340, main.scss */
+/* line 372, main.scss */
 .secondary-blue-text {
   color: #1e89e5;
 }
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-  /* line 346, main.scss */
+  /* line 378, main.scss */
   .container {
     max-width: 730px;
     margin: 0  auto;
   }
 
-  /* line 351, main.scss */
+  /* line 383, main.scss */
   .container-wide {
     max-width: 960px;
   }
 
   /* Remove the padding we set earlier */
-  /* line 356, main.scss */
+  /* line 388, main.scss */
   .header,
   .marketing,
   .footer {
@@ -412,13 +453,13 @@ input:placeholder-shown.valid {
   }
 
   /* Space out the masthead */
-  /* line 363, main.scss */
+  /* line 395, main.scss */
   .container-first {
     margin-top: 30px;
   }
 
   /* Remove the bottom border on the jumbotron for visual effect */
-  /* line 368, main.scss */
+  /* line 400, main.scss */
   .jumbotron {
     border-bottom: 0;
   }
