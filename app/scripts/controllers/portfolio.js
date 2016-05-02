@@ -68,7 +68,7 @@ function PortfolioCtrl($scope) {
     $('.datepicker').pickadate({
       selectMonths: true, // Creates a dropdown to control month
       selectYears: 15, // Creates a dropdown of 15 years to control year
-      format: 'mmmm dth, yyyy', // April 15, 2016
+      format: 'mmmm d, yyyy', // April 15, 2016
     });
     $('select').material_select();
   }
@@ -98,12 +98,20 @@ function PortfolioCtrl($scope) {
   }
 
   function addProperty() {
+    var file = document.getElementById('photo').files[0]
+    /*r = new FileReader();
+    r.onloadend = function(e){
+      var data = e.target.result;
+      //send you binary data via $http or $resource or do anything else with it
+    }*/
+    //r.readAsBinaryString(f);
+    
     var property = {
       "address": this.property.address,
       "city": this.property.city,
       "state": this.property.state,
       "zip": this.property.zip,
-      "teaserPhoto": this.property.teaserPhoto,
+      "teaserPhoto": "images/" + file.name,
       "teaser": this.property.teaser, 
       "propertyType": this.property.propertyType,
       "units": this.property.units,
