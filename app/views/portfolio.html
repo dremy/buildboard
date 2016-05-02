@@ -1,15 +1,15 @@
 <div class="portfolio">
   <div class="utility-bar">
-    <div class="container container-wide">
+    <div class="container container-wide" ng-show="view=='propertiesList'">
       <div class="row">
-        <div class="input-field col s4">
+        <div class="input-field col l4 m12">
             <i class="material-icons prefix blue-text">search</i>
             <input placeholder="Search" ng-model="searchKey"/> 
         </div>
-        <div class="col s4">
+        <div class="col l4 m6 s12">
           <a href="#" class="blue-text"><i class="material-icons blue-text">chat_bubble</i></a>
         </div>
-        <div class="col s4 right-align">
+        <div class="col l4 m6 s12 right-align">
           <a href="#" class="blue-text"><i class="material-icons blue-text">view_list</i></a> 
           <a href="#" class="blue-text"><i class="material-icons blue-text">view_module</i></a>          
           <a href="#" class="blue-text"><i class="material-icons blue-text">location_on</i></a>
@@ -18,11 +18,25 @@
       </div>          
     </div>
   </div>
-  <div class="container container-wide container-first">
-    <div class="row">
+  <div class="container container-wide container-first" ng-show="view=='propertiesList'">      
+    <div class="row center-align">
       <div class="col s12">
-        <div class="row" ng-show="view=='propertiesList'">
-          <div class="col s12 m6 l4">
+        <div class="row">
+          <div class="col l4 m4 s12">
+            <h2 class="blue-text">{{properties.length}}</h2>
+            <p><strong>Properties</strong></p>
+          </div>
+          <div class="col l4 m4 s12">
+            <h2 class="blue-text">{{propertiesUnits}}</h2>
+            <p><strong>Units</strong></p>
+          </div>
+          <div class="col l4 m4 s12">
+            <h2 class="blue-text">{{propertiesCosts | currency:"$":0}}</h2>
+            <p><strong>Cost</strong></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col l4 m6 s12">
             <button class="add-card" ng-click="startAddProperty()">
               <div class="card card-add center-align">
                 <span class="glyphicon glyphicon-plus"></span>
@@ -32,7 +46,7 @@
               </div>
             </button>
           </div>
-          <div class="col s12 m6 l4" ng-repeat="property in properties | filter:searchKey">
+          <div class="col l4 m6 s12" ng-repeat="property in properties | filter:searchKey">
             <div class="card">
               <div class="card-image">
                 <img src="/{{property.teaserPhoto}}" width="258" height="189">
@@ -40,9 +54,10 @@
                 <span class="card-subtitle">{{property.city}}, {{property.state}} {{property.zip}}</span>
               </div>
               <div class="card-content">
-                <p class="property-units" ng-show="property.units.length"><label>Units:</label> {{property.units}}</p>
-                <p class="property-type" ng-show="property.type.length"><label>Type:</label> {{property.propertyType}}</p>
+                <p class="property-units"><label>Units:</label> {{property.units | number}}</p>
+                <p class="property-type" ng-show="property.propertyType.length"><label>Type:</label> {{property.propertyType}}</p>
                 <p class="property-tag" ng-show="property.tags.length"><i class="material-icons">label</i><label>Tags</label><span> {{property.tags[0]}}, {{property.tags[1]}}, {{property.tags[2]}}</span></p>                
+                <p>{{property.purchasePrice | currency:"$":0}}
                 <p>{{property.teaser}}</p>
               </div>
               <div class="card-action">
@@ -72,114 +87,5 @@
   <div ng-show="view=='removeProperty'">
     <div ng-include="'views/removeProperty.html'">
     </div>  
-  </div>
-  <!--<div ng-show="view=='addProperty'" class="container add-property add-modal">
-    <h3><i class="material-icons prefix blue-text">location_on</i>Add Property</h3>
-    <div class="row">  
-      <div class="input-field col s12 medium-label">
-          <input placeholder="555 S Main St" type="text" ng-model="propertyAddress"/>
-          <label for="location">Location</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s4 small-label">
-          <input placeholder="New York" type="text" ng-model="propertyCity"/>
-          <label for="city">City</label>
-      </div>
-      <div class="input-field col s4">
-          <input placeholder="NY" type="text" ng-model="propertyState"/>
-          <label for="state">State</label>
-      </div>
-      <div class="input-field col s4 small-label">
-          <input placeholder="10004" type="text" ng-model="propertyZip"/>
-          <label for="zip">Zip</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-          <input placeholder="img/XXXX.jpg" type="text" ng-model="propertyPhoto"/>
-          <label for="photo">Photo</label>
-      </div>
-      <div class="input-field col s12">
-          <textarea id="textarea1" class="materialize-textarea" ng-model="propertyTeaser">
-          </textarea>
-          <label for="teaser">Teaser</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col s6">
-        <button class="btn btn-large wave-effect blue" ng-disabled="propertyAddress==''" ng-click="addProperty()">
-          Add
-        </button>
-      </div>
-      <div class="col s6">
-        <button class="btn btn-large wave-effect red" ng-click="cancelProperty()">
-          Cancel
-        </button>
-      </div>
-    </div>
-  </div>-->
-  <!--StartRemoveTemplate-->
-  
-  <!--<div ng-show="view=='removeProperty'" class="container remove-property in-modal">
-    <div class="row">
-      <h3>Delete Property <em>{{removalProperty.address}}</em></h3>
-    </div>
-    <div class="row">
-      <p>Are you sure you want to delete <em>{{removalProperty.address}}</em>?</p>
-    </div>
-    <div class="row">
-      <div class="col s6">
-          <button class="btn btn-large wave-effect blue" ng-click="cancelProperty()">
-            No
-          </button>
-          <button class="btn btn-large wave-effect red" ng-click="removeProperty()">
-            Yes
-          </button>
-      </div>
-    </div>
-  </div>-->
-  <!--StartEditTemplate-->
-  
-  <!--<div ng-show="view=='editProperty'" class="container edit-property add-modal">
-    <div class="row">
-      <h3>Edit Property {{property.title}}</h3>
-    </div>
-    <form class="">
-      <div class="row">  
-        <div class="input-field col s6 medium-label">
-            <i class="material-icons prefix blue-text">location_on</i>
-            <input placeholder="555 S Main St" type="text" ng-model="propertyAddress"/>
-            <label for="location">Location</label>
-        </div>
-        <div class="input-field col small-label s6">
-            <i class="material-icons prefix blue-text">location_on</i>
-            <input placeholder="10004" type="text" ng-model="propertyCityStateZip"/>
-            <label for="zip">Zip</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-            <input placeholder="img/XXXX.jpg" type="text" ng-model="propertyPhoto"/>
-            <label for="photo">Photo</label>
-        </div>
-        <div class="input-field col s12">
-            <textarea id="textarea1" class="materialize-textarea" ng-model="propertyTeaser">
-            </textarea>
-            <label for="teaser">Teaser</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col s6">
-          <button class="btn btn-large wave-effect blue" ng-disabled="propertyAddress==''" ng-click="saveProperty()">
-            Save
-          </button>
-        </div>
-        <div class="col s6">
-          <button class="btn btn-large wave-effect red" ng-click="cancelProperty()">
-            Cancel
-          </button>
-      </div>
-    </form>
-  </div>-->  
+  </div> 
 </div>
