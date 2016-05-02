@@ -26,6 +26,8 @@ angular.module('buildboardApp')
     $scope.addProperty = addProperty;
     $scope.startEditProperty = startEditProperty;
     $scope.saveProperty = saveProperty;
+    $scope.startRemoveProperty = startRemoveProperty;
+    $scope.removeProperty = removeProperty;
 
     var selected = -1;
 
@@ -37,14 +39,23 @@ angular.module('buildboardApp')
       $scope.view = view;      
     }
 
+    // ADD PROPERTY
     function startAddProperty() {
-      $scope.propertyAddress = '';
-      $scope.propertyCity = '';
-      $scope.propertyState = '';
-      $scope.propertyZip = '';
-      $scope.propertyPhoto = '';      
-      $scope.propertyTeaser = '';
+      $scope.property = {
+        "address":"",
+        "city":"",
+        "state":"",
+        "zip":"",
+        "teaserPhoto":"",
+        "teaser":"",
+        "type": "",
+        "units": "",
+        "activityCount":"",
+        "boardCount":"",
+        "tags": "",
+      }
       setView('addProperty');
+
     }
 
     function cancelProperty() {
@@ -52,51 +63,75 @@ angular.module('buildboardApp')
     }
 
     function addProperty() {
-      var propertyAddress = $scope.propertyAddress;
-      var propertyCity = $scope.propertyCity;
-      var propertyState = $scope.propertyState;
-      var propertyZip = $scope.propertyZip; 
-      var propertyPhoto = $scope.propertyPhoto;      
-      var propertyTeaser = $scope.propertyTeaser;
-
       var property = {
-        "address": propertyAddress,
-        "city": propertyCity,
-        "state": propertyState,
-        "zip": propertyZip,
-        "featurePhoto": propertyPhoto,
-        "teaser": propertyTeaser 
+        "address": this.property.address,
+        "city": this.property.city,
+        "state": this.property.state,
+        "zip": this.property.zip,
+        "teaserPhoto": this.property.teaserPhoto,
+        "teaser": this.property.teaser, 
+        "type": this.property.type,
+        "units": this.property.units,
+        "activityCount": this.property.activityCount,
+        "boardCount": this.property.boardCount,
+        "tags": this.property.tags,
       }
 
       $scope.properties.push(property);
+
       setView('propertiesList');
     }
 
+    // EDIT PROPERTY
     function startEditProperty(index) {
+      // Get the right one
       selected = index;
-      $scope.propertyAddress = $scope.properties[index].address;
-      $scope.propertyCity = $scope.properties[index].city;
-      $scope.propertyState = $scope.properties[index].state;
-      $scope.propertyZip = $scope.properties[index].zip;
-      $scope.propertyPhoto = $scope.properties[index].featurePhoto;      
-      $scope.propertyTeaser = $scope.properties[index].teaser;      
+
+      //Set the default values to the right property as an object
+      this.property = {
+        "address" : $scope.properties[index].address,
+        "city" : $scope.properties[index].city,
+        "state" : $scope.properties[index].state,
+        "zip" : $scope.properties[index].zip,
+        "teaserPhoto" : $scope.properties[index].teaserPhoto,
+        "teaser" : $scope.properties[index].teaser,
+        "type": $scope.properties[index].type,
+        "units": $scope.properties[index].units,
+        "activityCount": $scope.properties[index].activityCount,
+        "boardCount": $scope.properties[index].boardCount,
+        "tags": $scope.properties[index].tags,
+      }
+      // Assign to scope so accessible
+      $scope.property = this.property;
       setView('editProperty');
     }
 
     function saveProperty() {
-      $scope.properties[selected].address = $scope.propertyAddress;
-      $scope.properties[selected].city = $scope.propertyCity;
-      $scope.properties[selected].state = $scope.propertyState;
-      $scope.properties[selected].zip = $scope.propertyZip;
-      $scope.properties[selected].featurePhoto = $scope.propertyPhoto;
-      $scope.properties[selected].teaser = $scope.propertyTeaser;
+      $scope.properties[selected] = {
+        "address": this.property.address,
+        "city": this.property.city,
+        "state": this.property.state,
+        "zip": this.property.zip,
+        "teaserPhoto": this.property.teaserPhoto,
+        "teaser": this.property.teaser, 
+        "type": this.property.type,
+        "units": this.property.units,
+        "activityCount": this.property.activityCount,
+        "boardCount": this.property.boardCount,
+        "tags": this.property.tags,
+      }
+      setView('propertiesList');
+    }
+
+    // REMOVE PROPERTY
+    function startRemoveProperty(index) {
+      selected = index;
+      setView('removeProperty');
+      $scope.removalProperty = properties[selected];
+    }
+
+    function removeProperty() {
+      $scope.properties.splice(selected,1);
       setView('propertiesList');
     }
   }
-
-/*  function PortfolioCtrl($scope) {
-    //var index = 0; // Set index to beginning
-    console.log('Hello');
-    //$scope.properties = properties; // Set properties to empty array;
-    //console.log($scope.properties);
-  }*/

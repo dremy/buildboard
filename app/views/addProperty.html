@@ -1,36 +1,47 @@
-<h3>Add Property</h3>
-    <div class="row">  
-      <div class="input-field col s6">
-          <i class="material-icons blue-text">view_module location_on</i>
-          <input placeholder="555 S Main St" ng-model="propertyAddress"/>
-          <label for="location">Location</label>
-      </div>
-      <div class="input-field col s6">
-          <i class="material-icons blue-text">view_module location_on</i>
-          <input placeholder="Zip" ng-model="propertyCityStateZip"/>
-          <label for="zip">Zip</label>
-      </div>
+<!--StartAddTemplate-->
+<div class="container add-property add-modal">
+  <h3><i class="material-icons prefix blue-text">location_on</i>Add Property</h3>
+  <div class="row">  
+    <div class="input-field col s12 medium-label">
+        <input placeholder="555 S Main St" type="text" ng-model="property.address"/>
+        <label for="location">Location</label>
     </div>
-    <div class="row">
-      <div class="input-field col s12">
-          <input placeholder="img/XXXX.jpg" ng-model="propertyPhoto"/>
-          <label for="photo">Photo</label>
-      </div>
-      <div class="input-field col s12">
-          <textarea ng-model="propertyTeaser">
-          </textarea>
-          <label for="teaser">Teaser</label>
-      </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s4 small-label">
+        <input placeholder="New York" type="text" ng-model="property.city"/>
+        <label for="city">City</label>
     </div>
-    <div class="row">
-      <div class="col s6">
-        <button class="btn btn-large wave-effect blue" ng-disabled="propertyAddress==''" ng-click="addProperty()">
-          Add
-        </button>
-      </div>
-      <div class="col s6">
-        <button class="btn btn-large wave-effect red" ng-click="cancelProperty()">
-          Cancel
-        </button>
-      </div>
+    <div class="input-field col s4">
+        <input placeholder="NY" type="text" ng-model="property.state"/>
+        <label for="state">State</label>
     </div>
+    <div class="input-field col s4 small-label">
+        <input placeholder="10004" type="text" ng-model="property.zip"/>
+        <label for="zip">Zip</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s12">
+        <input placeholder="img/XXXX.jpg" type="text" ng-model="property.teaserPhoto"/>
+        <label for="photo">Photo</label>
+    </div>
+    <div class="input-field col s12">
+        <textarea id="textarea1" class="materialize-textarea" ng-model="property.teaser">
+        </textarea>
+        <label for="teaser">Teaser</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s6">
+      <button class="btn btn-large wave-effect blue" ng-disabled="propertyAddress==''" ng-click="addProperty()">
+        Add
+      </button>
+    </div>
+    <div class="col s6">
+      <button class="btn btn-large wave-effect red" ng-click="cancelProperty()">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
