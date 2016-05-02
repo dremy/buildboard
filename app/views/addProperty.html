@@ -22,6 +22,21 @@
     </div>
   </div>
   <div class="row">
+    <div class="input-field col s4">
+      <select name="propertyType" ng-model="property.propertyType">
+        <option value="" disabled selected>Choose your option</option>
+        <option value="sfr">House</option>
+        <option value="multi">Multi-Family</option>
+        <option value="lot">Lot</option>
+      </select>
+      <label>Property Type</label>
+    </div>
+    <div class="input-field col s4 small-label">
+        <input placeholder="1" type="number" ng-model="property.units"/>
+        <label for="units">Units</label>
+    </div>
+  </div>
+  <div class="row">
     <div class="input-field col s12">
         <input placeholder="img/XXXX.jpg" type="text" ng-model="property.teaserPhoto"/>
         <label for="photo">Photo</label>
