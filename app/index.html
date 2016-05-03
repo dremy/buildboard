@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="buildboardApp">
+  <body ng-app="buildboardApp" ng-controller="AdminCtrl">
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -77,9 +77,9 @@
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#/features">Features</a></li>
-              <li><a ng-href="#/developers">Developers</a></li>
-              <li><a ng-href="#/flippers">Flippers</a></li>
+              <li ng-class="{active: isActive('Features')}"><a href="#/features">Features</a></li>
+              <li ng-class="{active: isActive('Benefits')}"><a ng-href="#/benefits">Benefits</a></li>
+              <li ng-class="{active: isActive('How It Works')}"><a ng-href="#/how-it-works">How It Works</a></li>
               <li class="nav-login"><a ng-href="#/user/login">Sign In</a></li>
             </ul>
           </div>
@@ -88,6 +88,11 @@
     </header>
 
     <section class="content">
+      <div class="container container-wide" ng-show="!isActive('')">
+        <div class="row">
+          <h3>{{getTitle()}}</h3>
+        </div>
+      </div>
       <div ng-view=""></div>
     </section>
 
@@ -144,22 +149,16 @@
     <script src="scripts/app.js"></script>
     <script src="scripts/properties.js"></script>
     <script src="scripts/controllers/property.js"></script>
+    <script src="scripts/controllers/admin.js"></script>
     <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/features.js"></script>
+    <script src="scripts/controllers/benefits.js"></script>
+    <script src="scripts/controllers/howWorks.js"></script>
     <script src="scripts/controllers/activity.js"></script>
     <script src="scripts/controllers/about.js"></script>
     <script src="scripts/controllers/register.js"></script>
     <script src="scripts/controllers/login.js"></script>
     <script src="scripts/controllers/portfolio.js"></script>
     <!-- endbuild -->
-    <script>
-      $(document).ready(function(){
-        $('ul.tabs').tabs();
-        var tab = $('ul.tabs .tab');
-        tab.click(function(){
-            tab.removeClass("active");
-            $(this).addClass("active");
-        });
-      });
-    </script>
 </body>
 </html>

@@ -8,14 +8,14 @@
  * Controller of the buildboardApp
  */
 angular.module('buildboardApp')
-  .controller('MainCtrl', MainCtrl);
+  .controller('BenefitsCtrl', BenefitsCtrl);
 
-function MainCtrl($scope, currentSpot) {
+function BenefitsCtrl($scope, currentSpot) {
   this.awesomeThings = [
     'HTML5 Boilerplate',
     'AngularJS',
     'Karma'
   ];
 
-  currentSpot.setCurrentSpot('', '');  
-};
+  currentSpot.setCurrentSpot('Benefits', 'Benefits');  
+}

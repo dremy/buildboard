@@ -31,6 +31,16 @@ angular
         controller: 'FeaturesCtrl',
         controllerAs: 'features'
       })
+      .when('/benefits', {
+        templateUrl: 'views/benefits.html',
+        controller: 'BenefitsCtrl',
+        controllerAs: 'benefits'
+      })
+      .when('/how-it-works', {
+        templateUrl: 'views/how-it-works.html',
+        controller: 'HowWorksCtrl',
+        controllerAs: 'howworks'
+      })
       .when('/user/login', {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl',
@@ -106,6 +116,7 @@ angular
       }
     }
   }
+
   /*.run(['drupal', function(drupal) {
     
     drupal.node_load(1).then(function(node) {
