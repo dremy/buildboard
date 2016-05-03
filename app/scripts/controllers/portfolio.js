@@ -8,10 +8,12 @@
  * Controller of the buildboardApp
  */
 angular.module('buildboardApp')
-  .controller('PortfolioCtrl', PortfolioCtrl);
+  .controller('PortfolioCtrl', PortfolioCtrl)
+  .factory('propertiesApi', propertiesApi)
+  .constant('apiUrl','http://api.buildboard.io'); // Register new service
 
-
-function PortfolioCtrl($scope) {
+// Pass in $scope, and propertiesApi service
+function PortfolioCtrl($scope, propertiesApi) {
   this.awesomeThings = [
     'HTML5 Boilerplate',
     'AngularJS',
@@ -19,30 +21,56 @@ function PortfolioCtrl($scope) {
   ];
 
   // Set the model
-  $scope.properties = properties;
+  $scope.properties = [];
+  $scope.propertiesUnits = 0;
+  $scope.propertiesCosts = 0;
+  $scope.errorMessgae = '';
+
+  // Register functions to $scope
+  $scope.isLoading = isLoading;
+  $scope.refreshPortfolio = refreshPortfolio;
+
+  var loading = false;
+
+  function isLoading() {
+    return loading;
+  }
+
+  function refreshPortfolio() {
+    loading = true;
+    $scope.properties = [];
+    $scope.errorMessgae = '';
+    propertiesApi.getProperties()
+      .success(function (data) {
+        console.log(data);
+        $scope.properties = data;
+        $scope.propertiesUnits = propertiesUnits();
+        $scope.propertiesCosts = propertiesCosts();
+        loading = false;
+      })
+      .error(function () {
+        $scope.errorMessage = "Request failed";
+        loading = false;
+      });
+  }
 
   // REPORT - UNIT COUNT: Gather total unit count
   function propertiesUnits() {
     var propertiesUnits = 0;
-    for (var i = 0; i < properties.length; i++) {
-      propertiesUnits += properties[i].units;
+    for (var i = 0; i < $scope.properties.length; i++) {
+      propertiesUnits += $scope.properties[i].units;
     };
     return propertiesUnits;
   }
-  // Set the total unit count
-  $scope.propertiesUnits = propertiesUnits();
 
   // REPORT - COSTS COUNT:  Gather total costs
   function propertiesCosts() {
     var propertiesCosts = 0;
-    for (var i = 0; i < properties.length; i++) {
-      propertiesCosts += properties[i].purchasePrice;
+    for (var i = 0; i < $scope.properties.length; i++) {
+      propertiesCosts += $scope.properties[i].purchasePrice;
     };
     return propertiesCosts;
   }
-  // Set the total unit count
-  $scope.propertiesCosts = propertiesCosts();
-
 
   // ADD, EDIT, REMOVE PROPERTY
   // Assign functions to be exposed on view event "click"
@@ -198,5 +226,62 @@ function PortfolioCtrl($scope) {
     setView('propertiesList');
     $scope.propertiesUnits = propertiesUnits();
     $scope.propertiesCosts = propertiesCosts();
+  }
+}
+
+// Create API service function
+function propertiesApi($http, apiUrl) {
+  // Temp Model
+  var properties = [
+    {
+      "pid": "00001",
+      "address": "914 S Warsaw St",
+      "city":"Seattle",
+      "state":"WA",
+      "zip":"98108",
+      "propertyType": "Home",
+      "units": 1,
+      "teaserPhoto":"images/ISp98yfgbxdzrt0000000000.jpg",
+      "activityCount":2,
+      "boardCount":14,
+      "purchasePrice": 125000,
+      "tags": ["flip","sfr","adu"]
+    },
+    {
+      "pid": "00002",
+      "address": "2363 S State St",
+      "city":"Tacoma",
+      "state":"WA",
+      "zip":"98406",
+      "teaserPhoto":"images/IS9xrkre05x2181000000000.jpg",
+      "propertyType": "Home",
+      "units": 1,
+      "activityCount":5,
+      "boardCount":3,
+      "purchasePrice": 40000,
+      "tags": ["new construction","sfr"]    
+    },
+    {
+      "pid": "00003",
+      "address": "18 Jade Cir",
+      "city":"Las Vegas",
+      "state":"NV",
+      "zip":"89106",
+      "propertyType": "Home",
+      "units": 1,
+      "teaserPhoto":"images/ISl2oiz4ycwl310000000000.jpg",
+      "activityCount":22,
+      "boardCount":0,
+      "purchasePrice": 121000,
+      "tags": ["rental","sfr","pool"]    
+    }];
+
+  // Return object with getProperties function
+  return {
+    getProperties: function () {
+      var url = apiUrl + '/properties/v1/node'
+      // return properties;
+      return $http.get(url);
+    }
   }
 }
