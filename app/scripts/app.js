@@ -65,6 +65,7 @@ angular
         redirectTo: '/'
       });
   })
+  .factory('currentSpot', currentSpot)
   // allow you to format a text input field.
   // <input type="text" ng-model="test" format="number" />
   // <input type="text" ng-model="test" format="currency" />
@@ -85,6 +86,26 @@ angular
           }
       };
   }]);
+
+  function currentSpot() {
+    // Sets defaults as empty
+    var activeMenuId = '';
+    var titleText = '';
+
+    // Returns object with 3 operations 
+    return {
+      setCurrentSpot: function (menuId, title) {
+        activeMenuId = menuId;
+        titleText = title;
+      },
+      getActiveMenu: function () {
+        return activeMenuId;
+      },
+      getTitle: function () {
+        return titleText;
+      }
+    }
+  }
   /*.run(['drupal', function(drupal) {
     
     drupal.node_load(1).then(function(node) {
