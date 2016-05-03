@@ -10,12 +10,10 @@
 angular.module('buildboardApp')
   .controller('FeaturesCtrl', FeaturesCtrl);
 
-function FeaturesCtrl($scope, currentSpot) {
+function FeaturesCtrl($scope) {
   this.awesomeThings = [
     'HTML5 Boilerplate',
     'AngularJS',
     'Karma'
   ];
-
-  currentSpot.setCurrentSpot('Features', 'Features');
 }

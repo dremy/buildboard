@@ -10,12 +10,10 @@
 angular.module('buildboardApp')
   .controller('HowWorksCtrl', HowWorksCtrl);
 
-function HowWorksCtrl($scope, currentSpot) {
+function HowWorksCtrl($scope) {
   this.awesomeThings = [
     'HTML5 Boilerplate',
     'AngularJS',
     'Karma'
   ];
-
-  currentSpot.setCurrentSpot('How It Works', 'How It Works');  
 }

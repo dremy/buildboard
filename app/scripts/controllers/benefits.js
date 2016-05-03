@@ -10,12 +10,10 @@
 angular.module('buildboardApp')
   .controller('BenefitsCtrl', BenefitsCtrl);
 
-function BenefitsCtrl($scope, currentSpot) {
+function BenefitsCtrl($scope) {
   this.awesomeThings = [
     'HTML5 Boilerplate',
     'AngularJS',
     'Karma'
   ];
-
-  currentSpot.setCurrentSpot('Benefits', 'Benefits');  
 }

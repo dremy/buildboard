@@ -10,12 +10,10 @@
 angular.module('buildboardApp')
   .controller('MainCtrl', MainCtrl);
 
-function MainCtrl($scope, currentSpot) {
+function MainCtrl($scope) {
   this.awesomeThings = [
     'HTML5 Boilerplate',
     'AngularJS',
     'Karma'
   ];
-
-  currentSpot.setCurrentSpot('', '');  
 };

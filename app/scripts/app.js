@@ -76,7 +76,9 @@ angular
       });
   })
   .factory('currentSpot', currentSpot)
-  // allow you to format a text input field.
+  // Allows you to format values for active menu and title.
+  .directive('bbActiveMenu', bbActiveMenu)
+  // Allows you to format a text input field.
   // <input type="text" ng-model="test" format="number" />
   // <input type="text" ng-model="test" format="currency" />
   .directive('format', ['$filter', function ($filter) {
@@ -114,6 +116,16 @@ angular
       getTitle: function () {
         return titleText;
       }
+    }
+  }
+
+  function bbActiveMenu(currentSpot) {
+    return function (scope, element, attrs) {
+      // Set values to attributes.
+      var activeMenuId = attrs["bbActiveMenu"];
+      var activeTitle = attrs["bbActiveTitle"];
+      // Reuse depending on the new values.
+      currentSpot.setCurrentSpot(activeMenuId, activeTitle);
     }
   }
 
