@@ -101,20 +101,29 @@ function PortfolioCtrl($scope) {
   }
 
   function addProperty() {
-    var file = document.getElementById('photo').files[0]
-    /*r = new FileReader();
+    /*if (document.getElementById('photo').files[0].length) {
+      var file = document.getElementById('photo').files[0];
+    }
+    r = new FileReader();
     r.onloadend = function(e){
       var data = e.target.result;
       //send you binary data via $http or $resource or do anything else with it
-    }*/
-    //r.readAsBinaryString(f);
+    }
+    r.readAsBinaryString(f);
     
+    if (file.name.length) {
+      console.log('True');
+      filename = file.name;
+    }*/
+
+    var filename = '';    
+
     var property = {
       "address": this.property.address,
       "city": this.property.city,
       "state": this.property.state,
       "zip": this.property.zip,
-      "teaserPhoto": "images/" + file.name,
+      "teaserPhoto": "images/" + filename,
       "teaser": this.property.teaser, 
       "propertyType": this.property.propertyType,
       "units": this.property.units,

@@ -380,76 +380,103 @@ textarea.materialize-textarea:focus:not([readonly]) + label {
 }
 
 /* line 330, main.scss */
-.long-label .ng-not-empty,
+.extra-long-label .ng-touched {
+  padding-left: 0px;
+}
+/* line 333, main.scss */
+.extra-long-label .ng-untouched,
+.extra-long-label input:placeholder-shown {
+  padding-left: 115px;
+}
+
+/* line 339, main.scss */
+.long-label .ng-not-empty {
+  padding-left: 0px;
+}
+/* line 342, main.scss */
+.long-label .ng-empty,
 .long-label input:placeholder-shown {
   padding-left: 95px;
 }
 
-/* line 336, main.scss */
-.medium-label .ng-not-empty,
+/* line 348, main.scss */
+.medium-label .ng-not-empty {
+  padding-left: 0px;
+}
+/* line 351, main.scss */
+.medium-label .ng-empty,
 .medium-label input:placeholder-shown {
   padding-left: 75px;
 }
 
-/* line 342, main.scss */
-.small-label .ng-not-empty,
+/* line 357, main.scss */
+.small-label .ng-not-empty {
+  padding-left: 0px;
+}
+/* line 360, main.scss */
+.small-label .ng-empty,
 .small-label input:placeholder-shown {
   padding-left: 35px;
 }
 
-/* line 347, main.scss */
-input.ng-not-empty,
+/* line 365, main.scss */
+input.ng-not-empty {
+  padding-left: 0px;
+}
+
+/* line 368, main.scss */
+input.ng-empty,
 input:placeholder-shown {
   padding-left: 55px;
 }
-/* line 350, main.scss */
-input.ng-not-empty:focus, input.ng-not-empty.valid,
+/* line 371, main.scss */
+input.ng-empty:focus, input.ng-empty.valid,
 input:placeholder-shown:focus,
 input:placeholder-shown.valid {
   padding-left: 0px;
 }
 
-/* line 356, main.scss */
+/* line 378, main.scss */
 .input-field .prefix.active.blue-text {
   color: #2196F3;
 }
 
 /* Colors */
-/* line 361, main.scss */
+/* line 384, main.scss */
 .original-blue-text {
   color: #48aafe;
 }
 
-/* line 365, main.scss */
+/* line 388, main.scss */
 .original-blue {
   background-color: #48aafe;
 }
 
-/* line 369, main.scss */
+/* line 392, main.scss */
 .primary-blue-text {
   color: #296ad4;
 }
 
-/* line 373, main.scss */
+/* line 396, main.scss */
 .secondary-blue-text {
   color: #1e89e5;
 }
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-  /* line 379, main.scss */
+  /* line 402, main.scss */
   .container {
     max-width: 730px;
     margin: 0  auto;
   }
 
-  /* line 384, main.scss */
+  /* line 407, main.scss */
   .container-wide {
     max-width: 960px;
   }
 
   /* Remove the padding we set earlier */
-  /* line 389, main.scss */
+  /* line 412, main.scss */
   .header,
   .marketing,
   .footer {
@@ -458,13 +485,13 @@ input:placeholder-shown.valid {
   }
 
   /* Space out the masthead */
-  /* line 396, main.scss */
+  /* line 419, main.scss */
   .container-first {
     margin-top: 30px;
   }
 
   /* Remove the bottom border on the jumbotron for visual effect */
-  /* line 401, main.scss */
+  /* line 424, main.scss */
   .jumbotron {
     border-bottom: 0;
   }

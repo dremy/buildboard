@@ -326,25 +326,46 @@ textarea.materialize-textarea:focus:not([readonly]) {
   }
 }
 
+.extra-long-label {
+  .ng-touched {
+    padding-left: 0px;
+  }
+  .ng-untouched,
+  input:placeholder-shown {
+    padding-left: 115px;
+  }
+}
 .long-label {
-  .ng-not-empty,
+  .ng-not-empty {
+    padding-left: 0px; 
+  }
+  .ng-empty,
   input:placeholder-shown {
     padding-left: 95px;
   }
 }
 .medium-label {
-  .ng-not-empty,
+  .ng-not-empty {
+    padding-left: 0px; 
+  }
+  .ng-empty,
   input:placeholder-shown {
     padding-left: 75px;
-  } 
+  }
 }
 .small-label {
-  .ng-not-empty,
+  .ng-not-empty {
+    padding-left: 0px; 
+  }
+  .ng-empty,
   input:placeholder-shown {
     padding-left: 35px;
   } 
 }
-input.ng-not-empty,
+input.ng-not-empty {
+  padding-left: 0px;
+}
+input.ng-empty,
 input:placeholder-shown {
   padding-left: 55px;
   &:focus,
@@ -353,8 +374,10 @@ input:placeholder-shown {
   }
 }
 
-.input-field .prefix.active.blue-text {
-  color: $material-blue;
+.input-field .prefix {
+  &.active.blue-text {
+    color: $material-blue;
+  }
 }
 
 /* Colors */
