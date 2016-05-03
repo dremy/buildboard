@@ -21,7 +21,7 @@ function PortfolioCtrl($scope) {
   // Set the model
   $scope.properties = properties;
 
-  // Gather total unit count
+  // REPORT - UNIT COUNT: Gather total unit count
   function propertiesUnits() {
     var propertiesUnits = 0;
     for (var i = 0; i < properties.length; i++) {
@@ -32,7 +32,7 @@ function PortfolioCtrl($scope) {
   // Set the total unit count
   $scope.propertiesUnits = propertiesUnits();
 
-  // Gather total costs
+  // REPORT - COSTS COUNT:  Gather total costs
   function propertiesCosts() {
     var propertiesCosts = 0;
     for (var i = 0; i < properties.length; i++) {
@@ -44,6 +44,7 @@ function PortfolioCtrl($scope) {
   $scope.propertiesCosts = propertiesCosts();
 
 
+  // ADD, EDIT, REMOVE PROPERTY
   // Assign functions to be exposed on view event "click"
   $scope.startAddProperty = startAddProperty;
   $scope.cancelProperty = cancelProperty;
@@ -53,16 +54,18 @@ function PortfolioCtrl($scope) {
   $scope.startRemoveProperty = startRemoveProperty;
   $scope.removeProperty = removeProperty;
 
+
   var selected = -1;
 
-  //Define propertiesList as the default
+  // Define propertiesList as the default
   setView('propertiesList');
 
-  //Create function for setting the argument in setView to the controllers scope
+  // Create function for setting the argument in setView to the controllers scope
   function setView(view) {
-    $scope.view = view;      
+    $scope.view = view;
   }
 
+  // Setup the Form
   function initializeForm() {
     $('textarea#teaser').characterCounter();
     $('.datepicker').pickadate({
