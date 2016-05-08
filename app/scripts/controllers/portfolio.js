@@ -42,8 +42,30 @@ function PortfolioCtrl($scope, propertiesApi) {
     $scope.errorMessgae = '';
     propertiesApi.getProperties()
       .success(function (data) {
+        console.log(data[0].field_units.und[0].value);
+        //.und[1].0.value;
+        /*var properties = [
+          {
+            "pid": "00001",
+            "address": "914 S Warsaw St",
+            "city":"Seattle",
+            "state":"WA",
+            "zip":"98108",
+            "propertyType": "Home",
+            "units": 1,
+            "teaserPhoto":"images/ISp98yfgbxdzrt0000000000.jpg",
+            "activityCount":2,
+            "boardCount":14,
+            "purchasePrice": 125000,
+            "tags": ["flip","sfr","adu"]
+          },*/
         console.log(data);
-        $scope.properties = data;
+        for (var i = 0; i < data.length; i++) {
+          //$scope.properties[i].units = parseInt(data[i].field_units.und[0].value);
+          var properties = [{}];
+          properties[i].units = parseInt(data[i].field_units.und[0].value);
+        }
+        $scope.properties = properties;
         $scope.propertiesUnits = propertiesUnits();
         $scope.propertiesCosts = propertiesCosts();
         loading = false;
