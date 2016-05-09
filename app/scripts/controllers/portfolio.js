@@ -38,8 +38,7 @@ function PortfolioCtrl($scope, propertiesApi) {
 
   function refreshPortfolio() {
     loading = true;
-    $scope.properties = [];
-    $scope.errorMessgae = '';
+    $scope.errorMessage = '';
     propertiesApi.getProperties()
       .success(function (data) {
         /*var properties = [
@@ -57,19 +56,27 @@ function PortfolioCtrl($scope, propertiesApi) {
             "purchasePrice": 125000,
             "tags": ["flip","sfr","adu"]
           },*/
-        var properties = [{},{}];
+        var properties = [];
         var filesURL = "http://api.buildboard.io/sites/default/files/";
-        for (var i = 0; i < data.length; i++) {
-          //$scope.properties[i].units = parseInt(data[i].field_units.und[0].value);
-          properties[i].units = data[i].field_units.und.length;
-          properties[i].propertyType = data[i].field_property_type.und[0].value;
-          properties[i].purchasePrice = parseInt(data[i].field_purchase_price.und[0].value);
-          properties[i].address = data[i].field_address.und[0].thoroughfare;
-          properties[i].city = data[i].field_address.und[0].locality;
-          properties[i].state = data[i].field_address.und[0].administrative_area;
-          properties[i].zip = data[i].field_address.und[0].postal_code;
-          properties[i].teaserPhoto = filesURL + 'properties/images/' + data[i].field_feature_images.und[0].filename; // TO DO change schema to field_teaser_photo, qty. 1 
-        }
+        angular.forEach(
+          data, 
+          function(property, index) {
+            var teaserPhoto = property.field_feature_images.und;//[0].filename;
+            if (teaserPhoto == null) {
+              teaserPhoto = "default.jpeg";
+            }
+            properties.push({
+                "units":property.field_units.und.length,
+                "propertyType":property.field_property_type.und[0].value,
+                "purchasePrice":parseInt(property.field_purchase_price.und[0].value),
+                "address":property.field_address.und[0].thoroughfare,
+                "city":property.field_address.und[0].locality,
+                "state":property.field_address.und[0].administrative_area,
+                "zip":property.field_address.und[0].postal_code,              
+                "teaserPhoto":filesURL + 'properties/images/' + teaserPhoto[0].filename // TO DO change schema to field_teaser_photo, qty. 1
+            });
+          });
+        $scope.properties = [];
         $scope.properties = properties;
         $scope.propertiesUnits = propertiesUnits();
         $scope.propertiesCosts = propertiesCosts();
