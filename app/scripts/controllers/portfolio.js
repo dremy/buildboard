@@ -42,8 +42,6 @@ function PortfolioCtrl($scope, propertiesApi) {
     $scope.errorMessgae = '';
     propertiesApi.getProperties()
       .success(function (data) {
-        console.log(data[0].field_units.und[0].value);
-        //.und[1].0.value;
         /*var properties = [
           {
             "pid": "00001",
@@ -59,11 +57,18 @@ function PortfolioCtrl($scope, propertiesApi) {
             "purchasePrice": 125000,
             "tags": ["flip","sfr","adu"]
           },*/
-        console.log(data);
+        var properties = [{},{}];
+        var filesURL = "http://api.buildboard.io/sites/default/files/";
         for (var i = 0; i < data.length; i++) {
           //$scope.properties[i].units = parseInt(data[i].field_units.und[0].value);
-          var properties = [{}];
-          properties[i].units = parseInt(data[i].field_units.und[0].value);
+          properties[i].units = data[i].field_units.und.length;
+          properties[i].propertyType = data[i].field_property_type.und[0].value;
+          properties[i].purchasePrice = parseInt(data[i].field_purchase_price.und[0].value);
+          properties[i].address = data[i].field_address.und[0].thoroughfare;
+          properties[i].city = data[i].field_address.und[0].locality;
+          properties[i].state = data[i].field_address.und[0].administrative_area;
+          properties[i].zip = data[i].field_address.und[0].postal_code;
+          properties[i].teaserPhoto = filesURL + 'properties/images/' + data[i].field_feature_images.und[0].filename; // TO DO change schema to field_teaser_photo, qty. 1 
         }
         $scope.properties = properties;
         $scope.propertiesUnits = propertiesUnits();
@@ -251,53 +256,52 @@ function PortfolioCtrl($scope, propertiesApi) {
   }
 }
 
+var properties2 = [
+  {
+    "pid": "00001",
+    "address": "914 S Warsaw St",
+    "city":"Seattle",
+    "state":"WA",
+    "zip":"98108",
+    "propertyType": "Home",
+    "units": 1,
+    "teaserPhoto":"images/ISp98yfgbxdzrt0000000000.jpg",
+    "activityCount":2,
+    "boardCount":14,
+    "purchasePrice": 125000,
+    "tags": ["flip","sfr","adu"]
+  },
+  {
+    "pid": "00002",
+    "address": "2363 S State St",
+    "city":"Tacoma",
+    "state":"WA",
+    "zip":"98406",
+    "teaserPhoto":"images/IS9xrkre05x2181000000000.jpg",
+    "propertyType": "Home",
+    "units": 1,
+    "activityCount":5,
+    "boardCount":3,
+    "purchasePrice": 40000,
+    "tags": ["new construction","sfr"]    
+  },
+  {
+    "pid": "00003",
+    "address": "18 Jade Cir",
+    "city":"Las Vegas",
+    "state":"NV",
+    "zip":"89106",
+    "propertyType": "Home",
+    "units": 1,
+    "teaserPhoto":"images/ISl2oiz4ycwl310000000000.jpg",
+    "activityCount":22,
+    "boardCount":0,
+    "purchasePrice": 121000,
+    "tags": ["rental","sfr","pool"]    
+  }];
+
 // Create API service function
 function propertiesApi($http, apiUrl) {
-  // Temp Model
-  var properties = [
-    {
-      "pid": "00001",
-      "address": "914 S Warsaw St",
-      "city":"Seattle",
-      "state":"WA",
-      "zip":"98108",
-      "propertyType": "Home",
-      "units": 1,
-      "teaserPhoto":"images/ISp98yfgbxdzrt0000000000.jpg",
-      "activityCount":2,
-      "boardCount":14,
-      "purchasePrice": 125000,
-      "tags": ["flip","sfr","adu"]
-    },
-    {
-      "pid": "00002",
-      "address": "2363 S State St",
-      "city":"Tacoma",
-      "state":"WA",
-      "zip":"98406",
-      "teaserPhoto":"images/IS9xrkre05x2181000000000.jpg",
-      "propertyType": "Home",
-      "units": 1,
-      "activityCount":5,
-      "boardCount":3,
-      "purchasePrice": 40000,
-      "tags": ["new construction","sfr"]    
-    },
-    {
-      "pid": "00003",
-      "address": "18 Jade Cir",
-      "city":"Las Vegas",
-      "state":"NV",
-      "zip":"89106",
-      "propertyType": "Home",
-      "units": 1,
-      "teaserPhoto":"images/ISl2oiz4ycwl310000000000.jpg",
-      "activityCount":22,
-      "boardCount":0,
-      "purchasePrice": 121000,
-      "tags": ["rental","sfr","pool"]    
-    }];
-
   // Return object with getProperties function
   return {
     getProperties: function () {
