@@ -65,8 +65,16 @@ function PortfolioCtrl($scope, propertiesApi) {
             if (teaserPhoto == null) {
               teaserPhoto = "default.jpeg";
             }
+            
+            var units = property.field_units.und.length+1;
+            /*if () {
+              return; 
+            } else{
+              units = 0;
+            }*/
+            console.log(units);
             properties.push({
-                "units":property.field_units.und.length,
+                "units":units,
                 "propertyType":property.field_property_type.und[0].value,
                 "purchasePrice":parseInt(property.field_purchase_price.und[0].value),
                 "address":property.field_address.und[0].thoroughfare,
