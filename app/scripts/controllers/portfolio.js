@@ -10,7 +10,64 @@
 angular.module('buildboardApp')
   .controller('PortfolioCtrl', PortfolioCtrl)
   .factory('propertiesApi', propertiesApi)
-  .constant('apiUrl','http://api.buildboard.io'); // Register new service
+  .constant('apiUrl','http://api.buildboard.io/properties/v1/node'); // Register new service
+
+// Create API service function
+function propertiesApi($http, apiUrl) {
+
+  function get(param) {
+    return request("GET", param);
+  }
+
+  function post(data) {
+    return request("POST", null, data);
+  }
+
+  function put(data) {
+    return request("PUT",null, data);
+  }
+
+  function del(param) {
+    return request("DELETE", param);
+  }
+
+  function request(verb, param, data) {
+    var req = {
+      method: verb,
+      url: url(param),
+      data: data
+    }
+    return $http(req);
+  }
+
+  function url(param) {
+    if (param == null || !angular.isDefined(param)) {
+      param = '';
+    }
+    return apiUrl + param;
+  }
+  // Return object with getProperties function
+  return {
+    getProperties: function () {
+      //2var url = apiUrl + '/properties/v1/node'
+      //1 return properties;
+      //2return $http.get(url);
+      return get();
+    },
+    getPropertiesById: function (id) {
+      return get(id);
+    },
+    addProperty: function (property) {
+      return post(property);
+    },
+    removeProperty: function (id) {
+      return del(id);
+    },
+    updateProperty: function (id) {
+      return put(property);
+    }
+  }
+}
 
 // Pass in $scope, and propertiesApi service
 function PortfolioCtrl($scope, propertiesApi) {
@@ -188,7 +245,9 @@ function PortfolioCtrl($scope, propertiesApi) {
 
     var filename = '';    
 
-    var property = {
+    var title = this.property.address + " " + this.property.city + ", " + this.property.state + " " + this.property.zip;
+    var newProperty = {
+      "title": title,
       "address": this.property.address,
       "city": this.property.city,
       "state": this.property.state,
@@ -203,9 +262,28 @@ function PortfolioCtrl($scope, propertiesApi) {
       "tags": this.property.tags,
     }
 
-    $scope.properties.push(property);
+    var property = {
+      "title": title,
+      "type": "property",
+      "language": "und"
+    }
+    // Show us what we got!
+    console.log("Property: " + property);
+    console.log("New Property: " + newProperty);
+    
+    useBackend(-1, function () {
+      return propertiesApi.addProperty(
+        property)
+    })
 
+    this.errorMessage = "";
+    this.errorMessage = $scope.errorMessage;
+    // Make show up on page
+    $scope.properties.push(newProperty);
+
+    // Change views
     setView('propertiesList');
+    // Update Units & Costs Totals
     $scope.propertiesUnits = propertiesUnits();
     $scope.propertiesCosts = propertiesCosts();
   }
@@ -269,60 +347,31 @@ function PortfolioCtrl($scope, propertiesApi) {
     $scope.propertiesUnits = propertiesUnits();
     $scope.propertiesCosts = propertiesCosts();
   }
-}
 
-var properties2 = [
-  {
-    "pid": "00001",
-    "address": "914 S Warsaw St",
-    "city":"Seattle",
-    "state":"WA",
-    "zip":"98108",
-    "propertyType": "Home",
-    "units": 1,
-    "teaserPhoto":"images/ISp98yfgbxdzrt0000000000.jpg",
-    "activityCount":2,
-    "boardCount":14,
-    "purchasePrice": 125000,
-    "tags": ["flip","sfr","adu"]
-  },
-  {
-    "pid": "00002",
-    "address": "2363 S State St",
-    "city":"Tacoma",
-    "state":"WA",
-    "zip":"98406",
-    "teaserPhoto":"images/IS9xrkre05x2181000000000.jpg",
-    "propertyType": "Home",
-    "units": 1,
-    "activityCount":5,
-    "boardCount":3,
-    "purchasePrice": 40000,
-    "tags": ["new construction","sfr"]    
-  },
-  {
-    "pid": "00003",
-    "address": "18 Jade Cir",
-    "city":"Las Vegas",
-    "state":"NV",
-    "zip":"89106",
-    "propertyType": "Home",
-    "units": 1,
-    "teaserPhoto":"images/ISl2oiz4ycwl310000000000.jpg",
-    "activityCount":22,
-    "boardCount":0,
-    "purchasePrice": 121000,
-    "tags": ["rental","sfr","pool"]    
-  }];
+  function useBackend(id, operation) {
+    $scope.errorMessage = '';
+    operation()
+      .success(
+        function (data) {
+          console.log(data);
+          //console.log(data.title + " is completed.")
+        })
+      .error(
+        function (errorInfo, status) {
+          setError(errorInfo, status, id)
+        });    
+  }
 
-// Create API service function
-function propertiesApi($http, apiUrl) {
-  // Return object with getProperties function
-  return {
-    getProperties: function () {
-      var url = apiUrl + '/properties/v1/node'
-      // return properties;
-      return $http.get(url);
+  function setError(errorInfo, status, id) {
+    if (status == 401) {
+      $scope.errorMessage = "Authorization failed."
+    } else if (angular.isDefined(errorInfo.reasonCode)
+        && errorInfo.reasonCode == "TenantLimitExceeded")
+    {
+      $scope.errorMessage =
+          "You cannot add more locations.";
+    } else {
+      $scope.errorMessage = errorInfo.message;
     }
   }
 }
