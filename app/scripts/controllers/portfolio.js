@@ -10,7 +10,7 @@
 angular.module('buildboardApp')
   .controller('PortfolioCtrl', PortfolioCtrl)
   .factory('propertiesApi', propertiesApi)
-  .constant('apiUrl','http://api.buildboard.io/properties/v1/node'); // Register new service
+  .constant('apiUrl','http://api.buildboard.io/properties/v1/node/'); // Register new service
 
 // Create API service function
 function propertiesApi($http, apiUrl) {
@@ -24,7 +24,9 @@ function propertiesApi($http, apiUrl) {
   }
 
   function put(data) {
-    return request("PUT",null, data);
+    console.log(data);
+    var param = data.nid;
+    return request("PUT", param, data);
   }
 
   function del(param) {
@@ -63,7 +65,7 @@ function propertiesApi($http, apiUrl) {
     removeProperty: function (id) {
       return del(id);
     },
-    updateProperty: function (id) {
+    updateProperty: function (property) {
       return put(property);
     }
   }
@@ -98,23 +100,9 @@ function PortfolioCtrl($scope, propertiesApi) {
     $scope.errorMessage = '';
     propertiesApi.getProperties()
       .success(function (data) {
-        /*var properties = [
-          {
-            "pid": "00001",
-            "address": "914 S Warsaw St",
-            "city":"Seattle",
-            "state":"WA",
-            "zip":"98108",
-            "propertyType": "Home",
-            "units": 1,
-            "teaserPhoto":"images/ISp98yfgbxdzrt0000000000.jpg",
-            "activityCount":2,
-            "boardCount":14,
-            "purchasePrice": 125000,
-            "tags": ["flip","sfr","adu"]
-          },*/
         var properties = [];
         var filesURL = "http://api.buildboard.io/sites/default/files/";
+
         angular.forEach(
           data, 
           function(property, index) {
@@ -122,16 +110,15 @@ function PortfolioCtrl($scope, propertiesApi) {
             if (teaserPhoto == null) {
               teaserPhoto = "default.jpeg";
             }
-            
-            var units = property.field_units.und.length+1;
-            /*if () {
-              return; 
-            } else{
-              units = 0;
-            }*/
-            console.log(units);
+            var units = property.field_units.und;
+            if (units == null) {
+              units = [1];
+              console.log(units);
+              console.log(units.length);
+            }
             properties.push({
-                "units":units,
+                "nid":property.nid,
+                "units":units.length,
                 "propertyType":property.field_property_type.und[0].value,
                 "purchasePrice":parseInt(property.field_purchase_price.und[0].value),
                 "address":property.field_address.und[0].thoroughfare,
@@ -141,7 +128,7 @@ function PortfolioCtrl($scope, propertiesApi) {
                 "teaserPhoto":filesURL + 'properties/images/' + teaserPhoto[0].filename // TO DO change schema to field_teaser_photo, qty. 1
             });
           });
-        $scope.properties = [];
+//        $scope.properties = [];
         $scope.properties = properties;
         $scope.propertiesUnits = propertiesUnits();
         $scope.propertiesCosts = propertiesCosts();
@@ -228,21 +215,6 @@ function PortfolioCtrl($scope, propertiesApi) {
   }
 
   function addProperty() {
-    /*if (document.getElementById('photo').files[0].length) {
-      var file = document.getElementById('photo').files[0];
-    }
-    r = new FileReader();
-    r.onloadend = function(e){
-      var data = e.target.result;
-      //send you binary data via $http or $resource or do anything else with it
-    }
-    r.readAsBinaryString(f);
-    
-    if (file.name.length) {
-      console.log('True');
-      filename = file.name;
-    }*/
-
     var filename = '';    
 
     var title = this.property.address + " " + this.property.city + ", " + this.property.state + " " + this.property.zip;
@@ -265,12 +237,51 @@ function PortfolioCtrl($scope, propertiesApi) {
     var property = {
       "title": title,
       "type": "property",
-      "language": "und"
+      "language": "und",
+      "field_address": {
+        "und": [
+          {
+            "country":"US",
+            "administrative_area": this.property.state,
+            "sub_administrative_area": null,
+            "locality": this.property.city,
+            "dependent_locality":"",
+            "postal_code": this.property.zip,
+            "thoroughfare": this.property.address,
+            "premise": "",
+            "sub_premise": null,
+            "organisation_name": null,
+            "name_line": null,
+            "first_name": null,
+            "last_name": null,
+            "data":null
+          }
+        ]
+      },
+      "field_units": {
+        "und": [{
+
+        }],
+      },
+      "field_property_type": {
+        "und": [
+          {
+            "value":this.property.propertyType
+          }
+        ]
+      },
+      "field_purchase_price": {
+        "und": [
+          {
+              "value": this.property.purchasePrice,
+              "target_id": "240"
+          },
+        ]
+      }     
     }
-    // Show us what we got!
-    console.log("Property: " + property);
-    console.log("New Property: " + newProperty);
     
+    console.log(property);
+    // Hit the Service button!
     useBackend(-1, function () {
       return propertiesApi.addProperty(
         property)
@@ -295,6 +306,7 @@ function PortfolioCtrl($scope, propertiesApi) {
 
     //Set the default values to the right property as an object
     this.property = {
+      "nid": $scope.properties[index].nid,
       "address" : $scope.properties[index].address,
       "city" : $scope.properties[index].city,
       "state" : $scope.properties[index].state,
@@ -315,7 +327,54 @@ function PortfolioCtrl($scope, propertiesApi) {
   }
 
   function saveProperty() {
-    $scope.properties[selected] = {
+    var title = this.property.address + " " + this.property.city + ", " + this.property.state + " " + this.property.zip;
+    var property = {
+      "title": title,
+      "type": "property",
+      "nid": this.property.nid,
+      "field_address": {
+        "und": [
+          {
+            "country":"US",
+            "administrative_area": this.property.state,
+            "sub_administrative_area": null,
+            "locality": this.property.city,
+            "dependent_locality":"",
+            "postal_code": this.property.zip,
+            "thoroughfare": this.property.address,
+            "premise": "",
+            "sub_premise": null,
+            "organisation_name": null,
+            "name_line": null,
+            "first_name": null,
+            "last_name": null,
+            "data":null
+          }
+        ]
+      },
+      "field_units": {
+        "und": [{
+
+        }],
+      },
+      "field_property_type": {
+        "und": [
+          {
+            "value":this.property.propertyType
+          }
+        ]
+      },
+      "field_purchase_price": {
+        "und": [
+          {
+              "value": this.property.purchasePrice,
+              "target_id": "240"
+          },
+        ]
+      }     
+    }
+
+    /*$scope.properties[selected] = {
       "address": this.property.address,
       "city": this.property.city,
       "state": this.property.state,
@@ -328,7 +387,10 @@ function PortfolioCtrl($scope, propertiesApi) {
       "activityCount": this.property.activityCount,
       "boardCount": this.property.boardCount,
       "tags": this.property.tags,
-    }
+    }*/
+    useBackend(property, function () {
+      return propertiesApi.updateProperty(property)
+    })
     setView('propertiesList');
     $scope.propertiesUnits = propertiesUnits();
     $scope.propertiesCosts = propertiesCosts();
@@ -338,12 +400,20 @@ function PortfolioCtrl($scope, propertiesApi) {
   function startRemoveProperty(index) {
     selected = index;
     setView('removeProperty');
-    $scope.removalProperty = properties[selected];
+    $scope.removalProperty = $scope.properties[selected];
   }
 
   function removeProperty() {
-    $scope.properties.splice(selected,1);
+    console.log($scope.properties[selected].nid);
+    var id = $scope.properties[selected].nid
+    // $scope.properties.splice(selected,1);
+    // id = selected;
+    useBackend(id, function () {
+      return propertiesApi.removeProperty(id);
+    })
+
     setView('propertiesList');
+
     $scope.propertiesUnits = propertiesUnits();
     $scope.propertiesCosts = propertiesCosts();
   }
@@ -353,8 +423,8 @@ function PortfolioCtrl($scope, propertiesApi) {
     operation()
       .success(
         function (data) {
+          refreshPortfolio();        
           console.log(data);
-          //console.log(data.title + " is completed.")
         })
       .error(
         function (errorInfo, status) {
