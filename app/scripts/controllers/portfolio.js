@@ -83,11 +83,13 @@ function PortfolioCtrl($scope, propertiesApi) {
   $scope.properties = [];
   $scope.propertiesUnits = 0;
   $scope.propertiesCosts = 0;
-  $scope.errorMessgae = '';
+  $scope.errorMessage = '';
 
   // Register functions to $scope
   $scope.isLoading = isLoading;
   $scope.refreshPortfolio = refreshPortfolio;
+
+  $scope.refreshPortfolio= refreshPortfolio();
 
   var loading = false;
 
