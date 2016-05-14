@@ -102,38 +102,11 @@ function PortfolioCtrl($scope, propertiesApi) {
     $scope.errorMessage = '';
     propertiesApi.getProperties()
       .success(function (data) {
-        var properties = [];
         var filesURL = "http://api.buildboard.io/sites/default/files/";
-
-        angular.forEach(
-          data, 
-          function(property, index) {
-            var teaserPhoto = property.field_feature_images.und;//[0].filename;
-            if (teaserPhoto == null) {
-              teaserPhoto = "default.jpeg";
-            }
-            var units = property.field_units.und;
-            if (units == null) {
-              units = [1];
-              console.log(units);
-              console.log(units.length);
-            }
-            properties.push({
-                "nid":property.nid,
-                "units":units.length,
-                "propertyType":property.field_property_type.und[0].value,
-                "purchasePrice":parseInt(property.field_purchase_price.und[0].value),
-                "address":property.field_address.und[0].thoroughfare,
-                "city":property.field_address.und[0].locality,
-                "state":property.field_address.und[0].administrative_area,
-                "zip":property.field_address.und[0].postal_code,              
-                "teaserPhoto":filesURL + 'properties/images/' + teaserPhoto[0].filename // TO DO change schema to field_teaser_photo, qty. 1
-            });
-          });
-//        $scope.properties = [];
-        $scope.properties = properties;
-        $scope.propertiesUnits = propertiesUnits();
-        $scope.propertiesCosts = propertiesCosts();
+        $scope.properties = data;
+        var properties = data;
+        $scope.propertiesUnits = propertiesUnits(properties);
+        $scope.propertiesCosts = propertiesCosts(properties);
         loading = false;
       })
       .error(function () {
@@ -143,19 +116,19 @@ function PortfolioCtrl($scope, propertiesApi) {
   }
 
   // REPORT - UNIT COUNT: Gather total unit count
-  function propertiesUnits() {
+  function propertiesUnits(properties) {
     var propertiesUnits = 0;
     for (var i = 0; i < $scope.properties.length; i++) {
-      propertiesUnits += $scope.properties[i].units;
+      propertiesUnits += properties[i].field_units.und.length;
     };
     return propertiesUnits;
   }
 
   // REPORT - COSTS COUNT:  Gather total costs
-  function propertiesCosts() {
+  function propertiesCosts(properties) {
     var propertiesCosts = 0;
     for (var i = 0; i < $scope.properties.length; i++) {
-      propertiesCosts += $scope.properties[i].purchasePrice;
+      propertiesCosts += parseInt(properties[i].field_purchase_price.und[0].value);
     };
     return propertiesCosts;
   }
@@ -275,7 +248,7 @@ function PortfolioCtrl($scope, propertiesApi) {
       "field_purchase_price": {
         "und": [
           {
-              "value": this.property.purchasePrice,
+              "value": parseInt(this.property.purchasePrice),
               "target_id": "240"
           },
         ]
@@ -301,30 +274,22 @@ function PortfolioCtrl($scope, propertiesApi) {
     $scope.propertiesCosts = propertiesCosts();
   }
 
+  // Setup Types Options.
+  var types = ["Home", "Multifamily", "Lot"];
+  $scope.types = types;
+  
   // EDIT PROPERTY
   function startEditProperty(index) {
     // Get the right one
     selected = index;
 
-    //Set the default values to the right property as an object
-    this.property = {
-      "nid": $scope.properties[index].nid,
-      "address" : $scope.properties[index].address,
-      "city" : $scope.properties[index].city,
-      "state" : $scope.properties[index].state,
-      "zip" : $scope.properties[index].zip,
-      "teaserPhoto" : $scope.properties[index].teaserPhoto,
-      "teaser" : $scope.properties[index].teaser,
-      "propertyType": $scope.properties[index].propertyType,
-      "units": $scope.properties[index].units,
-      "activityCount": $scope.properties[index].activityCount,
-      "purchasePrice": $scope.properties[index].purchasePrice,
-      "boardCount": $scope.properties[index].boardCount,
-      "tags": $scope.properties[index].tags,
-    }
-    // Assign to scope so accessible
-    $scope.property = this.property;
+    $scope.property = $scope.properties[selected];
     setView('editProperty');
+    /*for (var i = 0; i < types.length; i++) {
+      if(types[i] == property.field_property_type.und[0].value) {
+        $('select[name="propertyType"]').value(types[i]).attr('selected');
+      }
+    }*/
     initializeForm();
   }
 

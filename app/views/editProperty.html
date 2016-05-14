@@ -6,36 +6,36 @@
   <form class="">
     <div class="row">  
       <div class="input-field col s12 medium-label">
-          <input placeholder="555 S Main St" type="text" ng-model="property.address"/>
+          <input placeholder="555 S Main St" type="text" ng-model="property.field_address.und[0].thoroughfare"/>
           <label for="location">Location</label>
       </div>
     </div>
     <div class="row">
       <div class="input-field col s4 small-label">
-          <input placeholder="New York" type="text" ng-model="property.city"/>
+          <input placeholder="New York" type="text" ng-model="property.field_address.und[0].locality"/>
           <label for="city">City</label>
       </div>
       <div class="input-field col s4">
-          <input placeholder="NY" type="text" ng-model="property.state"/>
+          <input placeholder="NY" type="text" ng-model="property.field_address.und[0].administrative_area"/>
           <label for="state">State</label>
       </div>
       <div class="input-field col s4 small-label">
-          <input placeholder="10004" type="text" ng-model="property.zip"/>
+          <input placeholder="10004" type="text" ng-model="property.field_address.und[0].postal_code"/>
           <label for="zip">Zip</label>
       </div>
     </div>
     <div class="row">
       <div class="input-field col s4">
-        <select name="propertyType" ng-model="property.propertyType">
-          <option value="" disabled selected>Choose your option</option>
-          <option value="Home">Home</option>
-          <option value="Multi-Family">Multi-Family</option>
-          <option value="Lot">Lot</option>
+        <select name="propertyType" ng-model="property.field_property_type.und[0].value">
+          <option value="" disabled>Choose your option</option>
+          <option ng-repeat="type in types" 
+          ng-value="{{type}}"
+          ng-attr-selected="{{property.field_property_type.und[0].value == type && 'selected'}}">{{type}}</option>
         </select>
         <label>Property Type</label>
       </div>
       <div class="input-field col s4">
-          <input placeholder="1" type="number" ng-model="property.units"/>
+          <input placeholder="1" type="number" ng-model="property.field_units.und[0].length"/>
           <label for="units">Units</label>
       </div>
       <div class="input-field col s4">
@@ -45,7 +45,7 @@
     </div>
     <div class="row">
       <div class="input-field col l6 m6 s12 large-label">
-          <input placeholder="$100,000" type="text" ng-model="property.purchasePrice" format="currency"/>
+          <input placeholder="$100,000" type="text" ng-model="property.field_purchase_price.und[0].value" format="currency"/>
           <label for="purchasePrice">Purchase Price</label>
       </div>
     </div>
@@ -54,15 +54,15 @@
         <div class="file-field input-field">
           <div class="btn blue">
             <span>Photo</span>
-            <input type="file" placeholder="img/XXXX.jpg" ng-model="property.teaserPhoto">
+            <input type="file" placeholder="img/XXXX.jpg" ng-model="property.field_feature_images.und[0].filename">
           </div>
           <div class="file-path-wrapper">
-            <input class="file-path validate" type="text">
+            <input class="file-path validate" ng-value="property.field_feature_images.und[0].filename" type="text">
           </div>
         </div>
       </div>
       <div class="input-field col s12">
-          <textarea id="teaser" class="materialize-textarea" ng-model="property.teaser" length="120">
+          <textarea id="teaser" class="materialize-textarea" ng-model="property.field_teaser.und[0].value" length="120">
           </textarea>
           <label for="teaser">Teaser</label>
       </div>

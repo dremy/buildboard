@@ -51,16 +51,16 @@
           <div class="col l4 m6 s12" ng-repeat="property in properties | filter:searchKey">
             <div class="card">
               <div class="card-image">
-                <img src="{{property.teaserPhoto}}" width="258" height="189">
-                <span class="card-title">{{property.address}}</span>
-                <span class="card-subtitle">{{property.city}}, {{property.state}} {{property.zip}}</span>
+                <img src="http://api.buildboard.io/sites/default/files/{{property.field_feature_images.und[0].uri.replace('public://','')}}" width="258" height="189">
+                <span class="card-title">{{property.field_address.und[0].thoroughfare}}</span>
+                <span class="card-subtitle">{{property.field_address.und[0].locality}}, {{property.field_address.und[0].administrative_area}} {{property.field_address.und[0].postal_code}}</span>
               </div>
               <div class="card-content">
-                <p class="property-units"><label>Units:</label> {{property.units | number}}</p>
-                <p class="property-type" ng-show="property.propertyType.length"><label>Type:</label> {{property.propertyType}}</p>
-                <p class="property-tag" ng-show="property.tags.length"><i class="material-icons">label</i><label>Tags</label><span> {{property.tags[0]}}, {{property.tags[1]}}, {{property.tags[2]}}</span></p>                
-                <p>{{property.purchasePrice | currency:"$":0}}
-                <p>{{property.teaser}}</p>
+                <p class="property-units"><label>Units:</label> {{property.field_units.und.length | number}}</p>
+                <p class="property-type" ng-show="property.field_property_type == true"><label>Type:</label> {{property.field_property_type.und[0].value}}</p>
+                <p class="property-tag" ng-show="property.field_tags == true"><i class="material-icons">label</i><label>Tags</label><span ng-repeat="tags in property.field_tags.und"> {{tag.value}}</span></p>
+                <p ng-show="property.field_purchase_price == true">{{property.field_purchase_price.und[0].value | currency:"$":0}}
+                <p ng-show="property.field_teaser == true">{{property.field_teaser.und[0].value}}</p>
               </div>
               <div class="card-action">
                 <button class="btn blue-text white" ng-click="startEditProperty($index)">
