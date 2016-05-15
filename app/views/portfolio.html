@@ -57,10 +57,10 @@
               </div>
               <div class="card-content">
                 <p class="property-units"><label>Units:</label> {{property.field_units.und.length | number}}</p>
-                <p class="property-type" ng-show="property.field_property_type == true"><label>Type:</label> {{property.field_property_type.und[0].value}}</p>
-                <p class="property-tag" ng-show="property.field_tags == true"><i class="material-icons">label</i><label>Tags</label><span ng-repeat="tags in property.field_tags.und"> {{tag.value}}</span></p>
-                <p ng-show="property.field_purchase_price == true">{{property.field_purchase_price.und[0].value | currency:"$":0}}
-                <p ng-show="property.field_teaser == true">{{property.field_teaser.und[0].value}}</p>
+                <p class="property-type" ng-show="property.field_property_type.und.length"><label>Type:</label> {{property.field_property_type.und[0].value}}</p>
+                <p class="property-tag" ng-show="property.field_tags.und.length"><i class="material-icons">label</i><label>Tags</label><span ng-repeat="tags in property.field_tags.und == true"> {{tag.value}}</span></p>
+                <p ng-show="property.field_purchase_price.und.length">{{property.field_purchase_price.und[0].value | currency:"$":0}}
+                <p ng-show="property.field_teaser.und.length">{{property.field_teaser.und[0].value}}</p>
               </div>
               <div class="card-action">
                 <button class="btn blue-text white" ng-click="startEditProperty($index)">

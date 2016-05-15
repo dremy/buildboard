@@ -10,8 +10,9 @@
 angular.module('buildboardApp')
   .controller('PortfolioCtrl', PortfolioCtrl)
   .factory('propertiesApi', propertiesApi)
-  .factory('zillowApi',zillowApi)
-  .constant('','')
+  .factory('zApi', zApi)
+  .constant('zSearchApiUrl','http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=X1-ZWz19u0t23l4i3_a6mew&address=914+Warsaw+St&citystatezip=Seattle%2C+WA')
+  .constant('zWebServicesId','X1-ZWz19u0t23l4i3_a6mew')
   .constant('bbPropertyApiUrl','http://api.buildboard.io/properties/v1/node/'); // Register new service
 
 // Create API service function
@@ -26,7 +27,6 @@ function propertiesApi($http, bbPropertyApiUrl) {
   }
 
   function put(data) {
-    console.log(data);
     var param = data.nid;
     return request("PUT", param, data);
   }
@@ -73,8 +73,19 @@ function propertiesApi($http, bbPropertyApiUrl) {
   }
 }
 
-// Pass in $scope, and propertiesApi service
-function PortfolioCtrl($scope, propertiesApi) {
+function zApi($http, zSearchApiUrl, zWebServicesId) {
+  // Set empty response object
+  var zResponse = {};
+  
+  return {
+    getZillowSearchResponse: function() {
+      $http.get(zSearchApiUrl + zWebServicesId + address + citystatezip);
+    }
+  }
+}
+
+// Pass in $scope, and propertiesApi and zApi service 
+function PortfolioCtrl($scope, propertiesApi, zApi) {
   this.awesomeThings = [
     'HTML5 Boilerplate',
     'AngularJS',
@@ -168,7 +179,7 @@ function PortfolioCtrl($scope, propertiesApi) {
   }
 
   // ADD PROPERTY
-  function startAddProperty() {
+  function startAddProperty() {    
     $scope.property = {
       "address":"",
       "city":"",
@@ -183,8 +194,13 @@ function PortfolioCtrl($scope, propertiesApi) {
       "boardCount": "",
       "tags": "",
     }
+
     setView('addProperty');
     initializeForm();
+
+    // Queue up the zApi on key up
+    // var address = "&address=" + this.property.address;
+    // var citystatezip = "&citystatezip" + this.property.city + "%2C+" + this.property.state + "%20" this.property.zip;
   }
 
   function cancelProperty() {
@@ -192,10 +208,10 @@ function PortfolioCtrl($scope, propertiesApi) {
   }
 
   function addProperty() {
-    var filename = '';    
+/*    var filename = '';    */
 
     var title = this.property.address + " " + this.property.city + ", " + this.property.state + " " + this.property.zip;
-    var newProperty = {
+    /*var newProperty = {
       "title": title,
       "address": this.property.address,
       "city": this.property.city,
@@ -209,7 +225,7 @@ function PortfolioCtrl($scope, propertiesApi) {
       "activityCount": this.property.activityCount,
       "boardCount": this.property.boardCount,
       "tags": this.property.tags,
-    }
+    }*/
 
     var property = {
       "title": title,
@@ -266,8 +282,6 @@ function PortfolioCtrl($scope, propertiesApi) {
 
     this.errorMessage = "";
     this.errorMessage = $scope.errorMessage;
-    // Make show up on page
-    $scope.properties.push(newProperty);
 
     // Change views
     setView('propertiesList');
@@ -277,7 +291,7 @@ function PortfolioCtrl($scope, propertiesApi) {
   }
 
   // Setup Types Options.
-  var types = ["Home", "Multifamily", "Lot"];
+  var types = ["Home", "Multi-family", "Lot"];
   $scope.types = types;
   
   // EDIT PROPERTY
@@ -373,7 +387,6 @@ function PortfolioCtrl($scope, propertiesApi) {
   }
 
   function removeProperty() {
-    console.log($scope.properties[selected].nid);
     var id = $scope.properties[selected].nid
     // $scope.properties.splice(selected,1);
     // id = selected;
