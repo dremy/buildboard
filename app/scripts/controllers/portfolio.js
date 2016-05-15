@@ -10,10 +10,12 @@
 angular.module('buildboardApp')
   .controller('PortfolioCtrl', PortfolioCtrl)
   .factory('propertiesApi', propertiesApi)
-  .constant('apiUrl','http://api.buildboard.io/properties/v1/node/'); // Register new service
+  .factory('zillowApi',zillowApi)
+  .constant('','')
+  .constant('bbPropertyApiUrl','http://api.buildboard.io/properties/v1/node/'); // Register new service
 
 // Create API service function
-function propertiesApi($http, apiUrl) {
+function propertiesApi($http, bbPropertyApiUrl) {
 
   function get(param) {
     return request("GET", param);
@@ -46,12 +48,12 @@ function propertiesApi($http, apiUrl) {
     if (param == null || !angular.isDefined(param)) {
       param = '';
     }
-    return apiUrl + param;
+    return bbPropertyApiUrl + param;
   }
   // Return object with getProperties function
   return {
     getProperties: function () {
-      //2var url = apiUrl + '/properties/v1/node'
+      //2var url = bbPropertyApiUrl
       //1 return properties;
       //2return $http.get(url);
       return get();
