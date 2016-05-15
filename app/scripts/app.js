@@ -61,10 +61,10 @@ angular
         controller: 'PropertyCtrl',
         controllerAs: 'property'
       })
-      .when('/activity', {
-        templateUrl: 'views/activity.html',
-        controller: 'ActivityCtrl',
-        controllerAs: 'activity'
+      .when('/property/:pid/documents', {
+        templateUrl: 'views/documents.html',
+        controller: 'DocumentsCtrl',
+        controllerAs: 'documents'
       })
       .when('/about', {
         templateUrl: 'views/about.html',
