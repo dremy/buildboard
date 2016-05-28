@@ -8,6 +8,36 @@
  *
  * Main module of the application.
  */
+function currentSpot() {
+  // Sets defaults as empty
+  var activeMenuId = '';
+  var titleText = '';
+
+  // Returns object with 3 operations 
+  return {
+    setCurrentSpot: function (menuId, title) {
+      activeMenuId = menuId;
+      titleText = title;
+    },
+    getActiveMenu: function () {
+      return activeMenuId;
+    },
+    getTitle: function () {
+      return titleText;
+    }
+  };
+}
+
+function bbActiveMenu(currentSpot) {
+  return function (scope, element, attrs) {
+    // Set values to attributes.
+    var activeMenuId = attrs.bbActiveMenu; // attrs["bbActiveMenu"]
+    var activeTitle = attrs.bbActiveTitle; // attrs['bbActiveTitle']
+    // Reuse depending on the new values.
+    currentSpot.setCurrentSpot(activeMenuId, activeTitle);
+  };
+}
+
 angular
   .module('buildboardApp', [
     'ngAnimate',
@@ -85,13 +115,15 @@ angular
       return {
           require: '?ngModel',
           link: function (scope, elem, attrs, ctrl) {
-              if (!ctrl) return;
+              if (!ctrl) {
+                return;
+              }
 
-              ctrl.$formatters.unshift(function (a) {
-                  return $filter(attrs.format)(ctrl.$modelValue)
+              ctrl.$formatters.unshift(function () {
+                  return $filter(attrs.format)(ctrl.$modelValue);
               });
 
-              elem.bind('blur', function(event) {
+              elem.bind('blur', function() {
                   var plainNumber = elem.val().replace(/[^\d|\-+|\.+]/g, '');
                   elem.val($filter(attrs.format)(plainNumber));
               });
@@ -99,35 +131,6 @@ angular
       };
   }]);
 
-  function currentSpot() {
-    // Sets defaults as empty
-    var activeMenuId = '';
-    var titleText = '';
-
-    // Returns object with 3 operations 
-    return {
-      setCurrentSpot: function (menuId, title) {
-        activeMenuId = menuId;
-        titleText = title;
-      },
-      getActiveMenu: function () {
-        return activeMenuId;
-      },
-      getTitle: function () {
-        return titleText;
-      }
-    }
-  }
-
-  function bbActiveMenu(currentSpot) {
-    return function (scope, element, attrs) {
-      // Set values to attributes.
-      var activeMenuId = attrs["bbActiveMenu"];
-      var activeTitle = attrs["bbActiveTitle"];
-      // Reuse depending on the new values.
-      currentSpot.setCurrentSpot(activeMenuId, activeTitle);
-    }
-  }
 
   /*.run(['drupal', function(drupal) {
     

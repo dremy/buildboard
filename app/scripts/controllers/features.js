@@ -7,13 +7,14 @@
  * # MainCtrl
  * Controller of the buildboardApp
  */
-angular.module('buildboardApp')
-  .controller('FeaturesCtrl', FeaturesCtrl);
-
-function FeaturesCtrl($scope) {
+function FeaturesCtrl() {
   this.awesomeThings = [
     'HTML5 Boilerplate',
     'AngularJS',
     'Karma'
   ];
 }
+
+angular.module('buildboardApp')
+  .controller('FeaturesCtrl', FeaturesCtrl);
+  

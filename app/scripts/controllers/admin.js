@@ -7,9 +7,6 @@
  * # MainCtrl
  * Controller of the buildboardApp
  */
-angular.module('buildboardApp')
-  .controller('AdminCtrl', AdminCtrl);
-
 function AdminCtrl($scope, currentSpot) {
   this.awesomeThings = [
     'HTML5 Boilerplate',
@@ -17,15 +14,18 @@ function AdminCtrl($scope, currentSpot) {
     'Karma'
   ];
 
-  // Register the functions.
-  $scope.isActive = isActive;
-  $scope.getTitle = getTitle;
-
   function isActive(menuId) {
-    return currentSpot.getActiveMenu() == menuId;
+    return currentSpot.getActiveMenu() === menuId;
   }
 
   function getTitle() {
     return currentSpot.getTitle();
-  }  
+  }
+
+  // Register the functions.
+  $scope.isActive = isActive;
+  $scope.getTitle = getTitle;  
 }
+
+angular.module('buildboardApp')
+  .controller('AdminCtrl', AdminCtrl);

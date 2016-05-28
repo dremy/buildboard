@@ -7,13 +7,13 @@
  * # MainCtrl
  * Controller of the buildboardApp
  */
-angular.module('buildboardApp')
-  .controller('HowWorksCtrl', HowWorksCtrl);
-
-function HowWorksCtrl($scope) {
+function HowWorksCtrl() {
   this.awesomeThings = [
     'HTML5 Boilerplate',
     'AngularJS',
     'Karma'
   ];
 }
+
+angular.module('buildboardApp')
+  .controller('HowWorksCtrl', HowWorksCtrl);

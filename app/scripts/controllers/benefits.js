@@ -7,13 +7,13 @@
  * # MainCtrl
  * Controller of the buildboardApp
  */
-angular.module('buildboardApp')
-  .controller('BenefitsCtrl', BenefitsCtrl);
-
-function BenefitsCtrl($scope) {
+function BenefitsCtrl() {
   this.awesomeThings = [
     'HTML5 Boilerplate',
     'AngularJS',
     'Karma'
   ];
 }
+
+angular.module('buildboardApp')
+  .controller('BenefitsCtrl', BenefitsCtrl);
