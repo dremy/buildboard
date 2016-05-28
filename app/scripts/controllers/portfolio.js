@@ -102,7 +102,7 @@ function PortfolioCtrl($scope, propertiesApi, zApi) {
   $scope.isLoading = isLoading;
   $scope.refreshPortfolio = refreshPortfolio;
 
-  $scope.refreshPortfolio= refreshPortfolio();
+  $scope.refreshPortfolio = refreshPortfolio();
 
   var loading = false;
 
@@ -208,25 +208,10 @@ function PortfolioCtrl($scope, propertiesApi, zApi) {
   }
 
   function addProperty() {
-/*    var filename = '';    */
-
+    // Some behind the scenes defining of the title.
     var title = this.property.address + " " + this.property.city + ", " + this.property.state + " " + this.property.zip;
-    /*var newProperty = {
-      "title": title,
-      "address": this.property.address,
-      "city": this.property.city,
-      "state": this.property.state,
-      "zip": this.property.zip,
-      "teaserPhoto": "images/" + filename,
-      "teaser": this.property.teaser, 
-      "propertyType": this.property.propertyType,
-      "units": this.property.units,
-      "purchasePrice": parseInt(this.property.purchasePrice),
-      "activityCount": this.property.activityCount,
-      "boardCount": this.property.boardCount,
-      "tags": this.property.tags,
-    }*/
 
+    // Setup the property to be posted.
     var property = {
       "title": title,
       "type": "property",
@@ -301,11 +286,6 @@ function PortfolioCtrl($scope, propertiesApi, zApi) {
 
     $scope.property = $scope.properties[selected];
     setView('editProperty');
-    /*for (var i = 0; i < types.length; i++) {
-      if(types[i] == property.field_property_type.und[0].value) {
-        $('select[name="propertyType"]').value(types[i]).attr('selected');
-      }
-    }*/
     initializeForm();
   }
 
@@ -357,20 +337,6 @@ function PortfolioCtrl($scope, propertiesApi, zApi) {
       }     
     }
 
-    /*$scope.properties[selected] = {
-      "address": this.property.address,
-      "city": this.property.city,
-      "state": this.property.state,
-      "zip": this.property.zip,
-      "teaserPhoto": this.property.teaserPhoto,
-      "teaser": this.property.teaser, 
-      "propertyType": this.property.propertyType,
-      "units": this.property.units,
-      "purchasePrice": parseInt(this.property.purchasePrice),
-      "activityCount": this.property.activityCount,
-      "boardCount": this.property.boardCount,
-      "tags": this.property.tags,
-    }*/
     useBackend(property, function () {
       return propertiesApi.updateProperty(property)
     })
@@ -388,8 +354,6 @@ function PortfolioCtrl($scope, propertiesApi, zApi) {
 
   function removeProperty() {
     var id = $scope.properties[selected].nid
-    // $scope.properties.splice(selected,1);
-    // id = selected;
     useBackend(id, function () {
       return propertiesApi.removeProperty(id);
     })
