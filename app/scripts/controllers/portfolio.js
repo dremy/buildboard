@@ -7,13 +7,6 @@
  * # PortfolioCtrl
  * Controller of the buildboardApp
  */
-angular.module('buildboardApp')
-  .controller('PortfolioCtrl', PortfolioCtrl)
-  .factory('propertiesApi', propertiesApi)
-  .factory('zApi', zApi)
-  .constant('zSearchApiUrl','http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=X1-ZWz19u0t23l4i3_a6mew&address=914+Warsaw+St&citystatezip=Seattle%2C+WA')
-  .constant('zWebServicesId','X1-ZWz19u0t23l4i3_a6mew')
-  .constant('bbPropertyApiUrl','http://api.buildboard.io/properties/v1/node/'); // Register new service
 
 // Create API service function
 function propertiesApi($http, bbPropertyApiUrl) {
@@ -40,12 +33,12 @@ function propertiesApi($http, bbPropertyApiUrl) {
       method: verb,
       url: url(param),
       data: data
-    }
+    };
     return $http(req);
   }
 
   function url(param) {
-    if (param == null || !angular.isDefined(param)) {
+    if (param === null || !angular.isDefined(param)) {
       param = '';
     }
     return bbPropertyApiUrl + param;
@@ -70,27 +63,53 @@ function propertiesApi($http, bbPropertyApiUrl) {
     updateProperty: function (property) {
       return put(property);
     }
-  }
+  };
 }
 
-function zApi($http, zSearchApiUrl, zWebServicesId) {
+/*function zApi($http, zSearchApiUrl, zWebServicesId) {
   // Set empty response object
   var zResponse = {};
   
+  // TO DO
   return {
     getZillowSearchResponse: function() {
       $http.get(zSearchApiUrl + zWebServicesId + address + citystatezip);
     }
-  }
-}
+  };
+}*/
 
-// Pass in $scope, and propertiesApi and zApi service 
-function PortfolioCtrl($scope, propertiesApi, zApi) {
+// Pass in $scope, and propertiesApi and TO DO zApi service 
+function PortfolioCtrl($scope, propertiesApi) {
   this.awesomeThings = [
     'HTML5 Boilerplate',
     'AngularJS',
     'Karma'
   ];
+
+  var loading = false;
+
+  function isLoading() {
+    return loading;
+  }
+
+  function refreshPortfolio() {
+    loading = true;
+    $scope.errorMessage = '';
+    propertiesApi.getProperties()
+      .success(function (data) {
+        $scope.properties = data;
+        var properties = data;
+        console.log(properties);
+        $scope.propertiesUnits = propertiesUnits(properties);
+        $scope.propertiesCosts = propertiesCosts(properties);
+        loading = false;
+      })
+      .error(function () {
+        $scope.errorMessage = "Request failed";
+        loading = false;
+      });
+  }
+
 
   // Set the model
   $scope.properties = [];
@@ -104,68 +123,33 @@ function PortfolioCtrl($scope, propertiesApi, zApi) {
 
   $scope.refreshPortfolio = refreshPortfolio();
 
-  var loading = false;
-
-  function isLoading() {
-    return loading;
-  }
-
-  function refreshPortfolio() {
-    loading = true;
-    $scope.errorMessage = '';
-    propertiesApi.getProperties()
-      .success(function (data) {
-        var filesURL = "http://api.buildboard.io/sites/default/files/";
-        $scope.properties = data;
-        var properties = data;
-        $scope.propertiesUnits = propertiesUnits(properties);
-        $scope.propertiesCosts = propertiesCosts(properties);
-        loading = false;
-      })
-      .error(function () {
-        $scope.errorMessage = "Request failed";
-        loading = false;
-      });
-  }
-
   // REPORT - UNIT COUNT: Gather total unit count
   function propertiesUnits(properties) {
-    var propertiesUnits = 0;
+    var propUnits = 0;
     for (var i = 0; i < $scope.properties.length; i++) {
-      propertiesUnits += properties[i].field_units.und.length;
-    };
-    return propertiesUnits;
+      propUnits += properties[i].field_units.und.length;
+    }
+    return propUnits;
   }
 
   // REPORT - COSTS COUNT:  Gather total costs
   function propertiesCosts(properties) {
-    var propertiesCosts = 0;
+    var propCosts = 0;
     for (var i = 0; i < $scope.properties.length; i++) {
-      propertiesCosts += parseInt(properties[i].field_purchase_price.und[0].value);
-    };
-    return propertiesCosts;
+      propCosts += parseInt(properties[i].field_purchase_price.und[0].value);
+    }
+    return propCosts;
   }
 
-  // ADD, EDIT, REMOVE PROPERTY
-  // Assign functions to be exposed on view event "click"
-  $scope.startAddProperty = startAddProperty;
-  $scope.cancelProperty = cancelProperty;
-  $scope.addProperty = addProperty;
-  $scope.startEditProperty = startEditProperty;
-  $scope.saveProperty = saveProperty;
-  $scope.startRemoveProperty = startRemoveProperty;
-  $scope.removeProperty = removeProperty;
-
-
   var selected = -1;
-
-  // Define propertiesList as the default
-  setView('propertiesList');
 
   // Create function for setting the argument in setView to the controllers scope
   function setView(view) {
     $scope.view = view;
   }
+
+  // Define propertiesList as the default
+  setView('propertiesList');
 
   // Setup the Form
   function initializeForm() {
@@ -193,7 +177,7 @@ function PortfolioCtrl($scope, propertiesApi, zApi) {
       "activityCount": "",
       "boardCount": "",
       "tags": "",
-    }
+    };
 
     setView('addProperty');
     initializeForm();
@@ -256,14 +240,12 @@ function PortfolioCtrl($scope, propertiesApi, zApi) {
           },
         ]
       }     
-    }
+    };
     
-    console.log(property);
     // Hit the Service button!
     useBackend(-1, function () {
-      return propertiesApi.addProperty(
-        property)
-    })
+      return propertiesApi.addProperty(property);
+    });
 
     this.errorMessage = "";
     this.errorMessage = $scope.errorMessage;
@@ -335,11 +317,11 @@ function PortfolioCtrl($scope, propertiesApi, zApi) {
           },
         ]
       }     
-    }
+    };
 
     useBackend(property, function () {
-      return propertiesApi.updateProperty(property)
-    })
+      return propertiesApi.updateProperty(property);
+    });
     setView('propertiesList');
     $scope.propertiesUnits = propertiesUnits();
     $scope.propertiesCosts = propertiesCosts();
@@ -353,16 +335,26 @@ function PortfolioCtrl($scope, propertiesApi, zApi) {
   }
 
   function removeProperty() {
-    var id = $scope.properties[selected].nid
+    var id = $scope.properties[selected].nid;
     useBackend(id, function () {
       return propertiesApi.removeProperty(id);
-    })
+    });
 
     setView('propertiesList');
 
     $scope.propertiesUnits = propertiesUnits();
     $scope.propertiesCosts = propertiesCosts();
   }
+
+  // ADD, EDIT, REMOVE PROPERTY
+  // Register functions to $scope; Exposed on view event "click"
+  $scope.startAddProperty = startAddProperty;
+  $scope.cancelProperty = cancelProperty;
+  $scope.addProperty = addProperty;
+  $scope.startEditProperty = startEditProperty;
+  $scope.saveProperty = saveProperty;
+  $scope.startRemoveProperty = startRemoveProperty;
+  $scope.removeProperty = removeProperty;
 
   function useBackend(id, operation) {
     $scope.errorMessage = '';
@@ -374,20 +366,25 @@ function PortfolioCtrl($scope, propertiesApi, zApi) {
         })
       .error(
         function (errorInfo, status) {
-          setError(errorInfo, status, id)
+          setError(errorInfo, status, id);
         });    
   }
 
-  function setError(errorInfo, status, id) {
-    if (status == 401) {
-      $scope.errorMessage = "Authorization failed."
-    } else if (angular.isDefined(errorInfo.reasonCode)
-        && errorInfo.reasonCode == "TenantLimitExceeded")
-    {
-      $scope.errorMessage =
-          "You cannot add more locations.";
+  function setError(errorInfo, status) {
+    if (status === 401) {
+      $scope.errorMessage = "Authorization failed.";
+    } else if (angular.isDefined(errorInfo.reasonCode) && errorInfo.reasonCode === "TenantLimitExceeded") {
+      $scope.errorMessage = "You cannot add more locations.";
     } else {
       $scope.errorMessage = errorInfo.message;
     }
   }
 }
+
+angular.module('buildboardApp')
+  .controller('PortfolioCtrl', PortfolioCtrl)
+  .factory('propertiesApi', propertiesApi)
+  //.factory('zApi', zApi)
+  .constant('zSearchApiUrl','http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=X1-ZWz19u0t23l4i3_a6mew&address=914+Warsaw+St&citystatezip=Seattle%2C+WA')
+  .constant('zWebServicesId','X1-ZWz19u0t23l4i3_a6mew')
+  .constant('bbPropertyApiUrl','http://api.buildboard.io/properties/v1/node/'); // Register new service

@@ -7,9 +7,9 @@
  * # PropertyCtrl
  * Controller of the buildboardApp
  */
+function PropertyCtrl() {
+
+}
+
 angular.module('buildboardApp')
   .controller('PropertyCtrl', PropertyCtrl);
-
-  function PropertyCtrl($scope) {
-
-  }
