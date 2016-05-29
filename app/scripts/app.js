@@ -158,7 +158,6 @@ angular
     // Name our endpoint for Angular Drupal
     $provide.value('drupalSettings', {
       sitePath: 'http://api.buildboard.io',
-      endpoint: 'investment/v1'
+      endpoint: 'properties/v1/node'
     });
-
-});
+  });
