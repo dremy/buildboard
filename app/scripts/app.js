@@ -129,28 +129,56 @@ angular
               });
           }
       };
+  }])
+  .run(['drupal', function(drupal) {
+    // GET by Id
+    function loadNode(id) {
+      drupal.node_load(id).then(function(node) {
+        console.log(node.title);
+      });
+    }
+
+    // GET Index
+    function indexNodes(query) {
+      var query = {
+        parameters: {
+          'type': 'property'
+        }
+      };
+      drupal.node_index(query).then(function(nodes) {
+          var msg = '';
+          for (var i = 0; i < nodes.length; i++) {
+            var node = nodes[i];
+            msg += 'Loaded node: ' + node.title + '\n';
+          }
+          alert(msg);
+      });
+    }
+
+    // POST
+    function saveNode(node) {
+      drupal.node_save(node).then(function(data) {
+        alert('Created node:' + data.nid);
+      });
+    }
+
+    // PUT
+    function updateNode(node) {
+      drupal.node_save(node).then(function(data) {
+          alert('Updated node: ' + data.nid);
+      });
+    }
+
+    // DELETE
+    function deleteNode(nid) {
+      drupal.node_delete(nid).then(function(data) {
+        if (data[0]) {
+          alert('Deleted node.');
+        }
+      });
+    }
+
   }]);
-
-
-  /*.run(['drupal', function(drupal) {
-    
-    drupal.node_load(1).then(function(node) {
-      console.log(node.title);
-    });
-
-    var node = {
-      type: "property",
-      title: "Something new",
-      language: "und",
-      body: {
-        und: [ { value: 'How are you?' }]
-      }
-    };
-
-    drupal.node_save(node).then(function(data) {
-      alert('Created node:' + data.nid);
-    });*/
-
 
 // The angular-drupal configuration settings for my simple app.
 angular
