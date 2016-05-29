@@ -2,9 +2,9 @@
 
 /**
  * @ngdoc function
- * @name buildboardApp.controller:MainCtrl
+ * @name buildboardApp.controller:AdminCtrl
  * @description
- * # MainCtrl
+ * # AdminCtrl
  * Controller of the buildboardApp
  */
 function AdminCtrl($scope, currentSpot) {
