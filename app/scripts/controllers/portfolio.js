@@ -46,10 +46,11 @@ function propertiesApi($http, bbPropertyApiUrl) {
   // Return object with getProperties function
   return {
     getProperties: function () {
-      //2var url = bbPropertyApiUrl
+      //2var url = bbPropertyApiUrl + param
       //1 return properties;
       //2return $http.get(url);
-      return get();
+      var propParam = '?parameters[type]=property';
+      return get(propParam);
     },
     getPropertiesById: function (id) {
       return get(id);
@@ -96,12 +97,11 @@ function PortfolioCtrl($scope, propertiesApi) {
     loading = true;
     $scope.errorMessage = '';
     propertiesApi.getProperties()
-      .success(function (data) {
-        $scope.properties = data;
-        var properties = data;
-        console.log(properties);
-        $scope.propertiesUnits = propertiesUnits(properties);
-        $scope.propertiesCosts = propertiesCosts(properties);
+      .success(function (nodes) {
+        $scope.properties = nodes;
+        var properties = nodes;
+        $scope.propertiesUnits = propertiesUnits(nodes);
+        $scope.propertiesCosts = propertiesCosts(nodes);
         loading = false;
       })
       .error(function () {
@@ -126,9 +126,9 @@ function PortfolioCtrl($scope, propertiesApi) {
   // REPORT - UNIT COUNT: Gather total unit count
   function propertiesUnits(properties) {
     var propUnits = 0;
-    for (var i = 0; i < $scope.properties.length; i++) {
+    /*for (var i = 0; i < $scope.properties.length; i++) {
       propUnits += properties[i].field_units.und.length;
-    }
+    }*/
     return propUnits;
   }
 
@@ -220,11 +220,6 @@ function PortfolioCtrl($scope, propertiesApi) {
           }
         ]
       },
-      "field_units": {
-        "und": [{
-
-        }],
-      },
       "field_property_type": {
         "und": [
           {
@@ -296,11 +291,6 @@ function PortfolioCtrl($scope, propertiesApi) {
             "data":null
           }
         ]
-      },
-      "field_units": {
-        "und": [{
-
-        }],
       },
       "field_property_type": {
         "und": [
