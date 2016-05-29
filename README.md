@@ -5,7 +5,12 @@ version 0.15.1.
 
 ## Build & development
 
-Run `grunt` for building and `grunt serve` for preview.
+Run `bower install [package-name] --save` to update bower.json
+Run `bower update` to update bower_components
+Run `grunt wiredep` to write bower_components to index.html
+
+Run `grunt` for building, JS lint, and `grunt serve` for preview.
+
 
 ## Testing
 
