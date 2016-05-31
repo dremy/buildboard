@@ -11,6 +11,7 @@ Run `grunt wiredep` to write bower_components to index.html
 
 Run `grunt` for building, JS lint, and `grunt serve` for preview.
 
+Go to `/services/session/token` to get new Services Session token.
 
 ## Testing
 
