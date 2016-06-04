@@ -12,6 +12,7 @@ function currentSpot() {
   // Sets defaults as empty
   var activeMenuId = '';
   var titleText = '';
+  var isAuthenticated = '';
 
   // Returns object with 3 operations 
   return {
@@ -47,7 +48,7 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'angular-drupal'
+    'angular-drupal' // Drupal service
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -129,63 +130,4 @@ angular
               });
           }
       };
-  }])
-  .run(['drupal', function(drupal) {
-    // GET by Id
-    function loadNode(id) {
-      drupal.node_load(id).then(function(node) {
-        console.log(node.title);
-      });
-    }
-
-    // GET Index
-    function indexNodes(query) {
-      var query = {
-        parameters: {
-          'type': 'property'
-        }
-      };
-      drupal.node_index(query).then(function(nodes) {
-          var msg = '';
-          for (var i = 0; i < nodes.length; i++) {
-            var node = nodes[i];
-            msg += 'Loaded node: ' + node.title + '\n';
-          }
-          alert(msg);
-      });
-    }
-
-    // POST
-    function saveNode(node) {
-      drupal.node_save(node).then(function(data) {
-        alert('Created node:' + data.nid);
-      });
-    }
-
-    // PUT
-    function updateNode(node) {
-      drupal.node_save(node).then(function(data) {
-          alert('Updated node: ' + data.nid);
-      });
-    }
-
-    // DELETE
-    function deleteNode(nid) {
-      drupal.node_delete(nid).then(function(data) {
-        if (data[0]) {
-          alert('Deleted node.');
-        }
-      });
-    }
-
   }]);
-
-// The angular-drupal configuration settings for my simple app.
-angular
-  .module('angular-drupal').config(function($provide) {
-    // Name our endpoint for Angular Drupal
-    $provide.value('drupalSettings', {
-      sitePath: 'http://api.buildboard.io',
-      endpoint: 'properties/v1/node'
-    });
-  });
