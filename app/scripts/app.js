@@ -12,7 +12,6 @@ function currentSpot() {
   // Sets defaults as empty
   var activeMenuId = '';
   var titleText = '';
-  var isAuthenticated = '';
 
   // Returns object with 3 operations 
   return {
