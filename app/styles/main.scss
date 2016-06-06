@@ -26,7 +26,8 @@ body {
     float: right;
     > li {
       margin: 0px 5px;
-      > a {
+      > a,
+      > button {
         color: $white;
         line-height: 10px;        
         &:hover,
@@ -38,7 +39,8 @@ body {
       }
     }
     > .nav-login {
-      > a {
+      > a,
+      > button {
         @include border-radius(4px);
         border: 1px solid $white;
         background: lighten($secondary-blue, 10%);    
@@ -46,6 +48,7 @@ body {
     }
     > .active {
       > a,
+      > button,
       > a:focus {
         @include border-radius(4px);
         color: $white;
@@ -69,6 +72,12 @@ body {
   }
 }
 
+.navbar-nav > li > button {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+}
+
 .navbar-brand {
   padding: 5px 15px;
 }
@@ -84,6 +93,33 @@ body {
 .marketing {
   padding-left: 15px;
   padding-right: 15px;
+}
+
+.preloader {
+  position: absolute;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+}
+.preloader-background {
+  background: white;
+  opacity: 0.5;
+  width: 100%;
+  height: 100%;
+}
+.preloader-anchor {
+  z-index: 1000;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: table;
+}
+
+.preloader-modal {
+  position: relative;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
 }
 
 /* Custom page header */
@@ -151,7 +187,7 @@ body {
     margin: 24px 0 24px;
     color: #999;
     position: relative;
-    display: block;
+    display: inline-block;
     height: 0;
     width: 100%;
     border-top: 1px #ccc solid;
