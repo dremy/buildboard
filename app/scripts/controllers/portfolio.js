@@ -80,7 +80,7 @@ function propertiesApi($http, bbPropertyApiUrl) {
 }*/
 
 // Pass in $scope, and propertiesApi and TO DO zApi service 
-function PortfolioCtrl($scope, propertiesApi) {
+function PortfolioCtrl($scope, propertiesApi, drupal) {
   this.awesomeThings = [
     'HTML5 Boilerplate',
     'AngularJS',
@@ -93,18 +93,38 @@ function PortfolioCtrl($scope, propertiesApi) {
     return loading;
   }
 
+  var query = {
+    parameters: {
+      'type': 'property'
+    }
+  };
+
+    // GET Index
+  function indexNodes(query) {
+    drupal.node_index(query).then(function(nodes) {
+      //console.log(nodes);
+      return nodes;
+      /* TEST
+      var msg = '';
+      for (var i = 0; i < nodes.length; i++) {
+        var node = nodes[i];
+        msg += 'Loaded node: ' + node.title + '\n';
+      }
+      alert(msg);*/
+    });
+  }
+
   function refreshPortfolio() {
     loading = true;
     $scope.errorMessage = '';
-    propertiesApi.getProperties()
-      .success(function (nodes) {
-        $scope.properties = nodes;
-        var properties = nodes;
-        $scope.propertiesUnits = propertiesUnits(nodes);
-        $scope.propertiesCosts = propertiesCosts(nodes);
-        loading = false;
-      })
-      .error(function () {
+    drupal.entity_node_index(query) // TO DO: .success(fn).error(fn)
+      .then(function (nodes) { // Success!
+        $scope.properties = nodes; // Display
+        var properties = nodes; // TO DO: necessary?
+        $scope.propertiesCosts = propertiesCosts(nodes); // Update Costs Value
+        loading = false; // No more loading spinner
+      }, function (reason) { // Error...
+        console.log(reason);
         $scope.errorMessage = "Request failed";
         loading = false;
       });
@@ -115,7 +135,8 @@ function PortfolioCtrl($scope, propertiesApi) {
   $scope.properties = [];
   $scope.propertiesUnits = 0;
   $scope.propertiesCosts = 0;
-  $scope.errorMessage = '';
+  $scope.message = '';
+
 
   // Register functions to $scope
   $scope.isLoading = isLoading;
@@ -196,7 +217,44 @@ function PortfolioCtrl($scope, propertiesApi) {
     var title = this.property.address + " " + this.property.city + ", " + this.property.state + " " + this.property.zip;
 
     // Setup the property to be posted.
-    var property = {
+    var node = {
+      "title": title,
+      "type": "property",
+      "language": "und",
+      "field_address": {
+        "und": [
+          {
+            "country":"US",
+            "administrative_area": "WA",
+            "sub_administrative_area": null,
+            "locality": "Tacoma",
+            "dependent_locality":"",
+            "postal_code": "98405",
+            "thoroughfare": "123 Something St",
+            "premise": "",
+            "sub_premise": null,
+            "organisation_name": null,
+            "name_line": null,
+            "first_name": null,
+            "last_name": null,
+            "data": null
+          }
+        ]
+      },
+      "field_purchase_price": {
+        "und": [
+          {
+              "value": "188945",
+              "target_id": "240"
+          },
+        ]
+      }
+    /*var node = {
+      "title": "Hello world",
+      "type": "article",
+      "language": "und"
+    };
+    var node = {
       "title": title,
       "type": "property",
       "language": "und",
@@ -216,10 +274,10 @@ function PortfolioCtrl($scope, propertiesApi) {
             "name_line": null,
             "first_name": null,
             "last_name": null,
-            "data":null
+            "data": null
           }
         ]
-      },
+      }/*,
       "field_property_type": {
         "und": [
           {
@@ -234,22 +292,21 @@ function PortfolioCtrl($scope, propertiesApi) {
               "target_id": "240"
           },
         ]
-      }     
+      }*/    
     };
-    
-    // Hit the Service button!
-    useBackend(-1, function () {
-      return propertiesApi.addProperty(property);
-    });
 
-    this.errorMessage = "";
-    this.errorMessage = $scope.errorMessage;
+    drupal.entity_node_save(node).then(function(data) {
+        alert('Created node: ' + data.nid);
+        // Update Units & Costs Totals
+        $scope.propertiesCosts = propertiesCosts();        
+    }, function(reason) {
+      alert('Adding failed due to ' + reason.status + reason.statusText + '. Try again later.');
+      console.log(reason);
+      $scope.message = reason.status + reason.statusText;
+    });
 
     // Change views
     setView('propertiesList');
-    // Update Units & Costs Totals
-    $scope.propertiesUnits = propertiesUnits();
-    $scope.propertiesCosts = propertiesCosts();
   }
 
   // Setup Types Options.
