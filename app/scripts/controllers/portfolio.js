@@ -8,79 +8,8 @@
  * Controller of the buildboardApp
  */
 
-// Create API service function
-function propertiesApi($http, bbPropertyApiUrl) {
-
-  function get(param) {
-    return request("GET", param);
-  }
-
-  function post(data) {
-    return request("POST", null, data);
-  }
-
-  function put(data) {
-    var param = data.nid;
-    return request("PUT", param, data);
-  }
-
-  function del(param) {
-    return request("DELETE", param);
-  }
-
-  function request(verb, param, data) {
-    var req = {
-      method: verb,
-      url: url(param),
-      data: data
-    };
-    return $http(req);
-  }
-
-  function url(param) {
-    if (param === null || !angular.isDefined(param)) {
-      param = '';
-    }
-    return bbPropertyApiUrl + param;
-  }
-  // Return object with getProperties function
-  return {
-    getProperties: function () {
-      //2var url = bbPropertyApiUrl + param
-      //1 return properties;
-      //2return $http.get(url);
-      var propParam = '?parameters[type]=property';
-      return get(propParam);
-    },
-    getPropertiesById: function (id) {
-      return get(id);
-    },
-    addProperty: function (property) {
-      return post(property);
-    },
-    removeProperty: function (id) {
-      return del(id);
-    },
-    updateProperty: function (property) {
-      return put(property);
-    }
-  };
-}
-
-/*function zApi($http, zSearchApiUrl, zWebServicesId) {
-  // Set empty response object
-  var zResponse = {};
-  
-  // TO DO
-  return {
-    getZillowSearchResponse: function() {
-      $http.get(zSearchApiUrl + zWebServicesId + address + citystatezip);
-    }
-  };
-}*/
-
 // Pass in $scope, and propertiesApi and TO DO zApi service 
-function PortfolioCtrl($scope, propertiesApi, drupal) {
+function PortfolioCtrl($scope, $rootScope, drupal) {
   this.awesomeThings = [
     'HTML5 Boilerplate',
     'AngularJS',
@@ -99,37 +28,28 @@ function PortfolioCtrl($scope, propertiesApi, drupal) {
     }
   };
 
-    // GET Index
-  function indexNodes(query) {
-    drupal.node_index(query).then(function(nodes) {
-      //console.log(nodes);
-      return nodes;
-      /* TEST
-      var msg = '';
-      for (var i = 0; i < nodes.length; i++) {
-        var node = nodes[i];
-        msg += 'Loaded node: ' + node.title + '\n';
-      }
-      alert(msg);*/
-    });
-  }
-
   function refreshPortfolio() {
-    loading = true;
+    // Lil' Spinner 
+    // loading = true;
+    $rootScope.globals.isLoading = true;
     $scope.errorMessage = '';
+    /* NEW SERVICE */
     drupal.entity_node_index(query) // TO DO: .success(fn).error(fn)
       .then(function (nodes) { // Success!
         $scope.properties = nodes; // Display
         var properties = nodes; // TO DO: necessary?
-        $scope.propertiesCosts = propertiesCosts(nodes); // Update Costs Value
-        loading = false; // No more loading spinner
+        $scope.propertiesCosts = propertiesCosts(nodes); // Update Costs Value 
+        // Lil' Spinner 
+        // loading = false;
+        $rootScope.globals.isLoading = false; // No more loading spinner
       }, function (reason) { // Error...
         console.log(reason);
-        $scope.errorMessage = "Request failed";
-        loading = false;
+        $scope.errorMessage = "Why you no like me... " + reason.statusText;        
+        // Lil' Spinner
+        // loading = false;
+        $rootScope.globals.isLoading = false; // No more loading spinner
       });
   }
-
 
   // Set the model
   $scope.properties = [];
@@ -137,12 +57,12 @@ function PortfolioCtrl($scope, propertiesApi, drupal) {
   $scope.propertiesCosts = 0;
   $scope.message = '';
 
-
   // Register functions to $scope
   $scope.isLoading = isLoading;
-  $scope.refreshPortfolio = refreshPortfolio;
 
+  // Execute refreshPortfolio
   $scope.refreshPortfolio = refreshPortfolio();
+  $scope.refreshPortfolio = refreshPortfolio;
 
   // REPORT - UNIT COUNT: Gather total unit count
   function propertiesUnits(properties) {
@@ -213,47 +133,12 @@ function PortfolioCtrl($scope, propertiesApi, drupal) {
   }
 
   function addProperty() {
+    $rootScope.globals.isLoading = true; //TO DO - Set preloader
+
     // Some behind the scenes defining of the title.
     var title = this.property.address + " " + this.property.city + ", " + this.property.state + " " + this.property.zip;
 
     // Setup the property to be posted.
-    var node = {
-      "title": title,
-      "type": "property",
-      "language": "und",
-      "field_address": {
-        "und": [
-          {
-            "country":"US",
-            "administrative_area": "WA",
-            "sub_administrative_area": null,
-            "locality": "Tacoma",
-            "dependent_locality":"",
-            "postal_code": "98405",
-            "thoroughfare": "123 Something St",
-            "premise": "",
-            "sub_premise": null,
-            "organisation_name": null,
-            "name_line": null,
-            "first_name": null,
-            "last_name": null,
-            "data": null
-          }
-        ]
-      },
-      "field_purchase_price": {
-        "und": [
-          {
-              "value": "188945",
-              "target_id": "240"
-          },
-        ]
-      }
-    /*var node = {
-      "title": "Hello world",
-      "type": "article",
-      "language": "und"
-    };
     var node = {
       "title": title,
       "type": "property",
@@ -277,14 +162,15 @@ function PortfolioCtrl($scope, propertiesApi, drupal) {
             "data": null
           }
         ]
-      }/*,
+      },
+      /* TO DO - Property Types
       "field_property_type": {
         "und": [
           {
             "value":this.property.propertyType
           }
         ]
-      },
+      },*/
       "field_purchase_price": {
         "und": [
           {
@@ -292,13 +178,18 @@ function PortfolioCtrl($scope, propertiesApi, drupal) {
               "target_id": "240"
           },
         ]
-      }*/    
+      }    
     };
 
-    drupal.entity_node_save(node).then(function(data) {
+    console.log(this.property.teaserPhoto);
+
+    /* NEW SERVICE */
+    drupal.node_save(node).then(function(data) {
         alert('Created node: ' + data.nid);
         // Update Units & Costs Totals
-        $scope.propertiesCosts = propertiesCosts();        
+        refreshPortfolio();
+        $rootScope.globals.isLoading = false;   //Set preloader
+        //$scope.propertiesCosts = propertiesCosts();        
     }, function(reason) {
       alert('Adding failed due to ' + reason.status + reason.statusText + '. Try again later.');
       console.log(reason);
@@ -310,7 +201,7 @@ function PortfolioCtrl($scope, propertiesApi, drupal) {
   }
 
   // Setup Types Options.
-  var types = ["Home", "Multi-family", "Lot"];
+  var types = ["Home", "Multi-Family", "Lot"];
   $scope.types = types;
   
   // EDIT PROPERTY
@@ -324,6 +215,7 @@ function PortfolioCtrl($scope, propertiesApi, drupal) {
   }
 
   function saveProperty() {
+    $rootScope.globals.isLoading = true;
     var title = this.property.address + " " + this.property.city + ", " + this.property.state + " " + this.property.zip;
     var property = {
       "title": title,
@@ -366,12 +258,25 @@ function PortfolioCtrl($scope, propertiesApi, drupal) {
       }     
     };
 
+    /* NEW SERVICE */
+    drupal.entity_node_save(property).then(function(data) {
+        alert('Updated node: ' + data.nid);
+        // Update Units & Costs Totals
+        $scope.propertiesCosts = propertiesCosts();
+        refreshPortfolio();
+        $rootScope.globals.isLoading = false;
+    }, function(reason) {
+      alert('Saving failed due to ' + reason.status + reason.statusText + '. Try again later.');
+      console.log(reason);
+      $scope.message = reason.status + reason.statusText;
+      $rootScope.globals.isLoading = false;
+    });
+
+    /* OLD SERVICE
     useBackend(property, function () {
       return propertiesApi.updateProperty(property);
-    });
+    });*/
     setView('propertiesList');
-    $scope.propertiesUnits = propertiesUnits();
-    $scope.propertiesCosts = propertiesCosts();
   }
 
   // REMOVE PROPERTY
@@ -383,9 +288,10 @@ function PortfolioCtrl($scope, propertiesApi, drupal) {
 
   function removeProperty() {
     var id = $scope.properties[selected].nid;
+    /* OLD SERVICE
     useBackend(id, function () {
       return propertiesApi.removeProperty(id);
-    });
+    });*/
 
     setView('propertiesList');
 
@@ -414,7 +320,7 @@ function PortfolioCtrl($scope, propertiesApi, drupal) {
       .error(
         function (errorInfo, status) {
           setError(errorInfo, status, id);
-        });    
+        });
   }
 
   function setError(errorInfo, status) {
@@ -429,9 +335,4 @@ function PortfolioCtrl($scope, propertiesApi, drupal) {
 }
 
 angular.module('buildboardApp')
-  .controller('PortfolioCtrl', PortfolioCtrl)
-  .factory('propertiesApi', propertiesApi)
-  //.factory('zApi', zApi)
-  .constant('zSearchApiUrl','http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=X1-ZWz19u0t23l4i3_a6mew&address=914+Warsaw+St&citystatezip=Seattle%2C+WA')
-  .constant('zWebServicesId','X1-ZWz19u0t23l4i3_a6mew')
-  .constant('bbPropertyApiUrl','http://api.buildboard.io/properties/v1/node/'); // Register new service
+  .controller('PortfolioCtrl', PortfolioCtrl);

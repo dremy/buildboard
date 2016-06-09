@@ -24,7 +24,7 @@ function AdminCtrl($scope, $rootScope, $location, currentSpot, drupal) {
       $rootScope.globals.currentUser = data.user;
       $scope.currentUser = data.user; 
       $scope.message = 'Hello ' + data.user.name + '!'; 
-      console.log(data.user.uid + " " + data.sessid + " " + data.session_name);
+      // console.log(data.user.uid + " " + data.sessid + " " + data.session_name);
     } else { 
       console.log('Please login.');  
     }
