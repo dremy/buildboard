@@ -16,14 +16,14 @@ function loginCtrl($rootScope, $scope, $location, drupal) {
         alert('Hello ' + data.user.name + '!');
         $rootScope.globals.currentUser = data.user;
         $rootScope.globals.isLoading = false;
-        console.log($rootScope);
         $location.path('/app'); // Redirect to home page once logged in.
-      } else {
-        console.log('Not working.');
+      } else { // Authentication didn't work.
+        $scope.mesage = "Something didn't work.");
         $rootScope.globals.isLoading = false;
       }
     }, function(reason) {
-      //$scope.message = reason.status + reason.statusText;
+      $scope.mesage = "Something didn't work.");
+      console.log(reason.status + ' ' + reason.statusText);
       $rootScope.globals.isLoading = false;
     });
   }
