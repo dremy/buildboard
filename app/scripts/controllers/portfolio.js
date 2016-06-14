@@ -16,12 +16,6 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
     'Karma'
   ];
 
-  var loading = false;
-
-  function isLoading() {
-    return loading;
-  }
-
   var query = {
     parameters: {
       'type': 'property'
@@ -29,24 +23,18 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
   };
 
   function refreshPortfolio() {
-    // Lil' Spinner 
-    // loading = true;
     $rootScope.globals.isLoading = true;
-    $scope.errorMessage = '';
+    $scope.message = '';
     /* NEW SERVICE */
     drupal.entity_node_index(query) // TO DO: .success(fn).error(fn)
       .then(function (nodes) { // Success!
         $scope.properties = nodes; // Display
         var properties = nodes; // TO DO: necessary?
         $scope.propertiesCosts = propertiesCosts(nodes); // Update Costs Value 
-        // Lil' Spinner 
-        // loading = false;
         $rootScope.globals.isLoading = false; // No more loading spinner
       }, function (reason) { // Error...
         console.log(reason);
-        $scope.errorMessage = "Why you no like me... " + reason.statusText;        
-        // Lil' Spinner
-        // loading = false;
+        $scope.message = "Why you no like me... " + reason.statusText;
         $rootScope.globals.isLoading = false; // No more loading spinner
       });
   }
@@ -57,9 +45,6 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
   $scope.propertiesCosts = 0;
   $scope.message = '';
 
-  // Register functions to $scope
-  $scope.isLoading = isLoading;
-
   // Execute refreshPortfolio
   $scope.refreshPortfolio = refreshPortfolio();
   $scope.refreshPortfolio = refreshPortfolio;
@@ -67,7 +52,7 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
   // REPORT - UNIT COUNT: Gather total unit count
   function propertiesUnits(properties) {
     var propUnits = 0;
-    /*for (var i = 0; i < $scope.properties.length; i++) {
+    /*TO DO - for (var i = 0; i < $scope.properties.length; i++) {
       propUnits += properties[i].field_units.und.length;
     }*/
     return propUnits;
@@ -82,15 +67,16 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
     return propCosts;
   }
 
-  var selected = -1;
-
   // Create function for setting the argument in setView to the controllers scope
   function setView(view) {
     $scope.view = view;
   }
 
-  // Define propertiesList as the default
-  setView('propertiesList');
+
+  var selected = -1;
+  setView('propertiesList');   // Define propertiesList as the default
+  var types = ["Home", "Multi-Family", "Lot"]; // Setup Types Options.
+  $scope.types = types; // Assign to dropdown.
 
   // Setup the Form
   function initializeForm() {
@@ -181,28 +167,25 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
       }    
     };
 
-    console.log(this.property.teaserPhoto);
+    // TO DO - Troubleshoot posting files
+    // console.log(this.property.teaserPhoto);
 
     /* NEW SERVICE */
     drupal.node_save(node).then(function(data) {
         alert('Created node: ' + data.nid);
         // Update Units & Costs Totals
         refreshPortfolio();
-        $rootScope.globals.isLoading = false;   //Set preloader
+        $rootScope.globals.isLoading = false;
         //$scope.propertiesCosts = propertiesCosts();        
     }, function(reason) {
-      alert('Adding failed due to ' + reason.status + reason.statusText + '. Try again later.');
-      console.log(reason);
-      $scope.message = reason.status + reason.statusText;
+      console.log('Adding failed due to ' + reason.status + reason.statusText + '. Try again later.');
+      $scope.message = reason.status + ' ' + reason.statusText;
+      $rootScope.globals.isLoading = false;
     });
 
     // Change views
     setView('propertiesList');
   }
-
-  // Setup Types Options.
-  var types = ["Home", "Multi-Family", "Lot"];
-  $scope.types = types;
   
   // EDIT PROPERTY
   function startEditProperty(index) {
@@ -212,54 +195,15 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
     $scope.property = $scope.properties[selected];
     setView('editProperty');
     initializeForm();
+    console.log($scope.property);
   }
 
   function saveProperty() {
     $rootScope.globals.isLoading = true;
-    var title = this.property.address + " " + this.property.city + ", " + this.property.state + " " + this.property.zip;
-    var property = {
-      "title": title,
-      "type": "property",
-      "nid": this.property.nid,
-      "field_address": {
-        "und": [
-          {
-            "country":"US",
-            "administrative_area": this.property.state,
-            "sub_administrative_area": null,
-            "locality": this.property.city,
-            "dependent_locality":"",
-            "postal_code": this.property.zip,
-            "thoroughfare": this.property.address,
-            "premise": "",
-            "sub_premise": null,
-            "organisation_name": null,
-            "name_line": null,
-            "first_name": null,
-            "last_name": null,
-            "data":null
-          }
-        ]
-      },
-      "field_property_type": {
-        "und": [
-          {
-            "value":this.property.propertyType
-          }
-        ]
-      },
-      "field_purchase_price": {
-        "und": [
-          {
-              "value": this.property.purchasePrice,
-              "target_id": "240"
-          },
-        ]
-      }     
-    };
+    this.property.title = this.property.field_address.und[0].thoroughfare + " " + this.property.field_address.und[0].locality + ", " + this.property.field_address.und[0].administrative_area + " " + this.property.field_address.und[0].postal_code;
 
-    /* NEW SERVICE */
-    drupal.entity_node_save(property).then(function(data) {
+    /* NEW SERVICE*/ 
+    drupal.node_save(this.property).then(function(data) {
         alert('Updated node: ' + data.nid);
         // Update Units & Costs Totals
         $scope.propertiesCosts = propertiesCosts();
@@ -271,7 +215,7 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
       $scope.message = reason.status + reason.statusText;
       $rootScope.globals.isLoading = false;
     });
-
+    
     /* OLD SERVICE
     useBackend(property, function () {
       return propertiesApi.updateProperty(property);
@@ -310,7 +254,7 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
   $scope.removeProperty = removeProperty;
 
   function useBackend(id, operation) {
-    $scope.errorMessage = '';
+    $scope.message = '';
     operation()
       .success(
         function (data) {
@@ -325,14 +269,56 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
 
   function setError(errorInfo, status) {
     if (status === 401) {
-      $scope.errorMessage = "Authorization failed.";
+      $scope.message = "Authorization failed.";
     } else if (angular.isDefined(errorInfo.reasonCode) && errorInfo.reasonCode === "TenantLimitExceeded") {
-      $scope.errorMessage = "You cannot add more locations.";
+      $scope.message = "You cannot add more locations.";
     } else {
-      $scope.errorMessage = errorInfo.message;
+      $scope.message = errorInfo.message;
     }
   }
 }
 
 angular.module('buildboardApp')
   .controller('PortfolioCtrl', PortfolioCtrl);
+
+/*OLD PROPERTY MODEL
+var property = {
+  "title": title,
+  "type": "property",
+  "nid": this.property.nid,
+  "field_address": {
+    "und": [
+      {
+        "country":"US",
+        "administrative_area": this.property.state,
+        "sub_administrative_area": null,
+        "locality": this.property.city,
+        "dependent_locality":"",
+        "postal_code": this.property.zip,
+        "thoroughfare": this.property.address,
+        "premise": "",
+        "sub_premise": null,
+        "organisation_name": null,
+        "name_line": null,
+        "first_name": null,
+        "last_name": null,
+        "data":null
+      }
+    ]
+  },
+  /*"field_property_type": {
+    "und": [
+      {
+        "value":this.property.propertyType
+      }
+    ]
+  },
+  "field_purchase_price": {
+    "und": [
+      {
+          "value": this.property.purchasePrice,
+          "target_id": "240"
+      },
+    ]
+  }     
+};
