@@ -13,21 +13,22 @@ function loginCtrl($rootScope, $scope, $location, drupal) {
     $rootScope.globals.isLoading = true;
     drupal.user_login(user.email, user.password).then(function(data) {
       if (data.user.uid) { // TO DO - Make sure "Not working" works.
-        alert('Hello ' + data.user.name + '!');
+        $scope.user.name = data.user.name;
         $rootScope.globals.currentUser = data.user;
         $rootScope.globals.isLoading = false;
         $location.path('/app'); // Redirect to home page once logged in.
       } else { // Authentication didn't work.
-        $scope.mesage = "Something didn't work.");
+        $scope.message = "Something didn't work.";
         $rootScope.globals.isLoading = false;
       }
     }, function(reason) {
-      $scope.mesage = "Something didn't work.");
+      $scope.message = "Something didn't work.";
       console.log(reason.status + ' ' + reason.statusText);
       $rootScope.globals.isLoading = false;
     });
   }
 
+  $scope.user.name = '';
   $scope.message = '';
   $scope.submit = submit;
 }
