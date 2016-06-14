@@ -20,13 +20,14 @@ function AdminCtrl($scope, $rootScope, $location, currentSpot, drupal) {
  
   //Check if already authenticated
   drupal.connect().then(function(data) {
-    if (data.user.uid) {
+    if (data.user.uid) { //Authenticated.
       $rootScope.globals.currentUser = data.user;
       $scope.currentUser = data.user; 
       $scope.message = 'Hello ' + data.user.name + '!'; 
-      // console.log(data.user.uid + " " + data.sessid + " " + data.session_name);
-    } else { 
-      console.log('Please login.');  
+      // data.user.uid
+      // data.sessid
+      // data.session_name
+    } else { // Please login.
     }
     $rootScope.globals.isLoading = false;
   });
