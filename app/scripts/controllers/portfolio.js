@@ -108,10 +108,6 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
 
     setView('addProperty');
     initializeForm();
-
-    // Queue up the zApi on key up
-    // var address = "&address=" + this.property.address;
-    // var citystatezip = "&citystatezip" + this.property.city + "%2C+" + this.property.state + "%20" this.property.zip;
   }
 
   function cancelProperty() {

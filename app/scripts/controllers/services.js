@@ -43,7 +43,7 @@ function propertiesApi($http, propertyApiUrl) {
     }
     return bbPropertyApiUrl + param;
   }
-  
+
   // Return object with getProperties function
   return {
     getProperties: function () {
@@ -68,6 +68,11 @@ function propertiesApi($http, propertyApiUrl) {
   };
 }
 
+
+// Queue up the zApi on key up
+// var address = "&address=" + this.property.address;
+// var citystatezip = "&citystatezip" + this.property.city + "%2C+" + this.property.state + "%20" this.property.zip;
+ 
 /*function zApi($http, zSearchApiUrl, zWebServicesId) {
   // Set empty response object
   var zResponse = {};
