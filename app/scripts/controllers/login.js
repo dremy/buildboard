@@ -13,7 +13,7 @@ function loginCtrl($rootScope, $scope, $location, drupal) {
     $rootScope.globals.isLoading = true;
     drupal.user_login(user.email, user.password).then(function(data) {
       if (data.user.uid) { // TO DO - Make sure "Not working" works.
-        $scope.user.name = data.user.name;
+        //$scope.user.name = data.user.name;
         $rootScope.globals.currentUser = data.user;
         $rootScope.globals.isLoading = false;
         $location.path('/app'); // Redirect to home page once logged in.
@@ -28,7 +28,7 @@ function loginCtrl($rootScope, $scope, $location, drupal) {
     });
   }
 
-  $scope.user.name = '';
+  //$scope.user.name = '';
   $scope.message = '';
   $scope.submit = submit;
 }
