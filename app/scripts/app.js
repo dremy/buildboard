@@ -47,6 +47,7 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
+    'ui.bootstrap',
     'angular-drupal' // Drupal service
   ])
   .config(function ($routeProvider) {
