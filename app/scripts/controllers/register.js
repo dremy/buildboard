@@ -9,6 +9,14 @@
  */
 function registerCtrl($rootScope, $scope, $location, drupal) {
 
+  function alerting(message, type) {// TO DO - Global solve.
+    $scope.$emit('alert', { // Emit message.
+      message: message,
+      type: type,
+    });        
+    $rootScope.globals.isLoading = false; 
+  }
+
   function submit(account) { //Register login function.   
     account.name = account.mail;
     $rootScope.globals.isLoading = true;
@@ -18,30 +26,21 @@ function registerCtrl($rootScope, $scope, $location, drupal) {
         drupal.user_login(account.mail, account.pass).then(function(data) { //Authentication was successful.
           if (data.user.uid) {
             $rootScope.globals.currentUser = data.user;
-            $scope.$emit('alert', { // Emit message.
-              message: 'Hello ' + data.user.name,
-              type: 'success',
-              //dt: 3000
-            });
-            $rootScope.globals.isLoading = false;
+            var message = 'Hello ' + data.user.name;
+            var type = 'success';
+            alerting(message, type);
             $location.path('/app'); // Redirect to home page once logged in.
           }
         }), function(reason) { // Authentication didn't work.
-          $scope.$emit('alert', { // Emit message.
-            message: reason.statusText,
-            type: 'danger',
-            //dt: 3000
-          });
-          $rootScope.globals.isLoading = false;
+          var message = reason.statusText;
+          var type = 'danger';
+          alerting(message, type);
         };
       }
     }, function(reason) { //Registration didn't work.
-      $scope.$emit('alert', { // Emit message.
-        message: reason.statusText,
-        type: 'danger',
-        //dt: 3000
-      });
-      $rootScope.globals.isLoading = false;
+      var message = reason.statusText;
+      var type = 'danger';
+      alerting(message, type);
     });
   }
 

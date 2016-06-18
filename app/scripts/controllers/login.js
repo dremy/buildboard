@@ -9,21 +9,28 @@
  */
 function loginCtrl($rootScope, $scope, $location, drupal) {
 
+  function alerting(message, type) {// TO DO - Global solve.
+    $scope.$emit('alert', { // Emit message.
+      message: message,
+      type: type,
+    });        
+    $rootScope.globals.isLoading = false; 
+  }
+
   function submit(user) { //Register login function.
     $rootScope.globals.isLoading = true;
     drupal.user_login(user.email, user.password).then(function(data) {
       if (data.user.uid) { // TO DO - Make sure "Not working" works.
         $rootScope.globals.currentUser = data.user;
-        $rootScope.globals.isLoading = false;
+        var message = 'Welcome back ' + data.user.name + '!';
+        var type = 'success';
+        alerting(message, type);
         $location.path('/app'); // Redirect to home page once logged in.
       }
     }, function(reason) {
-      $scope.$emit('alert', { // Emit message.
-        message: "Something didn't work. " + reason.statusText,
-        type: 'warning',
-        //dt: 3000
-      });
-      $rootScope.globals.isLoading = false;
+        var message = "Something didn't work. " + reason.statusText;
+        var type = 'warning';
+        alerting(message, type);
     });
   }
 
