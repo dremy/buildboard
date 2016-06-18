@@ -24,28 +24,28 @@
     <form class="col s12">
       <div class="row">
         <div class="input-field long-label col s6">
-          <input placeholder="John" id="first_name" type="text" class="validate">
+          <input placeholder="John" id="first_name" type="text" class="validate" ng-model="account.first_name">
           <label for="first_name" data-error="don't try and make one up" data-success="Boom!">First Name</label>
         </div>
         <div class="input-field long-label col s6">
-          <input placeholder="Parker" id="last_name" type="text" class="validate">
+          <input placeholder="Parker" id="last_name" type="text" class="validate" ng-model="account.last_name">
           <label for="last_name"  data-error="c'mon buddy" data-success="Shakalakah!">Last Name</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input placeholder="info@email.com" id="email" type="email" class="validate">
+          <input placeholder="info@email.com" id="email" type="email" class="validate" ng-model="account.mail">
           <label for="email" data-error="wrong" data-success="There you go!">Email</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input id="password" type="password" class="validate">
+          <input id="password" type="password" class="validate" ng-model="account.pass">
           <label for="password">Password</label>
         </div>
       </div>
       <div class="row">
-        <button class="btn btn-large blue waves-effect form-submit" type="submit" name="action">
+        <button class="btn btn-large blue waves-effect form-submit" type="submit" name="action" ng-click="submit(account)">
           <i class="material-icons left">lock</i>
           Submit
         </button>

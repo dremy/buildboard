@@ -18,16 +18,36 @@ function AdminCtrl($scope, $rootScope, $location, currentSpot, drupal) {
   $rootScope.globals.isLoading = true;   //Set preloader
   $scope.message = ''; // Set empty message
  
+  $scope.$on('alert', function(event, args) {
+    $scope.alerts.push({
+      message: args.message,
+      type: args.type,
+      dt: args.dt
+    });
+  });
+
+  $scope.alerts = [];
+
+  $scope.closeAlert = function(index) {
+    $scope.alerts.splice(index, 1);
+  };
+
   //Check if already authenticated
   drupal.connect().then(function(data) {
     if (data.user.uid) { //Authenticated.
       $rootScope.globals.currentUser = data.user;
       $scope.currentUser = data.user; 
-      $scope.message = 'Hello ' + data.user.name + '!'; 
       // data.user.uid
       // data.sessid
       // data.session_name
     } else { // Please login.
+    }
+    if(data.user.name) {
+      $scope.alerts.push({
+        message: 'Hello ' + data.user.name + '!',
+        type: 'success',
+        dt: 2000
+      });
     }
     $rootScope.globals.isLoading = false;
   });
@@ -60,7 +80,7 @@ function AdminCtrl($scope, $rootScope, $location, currentSpot, drupal) {
     $rootScope.globals.isLoading = true;
     drupal.user_logout().then(function(data) {
       if (!data.user.uid) {
-        alert('You have been logged out.');
+        $scope.alerts.push({message: 'You have been logged out.', type: 'success'});
         $rootScope.globals = {};
         $location.path('/app');
         $scope.message = 'You have been logged out.';
