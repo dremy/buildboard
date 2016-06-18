@@ -124,12 +124,7 @@
 
     <section class="content">
       <div class="container container-wide">  
-        <div class="row" ng-show="message">
-          <div class="alert alert-success">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            {{message}}
-          </div>
-        </div>
+        <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" dismiss-on-timeout="{{alert.dt}}" close="closeAlert($index)">{{alert.message}}</uib-alert>
       </div>
       <div class="container container-wide" ng-show="!isActive('')">
         <div class="row">
