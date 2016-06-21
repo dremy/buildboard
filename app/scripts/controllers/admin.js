@@ -43,11 +43,12 @@ function AdminCtrl($scope, $rootScope, $location, currentSpot, drupal) {
     } else { // Please login.
     }
     if(data.user.name) {
+      /* Message on Page Load if Authenticated
       $scope.alerts.push({
         message: 'Hello ' + data.user.name + '!',
         type: 'success',
         dt: 2000
-      });
+      });*/
     }
     $rootScope.globals.isLoading = false;
   });
