@@ -87,12 +87,12 @@ angular
         controller: 'PortfolioCtrl',
         controllerAs: 'portfolio'
       })
-      .when('/property', {
+      .when('/property/:nid', {
         templateUrl: 'views/property.html',
         controller: 'PropertyCtrl',
         controllerAs: 'property'
       })
-      .when('/property/:pid/documents', {
+      .when('/property/:nid/documents', {
         templateUrl: 'views/documents.html',
         controller: 'DocumentsCtrl',
         controllerAs: 'documents'
