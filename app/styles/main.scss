@@ -17,6 +17,7 @@ body {
 .navbar {
   border-radius: 0px;
   border: none;
+  box-shadow: 0px 0px 10px 0px #333;
 }
 
 .navbar-default {
@@ -124,7 +125,9 @@ body {
 
 /* Custom page header */
 .header {
-
+  position: absolute;
+  z-index: 3;
+  width: 100%;
   /* Make the masthead heading the same height as the navigation */
   h3 {
     margin-top: 0;
@@ -444,16 +447,44 @@ input:placeholder-shown {
     max-width: 960px;
   }
 
+  .container-full {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  /* Space out the masthead */
+  .container-first {
+    margin-top: 30px;
+  }
+
+  .marquee {
+    .marquee-background {
+      width: 100%;
+    }
+
+    .marquee-text {
+      position: absolute;
+      z-index: 2;
+      top: 160px;
+      left: 15%;
+      width: 480px;
+    }
+
+    h1 {
+      color: $white;
+    }
+
+    .lead {
+      color: #f5f5f5;
+    }
+  }
+
   /* Remove the padding we set earlier */
   .header,
   .marketing,
   .footer {
     padding-left: 0;
     padding-right: 0;
-  }
-  /* Space out the masthead */
-  .container-first {
-    margin-top: 30px;
   }
 
   /* Remove the bottom border on the jumbotron for visual effect */
