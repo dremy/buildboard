@@ -114,31 +114,31 @@
               <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" href="#/"><img class="logo" src="images/logo-white-300x43.png" alt="BuildBoard Logo" title="Build Board Logo"></a>
+            <a class="navbar-brand" href="/app/#/"><img class="logo" src="images/logo-white-300x43.png" alt="BuildBoard Logo" title="Build Board Logo"></a>
           </div>
 
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
             <!-- Anonymous Menu-->  
             <ul class="nav navbar-nav" ng-hide="isLoggedIn()">
-              <li ng-class="{active: isActive('Features')}"  ng-hide="isLoggedIn()">
+              <li ng-class="{active: isActive('Features')}">
                 <a href="#/features">Features</a>
               </li>
-              <li ng-class="{active: isActive('Benefits')}"  ng-hide="isLoggedIn()">
+              <li ng-class="{active: isActive('Benefits')}">
                 <a ng-href="#/benefits">Benefits</a>
               </li>
-              <li ng-class="{active: isActive('How It Works')}"  ng-hide="isLoggedIn()">
+              <li ng-class="{active: isActive('How It Works')}">
                 <a ng-href="#/how-it-works">How It Works</a>
               </li>
-              <li class="nav-login" ng-hide="isLoggedIn()">
+              <li class="nav-login">
                 <a ng-href="#/user/login">Sign In</a>
               </li>
             </ul>
             <ul class="nav navbar-nav" ng-show="isLoggedIn()">
               <!-- Authenticated Menu -->
-              <li class="nav-login" ng-show="isLoggedIn()">
+              <li class="nav-login">
                 <a ng-href="#/portfolio">Portfolio</a>
               </li>
-              <li class="nav-login" ng-show="isLoggedIn()">
+              <li class="nav-login">
                 <button ng-click="logout()">Log Out</button></li>
             </ul>
           </div>
@@ -147,7 +147,7 @@
     </header>
 
     <section class="content" ng-cloak>
-      <div class="container container-wide">  
+      <div class="container container-wide">
         <div class="row">
           <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" dismiss-on-timeout="{{alert.dt}}" close="closeAlert($index)">{{alert.message}}</uib-alert>
         </div>
