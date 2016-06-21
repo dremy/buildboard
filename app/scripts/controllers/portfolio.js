@@ -227,15 +227,23 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
   }
 
   function removeProperty() {
+    $rootScope.globals.isLoading = true;
     var id = $scope.properties[selected].nid;
     /* OLD SERVICE
     useBackend(id, function () {
       return propertiesApi.removeProperty(id);
     });*/
 
+    /* NEW SERVICE */
+    drupal.node_delete(id).then(function(data) {
+      if (data[0]) {
+        $rootScope.globals.isLoading = false;
+      }
+    });
+  
     setView('propertiesList');
 
-    $scope.propertiesUnits = propertiesUnits();
+    // $scope.propertiesUnits = propertiesUnits();
     $scope.propertiesCosts = propertiesCosts();
   }
 
