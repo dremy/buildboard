@@ -50,11 +50,13 @@
           </div>
           <div class="col l4 m6 s12" ng-repeat="property in properties | filter:searchKey">
             <div class="card">
-              <div class="card-image">
-                <img src="http://api.buildboard.io/sites/default/files/{{property.field_feature_images.und[0].uri.replace('public://','')}}" width="258" height="189">
-                <span class="card-title">{{property.field_address.und[0].thoroughfare}}</span>
-                <span class="card-subtitle">{{property.field_address.und[0].locality}}, {{property.field_address.und[0].administrative_area}} {{property.field_address.und[0].postal_code}}</span>
-              </div>
+              <a href="#/property/{{property.nid}}">
+                <div class="card-image">
+                  <img src="http://api.buildboard.io/sites/default/files/{{property.field_feature_images.und[0].uri.replace('public://','')}}" width="258" height="189">
+                  <span class="card-title">{{property.field_address.und[0].thoroughfare}}</span>
+                  <span class="card-subtitle">{{property.field_address.und[0].locality}}, {{property.field_address.und[0].administrative_area}} {{property.field_address.und[0].postal_code}}</span>
+                </div>
+              </a>
               <div class="card-content">
                 <!--<p class="property-units"><label>Units:</label> {{property.field_units.und.length | number}}</p>-->
                 <p class="property-type" ng-show="property.field_property_type.und.length"><label>Type:</label> {{property.field_property_type.und[0].value}}</p>

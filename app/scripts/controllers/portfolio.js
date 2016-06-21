@@ -16,6 +16,14 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
     'Karma'
   ];
 
+  function alerting(message, type) {// TO DO - Global solve.
+    $scope.$emit('alert', { // Emit message.
+      message: message,
+      type: type,
+    });        
+    $rootScope.globals.isLoading = false; 
+  }
+
   var query = {
     parameters: {
       'type': 'property'
@@ -61,9 +69,9 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
   // REPORT - COSTS COUNT:  Gather total costs
   function propertiesCosts(properties) {
     var propCosts = 0;
-    for (var i = 0; i < $scope.properties.length; i++) {
+    /*for (var i = 0; i < $scope.properties.length; i++) {
       propCosts += parseInt(properties[i].field_purchase_price.und[0].value);
-    }
+    }*/
     return propCosts;
   }
 
@@ -144,15 +152,15 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
             "data": null
           }
         ]
-      },
-      /* TO DO - Property Types
+      }/*,
+       TO DO - Property Types
       "field_property_type": {
         "und": [
           {
             "value":this.property.propertyType
           }
         ]
-      },*/
+      },
       "field_purchase_price": {
         "und": [
           {
@@ -160,7 +168,7 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
               "target_id": "240"
           },
         ]
-      }    
+      }*/    
     };
 
     // TO DO - Troubleshoot posting files
@@ -168,19 +176,18 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
 
     /* NEW SERVICE */
     drupal.node_save(node).then(function(data) {
-        alert('Created node: ' + data.nid);
-        // Update Units & Costs Totals
-        refreshPortfolio();
-        $rootScope.globals.isLoading = false;
-        //$scope.propertiesCosts = propertiesCosts();        
+        var message = 'Congratulations! Node ' + data.nid + 'is created!';
+        var type = 'success';
+        alerting(message, type);        
     }, function(reason) {
-      console.log('Adding failed due to ' + reason.status + reason.statusText + '. Try again later.');
-      $scope.message = reason.status + ' ' + reason.statusText;
-      $rootScope.globals.isLoading = false;
+      var message = 'Adding failed due to ' + reason.statusText + '. Try again later.';
+      var type = 'success';
+      alerting(message, type); ;
     });
 
     // Change views
     setView('propertiesList');
+    setTimeout(refreshPortfolio, 1000);
   }
   
   // EDIT PROPERTY
@@ -239,12 +246,13 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
       if (data[0]) {
         $rootScope.globals.isLoading = false;
       }
+    }, function(reason) {
+      console.log(reason.statusText);
+      $rootScope.globals.isLoading = false;
     });
   
-    setView('propertiesList');
-
-    // $scope.propertiesUnits = propertiesUnits();
-    $scope.propertiesCosts = propertiesCosts();
+    setView('propertiesList')
+    setTimeout(refreshPortfolio, 1000);
   }
 
   // ADD, EDIT, REMOVE PROPERTY
