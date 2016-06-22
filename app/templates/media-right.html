@@ -1,0 +1,14 @@
+<div class="container-full">
+  <div class="container container-wide">
+    <div class="row marketing center">
+      <div class="col s12 m6 l6">
+        <h3>{{row.subheader}}</h3>
+        <p class="lead" ng-repeat="paragraph in row.paragraphs">{{paragraph.text}}</p>
+        <a class="btn btn-large blue btn-success" href="{{row.cta.url}}"><i class="material-icons left"> {{row.cta.icon}}</i> {{row.cta.text}}</a>
+      </div>
+      <div class="col s12 m6 l6" ng-show="{{row.image.filename != null}}">
+        <img src="images/{{row.image.filename}}" alt="{{row.image.alt}}" title="{{row.image.title}}" />
+      </div>  
+    </div>
+  </div>
+</div>
