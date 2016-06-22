@@ -1,23 +1,20 @@
-<div class="portfolio">
+<div class="portfolio" bb-active-menu="Portfolio" bb-active-title="Portfolio">
   <div class="utility-bar">
     <div class="container container-wide" ng-show="view=='propertiesList'">
       <div class="row">
-        <div class="input-field col l12 m12 s12">
+        <div class="input-field col s12 m8 l8">
             <i class="material-icons prefix blue-text">search</i>
             <input type="text" ng-model="searchKey"/>
             <label for="propertySearch">Search</label>
         </div>
-      </div>
-      <div class="row">
-        <button class ="btn btn-large wave-effect blue" ng-click="refreshPortfolio()">Refresh
-        </button>
-        <img ng-show="isLoading()" src ="images/progressring.gif" alt="Loading" title="Loading"/>
-        <div class="row" ng-show="errorMessage !=''">
-          <div class="col l12 s12">
-            <h3 class="text-danger">{{errorMessage}}</h3>
-          </div>
+        <div class="col s12 m1 l1">
+          <span>.</span>
         </div>
-      </div>         
+        <div class="col s12 m3 l3">
+          <button class ="btn btn-large wave-effect blue" ng-click="refreshPortfolio()">Refresh</button>
+          <img ng-show="isLoading()" src ="images/progressring.gif" alt="Loading" title="Loading"/>
+        </div>
+      </div>
     </div>
   </div>
   <div class="container container-wide container-first" ng-show="view=='propertiesList'">      
