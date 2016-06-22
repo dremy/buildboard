@@ -44,8 +44,16 @@ body {
       > button {
         @include border-radius(4px);
         border: 1px solid $white;
-        background: lighten($secondary-blue, 10%);    
+        background: lighten($secondary-blue, 10%);
+        text-transform: none;   
       }
+    }
+    .nav-login > a {
+      padding: 14px 15px;
+    }
+    .nav-login > button {
+      padding: 0px 15px;
+      height: 40px;
     }
     > .active {
       > a,
@@ -73,10 +81,32 @@ body {
   }
 }
 
-.navbar-nav > li > button {
-  position: relative;
-  display: block;
-  padding: 10px 15px;
+.navbar-nav {
+  > li > button {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+  }
+  .dropdown-menu {
+    background: lighten($secondary-blue, 10%);
+    > li {
+      > button {
+        padding: 3px 20px;
+        background: transparent;
+        border: none;
+        width: 100%;
+      }
+      > a,
+      > button {
+        color: $white;
+        &:hover,
+        &:focus,
+        &:active {
+          background: lighten($secondary-blue, 20%);
+        }
+      }
+    }
+  }
 }
 
 .navbar-brand {
@@ -523,4 +553,11 @@ input:placeholder-shown {
   .jumbotron {
     border-bottom: 0;
   }
+}
+
+.alert-box {
+  position: absolute;
+  z-index: 3;
+  top: 100px;
+  left: 15%;
 }
