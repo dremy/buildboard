@@ -147,7 +147,7 @@
     </header>
 
     <section class="content" ng-cloak>
-      <div class="container container-wide">
+      <div class="container container-wide" ng-show="alerts != ''">
         <div class="row">
           <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" dismiss-on-timeout="{{alert.dt}}" close="closeAlert($index)">{{alert.message}}</uib-alert>
         </div>

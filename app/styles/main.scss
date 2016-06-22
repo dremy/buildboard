@@ -94,6 +94,9 @@ body {
 .marketing {
   padding-left: 15px;
   padding-right: 15px;
+  img {
+    max-width: 100%;
+  }
 }
 
 .preloader {
@@ -420,6 +423,9 @@ input:placeholder-shown {
     color: $material-blue;
   }
 }
+////////////
+///COLORS
+////////////
 
 /* Colors */
 .original-blue-text {
@@ -438,11 +444,35 @@ input:placeholder-shown {
   color: $secondary-blue;
 }
 
+////////////
+///CONTAINERS
+////////////
+
+.content {
+  margin-top: 100px;
+}
+
+.container {
+  margin: 0  auto;
+}
+
+/* Space out the masthead */
+.container-first {
+  margin-top: 30px;
+}
+
+.marquee {
+  background: #f5f5f5;
+  margin-top: -100px;
+  .marquee-background {
+    max-width: 100%;
+  }
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   .container {
     max-width: 730px;
-    margin: 0  auto;
   }
 
   .container-wide {
@@ -452,11 +482,6 @@ input:placeholder-shown {
   .container-full {
     max-width: 100%;
     width: 100%;
-  }
-
-  /* Space out the masthead */
-  .container-first {
-    margin-top: 30px;
   }
 
   .marquee {
@@ -478,6 +503,7 @@ input:placeholder-shown {
 
     .lead {
       color: #f5f5f5;
+      text-shadow: 0px 0px 7px #333;
     }
   }
 

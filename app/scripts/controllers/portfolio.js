@@ -176,18 +176,18 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
 
     /* NEW SERVICE */
     drupal.node_save(node).then(function(data) {
-        var message = 'Congratulations! Node ' + data.nid + 'is created!';
+        var message = 'Congratulations! Node ' + node.title + ' is created!';
         var type = 'success';
-        alerting(message, type);        
+        alerting(message, type);
     }, function(reason) {
       var message = 'Adding failed due to ' + reason.statusText + '. Try again later.';
       var type = 'success';
-      alerting(message, type); ;
+      alerting(message, type);
     });
 
     // Change views
     setView('propertiesList');
-    setTimeout(refreshPortfolio, 1000);
+    setTimeout(refreshPortfolio, 2000);
   }
   
   // EDIT PROPERTY
@@ -198,7 +198,6 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
     $scope.property = $scope.properties[selected];
     setView('editProperty');
     initializeForm();
-    console.log($scope.property);
   }
 
   function saveProperty() {
@@ -207,16 +206,13 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
 
     /* NEW SERVICE*/ 
     drupal.node_save(this.property).then(function(data) {
-        alert('Updated node: ' + data.nid);
-        // Update Units & Costs Totals
-        $scope.propertiesCosts = propertiesCosts();
-        refreshPortfolio();
-        $rootScope.globals.isLoading = false;
+      var message = 'Congratulations! Node ' + this.property.title + ' is updated!';
+      var type = 'success';
+      alerting(message, type);
     }, function(reason) {
-      alert('Saving failed due to ' + reason.status + reason.statusText + '. Try again later.');
-      console.log(reason);
-      $scope.message = reason.status + reason.statusText;
-      $rootScope.globals.isLoading = false;
+      var message = 'Saving failed due to ' + reason.statusText + '. Try again later.';
+      var type = 'warning';
+      alerting(message, type);
     });
     
     /* OLD SERVICE
@@ -224,6 +220,7 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
       return propertiesApi.updateProperty(property);
     });*/
     setView('propertiesList');
+    setTimeout(refreshPortfolio, 2000);
   }
 
   // REMOVE PROPERTY
@@ -241,18 +238,22 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
       return propertiesApi.removeProperty(id);
     });*/
 
+    var title = $scope.properties[selected].title;
     /* NEW SERVICE */
     drupal.node_delete(id).then(function(data) {
       if (data[0]) {
-        $rootScope.globals.isLoading = false;
+        var message = 'Congratulations! ' + title + ' has been deleted!';
+        var type = 'success';
+        alerting(message, type);
       }
     }, function(reason) {
-      console.log(reason.statusText);
-      $rootScope.globals.isLoading = false;
+      var message = 'Deleting failed due to ' + reason.statusText + '. Try again later.';
+      var type = 'warning';
+      alerting(message, type);
     });
   
     setView('propertiesList')
-    setTimeout(refreshPortfolio, 1000);
+    setTimeout(refreshPortfolio, 2000);
   }
 
   // ADD, EDIT, REMOVE PROPERTY

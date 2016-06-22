@@ -16,8 +16,8 @@ function AdminCtrl($scope, $rootScope, $location, currentSpot, drupal) {
 
   $rootScope.globals = {};   //Set globals
   $rootScope.globals.isLoading = true;   //Set preloader
-  $scope.message = ''; // Set empty message
  
+  // Alerts
   $scope.$on('alert', function(event, args) {
     $scope.alerts.push({
       message: args.message,
@@ -43,12 +43,12 @@ function AdminCtrl($scope, $rootScope, $location, currentSpot, drupal) {
     } else { // Please login.
     }
     if(data.user.name) {
-      /* Message on Page Load if Authenticated
+      //Message on Page Load if Authenticated
       $scope.alerts.push({
         message: 'Hello ' + data.user.name + '!',
         type: 'success',
         dt: 2000
-      });*/
+      });
     }
     $rootScope.globals.isLoading = false;
   });
@@ -84,7 +84,6 @@ function AdminCtrl($scope, $rootScope, $location, currentSpot, drupal) {
         $scope.alerts.push({message: 'You have been logged out.', type: 'success'});
         $rootScope.globals = {};
         $location.path('/app');
-        $scope.message = 'You have been logged out.';
       }
     });
   }

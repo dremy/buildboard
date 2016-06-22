@@ -109,6 +109,19 @@ angular
   .factory('currentSpot', currentSpot)
   // Allows you to format values for active menu and title.
   .directive('bbActiveMenu', bbActiveMenu)
+  // Content panes.
+  .directive('mediaContent', function () {
+    return {
+      restrict: 'E', // Element only directive.
+      scope: {
+        row: '=' // Pull row
+      },
+      link: function (scope) {
+        scope.myTemplate = '/app/templates/' + scope.row.type + '.html';
+      },
+      template: '<div ng-include="myTemplate"></div>'
+    };
+  })
   // Allows you to format a text input field.
   // <input type="text" ng-model="test" format="number" />
   // <input type="text" ng-model="test" format="currency" />
