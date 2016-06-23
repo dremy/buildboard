@@ -82,12 +82,17 @@ angular
         controller: 'RegisterCtrl',
         controllerAs: 'register'
       })
+      .when('/user/:uid', { // User Profile, Account
+        templateUrl: 'views/user.html',
+        controller: 'UserCtrl',
+        controllerAs: 'user'
+      })
       .when('/portfolio', {
         templateUrl: 'views/portfolio.html',
         controller: 'PortfolioCtrl',
         controllerAs: 'portfolio'
       })
-      .when('/property/:nid', {
+      .when('/property/:nid', { // Property Profile
         templateUrl: 'views/property.html',
         controller: 'PropertyCtrl',
         controllerAs: 'property'
