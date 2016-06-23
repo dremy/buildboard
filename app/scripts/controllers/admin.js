@@ -16,8 +16,18 @@ function AdminCtrl($scope, $rootScope, $location, currentSpot, drupal) {
 
   $rootScope.globals = {};   //Set globals
   $rootScope.globals.isLoading = true;   //Set preloader
- 
+  $scope.alerts = [];
+  var currentUser = {};
+
   // Alerts
+  function alerting(message, type) {// TO DO - Global solve.
+    $scope.$emit('alert', { // Emit message.
+      message: message,
+      type: type,
+    });
+    $rootScope.globals.isLoading = false;
+  }
+
   $scope.$on('alert', function(event, args) {
     $scope.alerts.push({
       message: args.message,
@@ -25,8 +35,6 @@ function AdminCtrl($scope, $rootScope, $location, currentSpot, drupal) {
       dt: args.dt
     });
   });
-
-  $scope.alerts = [];
 
   $scope.closeAlert = function(index) {
     $scope.alerts.splice(index, 1);
@@ -36,19 +44,33 @@ function AdminCtrl($scope, $rootScope, $location, currentSpot, drupal) {
   drupal.connect().then(function(data) {
     if (data.user.uid) { //Authenticated.
       $rootScope.globals.currentUser = data.user;
-      $scope.currentUser = data.user; 
+      drupal.user_load(data.user.uid).then(function(account) {
+        $rootScope.globals.currentUser = account;
+        currentUser = {
+          uid: account.uid,
+          mail: account.mail,
+        };
+        if (account.field_full_name.und) {
+          currentUser.name = account.field_full_name.und[0];
+        }
+        if (account.picture) {
+          currentUser.picture = account.picture;
+        }
+        $scope.currentUser = currentUser;
+        //Message on Page Load if Authenticated
+        $scope.alerts.push({
+          message: 'Hello ' + currentUser.name.given + '!',
+          type: 'success',
+          dt: 2000
+        });
+      }, function(reason) {
+        var message = 'Having an issue pulling user account details. Try again soon.';
+        var type = 'warning';
+        alerting(message,type);
+      });
       // data.user.uid
       // data.sessid
       // data.session_name
-    } else { // Please login.
-    }
-    if(data.user.name) {
-      //Message on Page Load if Authenticated
-      $scope.alerts.push({
-        message: 'Hello ' + data.user.name + '!',
-        type: 'success',
-        dt: 2000
-      });
     }
     $rootScope.globals.isLoading = false;
   });
