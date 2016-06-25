@@ -1,0 +1,19 @@
+<div class="container container-first container-wide" bb-active-menu="" bb-active-title="">
+  <div class="user user-{{user.uid}}" ng-show="view=='userProfile'">
+      <div class="row">
+      <button class="btn btn-primary float-right" ng-click="startEditUser()">Edit User</button>
+    </div>
+    <div class="row" ng-cloak>
+      <div class="col s12 m3 l3 user-photo">
+          <img class="tbd" src="{{user.picture.url}}" alt="{{user.fullName}}" title="{{user.fullName}}" />
+      </div>
+      <div class="col s12 m9 l9">
+        <h3>{{user.fullName}}</h3>
+        <p><i class="material-icons">location_on</i> {{user.field_user_location.und[0].locality}}, {{user.field_user_location.und[0].administrative_area}}</p>
+      </div>
+    </div>
+  </div>
+  <div ng-show="view=='editUser'">
+    <div ng-include="'views/editUser.html'">      
+  </div>
+</div>

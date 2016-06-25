@@ -103,6 +103,7 @@ body {
         &:focus,
         &:active {
           background: lighten($secondary-blue, 20%);
+          cursor: pointer;
         }
       }
     }
@@ -375,6 +376,13 @@ button.add-card {
   }
 }
 
+.user .user-photo {
+  width: 250px;
+  > img {
+    width: 100%;
+  }
+}
+
 /* Forms */
 input:not([type]):focus:not([readonly]),
 input[type=text]:focus:not([readonly]),
@@ -497,6 +505,10 @@ input:placeholder-shown {
   .marquee-background {
     max-width: 100%;
   }
+}
+
+.float-right {
+  float: right;
 }
 
 /* Responsive: Portrait tablets and up */
