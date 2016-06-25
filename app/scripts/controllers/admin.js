@@ -14,20 +14,23 @@ function AdminCtrl($scope, $rootScope, $location, currentSpot, drupal) {
     'Karma'
   ];
 
-  $rootScope.globals = {};   //Set globals
-  $rootScope.globals.isLoading = true;   //Set preloader
+  $rootScope.globals = { //Set globals
+    isLoading: true, //Set preloader
+  };
   $scope.alerts = [];
   var currentUser = {};
 
   // Alerts
-  function alerting(message, type) {// TO DO - Global solve.
-    $scope.$emit('alert', { // Emit message.
+  function alertPush(message, type, dt) {// TO DO - Global solve.
+    $scope.alerts.push({ // Emit message.
       message: message,
       type: type,
+      dt: dt
     });
     $rootScope.globals.isLoading = false;
   }
 
+  //Awaiting alerts from lower controllers.
   $scope.$on('alert', function(event, args) {
     $scope.alerts.push({
       message: args.message,
@@ -41,32 +44,40 @@ function AdminCtrl($scope, $rootScope, $location, currentSpot, drupal) {
   };
 
   //Check if already authenticated
-  drupal.connect().then(function(data) {
-    if (data.user.uid) { //Authenticated.
-      $rootScope.globals.currentUser = data.user;
+  drupal.connect().then(function(data) { //Authenticated.
+    if (data.user.uid > 0) { //Authenticated validation.
       drupal.user_load(data.user.uid).then(function(account) {
-        $rootScope.globals.currentUser = account;
+        //Setup current user to the view.
         currentUser = {
           uid: account.uid,
           mail: account.mail,
+          roles: account.roles
         };
         if (account.field_full_name.und) {
           currentUser.name = account.field_full_name.und[0];
+        } else {
+          currentUser.name = {
+            given: data.user.name
+          };
         }
-        if (account.picture) {
+        if (!account.picture) {
+          currentUser.picture = {
+            url: '/app/images/avatar_silhouette.png'
+          };
+        } else {
           currentUser.picture = account.picture;
         }
-        $scope.currentUser = currentUser;
+        $rootScope.globals.currentUser = currentUser; //Set current user to the view.
         //Message on Page Load if Authenticated
-        $scope.alerts.push({
-          message: 'Hello ' + currentUser.name.given + '!',
-          type: 'success',
-          dt: 2000
-        });
+        var message = 'Hello ' + currentUser.name.given + '!';
+        var type = 'success';
+        var dt = 2000;
+        alertPush(message, type, dt);
       }, function(reason) {
         var message = 'Having an issue pulling user account details. Try again soon.';
         var type = 'warning';
-        alerting(message,type);
+        var dt = 2000;
+        alertPush(message,type);
       });
       // data.user.uid
       // data.sessid
@@ -103,8 +114,11 @@ function AdminCtrl($scope, $rootScope, $location, currentSpot, drupal) {
     $rootScope.globals.isLoading = true;
     drupal.user_logout().then(function(data) {
       if (!data.user.uid) {
-        $scope.alerts.push({message: 'You have been logged out.', type: 'success'});
         $rootScope.globals = {};
+        var message = 'You have been logged out.';
+        var type = 'success';
+        var dt = 2000;
+        alertPush(message, type, dt);
         $location.path('/app');
       }
     });
