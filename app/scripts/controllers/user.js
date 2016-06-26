@@ -49,9 +49,9 @@ function userCtrl($rootScope, $scope, $routeParams, drupal) {
       account.field_full_name.und[0].generational = "";
       account.field_full_name.und[0].credentials = "";
       account.field_full_name.und[0].safe = {
-        given: (!account.field_full_name.und[0].given ? "" : account.field_full_name.und[0].given),
+        given: (!account.field_full_name.und[0].given ? "" : account.field_full_name.und[0].given), //If  empty, set empty.
         middle: "",
-        family: (!account.field_full_name.und[0].family ? "" : account.field_full_name.und[0].family),
+        family: (!account.field_full_name.und[0].family ? "" : account.field_full_name.und[0].family), //If empty, set empty.
         generational: "",
         credentials: ""
       };
