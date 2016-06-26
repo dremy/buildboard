@@ -68,9 +68,10 @@ function userCtrl($rootScope, $scope, $routeParams, drupal) {
       var dt = 2000;
       alerting(message, type, dt);
 
-      //Update view
+      //Update view - TO DO - get rid of .fullName property
       $scope.user.fullName = account.field_full_name.und[0].given + ' ' + account.field_full_name.und[0].family;
-      //TO DO - Emit given name change up to AdminCtrl.
+      //Update currentUser name for user menu.
+      $rootScope.globals.currentUser.name = account.field_full_name.und[0];
       //Set to Profile view.
       setView('userProfile');
     }, function(reason) {
@@ -96,16 +97,12 @@ function userCtrl($rootScope, $scope, $routeParams, drupal) {
   var uid = $routeParams.uid;
 
   drupal.user_load(uid).then(function(account) {
-    if (account.picture === null) {
+    if (!account.picture) {
       account.picture = {
         url: '/app/images/avatar_silhouette.png'
       };
     }
-    if (account.field_full_name.und) {
-      account.fullName = account.field_full_name.und[0].given + ' ' + account.field_full_name.und[0].family;
-    } else {
-      account.fullName = account.name;
-    }
+    account.fullName = account.field_full_name.und ? account.field_full_name.und[0].given + ' ' + account.field_full_name.und[0].family : account.name;
     $scope.user = account; //Set to view.
     $rootScope.globals.isLoading = false; //No loading spinner.
   }, function(reason) {
