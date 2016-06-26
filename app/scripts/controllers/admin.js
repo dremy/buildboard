@@ -18,7 +18,6 @@ function AdminCtrl($scope, $rootScope, $location, currentSpot, drupal) {
     isLoading: true, //Set preloader
   };
   $scope.alerts = [];
-  var currentUser = {};
 
   // Alerts
   function alertPush(message, type, dt) {// TO DO - Global solve.
@@ -48,26 +47,15 @@ function AdminCtrl($scope, $rootScope, $location, currentSpot, drupal) {
     if (data.user.uid > 0) { //Authenticated validation.
       drupal.user_load(data.user.uid).then(function(account) {
         //Setup current user to the view.
-        currentUser = {
+        $rootScope.globals.currentUser = {
           uid: account.uid,
           mail: account.mail,
           roles: account.roles
         };
-        if (account.field_full_name.und) {
-          currentUser.name = account.field_full_name.und[0];
-        } else {
-          currentUser.name = {
-            given: data.user.name
-          };
-        }
-        if (!account.picture) {
-          currentUser.picture = {
-            url: '/app/images/avatar_silhouette.png'
-          };
-        } else {
-          currentUser.picture = account.picture;
-        }
-        $rootScope.globals.currentUser = currentUser; //Set current user to the view.
+
+        //Setup first name. If empty, use username.
+        $rootScope.globals.currentUser.name = account.field_full_name.und ? account.field_full_name.und[0] : {given: data.user.name};
+        $rootScope.globals.currentUser.picture = account.picture ? account.picture : {url: '/app/images/avatar_silhouette.png'};
         //Message on Page Load if Authenticated
         var message = 'Hello ' + currentUser.name.given + '!';
         var type = 'success';
