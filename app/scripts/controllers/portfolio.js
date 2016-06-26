@@ -97,7 +97,7 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
     $('select').material_select();
   }
 
-  // ADD PROPERTY
+  //Start Adding Property.
   function startAddProperty() {    
     $scope.property = {
       "address":"",
@@ -125,10 +125,10 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
   function addProperty() {
     $rootScope.globals.isLoading = true; //TO DO - Set preloader
 
-    // Some behind the scenes defining of the title.
+    //Some behind the scenes defining of the title.
     var title = this.property.address + " " + this.property.city + ", " + this.property.state + " " + this.property.zip;
 
-    // Setup the property to be posted.
+    //Setup the property to be posted.
     var node = {
       "title": title,
       "type": "property",
@@ -171,10 +171,7 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
       }*/    
     };
 
-    // TO DO - Troubleshoot posting files
-    // console.log(this.property.teaserPhoto);
-
-    /* NEW SERVICE */
+    //Save node.
     drupal.node_save(node).then(function(data) {
         var message = 'Congratulations! Node ' + node.title + ' is created!';
         var type = 'success';
@@ -190,7 +187,7 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
     setTimeout(refreshPortfolio, 2000);
   }
   
-  // EDIT PROPERTY
+  //Start Edit Property.
   function startEditProperty(index) {
     // Get the right one
     selected = index;
@@ -204,7 +201,7 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
     $rootScope.globals.isLoading = true;
     this.property.title = this.property.field_address.und[0].thoroughfare + " " + this.property.field_address.und[0].locality + ", " + this.property.field_address.und[0].administrative_area + " " + this.property.field_address.und[0].postal_code;
 
-    /* NEW SERVICE*/ 
+    //Save node. 
     drupal.node_save(this.property).then(function(data) {
       var message = 'Congratulations! Node ' + this.property.title + ' is updated!';
       var type = 'success';
@@ -214,16 +211,12 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
       var type = 'warning';
       alerting(message, type);
     });
-    
-    /* OLD SERVICE
-    useBackend(property, function () {
-      return propertiesApi.updateProperty(property);
-    });*/
+
     setView('propertiesList');
     setTimeout(refreshPortfolio, 2000);
   }
 
-  // REMOVE PROPERTY
+  //Start Remove Property.
   function startRemoveProperty(index) {
     selected = index;
     setView('removeProperty');
@@ -233,13 +226,9 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
   function removeProperty() {
     $rootScope.globals.isLoading = true;
     var id = $scope.properties[selected].nid;
-    /* OLD SERVICE
-    useBackend(id, function () {
-      return propertiesApi.removeProperty(id);
-    });*/
-
     var title = $scope.properties[selected].title;
-    /* NEW SERVICE */
+    
+    //Delete Node.
     drupal.node_delete(id).then(function(data) {
       if (data[0]) {
         var message = 'Congratulations! ' + title + ' has been deleted!';
@@ -256,8 +245,7 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
     setTimeout(refreshPortfolio, 2000);
   }
 
-  // ADD, EDIT, REMOVE PROPERTY
-  // Register functions to $scope; Exposed on view event "click"
+  //Register functions to $scope; Exposed on view event "click"
   $scope.startAddProperty = startAddProperty;
   $scope.cancelProperty = cancelProperty;
   $scope.addProperty = addProperty;
@@ -265,30 +253,6 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
   $scope.saveProperty = saveProperty;
   $scope.startRemoveProperty = startRemoveProperty;
   $scope.removeProperty = removeProperty;
-
-  function useBackend(id, operation) {
-    $scope.message = '';
-    operation()
-      .success(
-        function (data) {
-          refreshPortfolio();        
-          console.log(data);
-        })
-      .error(
-        function (errorInfo, status) {
-          setError(errorInfo, status, id);
-        });
-  }
-
-  function setError(errorInfo, status) {
-    if (status === 401) {
-      $scope.message = "Authorization failed.";
-    } else if (angular.isDefined(errorInfo.reasonCode) && errorInfo.reasonCode === "TenantLimitExceeded") {
-      $scope.message = "You cannot add more locations.";
-    } else {
-      $scope.message = errorInfo.message;
-    }
-  }
 }
 
 angular.module('buildboardApp')
