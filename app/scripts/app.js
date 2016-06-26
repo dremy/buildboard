@@ -51,7 +51,7 @@ angular
     'angular-drupal' // Drupal service
   ])
   .config(function ($routeProvider) {
-    $routeProvider
+    $routeProvider   //TO DO - Do not allow logged in users to go to /user/login OR /user/register
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
