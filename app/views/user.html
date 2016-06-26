@@ -9,7 +9,7 @@
       </div>
       <div class="col s12 m9 l9">
         <h3>{{user.fullName}}</h3>
-        <p><i class="material-icons">location_on</i> {{user.field_user_location.und[0].locality}}, {{user.field_user_location.und[0].administrative_area}}</p>
+        <p ng-show="user.field_user_location.und[0].locality && user.field_user_location.und[0].administrative_area"><i class="material-icons">location_on</i> {{user.field_user_location.und[0].locality}}, {{user.field_user_location.und[0].administrative_area}}</p>
       </div>
     </div>
   </div>
