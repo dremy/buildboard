@@ -42,26 +42,37 @@ function userCtrl($rootScope, $scope, $routeParams, drupal) {
 
   function saveUser() {
     var account = $scope.user;
+
+    //Build out name field values.
     if (account.field_full_name.und[0].given || account.field_full_name.und[0].family) {
       account.field_full_name.und[0].middle = ""; 
       account.field_full_name.und[0].generational = "";
       account.field_full_name.und[0].credentials = "";
       account.field_full_name.und[0].safe = {
-        given: account.field_full_name.und[0].given,
+        given: (!account.field_full_name.und[0].given ? "" : account.field_full_name.und[0].given),
         middle: "",
-        family: account.field_full_name.und[0].family,
+        family: (!account.field_full_name.und[0].family ? "" : account.field_full_name.und[0].family),
         generational: "",
         credentials: ""
       };
     }
-    console.log(account);
-   drupal.user_save(account).then(function(data) {
+    //Remove fullName property, before PUT.
+    delete account.fullName;
+
+    //User save.
+    drupal.user_save(account).then(function(data) {
 
       //Alerting
       var message = 'Your account has been updated.';
       var type = 'success';
       var dt = 2000;
       alerting(message, type, dt);
+
+      //Update view
+      $scope.user.fullName = account.field_full_name.und[0].given + ' ' + account.field_full_name.und[0].family;
+      //TO DO - Emit given name change up to AdminCtrl.
+      //Set to Profile view.
+      setView('userProfile');
     }, function(reason) {
 
       //Alerting
@@ -69,9 +80,12 @@ function userCtrl($rootScope, $scope, $routeParams, drupal) {
       var type = 'warning';
       var dt = 2000;
       alerting(message, type, dt);
+      //Log reason.
+      console.log(reason);
+      //Set to Profile view.
+      setView('userProfile');
     });
 
-    setView('userProfile');
   }
 
   function cancelUser() {
