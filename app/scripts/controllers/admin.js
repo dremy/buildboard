@@ -57,7 +57,7 @@ function AdminCtrl($scope, $rootScope, $location, currentSpot, drupal) {
         $rootScope.globals.currentUser.name = account.field_full_name.und ? account.field_full_name.und[0] : {given: data.user.name};
         $rootScope.globals.currentUser.picture = account.picture ? account.picture : {url: '/app/images/avatar_silhouette.png'};
         //Message on Page Load if Authenticated
-        var message = 'Hello ' + currentUser.name.given + '!';
+        var message = 'Hello ' + $rootScope.globals.currentUser.name.given + '!';
         var type = 'success';
         var dt = 2000;
         alertPush(message, type, dt);
