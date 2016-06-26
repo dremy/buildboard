@@ -10,10 +10,11 @@
 function userCtrl($rootScope, $scope, $routeParams, drupal) {
 
   //ALERT
-  function alerting(message, type) {// TO DO - Global solve.
+  function alerting(message, type, dt) {// TO DO - Global solve.
     $scope.$emit('alert', { // Emit message.
       message: message,
       type: type,
+      dt: dt
     });        
     $rootScope.globals.isLoading = false; 
   }
@@ -95,9 +96,10 @@ function userCtrl($rootScope, $scope, $routeParams, drupal) {
     $rootScope.globals.isLoading = false; //No loading spinner.
   }, function(reason) {
     //Alerting.
-    var message = "Can't pull user account details. <strong>Refresh the page</strong> to try again.";
+    var message = "Can't pull user account details. Refresh the page to try again.";
     var type = 'danger';
-    alerting(message, type);
+    var dt = 2000; 
+    alerting(message, type, dt);
   });
 
   //Show user profile.
