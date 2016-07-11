@@ -20,7 +20,9 @@
     "angular-drupal": "7.x-1.x",
     "Materialize": "materialize#^0.97.6",
     "angularjs-google-maps": "^0.5.0",
-    "material-design-icons": "^2.2.3"
+    "material-design-icons": "^2.2.3",
+    "ngmap": "^1.17.3",
+    "angular-ui-calendar": "^1.0.1"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"
