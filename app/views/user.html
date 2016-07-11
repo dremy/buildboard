@@ -14,6 +14,59 @@
     </div>
   </div>
   <div ng-show="view=='editUser'">
-    <div ng-include="'views/editUser.html'">      
+    <!--<div ng-include="'views/editUser.html'">-->      
+    <div class="container edit-user add-modal">
+      <div class="row">
+        <h3>Edit My Account</h3>
+      </div>
+      <form class="">
+        <div class="row">
+          <div class="input-field long-label col s6">
+            <input id="first_name" type="text" class="validate" ng-model="user.field_full_name.und[0].given">
+            <label for="first_name" data-error="Don't try to make this up." data-success="Oh hey!">First Name</label>
+          </div>
+          <div class="input-field long-label col s6">
+            <input id="last_name" type="text" class="validate" ng-model="user.field_full_name.und[0].family">
+            <label for="last_name"  data-error="C'mon buddy!" data-success="New last name, huh?.">Last Name</label>
+          </div>
+        </div>
+        <div class="row">  
+          <div class="input-field col s12 medium-label">
+              <input placeholder="info@email.com" id="email" type="email" class="validate" ng-model="user.mail">
+              <label for="email" data-error="Wrong!" data-success="There you go!">Email</label>
+          </div>
+        </div>
+        <div class="row">  
+          <div class="input-field col s12 medium-label">
+              <input places-auto-complete 
+                id="location" 
+                class="validate" 
+                size=80
+                ng-model="address"
+                component-restrictions="{country:'us'}"
+                types="address"
+                on-place-changed="user.placeChanged()" />
+              <label
+                for="location" 
+                data-error="Wrong" 
+                data-success="There you go!">Location
+              </label>
+              <div ng-show="place">
+                Address = {{place.formatted_address}} <br/>
+                Location: {{place.geometry.location}}<br/>
+              </div>
+              <p>address : {{address}}</p>
+              <ng-map></ng-map>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s6">
+            <button class="btn btn-large wave-effect blue" ng-click="saveUser()">Save</button>
+          </div>
+          <div class="col s6">
+            <button class="btn btn-large wave-effect red" ng-click="cancelUser()">Cancel</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>

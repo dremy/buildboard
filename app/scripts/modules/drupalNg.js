@@ -5,22 +5,18 @@
 
 //Initial Config
 //------------------------------------
+//Setup the Site Path.
 var sitePath = '';
-if (location.host === 'localhost') {
-  sitePath = 'http://localhost/bb_pantheon/buildboard/';
-} else {
-  console.log(location.host);
-  sitePath = 'http://dev-buildboard.pantheonsite.io/';
-}
-
-//TO DO - Move to Switch statement
-/*switch (location.host) {
+switch (location.host) {
   case 'localhost':
     sitePath = 'http://localhost/bb_pantheon/buildboard/';
   break;
-}*/
+  case 'dev-buildboard.pantheonsite.io':
+    sitePath = 'http://dev-buildboard.pantheonsite.io/';
+  break;
+}
 
-//Setup Angular Drupal
+//Setup Angular Drupal.
 //------------------------------------
 angular
   .module('angular-drupal')

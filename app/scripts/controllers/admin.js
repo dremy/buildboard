@@ -67,6 +67,9 @@ function AdminCtrl($scope, $rootScope, $location, currentSpot, drupal, googleMap
         var dt = 2000;
         alertPush(message,type);
       });
+      // data.user.uid
+      // data.sessid
+      // data.session_name
     }
     $rootScope.globals.isLoading = false;
   });

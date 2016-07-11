@@ -26,11 +26,15 @@
     </div>
     <div class="row">
       <div class="input-field col s4">
-        <select name="propertyType" ng-model="property.field_property_type.und[0].value">
+        <select
+          material-select
+          name="propertyType" 
+          ng-model="property.field_property_type.und[0].value">
           <option value="" disabled>Choose your option</option>
-          <option ng-repeat="type in types" 
-          ng-value="{{type}}"
-          ng-attr-selected="{{property.field_property_type.und[0].value == type && 'selected'}}">{{type}}</option>
+          <option 
+            ng-repeat="type in types" 
+            ng-value="{{type}}"
+            ng-attr-selected="{{property.field_property_type.und[0].value == type && 'selected'}}">{{type}}</option>
         </select>
         <label>Property Type</label>
       </div>

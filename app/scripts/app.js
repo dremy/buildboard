@@ -48,7 +48,8 @@ angular
     'ngSanitize',
     'ngTouch',
     'ngMap',
-    'ui.bootstrap',
+    //'google.places',
+    'ui.bootstrap', // UI Bootstrap
     'ui.materialize',
     'angular-drupal' // Drupal service
   ])

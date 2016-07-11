@@ -1,0 +1,128 @@
+<!--StartEditUserTemplate-->
+<div class="container edit-user add-modal" ng-controller="ProposalCtrl">
+  <div class="row">
+    <h2>Add Proposal</h2>
+  </div>
+  <form class="">
+    <div 
+      class="row"
+      ng-show="view=='Start'">
+      <h4>Add your target amount</h4>
+      <div class="input-field input-group long-label col s12">
+        <span class="input-group-addon">$</span>
+        <input 
+          id="proposal_target_amount" 
+          class="form-control validate" 
+          type="number" 
+          ng-model="proposal.targetAmount">
+        <label class="active" for="proposal_target_amount">Target Amount</label>
+      </div>
+      <button class="btn blue" ng-click="setView('Method')">Next</button>
+    </div>
+    <div 
+      class="row"
+      ng-show="view=='Method'" 
+      ng-repeat="option in proposal.options" 
+      ng-class-even="'even'">
+      <h4>Add Financing Type</h4>
+      <div class="input-field long-label col s12">
+        <select 
+          material-select 
+          id="proposal_financing_type_{{$index+1}}" 
+          name="proposal_financing_type_{{$index+1}}" 
+          ng-model="option.financingType"
+          ng-change="calculate($index)">
+          <option value="" disabled selected>Choose your option</option>
+          <option value="Mortgage">Mortgage</option>
+          <option value="Cash">Cash</option>
+          <option value="Hard Money">Hard Money</option>
+          <option value="Gift">Gift</option>
+        </select>
+        <label for="proposal_financing_type">Financing Type</label>
+      </div>
+      <div class="input-field input-group long-label col s12">
+        <span class="input-group-addon">$</span>
+        <input 
+          id="proposal_amount_raised" 
+          class="form-control" 
+          type="number" 
+          class="validate" 
+          ng-model="option.amountRaised" 
+          ng-change="sumRaised($index)">
+        <label class="active" for="proposal_amount_raised">Amount Raised</label>
+      </div>
+      <div class="col s12" ng-hide="option.financingType == 'Cash'">
+        <div class="input-field input-group long-label col m4 s12">
+          <span class="input-group-addon">$</span>
+          <input 
+            id="proposal_down_payment" 
+            class="form-control" 
+            type="number"
+            class="validate" 
+            ng-model="option.down" 
+            ng-change="calculate($index)">
+          <label class="active" for="proposal_down_payment">Down Payment</label>
+        </div>
+        <div class="input-field input-group long-label col m4 s12">
+          <input 
+            id="proposal_terms" 
+            class="form-control" 
+            type="number" 
+            class="validate" 
+            ng-change="calculate($index)"
+            ng-model="option.terms">
+          <span class="input-group-addon">months</span>
+          <label class="active" for="proposal_terms">Terms</label>
+        </div>
+        <div class="input-field input-group long-label col m4 s12">
+          <input 
+            id="proposal_rate" 
+            class="form-control" 
+            type="number" 
+            class="validate"
+            ng-change="calculate($index)"
+            ng-model="option.rate">
+          <span class="input-group-addon">%</span>
+          <label class="active" for="proposal_rate">Interest Rate</label>
+        </div>
+      </div>
+      <div class="col l6 s6">
+        <button class="btn blue" ng-click="addOption()">Add Option</button>
+      </div>
+      <button class="btn blue" ng-click="setView('Title')">Next</button>
+    </div>
+    <div 
+      class="row"
+      ng-show="view=='Title'">
+      <h4>Name your Proposal</h4>
+      <div class="input-field long-label col s12">
+        <input id="proposal_title" type="text" class="validate" ng-model="proposal.title" value="{{proposal.title}}">
+        <label class="active" for="proposal_title">Title</label>
+      </div>
+      <button class="btn blue" ng-click="setView('Review')">Next</button>
+    </div>
+    <div 
+      class="row"
+      ng-show="view=='Review'">
+      <h4>Review your Proposal</h4>
+      <p><strong>Title: </strong>{{proposal.title}}</p>
+      <p><strong>Target: </strong>{{proposal.targetAmount | currency:"$":0}}</p>
+      <p><strong>Total Raised: </strong>{{proposal.totalRaised | currency:"$":0}}</p>
+      <p ng-show="proposal.targetAmount - proposal.totalRaised < 0"><strong>Remaining: </strong>{{proposal.targetAmount - proposal.totalRaised | currency:"$":0}}</p>
+      <div class="panel panel-default" ng-repeat="option in proposal.options" ng-class-even="'even'">
+        <div class="panel-body">
+          <strong>Method #{{$index+1}}</strong>
+          <p><strong>Financing Type:</strong> {{option.financingType}}</p>
+          <p><strong>Amount:</strong> {{option.amountRaised | currency:"$":0}}</p>
+          <div ng-hide="option.financingType == 'Cash'">
+            <p><strong>Terms:</strong> {{option.terms}} months</p>
+            <p><strong>Rate:</strong> {{option.rate | number:3}}%</p>
+            <hr />
+            <p ng-hide="option.financingType == 'Mortgage'"><strong>Total Payment</strong>: {{option.totalPayment | currency:"$":2}}</p>
+            <p><strong>Monthly Payment</strong>: {{option.monthlyPayment | currency:"$":2}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
