@@ -47,7 +47,9 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
+    'ngMap',
     'ui.bootstrap',
+    'ui.materialize',
     'angular-drupal' // Drupal service
   ])
   .config(function ($routeProvider) {
@@ -107,6 +109,11 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
+      .when('/addProposal', { //TO DO - Very temporary
+        templateUrl: 'views/addProposal.html',
+        controller: 'ProposalCtrl',
+        controllerAs: 'proposal'
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -122,7 +129,7 @@ angular
         row: '=' // Pull row
       },
       link: function (scope) {
-        scope.myTemplate = '/app/templates/' + scope.row.type + '.html';
+        scope.myTemplate = 'templates/' + scope.row.type + '.html';
       },
       template: '<div ng-include="myTemplate"></div>'
     };
