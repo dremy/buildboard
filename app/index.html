@@ -26,10 +26,19 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
+    <!--custom libraries-->
+    <!--Import Google Places-->
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyD3fFcIkaR45zB5_H296gkHJ__RwX_zrBo"></script>
+    <!--Import Google Icon Font -->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--end custom libraries -->
+
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/Materialize/bin/materialize.css" />
+    <link rel="stylesheet" href="bower_components/angular-google-places-autocomplete/src/autocomplete.css" />
+    <link rel="stylesheet" href="bower_components/angular-google-places-autocomplete/dist/autocomplete.min.css" />
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -52,13 +61,13 @@
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/angular-drupal/src/angular-drupal.js"></script>
     <script src="bower_components/Materialize/bin/materialize.js"></script>
-    <script src="bower_components/angularjs-google-maps/dist/angularjs-google-maps.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.1.9/angular-materialize.min.js"></script>
+    <!--<script src="bower_components/angularjs-google-maps/dist/angularjs-google-maps.js"></script>
+    <script src="bower_components/angular-google-places-autocomplete/src/autocomplete.js"></script>
+    <script src="bower_components/angular-google-places-autocomplete/dist/autocomplete.min.js"></script>-->
+    <script src="bower_components/ngmap/build/scripts/ng-map.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
-    <!--Import Google Places-->
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
-    <!--Import Google Icon Font -->
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
   <body ng-controller="AdminCtrl">
     <!--[if lte IE 8]>
@@ -115,7 +124,7 @@
               <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" href="/app/#/"><img class="logo" src="images/logo-white-300x43.png" alt="BuildBoard Logo" title="Build Board Logo"></a>
+            <a class="navbar-brand" href="#/"><img class="logo" src="images/logo-white-300x43.png" alt="BuildBoard Logo" title="Build Board Logo"></a>
           </div>
 
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
@@ -212,12 +221,14 @@
     <!-- App - Controllers -->
     <script src="scripts/controllers/portfolio.js"></script>
     <script src="scripts/controllers/activity.js"></script>
-    <script src="scripts/controllers/property.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/features.js"></script>
     <script src="scripts/controllers/benefits.js"></script>
     <script src="scripts/controllers/howWorks.js"></script>
     <script src="scripts/controllers/about.js"></script>
+    <!-- Nodes - Controllers -->
+    <script src="scripts/controllers/property.js"></script>
+    <script src="scripts/controllers/proposal.js"></script>
     <!-- User - Controllers -->
     <script src="scripts/controllers/register.js"></script>
     <script src="scripts/controllers/login.js"></script>
