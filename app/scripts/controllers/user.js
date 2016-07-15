@@ -7,7 +7,7 @@
  * # UserCtrl
  * Controller of the buildboardApp
  */
-function UserCtrl($rootScope, $scope, $routeParams, drupal, NgMap) {
+function UserCtrl($rootScope, $scope, $routeParams, drupal, NgMap, googleMapsUrl) {
 
   // Define Functions
   //------------------------------------
@@ -42,7 +42,7 @@ function UserCtrl($rootScope, $scope, $routeParams, drupal, NgMap) {
   }
 
   function saveUser() {
-    // Store form values to account variable.
+    // Store form values to account object.
     var account = $scope.user;
 
     // Build out name field values.
@@ -78,9 +78,11 @@ function UserCtrl($rootScope, $scope, $routeParams, drupal, NgMap) {
       data: null
     }];
 
+    var newPlace = $scope.place;
+
     if (newPlace.address_components) {
       for (var i = 0; i < newPlace.address_components.length; i++) {
-        switch (newPlace.address_components[i].type) {
+        switch (newPlace.address_components[i].types[0]) {
           case 'locality':
             account.field_user_location.und[0].locality = newPlace.address_components[i].long_name;
           break;
@@ -98,16 +100,18 @@ function UserCtrl($rootScope, $scope, $routeParams, drupal, NgMap) {
       account.field_user_location.und[0].administrative_area = '';
     }
 
-    /* SAVE FOR NOW.
-      country: $scope.place.address_components[3].long_name,
-      administrative_area: $scope.place.address_components[2].short_name,
-      locality: $scope.place.address_components[0].long_name,*/
+    account.field_location.und = [{
+      lat: newPlace.geometry.location.lat,
+      lon: newPlace.geometry.location.lng
+    }];
 
     //Remove fullName property, before PUT.
     delete account.fullName;
+    console.log('Account');
     console.log(account);
     setView('userProfile');
-    /*User save.
+    
+    //User save.
     drupal.user_save(account).then(function(data) {
 
       //Alerting
@@ -133,7 +137,7 @@ function UserCtrl($rootScope, $scope, $routeParams, drupal, NgMap) {
       console.log(reason);
       //Set to Profile view.
       setView('userProfile');
-    });*/
+    });
 
   }
 
@@ -143,8 +147,8 @@ function UserCtrl($rootScope, $scope, $routeParams, drupal, NgMap) {
 
   function placeChanged() {
     $scope.place = this.getPlace();
+    $scope.map.setCenter($scope.place.geometry.location);
     console.log($scope.place);
-    newPlace = $scope.place;
   }
 
   //Perform on load.
@@ -162,6 +166,12 @@ function UserCtrl($rootScope, $scope, $routeParams, drupal, NgMap) {
     }
     account.fullName = account.field_full_name.und ? account.field_full_name.und[0].given + ' ' + account.field_full_name.und[0].family : account.name;
     $scope.user = account; //Set to view.
+    /*if (!user.field_locations.und) {
+      $scope.map.setCenter(centerOfAmerica);
+    } else {
+      // TO DO search required parameter value for setCenter()
+      // $scope.map.setCenter(user.field_locations.und[0]);
+    }*/
     $rootScope.globals.isLoading = false; //No loading spinner.
   }, function(reason) {
     var message = "Can't pull user account details. Refresh the page to try again.";
@@ -176,14 +186,20 @@ function UserCtrl($rootScope, $scope, $routeParams, drupal, NgMap) {
 
   //Initialize variables.
   //------------------------------------
-  var newPlace;
+  var centerOfAmerica = {
+    lat: 39.500,
+    lng: -98.350
+  };
 
   NgMap.getMap().then(function(map) {
     $scope.map = map;
+  }).then(function() {
+    $scope.map.setCenter(centerOfAmerica);
   });
 
   //Register functions to $scope.
   //------------------------------------
+  $scope.googleMapsUrl = googleMapsUrl;
   $scope.startEditUser = startEditUser;
   $scope.saveUser = saveUser;
   $scope.cancelUser = cancelUser;
@@ -191,4 +207,5 @@ function UserCtrl($rootScope, $scope, $routeParams, drupal, NgMap) {
 }
 
 angular.module('buildboardApp')
-  .controller('UserCtrl', UserCtrl);
+  .controller('UserCtrl', UserCtrl)
+  .constant('googleMapsUrl','https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyD3fFcIkaR45zB5_H296gkHJ__RwX_zrBo');
