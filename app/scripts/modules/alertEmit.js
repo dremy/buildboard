@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * The alerting module.
  */
@@ -34,8 +36,9 @@ var message = {
 };
 
 
-function alertEmit($rootScope, message) {
+function alertEmit($rootScope, $scope, message) {
   var type;
+  var dt;
 
   function alerting(message, type, dt) {// TO DO - Global solve.
     $scope.$emit('alert', { // Emit message.
@@ -50,17 +53,17 @@ function alertEmit($rootScope, message) {
   this.success = function () {
     type = 'success';
     return alerting(message, type, dt);
-  }
+  };
 
   this.warning = function () {
     type = 'warning';
     return alerting(message, type, dt);
-  }
+  };
 
   this.danger = function () {
     type = 'danger';
     return alerting(message, type, dt);
-  }
+  };
 }
 
 angular.module('buildboardApp').

@@ -9,41 +9,59 @@
  */
 function registerCtrl($rootScope, $scope, $location, drupal) {
 
-  function alerting(message, type) {// TO DO - Global solve.
+  // Define Functions
+  //------------------------------------
+  // Alert - TO DO pass in as service
+  function alerting(message, type) {
     $scope.$emit('alert', { // Emit message.
       message: message,
       type: type,
-    });        
+    });
     $rootScope.globals.isLoading = false; 
   }
 
-  function submit(account) { //Register login function.   
-    account.name = account.mail;
-    $rootScope.globals.isLoading = true;
-    drupal.user_register(account).then(function(data) {
-      console.log(data);
-      if (data.uid) { // TO DO - Make sure "Not working" works.
-        drupal.user_login(account.mail, account.pass).then(function(data) { //Authentication was successful.
-          if (data.user.uid) {
-            $rootScope.globals.currentUser = data.user;
-            var message = 'Hello ' + data.user.name;
-            var type = 'success';
-            alerting(message, type);
-            $location.path('/app'); // Redirect to home page once logged in.
-          }
-        }), function(reason) { // Authentication didn't work.
-          var message = reason.statusText;
-          var type = 'danger';
-          alerting(message, type);
-        };
-      }
-    }, function(reason) { //Registration didn't work.
-      var message = reason.statusText;
-      var type = 'danger';
-      alerting(message, type);
-    });
+  // Registration Submit
+  function submit(account) {   
+    account.name = account.mail; // Set username to e-mail address
+    $rootScope.globals.isLoading = true; // Start the loading flag
+    drupal.user_register(account).then(
+      // Success - Post account
+      function(data) {
+        console.log(data);
+        // If successful, with a returned uid.
+        if (data.uid) {
+          //Then login.
+          drupal.user_login(account.mail, account.pass).then( 
+            function(data) { //Authentication was successful.
+              if (data.user.uid) {
+                $rootScope.globals.currentUser = data.user;
+                var message = 'Hello ' + data.user.name;
+                var type = 'success';
+                alerting(message, type);
+                $location.path('/app'); // Redirect to home page once logged in.
+              }
+            }, function(reason) { // ERROR - Authentication not successful.
+              var message = reason.statusText;
+              var type = 'danger';
+              alerting(message, type);
+            }
+          );
+        }
+      }, function(reason) { // ERROR - Registration not successful.
+        var message = reason.statusText;
+        var type = 'danger';
+        alerting(message, type);
+      });
   }
 
+  //Initialize variables.
+  //------------------------------------
+
+  //Perform on load.
+  //------------------------------------
+
+  //Register functions to $scope.
+  //------------------------------------
   $scope.submit = submit;
 }
 

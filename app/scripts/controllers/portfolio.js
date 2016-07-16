@@ -16,6 +16,16 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
     'Karma'
   ];
 
+  var types = ["Home", "Multi-Family", "Lot"]; // Setup Types Options.
+  var selected = -1;
+  var query = {
+    parameters: {
+      'type': 'property'
+    }
+  };
+
+  // Define Functions
+  //------------------------------------
   function alerting(message, type) {// TO DO - Global solve.
     $scope.$emit('alert', { // Emit message.
       message: message,
@@ -24,38 +34,21 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
     $rootScope.globals.isLoading = false; 
   }
 
-  var query = {
-    parameters: {
-      'type': 'property'
-    }
-  };
-
   function refreshPortfolio() {
     $rootScope.globals.isLoading = true;
     $scope.message = '';
-    /* NEW SERVICE */
-    drupal.entity_node_index(query) // TO DO: .success(fn).error(fn)
-      .then(function (nodes) { // Success!
+    drupal.entity_node_index(query).then(
+      function(nodes) { // SUCCESS - Nodes loaded.
         $scope.properties = nodes; // Display
-        var properties = nodes; // TO DO: necessary?
         $scope.propertiesCosts = propertiesCosts(nodes); // Update Costs Value 
         $rootScope.globals.isLoading = false; // No more loading spinner
-      }, function (reason) { // Error...
+      }, function(reason) { // ERROR - Nodes NOT loaded.
         console.log(reason);
         $scope.message = "Why you no like me... " + reason.statusText;
         $rootScope.globals.isLoading = false; // No more loading spinner
-      });
+      }
+    );
   }
-
-  // Set the model
-  $scope.properties = [];
-  $scope.propertiesUnits = 0;
-  $scope.propertiesCosts = 0;
-  $scope.message = '';
-
-  // Execute refreshPortfolio
-  $scope.refreshPortfolio = refreshPortfolio();
-  $scope.refreshPortfolio = refreshPortfolio;
 
   // REPORT - UNIT COUNT: Gather total unit count
   function propertiesUnits(properties) {
@@ -80,21 +73,9 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
     $scope.view = view;
   }
 
-
-  var selected = -1;
-  setView('propertiesList');   // Define propertiesList as the default
-  var types = ["Home", "Multi-Family", "Lot"]; // Setup Types Options.
-  $scope.types = types; // Assign to dropdown.
-
   // Setup the Form
   function initializeForm() {
     $('textarea#teaser').characterCounter();
-    $('.datepicker').pickadate({
-      selectMonths: true, // Creates a dropdown to control month
-      selectYears: 15, // Creates a dropdown of 15 years to control year
-      format: 'mmmm d, yyyy', // April 15, 2016
-    });
-    $('select').material_select();
   }
 
   //Start Adding Property.
@@ -241,11 +222,23 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
       alerting(message, type);
     });
   
-    setView('propertiesList')
+    setView('propertiesList');
     setTimeout(refreshPortfolio, 2000);
   }
 
-  //Register functions to $scope; Exposed on view event "click"
+  //Perform on load.
+  //------------------------------------
+  $scope.properties = [];
+  $scope.propertiesUnits = 0;
+  $scope.propertiesCosts = 0;
+  $scope.message = '';
+  $scope.types = types; // Assign to dropdown.
+  setView('propertiesList');   // Define propertiesList as the default
+  $scope.refreshPortfolio = refreshPortfolio();   // Execute refreshPortfolio
+
+  //Register functions to $scope.
+  //------------------------------------
+  $scope.refreshPortfolio = refreshPortfolio;
   $scope.startAddProperty = startAddProperty;
   $scope.cancelProperty = cancelProperty;
   $scope.addProperty = addProperty;
@@ -257,45 +250,3 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
 
 angular.module('buildboardApp')
   .controller('PortfolioCtrl', PortfolioCtrl);
-
-/*OLD PROPERTY MODEL
-var property = {
-  "title": title,
-  "type": "property",
-  "nid": this.property.nid,
-  "field_address": {
-    "und": [
-      {
-        "country":"US",
-        "administrative_area": this.property.state,
-        "sub_administrative_area": null,
-        "locality": this.property.city,
-        "dependent_locality":"",
-        "postal_code": this.property.zip,
-        "thoroughfare": this.property.address,
-        "premise": "",
-        "sub_premise": null,
-        "organisation_name": null,
-        "name_line": null,
-        "first_name": null,
-        "last_name": null,
-        "data":null
-      }
-    ]
-  },
-  /*"field_property_type": {
-    "und": [
-      {
-        "value":this.property.propertyType
-      }
-    ]
-  },
-  "field_purchase_price": {
-    "und": [
-      {
-          "value": this.property.purchasePrice,
-          "target_id": "240"
-      },
-    ]
-  }     
-};*/

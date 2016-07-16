@@ -41,7 +41,7 @@ function propertiesApi($http, propertyApiUrl) {
     if (param === null || !angular.isDefined(param)) {
       param = '';
     }
-    return bbPropertyApiUrl + param;
+    return propertyApiUrl + param;
   }
 
   // Return object with getProperties function

@@ -32,7 +32,7 @@ function ProposalCtrl($rootScope, $scope, $routeParams, drupal) {
       break;
       case 'Hard Money':
         var totalPayment = (opAmount * powerOfOpRateAndTerms) - opAmount;
-        var monthlyPayment = totalPayment/opTerms;
+        monthlyPayment = totalPayment/opTerms;
       break;
     }
 
@@ -46,7 +46,7 @@ function ProposalCtrl($rootScope, $scope, $routeParams, drupal) {
       if ($scope.proposal.options[i].amountRaised) {
         $scope.proposal.totalRaised += $scope.proposal.options[i].amountRaised;
       }
-    };
+    }
     calculate(index);
   }
 
@@ -76,7 +76,7 @@ function ProposalCtrl($rootScope, $scope, $routeParams, drupal) {
   };
 
   drupal.entity_node_index(query) // TO DO: .success(fn).error(fn)
-    .then(function (nodes) { // Success!
+    .then(function(nodes) { // Success!
       // $scope.proposals = nodes; // Display
       var proposals = nodes; // TO DO: necessary?
       var nextProposal = 1;
@@ -84,12 +84,12 @@ function ProposalCtrl($rootScope, $scope, $routeParams, drupal) {
       if (proposals.length) {
         for (var i = 0; i < proposals.length; i++) {
           nextProposal++;
-        };
+        }
         $scope.proposal.title = 'Proposal #' + nextProposal;
       }
       console.log('doing something');
       $rootScope.globals.isLoading = false; // No more loading spinner
-    }, function (reason) { // Error...
+    }, function(reason) { // Error...
       console.log(reason);
       $scope.message = "Why you no like me... " + reason.statusText;
       $rootScope.globals.isLoading = false; // No more loading spinner

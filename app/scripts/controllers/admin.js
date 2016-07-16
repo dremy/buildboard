@@ -7,7 +7,7 @@
  * # AdminCtrl
  * Controller of the buildboardApp
  */
-function AdminCtrl($scope, $rootScope, $location, currentSpot, drupal, googleMapApiKey) {
+function AdminCtrl($scope, $rootScope, $location, currentSpot, drupal) {
   this.awesomeThings = [
     'HTML5 Boilerplate',
     'AngularJS',
@@ -62,10 +62,10 @@ function AdminCtrl($scope, $rootScope, $location, currentSpot, drupal, googleMap
         var dt = 2000;
         alertPush(message, type, dt);*/
       }, function(reason) {
-        var message = 'Having an issue pulling user account details. Try again soon.';
+        var message = "Something didn't work. " + reason.statusText;
         var type = 'warning';
         var dt = 2000;
-        alertPush(message,type);
+        alertPush(message,type, dt);
       });
       // data.user.uid
       // data.sessid
@@ -122,4 +122,4 @@ function AdminCtrl($scope, $rootScope, $location, currentSpot, drupal, googleMap
 
 angular.module('buildboardApp')
   .controller('AdminCtrl', AdminCtrl)
-  .constant('googleMapApiKey','AIzaSyD3fFcIkaR45zB5_H296gkHJ__RwX_zrBo');
+  .constant('googleMapsUrl','https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyD3fFcIkaR45zB5_H296gkHJ__RwX_zrBo');

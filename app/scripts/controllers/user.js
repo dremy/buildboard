@@ -9,6 +9,13 @@
  */
 function UserCtrl($rootScope, $scope, $routeParams, drupal, NgMap, googleMapsUrl) {
 
+  //Initialize variables.
+  //------------------------------------
+  var centerOfAmerica = {
+    lat: 39.500,
+    lng: -98.350
+  };
+
   // Define Functions
   //------------------------------------
   // Alert
@@ -21,26 +28,17 @@ function UserCtrl($rootScope, $scope, $routeParams, drupal, NgMap, googleMapsUrl
     $rootScope.globals.isLoading = false; 
   }
 
-  // Set which view
+  // TO DO - Use UI router instead
   function setView(view) {
     $scope.view = view;
   }
 
-  // Setup the Form
-  function initializeForm() { //TO DO - Make global and serve.
-    $('textarea#teaser').characterCounter();
-    $('.datepicker').pickadate({
-      selectMonths: true, // Creates a dropdown to control month
-      selectYears: 15, // Creates a dropdown of 15 years to control year
-      format: 'mmmm d, yyyy', // April 15, 2016
-    });
-  }
-
+  // TO DO - Use UI router instead
   function startEditUser() {
     setView('editUser'); //Show edit form.
-    initializeForm(); //Initialize the form.
   }
 
+  // TO DO - Use UI router instead
   function saveUser() {
     // Store form values to account object.
     var account = $scope.user;
@@ -111,7 +109,8 @@ function UserCtrl($rootScope, $scope, $routeParams, drupal, NgMap, googleMapsUrl
     console.log(account);
     setView('userProfile');
     
-    //User save.
+    //User save
+    /*
     drupal.user_save(account).then(function(data) {
 
       //Alerting
@@ -137,10 +136,11 @@ function UserCtrl($rootScope, $scope, $routeParams, drupal, NgMap, googleMapsUrl
       console.log(reason);
       //Set to Profile view.
       setView('userProfile');
-    });
-
+    });*/
   }
 
+  // TO DO - Use UI router instead
+  //Cancel User
   function cancelUser() {
     setView('userProfile');
   }
@@ -153,10 +153,11 @@ function UserCtrl($rootScope, $scope, $routeParams, drupal, NgMap, googleMapsUrl
 
   //Perform on load.
   //------------------------------------
+  //Start loading flag.
   $rootScope.globals.isLoading = true;
-
-
-  var uid = $routeParams.uid; //Pull uid from path.
+  //Pull uid from path.
+  var uid = $routeParams.uid;
+  //Load users details.
   drupal.user_load(uid).then(function(account) { //Load user profile.
     // If there is not an account picture, then use default.
     if (!account.picture) {
@@ -184,13 +185,6 @@ function UserCtrl($rootScope, $scope, $routeParams, drupal, NgMap, googleMapsUrl
   //Show user profile.
   setView('userProfile');
 
-  //Initialize variables.
-  //------------------------------------
-  var centerOfAmerica = {
-    lat: 39.500,
-    lng: -98.350
-  };
-
   NgMap.getMap().then(function(map) {
     $scope.map = map;
   }).then(function() {
@@ -207,5 +201,4 @@ function UserCtrl($rootScope, $scope, $routeParams, drupal, NgMap, googleMapsUrl
 }
 
 angular.module('buildboardApp')
-  .controller('UserCtrl', UserCtrl)
-  .constant('googleMapsUrl','https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyD3fFcIkaR45zB5_H296gkHJ__RwX_zrBo');
+  .controller('UserCtrl', UserCtrl);

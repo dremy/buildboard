@@ -27,7 +27,7 @@ angular
         endpoint: 'v1/api'
       });
     })
-    .config(['$httpProvider',
+    .config(['$httpProvider', //TO DO - Is this actually needed?
       function($httpProvider) {
         $httpProvider.interceptors.push(['$q',
           function($q) {
