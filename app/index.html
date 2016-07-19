@@ -26,9 +26,10 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
-    <!--Custom Libraries-->
+    <!--External Libraries-->
     <!--Import Google Icon Font -->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=placeses,places&key=AIzaSyD3fFcIkaR45zB5_H296gkHJ__RwX_zrBo"></script>
     <!--end Custom libraries -->
 
     <!-- build:css(.) styles/vendor.css -->
@@ -47,22 +48,23 @@
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="bower_components/angular-messages/angular-messages.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-touch/angular-touch.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="bower_components/angular-drupal/src/angular-drupal.js"></script>
     <script src="bower_components/Materialize/bin/materialize.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.1.9/angular-materialize.min.js"></script>
+    <!--Angular Custom-->
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <!--Theme-->
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-materialize/angular-materialize.min.js"></script>
+    <!--Services-->
+    <script src="bower_components/angular-drupal/src/angular-drupal.js"></script>
     <script src="bower_components/ngmap/build/scripts/ng-map.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
+
+    <!-- App -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/routes.js"></script>
   </head>
-  <body ng-controller="AdminCtrl">
+  <body ng-controller="AdminCtrl as admin">
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -85,7 +87,10 @@
        }(document, 'script', 'facebook-jssdk'));
     </script>
     <!-- Preloaders -->
-    <div class="preloader" ng-show="isLoading()">
+    <div 
+      class="preloader"
+      ng-controller="preloaderCtrl as preloader"
+      ng-show="preloader.isLoading()">
       <div class="preloader-anchor">
         <div class="preloader-modal">
           <div class="preloader-wrapper big active">
@@ -105,7 +110,7 @@
       </div>
     </div>
     <!-- Content -->
-    <header class="header">
+    <header class="header" ng-controller="loggedInCtrl as check">
       <div class="navbar navbar-default" role="navigation">
         <div class="container container-wide">
           <div class="navbar-header">
@@ -117,38 +122,46 @@
               <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" href="#/"><img class="logo" src="images/logo-white-300x43.png" alt="BuildBoard Logo" title="Build Board Logo"></a>
+            <a class="navbar-brand" ui-sref="home"><img class="logo" src="images/logo-white-300x43.png" alt="BuildBoard Logo" title="Build Board Logo"></a>
           </div>
 
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
             <!-- Anonymous Menu-->  
-            <ul class="nav navbar-nav" ng-hide="isLoggedIn()">
-              <li ng-class="{active: isActive('Features')}">
-                <a href="#/features">Features</a>
+            <ul class="nav navbar-nav" ng-hide="check.isLoggedIn()">
+              <li ng-class="{active: admin.isActive('Features')}">
+                <a ui-sref="features" ui-sref-active="active">Features</a>
               </li>
-              <li ng-class="{active: isActive('Benefits')}">
-                <a ng-href="#/benefits">Benefits</a>
+              <li ng-class="{active: admin.isActive('Benefits')}">
+                <a ui-sref="benefits" ui-sref-active="active">Benefits</a>
               </li>
-              <li ng-class="{active: isActive('How It Works')}">
-                <a ng-href="#/how-it-works">How It Works</a>
+              <li ng-class="{active: admin.isActive('How It Works')}">
+                <a ui-sref="howItWorks" ui-sref-active="active">How It Works</a>
               </li>
               <li class="nav-login">
-                <a ng-href="#/user/login">Sign In</a>
+                <a ui-sref="userLogin" ui-sref-active="active">Sign In</a>
               </li>
             </ul>
-            <ul class="nav navbar-nav" ng-show="isLoggedIn()">
+            <ul class="nav navbar-nav" ng-show="check.isLoggedIn()">
               <!-- Authenticated Menu -->
               <li>
-                <a ng-href="#/portfolio">Portfolio</a>
+                <a ui-sref="portfolio" ui-sref-active="active">Portfolio</a>
               </li>
               <div class="btn-group nav-login" uib-dropdown keyboard-nav is-open="status.isopen">
-                <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled"><img ng-show="globals.currentUser.picture.url" src="{{globals.currentUser.picture.url}}" width="16"/> {{globals.currentUser.name.given}} <span class="caret"></span>
+                <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled"><img ng-show="check.currentUser.account.picture.url" ng-src="{{check.currentUser.account.picture.url}}" width="16"/> {{check.currentUser.account.name.given}} <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-                  <li role="menuitem"><a href="#/user/{{globals.currentUser.uid}}">My Profile</a></li>
-                  <li role="menuitem"><a href="#/user/{{globals.currentUser.uid}}/edit">Edit Account</a></li>
+                  <li role="menuitem">
+                    <a ui-sref="account({uid: check.currentUser.account.uid})"
+                      ui-sref-active="active">My Profile</a>
+                  </li>
+                  <li role="menuitem">
+                    <a ui-sref="accountEdit({uid: check.currentUser.account.uid})"
+                      ui-sref-active="active">Edit Account</a>
+                  </li>
                   <li class="divider"></li>
-                  <li role="menuitem"><a ng-click="logout()">Log Out</a></li>
+                  <li role="menuitem">
+                    <a ng-click="check.currentUser.logOut()">Log Out</a>
+                  </li>
                 </ul>
               </div>
               </li>
@@ -159,17 +172,21 @@
     </header>
 
     <section class="content" ng-cloak>
-      <div class="container container-wide" ng-class="{'alert-box': isActive('Home')}" ng-show="alerts != ''">
+      <div ng-controller="AlertingCtrl as alerting" class="container container-wide" ng-class="{'alert-box': admin.isActive('Home')}" ng-show="alerting.alerts != ''">
         <div class="row">
-          <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" dismiss-on-timeout="{{alert.dt}}" close="closeAlert($index)">{{alert.message}}</uib-alert>
+          <uib-alert 
+            ng-repeat="alert in alerting.alerts" 
+            type="{{alert.type}}" 
+            dismiss-on-timeout="{{alert.dt}}" 
+            close="alerting.closeAlert($index)">{{alert.message}}</uib-alert>
         </div>
       </div>
-      <div class="container container-wide" ng-show="!isActive('')">
+      <div class="container container-wide" ng-show="!admin.isActive('')">
         <div class="row">
           <h3>{{getTitle()}}</h3>
         </div>
       </div>
-      <div ng-view=""></div>
+      <div ui-view=""></div>
     </section>
 
     <footer class="footer grey lighten-4">
@@ -204,28 +221,34 @@
     </script>
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
-    <!-- App -->
-    <script src="scripts/app.js"></script>
     <!-- Modules & Services -->
     <script src="scripts/modules/drupalNg.js"></script>
-    <!--<script src="scripts/modules/services.js"></script>-->
+    <!-- NOT READY - <script src="scripts/modules/message.js"></script> -->
     <!-- App - Controllers - Configuration -->
+    <script src="scripts/components/currentSpot.js"></script>
+    <script src="scripts/components/alert.js"></script>
+    <script src="scripts/components/preloader.js"></script>
     <script src="scripts/controllers/admin.js"></script>
+    <script src="scripts/components/user/user.js"></script>
+    <script src="scripts/components/user/user.current.js"></script>
+    <script src="scripts/components/user/user.edit.js"></script>
     <!-- App - Controllers -->
-    <script src="scripts/controllers/portfolio.js"></script>
+    <script src="scripts/components/portfolio/portfolio.js"></script>
     <script src="scripts/controllers/activity.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/features.js"></script>
     <script src="scripts/controllers/benefits.js"></script>
     <script src="scripts/controllers/howWorks.js"></script>
     <script src="scripts/controllers/about.js"></script>
-    <!-- Nodes - Controllers -->
-    <script src="scripts/controllers/property.js"></script>
+    <!-- Property - Controllers -->
+    <script src="scripts/components/property/property.js"></script>
+    <script src="scripts/components/property/property.edit.js"></script>
+    <script src="scripts/components/property/property.add.js"></script>
+    <!-- Proposal - Controllers -->
     <script src="scripts/controllers/proposal.js"></script>
     <!-- User - Controllers -->
     <script src="scripts/controllers/register.js"></script>
     <script src="scripts/controllers/login.js"></script>
-    <script src="scripts/controllers/user.js"></script>
     <!-- endbuild -->
 </body>
 </html>
