@@ -40,5 +40,9 @@
   },
   "scripts": {
     "test": "karma start test/karma.conf.js"
+  },
+  "dependencies": {
+    "@angular/router": "^0.2.0",
+    "object-assign": "^4.1.0"
   }
 }
