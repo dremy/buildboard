@@ -44,6 +44,7 @@ module.exports = function(config) {
       'bower_components/angular-moment/angular-moment.js',
       'bower_components/materialize/bin/materialize.js',
       'bower_components/angular-materialize/src/angular-materialize.js',
+      'bower_components/angular-xml2json/angular-xml2json.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

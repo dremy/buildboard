@@ -28,7 +28,8 @@
 
     <!--External Libraries-->
     <!--Import Google Icon Font -->
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import Google Maps Places API -->
     <script src="https://maps.googleapis.com/maps/api/js?libraries=placeses,places&key=AIzaSyD3fFcIkaR45zB5_H296gkHJ__RwX_zrBo"></script>
     <!--end Custom libraries -->
 
@@ -69,6 +70,7 @@
     <script src="bower_components/angular-moment/angular-moment.js"></script>
     <script src="bower_components/materialize/bin/materialize.js"></script>
     <script src="bower_components/angular-materialize/src/angular-materialize.js"></script>
+    <script src="bower_components/angular-xml2json/angular-xml2json.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -80,7 +82,7 @@
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <!-- Facebook -->
+    <!-- Facebook 
     <script>
       window.fbAsyncInit = function() {
         FB.init({
@@ -97,7 +99,7 @@
          js.src = "//connect.facebook.net/en_US/sdk.js";
          fjs.parentNode.insertBefore(js, fjs);
        }(document, 'script', 'facebook-jssdk'));
-    </script>
+    </script>-->
     <!-- Preloaders -->
     <div 
       class="preloader"
@@ -155,6 +157,9 @@
             </ul>
             <ul class="nav navbar-nav" ng-show="check.isLoggedIn()">
               <!-- Authenticated Menu -->
+              <li>
+                <a ui-sref="add.item" ui-sref-active="active">Add</a>
+              </li>
               <li>
                 <a ui-sref="portfolio" ui-sref-active="active">Portfolio</a>
               </li>
@@ -221,7 +226,7 @@
     </footer>
 
 
-    <!-- Google Analytics--> 
+    <!-- Google Analytics 
      <script>
        !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
        (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
@@ -230,20 +235,25 @@
 
        ga('create', 'UA-74645472-1');
        ga('send', 'pageview');
-    </script>
+    </script>-->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <!-- Modules & Services -->
     <script src="scripts/modules/drupalNg.js"></script>
+    <script src="scripts/modules/zillow.js"></script>
     <!-- NOT READY - <script src="scripts/modules/message.js"></script> -->
     <!-- App - Controllers - Configuration -->
     <script src="scripts/components/currentSpot.js"></script>
     <script src="scripts/components/alert.js"></script>
     <script src="scripts/components/preloader.js"></script>
     <script src="scripts/controllers/admin.js"></script>
+    <!-- User - Component -->
     <script src="scripts/components/user/user.js"></script>
     <script src="scripts/components/user/user.current.js"></script>
     <script src="scripts/components/user/user.edit.js"></script>
+    <!-- Add - Component -->
+    <script src="scripts/components/add/add.item.js"></script>
+    <script src="scripts/components/add/add.property.js"></script>
     <!-- App - Controllers -->
     <script src="scripts/components/portfolio/portfolio.js"></script>
     <script src="scripts/controllers/activity.js"></script>
@@ -255,7 +265,6 @@
     <!-- Property - Controllers -->
     <script src="scripts/components/property/property.js"></script>
     <script src="scripts/components/property/property.edit.js"></script>
-    <script src="scripts/components/property/property.add.js"></script>
     <!-- Proposal - Controllers -->
     <script src="scripts/controllers/proposal.js"></script>
     <!-- User - Controllers -->
