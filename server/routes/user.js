@@ -1,5 +1,5 @@
 /*
- * The Property API controller
+ * The User API controller
  *
  * Exports 4 methods:
  *  - getAll
@@ -9,7 +9,7 @@
  */
 // Dependencies.
 var mongoose  = require('mongoose'),
-    Property  = require('../models/property');
+    User  = require('../models/user');
 
 module.exports = function() {
   return {
@@ -17,11 +17,11 @@ module.exports = function() {
      * Get route to retrieve all the properties.
      */
     getAll : function(req, res) {
-      var query = Property.find({});
-      query.exec(function(err, properties) {
+      var query = User.find({});
+      query.exec(function(err, users) {
         if(err) res.send(err);
         // If no errors, send back to client.
-        res.json(properties);
+        res.json(users);
       });
     },
     /*
@@ -29,22 +29,22 @@ module.exports = function() {
      */
     post: function(req, res) {
       // Creates a new property.
-      var newProperty = new Property(req.body);
+      var newUser = new User(req.body);
       // Save it into the DB...
-      newProperty.save(function(err, property) {
+      newUser.save(function(err, user) {
         if(err) res.send(err);
         // If no errors, send back to client.
-        res.json(property);
+        res.json(user);
       });
     },
     /*
      * Get a single property based on ID.
      */
     getOne: function(req, res) {
-      Property.findById(req.params.id, function(err, property) {
+      User.findById(req.params.id, function(err, user) {
         if(err) res.send(err);
         // If no errors, send back to client.
-        res.json(property);
+        res.json(user);
       });
     },
     /*
@@ -52,13 +52,13 @@ module.exports = function() {
      */
     updateById: function(req, res) {
       //Model.findByIdAndUpdate([conditions], [update], [options], [callback])
-      Property.findByIdAndUpdate(req.params.id, req.body, {new: true}, function(err, property) {
+      User.findByIdAndUpdate(req.params.id, req.body, {new: true}, function(err, user) {
         if(err) res.send(err);
-        res.json(property);
+        res.json(user);
       });
     },
     deleteById: function(req, res) {
-      Property.findByIdAndRemove(req.params.id, req.body, function(err) {
+      User.findByIdAndRemove(req.params.id, req.body, function(err) {
         if(err) res.send(err);
         res.json(req.body);
       });

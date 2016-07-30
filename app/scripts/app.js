@@ -18,7 +18,6 @@ angular
     'ui.bootstrap',
     'ui.materialize',
     // Services
-    //'angular-drupal',
     'angular-zillow',
     'angular-filepicker',
     'angularMoment',

@@ -12,6 +12,7 @@ var app       = express(),
 
 // Route
 var Property = require('./server/routes/property')();
+var User = require('./server/routes/user')();
 
 // Some options
 var options = {
@@ -47,15 +48,27 @@ app.use(bodyParser.json({text: 'application/json'}));
 //Static files
 app.use(express.static(__dirname + '/app'));
 
-//API route
+// API Routes
+//-------------------------
+// Users
+app.route('/api/user')
+  .get(User.getAll)
+  .post(User.post);
+
+app.route('/api/user/:id')
+  .get(User.getOne)
+  .delete(User.deleteById)
+  .put(User.updateById); 
+
+// Properties
 app.route('/api/property')
-  .post(Property.post)
-  .get(Property.getAll);
+  .get(Property.getAll)
+  .post(Property.post);
 
 app.route('/api/property/:id')
-  .get(Property.getOne);
-  // .delete(Property.deleteOne)
-  // .put(Property.updateOne);
+  .get(Property.getOne)
+  .delete(Property.deleteById)
+  .put(Property.updateById); 
 
 app.listen(port);
   console.log('listening on port ' + port);
