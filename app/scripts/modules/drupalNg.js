@@ -9,10 +9,10 @@
 var sitePath = '';
 switch (location.host) {
   case 'localhost':
-    sitePath = 'http://localhost/bb_pantheon/buildboard/';
+    sitePath = 'http://localhost/bb_pantheon/buildboard';
   break;
   case 'dev-buildboard.pantheonsite.io':
-    sitePath = 'http://dev-buildboard.pantheonsite.io/';
+    sitePath = 'http://dev-buildboard.pantheonsite.io';
   break;
 }
 

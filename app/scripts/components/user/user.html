@@ -12,24 +12,29 @@
       </div>
       <div class="col s12 m9 l9">
         <h3>{{user.account.fullName}}</h3>
-        <p ng-show="user.account.field_user_location.und[0].locality && user.account.field_user_location.und[0].administrative_area"><i class="material-icons">location_on</i> {{user.account.field_user_location.und[0].locality}}, {{user.account.field_user_location.und[0].administrative_area}}</p>
+        <p ng-show="user.location.city && user.location.state"><i class="material-icons">location_on</i>
+          {{user.location.city}}, {{user.location.state}}
+        </p>
+        <p ng-show="user.account.created">
+            <i title="Date Created" class="material-icons">av_timer</i>
+          {{ user.account.created | amFromUnix | amTimeAgo }}
+        </p>
+        <!-- {{user.time | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }} -->
       </div>
     </div>
   </div>
-  <!--<div class="container-full"
-    map-lazy-load="https://maps.google.com/maps/api/js"
-    map-lazy-load-params="{{user.googleMapsUrl}}">
+  <div class="container-full">
     <ng-map
       id="map"
       zoom="11"
-      center="{{user.centerOfAmerica}}"
+      center="{{user.location.city}}, {{user.location.state}}"
       geo-fallback-center="current-location">
       <marker
-        position="{{user.centerOfAmerica}}"
+        position="{{user.location.city}}, {{user.location.state}}"
         animation="Animation.BOUNCE"
         title="You are here."
         centered="true">
       </marker>    
     </ng-map>
-  </div>-->
+  </div>
 </div>

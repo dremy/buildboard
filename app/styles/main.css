@@ -659,3 +659,71 @@ input:placeholder-shown.valid {
   top: 100px;
   left: 15%;
 }
+
+/* line 577, main.scss */
+a.additional-items {
+  display: block;
+  border: 1px solid #c3c3c3;
+  margin: 5px 5px;
+  padding: 10px;
+  height: 100px;
+  border-radius: 5px;
+}
+/* line 584, main.scss */
+a.additional-items:hover {
+  background: #f3f3f3;
+}
+
+/* numbered nav items */
+/* line 590, main.scss */
+.status-nav {
+  /* we will style the span as the circled number */
+}
+/* line 591, main.scss */
+.status-nav a {
+  color: #1e89e5;
+  display: inline-block;
+  font-size: 12px;
+  margin-right: 10px;
+  text-align: center;
+  text-transform: uppercase;
+  /* active buttons blue border*/
+}
+/* line 598, main.scss */
+.status-nav a:hover {
+  text-decoration: none;
+}
+/* line 602, main.scss */
+.status-nav a.active span {
+  border: 1px solid #296ad4;
+  background: #FFF;
+  color: #296ad4;
+}
+/* line 609, main.scss */
+.status-nav span {
+  background: #1e89e5;
+  color: #FFF;
+  display: block;
+  height: 30px;
+  margin: 0 auto 10px;
+  padding-top: 5px;
+  width: 30px;
+  border-radius: 50%;
+}
+
+/* line 621, main.scss */
+.add-property .address .input-field,
+.add-property .confirm,
+.add-property .relationship {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+}
+/* line 629, main.scss */
+.add-property .confirm h5 {
+  color: #555;
+}
+/* line 632, main.scss */
+.add-property .confirm .img .col.s3 {
+  margin-bottom: 16px;
+}

@@ -9,13 +9,15 @@
  */
 
 // Pass in $scope, and propertiesApi and TO DO zApi service 
-function PortfolioCtrl($scope, $rootScope, drupal) {
+function PortfolioCtrl($scope, drupal, NgMap, preloader, messages, alert) {
   this.awesomeThings = [
     'HTML5 Boilerplate',
     'AngularJS',
     'Karma'
   ];
 
+  //Initialize variables.
+  //------------------------------------
   var types = ["Home", "Multi-Family", "Lot"]; // Setup Types Options.
   var selected = -1;
   var query = {
@@ -24,28 +26,24 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
     }
   };
 
+  NgMap.getMap({id: 'portfolio-map'}).then(function(map) {
+    console.log('NgMap.getMap in PortfolioCtrl', map);
+  });
   // Define Functions
   //------------------------------------
-  function alerting(message, type) {// TO DO - Global solve.
-    $scope.$emit('alert', { // Emit message.
-      message: message,
-      type: type,
-    });        
-    $rootScope.globals.isLoading = false; 
-  }
-
   function refreshPortfolio() {
-    $rootScope.globals.isLoading = true;
-    $scope.message = '';
+    preloader.setState(true);
     drupal.entity_node_index(query).then(
       function(nodes) { // SUCCESS - Nodes loaded.
         $scope.properties = nodes; // Display
         $scope.propertiesCosts = propertiesCosts(nodes); // Update Costs Value 
-        $rootScope.globals.isLoading = false; // No more loading spinner
+        preloader.setState(false);
       }, function(reason) { // ERROR - Nodes NOT loaded.
         console.log(reason);
-        $scope.message = "Why you no like me... " + reason.statusText;
-        $rootScope.globals.isLoading = false; // No more loading spinner
+        alert.message = "Why you no like me... " + reason.statusText;
+        alert.type = 'warning';
+        messages.add(alert.message, alert.type, alert.dt);
+        preloader.setState(false);
       }
     );
   }
@@ -104,7 +102,7 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
   }
 
   function addProperty() {
-    $rootScope.globals.isLoading = true; //TO DO - Set preloader
+    preloader.setState(true);
 
     //Some behind the scenes defining of the title.
     var title = this.property.address + " " + this.property.city + ", " + this.property.state + " " + this.property.zip;
@@ -153,15 +151,19 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
     };
 
     //Save node.
-    drupal.node_save(node).then(function(data) {
-        var message = 'Congratulations! Node ' + node.title + ' is created!';
-        var type = 'success';
-        alerting(message, type);
-    }, function(reason) {
-      var message = 'Adding failed due to ' + reason.statusText + '. Try again later.';
-      var type = 'success';
-      alerting(message, type);
-    });
+    drupal.node_save(node).then(
+      function(data) {
+        alert.message = 'Congratulations! Node ' + node.title + ' is created!';
+        alert.type = 'success';
+        messages.add(alert.message, alert.type, alert.dt);
+        preloader.setState(false);
+      }, function(reason) {
+        alert.message = 'Adding failed due to ' + reason.statusText + '. Try again later.';
+        alert.type = 'success';
+        messages.add(alert.message, alert.type, alert.dt);
+        preloader.setState(false);
+      }
+    );
 
     // Change views
     setView('propertiesList');
@@ -172,26 +174,30 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
   function startEditProperty(index) {
     // Get the right one
     selected = index;
-
-    $scope.property = $scope.properties[selected];
-    setView('editProperty');
+    console.log($scope.properties[selected].nid);
+//    $scope.property = $scope.properties[selected];
+//    $state.go('propertyEditForm');
     initializeForm();
   }
 
   function saveProperty() {
-    $rootScope.globals.isLoading = true;
+    preloader.setState(true);
     this.property.title = this.property.field_address.und[0].thoroughfare + " " + this.property.field_address.und[0].locality + ", " + this.property.field_address.und[0].administrative_area + " " + this.property.field_address.und[0].postal_code;
 
     //Save node. 
-    drupal.node_save(this.property).then(function(data) {
-      var message = 'Congratulations! Node ' + this.property.title + ' is updated!';
-      var type = 'success';
-      alerting(message, type);
-    }, function(reason) {
-      var message = 'Saving failed due to ' + reason.statusText + '. Try again later.';
-      var type = 'warning';
-      alerting(message, type);
-    });
+    drupal.node_save(this.property).then(
+      function(data) {
+        alert.message = 'Congratulations! Node ' + this.property.title + ' is updated!';
+        alert.type = 'success';
+        messages.add(alert.message, alert.type, alert.dt);
+        preloader.setState(false);
+      }, function(reason) {
+        alert.message = 'Saving failed due to ' + reason.statusText + '. Try again later.';
+        alert.type = 'warning';
+        messages.add(alert.message, alert.type, alert.dt);
+        preloader.setState(false);
+      }
+    );
 
     setView('propertiesList');
     setTimeout(refreshPortfolio, 2000);
@@ -205,22 +211,26 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
   }
 
   function removeProperty() {
-    $rootScope.globals.isLoading = true;
+    preloader.setState(true);
     var id = $scope.properties[selected].nid;
     var title = $scope.properties[selected].title;
     
     //Delete Node.
-    drupal.node_delete(id).then(function(data) {
-      if (data[0]) {
-        var message = 'Congratulations! ' + title + ' has been deleted!';
-        var type = 'success';
-        alerting(message, type);
+    drupal.node_delete(id).then(
+      function(data) {
+        if (data[0]) {
+          alert.message = 'Congratulations! ' + title + ' has been deleted!';
+          alert.type = 'success';
+          messages.add(alert.message, alert.type, alert.dt);
+          preloader.setState(false);
+        }
+      }, function(reason) {
+        alert.message = 'Deleting failed due to ' + reason.statusText + '. Try again later.';
+        alert.type = 'warning';
+        alert.messages.add(alert.message, alert.type, alert.dt);
+        preloader.setState(false);
       }
-    }, function(reason) {
-      var message = 'Deleting failed due to ' + reason.statusText + '. Try again later.';
-      var type = 'warning';
-      alerting(message, type);
-    });
+    );
   
     setView('propertiesList');
     setTimeout(refreshPortfolio, 2000);
@@ -231,7 +241,6 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
   $scope.properties = [];
   $scope.propertiesUnits = 0;
   $scope.propertiesCosts = 0;
-  $scope.message = '';
   $scope.types = types; // Assign to dropdown.
   setView('propertiesList');   // Define propertiesList as the default
   $scope.refreshPortfolio = refreshPortfolio();   // Execute refreshPortfolio
@@ -241,7 +250,6 @@ function PortfolioCtrl($scope, $rootScope, drupal) {
   $scope.refreshPortfolio = refreshPortfolio;
   $scope.startAddProperty = startAddProperty;
   $scope.cancelProperty = cancelProperty;
-  $scope.addProperty = addProperty;
   $scope.startEditProperty = startEditProperty;
   $scope.saveProperty = saveProperty;
   $scope.startRemoveProperty = startRemoveProperty;

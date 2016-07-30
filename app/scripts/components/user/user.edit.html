@@ -1,0 +1,93 @@
+<div class="container container-first container-wide"
+  bb-active-menu="Edit My Account"
+  bb-active-title="Edit My Account">
+  <form class="">
+    <div class="row">
+      <div class="input-field long-label col s6">
+        <input
+          id="first_name"
+          type="text"
+          class="validate"
+          ng-model="user.account.field_full_name.und[0].given">
+        <label
+          for="first_name"
+          data-error="Don't try to make this up."
+          data-success="Oh hey!">First Name
+        </label>
+      </div>
+      <div class="input-field long-label col s6">
+        <input 
+          id="last_name" 
+          type="text" 
+          class="validate" 
+          ng-model="user.account.field_full_name.und[0].family">
+        <label 
+          for="last_name"  
+          data-error="C'mon buddy!" 
+          data-success="New last name, huh?.">Last Name
+        </label>
+      </div>
+    </div>
+    <div class="row">  
+      <div class="input-field col s12 medium-label">
+          <input
+            placeholder="info@email.com"
+            id="email"
+            type="email"
+            class="validate"
+            ng-model="user.account.mail">
+          <label 
+            for="email" 
+            data-error="Wrong!" 
+            data-success="There you go!">Email
+          </label>
+      </div>
+    </div>
+    <div class="row">  
+      <div class="input-field col s12 medium-label">
+          <input
+            places-auto-complete 
+            id="location" 
+            class="validate" 
+            size=80
+            ng-model="user.inputLocation"
+            types="['(cities)']"
+            component-restrictions="{country:'us'}"
+            on-place-changed="user.placeChanged()" />
+          <label
+            class="active"
+            for="location" 
+            data-error="Wrong"
+            data-success="There you go!">Location
+          </label>
+          <div ng-show="user.place">
+            Address = {{user.place.formatted_address}} <br/>
+            Location: {{user.place.geometry.location}}<br/>
+          </div>
+          <p>Location : {{user.inputLocation}}</p>
+          <ng-map
+            center="{{user.mapLocation}}">
+            <marker
+              position="{{user.mapLocation}}"
+              animation="Animation.BOUNCE"
+              title="You are here.">
+            </marker>
+          </ng-map>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s6">
+        <button 
+        class="btn btn-large wave-effect blue"
+        ng-click="user.saveUser(user.account)"
+        ng-disabled="!user.place.geometry.location">Save
+        </button>
+      </div>
+      <div class="col s6">
+        <button 
+          class="btn btn-large wave-effect red" 
+          ui-sref="account({uid:user.account.uid})">Cancel
+        </button>
+    </div>
+  </form>
+</div>

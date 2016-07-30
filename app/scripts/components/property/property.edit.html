@@ -1,5 +1,8 @@
 <!--StartEditTemplate-->
-<div class="container edit-property add-modal">
+<div 
+  class="container edit-property add-modal"
+  bb-active-menu=""
+  bb-active-title="">
   <div class="row">
     <h3>Edit Property {{property.title}}</h3>
   </div>
@@ -78,9 +81,11 @@
         </button>
       </div>
       <div class="col s6">
-        <button class="btn btn-large wave-effect red" ng-click="cancelProperty()">
+        <a 
+          class="btn btn-large wave-effect red" 
+          ui-sref="property({nid:property.nid})">
           Cancel
-        </button>
+        </a>
     </div>
   </form>
 </div>

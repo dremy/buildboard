@@ -36,7 +36,6 @@
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="bower_components/Materialize/bin/materialize.css" />
     <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css" />
     <link rel="stylesheet" href="bower_components/materialize/bin/materialize.css" />
     <!-- endbower -->
@@ -59,8 +58,7 @@
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="bower_components/angular-drupal/src/angular-drupal.js"></script>
-    <script src="bower_components/Materialize/bin/materialize.js"></script>
+    <!--<script src="bower_components/angular-drupal/src/angular-drupal.js"></script>-->
     <script src="bower_components/angularjs-google-maps/dist/angularjs-google-maps.js"></script>
     <script src="bower_components/ngmap/build/scripts/ng-map.js"></script>
     <script src="bower_components/moment/moment.js"></script>
@@ -70,7 +68,9 @@
     <script src="bower_components/angular-moment/angular-moment.js"></script>
     <script src="bower_components/materialize/bin/materialize.js"></script>
     <script src="bower_components/angular-materialize/src/angular-materialize.js"></script>
-    <script src="bower_components/angular-xml2json/angular-xml2json.js"></script>
+    <script src="bower_components/jquery.xml2json/src/jquery.xml2json.js"></script>
+    <script type="text/javascript" src="bower_components/filepicker-js/filepicker.js"></script>
+    <script type="text/javascript" src="bower_components/angular-filepicker/dist/angular_filepicker.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -141,7 +141,7 @@
 
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
             <!-- Anonymous Menu-->  
-            <ul class="nav navbar-nav" ng-hide="check.isLoggedIn()">
+            <ul class="nav navbar-nav" ng-hide="check.user.isLoggedIn()">
               <li ng-class="{active: admin.isActive('Features')}">
                 <a ui-sref="features" ui-sref-active="active">Features</a>
               </li>
@@ -155,7 +155,7 @@
                 <a ui-sref="userLogin" ui-sref-active="active">Sign In</a>
               </li>
             </ul>
-            <ul class="nav navbar-nav" ng-show="check.isLoggedIn()">
+            <ul class="nav navbar-nav" ng-show="check.user.isLoggedIn()">
               <!-- Authenticated Menu -->
               <li>
                 <a ui-sref="add.item" ui-sref-active="active">Add</a>
@@ -164,20 +164,21 @@
                 <a ui-sref="portfolio" ui-sref-active="active">Portfolio</a>
               </li>
               <div class="btn-group nav-login" uib-dropdown keyboard-nav is-open="status.isopen">
-                <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled"><img ng-show="check.currentUser.account.picture.url" ng-src="{{check.currentUser.account.picture.url}}" width="16"/> {{check.currentUser.account.name.given}} <span class="caret"></span>
+                <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+                  <img ng-show="check.user.current.picture.url" ng-src="{{check.user.current.picture.url}}" width="16"/> {{check.user.current.name.given}} <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
                   <li role="menuitem">
-                    <a ui-sref="account({uid: check.currentUser.account.uid})"
+                    <a ui-sref="account({uid: check.user.current.uid})"
                       ui-sref-active="active">My Profile</a>
                   </li>
                   <li role="menuitem">
-                    <a ui-sref="accountEdit({uid: check.currentUser.account.uid})"
+                    <a ui-sref="accountEdit({uid: check.user.current.uid})"
                       ui-sref-active="active">Edit Account</a>
                   </li>
                   <li class="divider"></li>
                   <li role="menuitem">
-                    <a ng-click="check.currentUser.logOut()">Log Out</a>
+                    <a ng-click="check.user.logOut()">Log Out</a>
                   </li>
                 </ul>
               </div>
@@ -239,7 +240,7 @@
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <!-- Modules & Services -->
-    <script src="scripts/modules/drupalNg.js"></script>
+    <!--<script src="scripts/modules/drupalNg.js"></script>-->
     <script src="scripts/modules/zillow.js"></script>
     <!-- NOT READY - <script src="scripts/modules/message.js"></script> -->
     <!-- App - Controllers - Configuration -->
@@ -251,6 +252,8 @@
     <script src="scripts/components/user/user.js"></script>
     <script src="scripts/components/user/user.current.js"></script>
     <script src="scripts/components/user/user.edit.js"></script>
+    <script src="scripts/components/user/user.register.js"></script>
+    <script src="scripts/components/user/user.login.js"></script>
     <!-- Add - Component -->
     <script src="scripts/components/add/add.item.js"></script>
     <script src="scripts/components/add/add.property.js"></script>
@@ -267,9 +270,6 @@
     <script src="scripts/components/property/property.edit.js"></script>
     <!-- Proposal - Controllers -->
     <script src="scripts/controllers/proposal.js"></script>
-    <!-- User - Controllers -->
-    <script src="scripts/controllers/register.js"></script>
-    <script src="scripts/controllers/login.js"></script>
     <!-- endbuild -->
 </body>
 </html>

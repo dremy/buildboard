@@ -1,0 +1,90 @@
+<div 
+  class="container container-wide container-first form-register"  
+  bb-active-menu="" 
+  bb-active-title="">
+    <div class="row">
+    <div class="blue-text">
+      <ul class="tabs">
+        <li class="tab col s3"><a class="blue-text" href="#/user/login">Sign In</a></li>
+        <li class="tab col s3"><a class="active blue-text" href="#/user/register">Sign Up</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 center-align">
+      <h1 class="center-align">Create an Account</h1>
+    </div>
+  </div>
+  <div class="row content-intro">
+    <p><i class="material-icons blue-text">lock</i> Sign up for a secure account to:</strong></p>
+    <ul>
+      <li>Manage your properties</li>
+      <li>Keep documents in one place</li>
+      <li>Keep everyone informed</li>
+    </ul>
+  </div>
+  <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field long-label col s6">
+          <input 
+            placeholder="John" 
+            id="first_name" 
+            type="text" 
+            class="validate" 
+            ng-model="register.account.first_name">
+          <label 
+            for="first_name" 
+            data-error="don't try and make one up" 
+            data-success="Boom!">First Name</label>
+        </div>
+        <div class="input-field long-label col s6">
+          <input 
+            placeholder="Parker" 
+            id="last_name" 
+            type="text" 
+            class="validate" 
+            ng-model="register.account.last_name">
+          <label 
+            for="last_name"  
+            data-error="c'mon buddy" 
+            data-success="Shakalakah!">Last Name</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input 
+            placeholder="info@email.com" 
+            id="email" 
+            type="email" 
+            class="validate" 
+            ng-model="register.account.mail">
+          <label 
+            for="email" 
+            data-error="wrong" 
+            data-success="There you go!">Email</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input 
+            id="password" 
+            type="password" 
+            class="validate" 
+            ng-model="register.account.pass">
+          <label for="password">Password</label>
+        </div>
+      </div>
+      <div class="row">
+        <button 
+          class="btn btn-large blue waves-effect form-submit" 
+          type="submit" 
+          name="action" 
+          ng-click="register.submit(register.account)">
+          <i class="material-icons left">lock</i>
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

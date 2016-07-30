@@ -7,15 +7,21 @@
  * # MainCtrl
  * Controller of the buildboardApp
  */
-function MainCtrl($scope) {
+function MainCtrl(paragraphs) {
   this.awesomeThings = [
     'HTML5 Boilerplate',
     'AngularJS',
     'Karma'
   ];
 
+  this.rows = paragraphs;
+}
+
+function paragraphs() {
   // Content!
-  var rows = [
+  var rows = [];
+
+  rows = [
     {
       type: 'content-center',
       subheader: "What's Buildboard?",
@@ -124,10 +130,23 @@ function MainCtrl($scope) {
     }
   ];
 
-  $scope.rows = rows;
+  return rows;
 }
 
-
+function mediaContent() {
+  return {
+    restrict: 'E', // Element only directive.
+    scope: {
+      row: '=' // Pull row
+    },
+    link: function(scope) {
+      scope.myTemplate = 'templates/' + scope.row.type + '.html';
+    },
+    template: '<div ng-include="myTemplate"></div>'
+  };
+}
 
 angular.module('buildboardApp')
-  .controller('MainCtrl', MainCtrl);
+  .controller('MainCtrl', MainCtrl)
+  .service('paragraphs', paragraphs) // Content panes.
+  .directive('mediaContent', mediaContent);

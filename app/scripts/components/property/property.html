@@ -1,0 +1,35 @@
+<div
+  class="container container-first container-wide property" 
+  bb-active-menu="" 
+  bb-active-title="">
+  <div class="row">
+    <a class="btn blue float-right"
+      ui-sref="propertyEditForm({nid: property.details.nid})">Edit Property</a>
+  </div>
+  <div class="row" ng-cloak>
+    <div class="col s12">
+      <div class="photos" ng-repeat="image in property.details.field_feature_images.und">
+        <img class="tbd" ng-src="../sites/default/files/{{image.uri.replace('public://','')}}" alt="{{image.alt}}" title="{{image.title}}" width="258" height="189" />
+      </div>
+      <h1>{{property.details.field_address.und[0].thoroughfare}}</h1>
+      <h2>{{property.details.field_address.und[0].locality}}, {{property.details.field_address.und[0].administrative_area}} {{property.details.field_address.und[0].postal_code}}</h2>
+      <label>Purchase Price</label><p>{{property.details.field_purchase_price.und[0].value | currency:"$":0}}</p>
+    </div>
+  </div>
+  <div class="row">
+  </div>
+</div>
+<div class="container-full">
+  <ng-map
+    id="property-map"
+    zoom="14"
+    center="{{property.address}}"
+    geo-fallback-center="current-location">
+    <marker
+      position="{{property.address}}"
+      animation="Animation.BOUNCE"
+      title="{{property.address}}"
+      centered="true">
+    </marker>    
+  </ng-map>
+</div>

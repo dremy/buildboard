@@ -36,7 +36,7 @@
         </div>
         <div class="row">
           <div class="col l4 m6 s12">
-            <button class="add-card" ng-click="startAddProperty()">
+            <button class="add-card" ui-sref="add.property.address">
               <div class="card card-add center-align">
                 <span class="glyphicon glyphicon-plus"></span>
                 <div class="card-content">
@@ -47,9 +47,9 @@
           </div>
           <div class="col l4 m6 s12" ng-repeat="property in properties | filter:searchKey">
             <div class="card">
-              <a href="#/property/{{property.nid}}">
+              <a ui-sref="property({nid: property.nid})">
                 <div class="card-image">
-                  <img src="/sites/default/files/{{property.field_feature_images.und[0].uri.replace('public://','')}}" width="258" height="189">
+                  <img ng-src="../sites/default/files/{{property.field_feature_images.und[0].uri.replace('public://','')}}" width="258" height="189">
                   <span class="card-title">{{property.field_address.und[0].thoroughfare}}</span>
                   <span class="card-subtitle">{{property.field_address.und[0].locality}}, {{property.field_address.und[0].administrative_area}} {{property.field_address.und[0].postal_code}}</span>
                 </div>
@@ -62,7 +62,9 @@
                 <p ng-show="property.field_teaser.und.length">{{property.field_teaser.und[0].value}}</p>
               </div>
               <div class="card-action">
-                <button class="btn blue-text white" ng-click="startEditProperty($index)">
+                <button 
+                  class="btn blue-text white"
+                  ui-sref="propertyEditForm({nid: property.nid})">
                   <i class="material-icons">mode_edit</i>
                   <span>Edit</span>
                 </button>
@@ -77,16 +79,23 @@
       </div>
     </div>
   </div>
-  <div ng-show="view=='addProperty'">
-    <div ng-include="'views/addProperty.html'">
-    </div>
-  </div>
-  <div ng-show="view=='editProperty'">
-    <div ng-include="'views/editProperty.html'">
-    </div>
+  <div class="container-full">
+    <ng-map
+      id="portfolio-map"
+      zoom="11"
+      scrollwheel="false"
+      zoom-to-include-markers="auto"
+      center="{{property.field_address.und[0].thoroughfare}} {{property.field_address.und[0].locality}}, {{property.field_address.und[0].administrative_area}}"
+      geo-fallback-center="current-location">
+      <marker ng-repeat="property in properties | filter:searchKey"
+        position="{{property.field_address.und[0].thoroughfare}} {{property.field_address.und[0].locality}}, {{property.field_address.und[0].administrative_area}}"
+        title="{{property.field_address.und[0].thoroughfare}} {{property.field_address.und[0].locality}}, {{property.field_address.und[0].administrative_area}}"
+        centered="true">
+      </marker>    
+    </ng-map>
   </div>
   <div ng-show="view=='removeProperty'">
-    <div ng-include="'views/removeProperty.html'">
+    <div ng-include="'views/property.delete.html'">
     </div>  
   </div> 
 </div>

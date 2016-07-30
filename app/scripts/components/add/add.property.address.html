@@ -1,0 +1,46 @@
+<!--Start Add.Property.Address Template-->
+<div class="address"
+  <div class="row">  
+    <div class="input-field col s12 medium-label">
+        <input 
+          places-auto-complete
+          id="location"
+          class="validate"
+          size="80"
+          ng-model="property.address"
+          placeholder="555 S Main St"            
+          component-restrictions="{country:'us'}"
+          on-place-changed="property.placeChanged()" />
+        <label ng-class="{active:property.address}" for="location">Location</label>
+    </div>
+    <div ng-show="property.place">
+      Address = {{property.place.formatted_address}} <br/>
+      Location: {{property.place.geometry.location}}<br/>
+    </div>
+    <div class="map" ng-style="{'visibility': property.place ? 'visible':'hidden'}">
+      <ng-map
+        center="{{property.centerOfAmerica}}">
+        <marker 
+          ng-repeat="marker in property.markers"
+          position="{{marker.pos}}"
+          title="pos: {{marker.pos}}">
+        </marker>
+      </ng-map>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s6">
+      <button 
+        ng-disabled="!property.place"
+        class="btn btn-large wave-effect blue" 
+        ng-click="property.confirmProperty()">
+        Add
+      </button>
+    </div>
+    <div class="col s6">
+      <button class="btn btn-large wave-effect red" ng-click="property.cancelAddProperty()">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
