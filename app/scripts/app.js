@@ -10,6 +10,8 @@
  */
 
 (function(angular) {
+var lock = new Auth0Lock('','http://localhost:3000')
+
 angular
   .module('buildboardApp', [
     // Route

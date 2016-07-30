@@ -17,7 +17,6 @@
     "angular-sanitize": "^1.4.0",
     "angular-touch": "^1.4.0",
     "angular-bootstrap": "^1.1.2",
-    "angular-drupal": "7.x-1.x",
     "Materialize": "materialize#^0.97.6",
     "angularjs-google-maps": "^0.5.0",
     "material-design-icons": "^2.2.3",
@@ -28,7 +27,8 @@
     "moment": "^2.14.1",
     "angular-materialize": "^0.1.9",
     "angular-xml2json": "^0.0.2",
-    "angular-filepicker": "^1.1.4"
+    "angular-filepicker": "^1.1.4",
+    "auth0-lock": "^10.0.1"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"
