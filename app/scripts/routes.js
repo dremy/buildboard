@@ -13,7 +13,7 @@ var componentsDir = 'scripts/components';
 // Main App
 //--------------------------
 angular.module('buildboardApp')
-  .config(function($stateProvider, $urlRouterProvider, filepickerProvider) {
+  .config(function($stateProvider, $urlRouterProvider, $httpProvider, authProvider) {
     $stateProvider   //TO DO - Do not allow logged in users to go to /user/login OR /user/register
       .state('home', {
         url: '/',
@@ -32,6 +32,12 @@ angular.module('buildboardApp')
         templateUrl: 'views/benefits.html',
         controller: 'BenefitsCtrl',
         controllerAs: 'benefits'
+      })
+      .state('about', {
+        url: '/about',
+        templateUrl: 'views/about.html',
+        controller: 'AboutCtrl',
+        controllerAs: 'about'
       })
       .state('howItWorks', {
         url: '/how-it-works',
@@ -54,6 +60,9 @@ angular.module('buildboardApp')
       .state('add', {
         url:'/add',
         templateUrl: 'scripts/components/add/add.html',
+        data: {
+          requiresLogin: true
+        }
       })
       .state('add.item', {
         url: '/item',
@@ -81,12 +90,18 @@ angular.module('buildboardApp')
       })
       .state('accountEdit', {
         url: '/user/:uid/edit',
+        data: {
+          requiresLogin: true
+        },
         templateUrl: 'scripts/components/user/user.edit.html',
         controller: 'UserEditCtrl',
         controllerAs: 'user'
       })
       .state('account', {
         url:'/user/:uid',
+        data: {
+          requiresLogin: true
+        },
         resolve: {
           account: ['$stateParams', 'drupal', 'messages','alert', 
             function ($stateParams, drupal, messages, alert) {
@@ -105,6 +120,9 @@ angular.module('buildboardApp')
       })
       .state('portfolio', {
         url: '/portfolio',
+        data: {
+          requiresLogin: true
+        },
         templateUrl: 'scripts/components/portfolio/portfolio.html',
         controller: 'PortfolioCtrl',
         controllerAs: 'portfolio'
@@ -116,6 +134,9 @@ angular.module('buildboardApp')
       })*/
       .state('property', { // Property Profile
         url: '/property/:nid',
+        data: {
+          requiresLogin: true
+        },
         resolve: {
           property: ['$stateParams', 'drupal', 
             function ($stateParams, drupal) {
@@ -137,12 +158,6 @@ angular.module('buildboardApp')
         controller: 'DocumentsCtrl',
         controllerAs: 'documents'
       })*/
-      .state('about', {
-        url: '/about',
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
-      })
       .state('addProposal', { //TO DO - Very temporary
         url: '/addProposal',
         templateUrl: 'views/addProposal.html',
@@ -152,6 +167,4 @@ angular.module('buildboardApp')
 
     // Catch all route
     $urlRouterProvider.otherwise('/');
-    // Add the API key to use filestack service
-    filepickerProvider.setKey('AbxbbjIjQuq0m1MnLf9n0z');
   });

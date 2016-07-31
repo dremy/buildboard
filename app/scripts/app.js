@@ -10,7 +10,6 @@
  */
 
 (function(angular) {
-var lock = new Auth0Lock('','http://localhost:3000')
 
 angular
   .module('buildboardApp', [
@@ -19,11 +18,15 @@ angular
     // Theme
     'ui.bootstrap',
     'ui.materialize',
+    // Ng Config
+    'angular-storage',
+    'angular-jwt',
     // Services
     'angular-zillow',
     'angular-filepicker',
     'angularMoment',
     'ngMap',
+    'auth0',
     //Custom modules
     'bb.alert',
     'bb.preloader',
