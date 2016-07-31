@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <title>Buildboard | Investment Collaboration Platform</title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
@@ -36,8 +35,8 @@
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/Materialize/bin/materialize.css" />
     <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css" />
-    <link rel="stylesheet" href="bower_components/materialize/bin/materialize.css" />
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -58,6 +57,7 @@
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/Materialize/bin/materialize.js"></script>
     <script src="bower_components/angularjs-google-maps/dist/angularjs-google-maps.js"></script>
     <script src="bower_components/ngmap/build/scripts/ng-map.js"></script>
     <script src="bower_components/moment/moment.js"></script>
@@ -65,17 +65,25 @@
     <script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/angular-moment/angular-moment.js"></script>
-    <script src="bower_components/materialize/bin/materialize.js"></script>
     <script src="bower_components/angular-materialize/src/angular-materialize.js"></script>
-    <script src="bower_components/jquery.xml2json/src/jquery.xml2json.js"></script>
-    <script type="text/javascript" src="bower_components/filepicker-js/filepicker.js"></script>
-    <script type="text/javascript" src="bower_components/angular-filepicker/dist/angular_filepicker.js"></script>
+    <script src="bower_components/filepicker-js/filepicker.min.js"></script>
+    <script src="bower_components/angular-filepicker/dist/angular_filepicker.js"></script>
+    <script src="bower_components/auth0-lock/build/auth0-lock.js"></script>
+    <script src="bower_components/jquery-xml2json/src/xml2json.js"></script>
+    <script src="bower_components/auth0.js/build/auth0.js"></script>
+    <script src="bower_components/auth0-angular/build/auth0-angular.js"></script>
+    <script src="bower_components/angular-jwt/dist/angular-jwt.js"></script>
+    <script src="bower_components/a0-angular-storage/dist/angular-storage.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- App -->
     <script src="scripts/app.js"></script>
     <script src="scripts/routes.js"></script>
+    <script src="scripts/config.js"></script>
+
+    <!-- Viewport Settings -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   </head>
   <body ng-controller="AdminCtrl as admin">
     <!--[if lte IE 8]>
@@ -151,7 +159,7 @@
                 <a ui-sref="howItWorks" ui-sref-active="active">How It Works</a>
               </li>
               <li class="nav-login">
-                <a ui-sref="userLogin" ui-sref-active="active">Sign In</a>
+                <a href="#" ng-click="check.auth.signin()">Sign In</a>
               </li>
             </ul>
             <ul class="nav navbar-nav" ng-show="check.user.isLoggedIn()">
@@ -177,7 +185,7 @@
                   </li>
                   <li class="divider"></li>
                   <li role="menuitem">
-                    <a ng-click="check.user.logOut()">Log Out</a>
+                    <a ng-click="check.logOut()">Log Out</a>
                   </li>
                 </ul>
               </div>
