@@ -7,7 +7,7 @@
  * # PropertyCtrl
  * Controller of the buildboardApp
  */
-function addPropertyCtrl(zillowZervice, $state, drupal, NgMap, preloader, messages, alert, centerOfAmerica) { 
+function addPropertyCtrl(zillowZervice, $state, NgMap, preloader, messages, alert, centerOfAmerica) { 
 
   // Initialize variables.
   //-------------------------------
@@ -107,54 +107,8 @@ function addPropertyCtrl(zillowZervice, $state, drupal, NgMap, preloader, messag
   }
 
   function addProperty() {
-/*    //Some behind the scenes defining of the title.
-    var title = this.property.address + " " + this.property.city + ", " + this.property.state + " " + this.property.zip;
-
-    //Setup the property to be posted.
-    var node = {
-      "title": title,
-      "type": "property",
-      "language": "und",
-      "field_address": {
-        "und": [
-          {
-            "country":"US",
-            "administrative_area": this.property.state,
-            "sub_administrative_area": null,
-            "locality": this.property.city,
-            "dependent_locality":"",
-            "postal_code": this.property.zip,
-            "thoroughfare": this.property.address,
-            "premise": "",
-            "sub_premise": null,
-            "organisation_name": null,
-            "name_line": null,
-            "first_name": null,
-            "last_name": null,
-            "data": null
-          }
-        ]
-      }/*,
-       TO DO - Property Types
-      "field_property_type": {
-        "und": [
-          {
-            "value":this.property.propertyType
-          }
-        ]
-      },
-      "field_purchase_price": {
-        "und": [
-          {
-              "value": parseInt(this.property.purchasePrice),
-              "target_id": "240"
-          },
-        ]
-      }*/  
-    //};
-
     //Save node.
-    /*drupal.node_save(node).then(
+    /*.....then(
       function(data) {
           message = 'Congratulations! Node ' + node.title + ' is created!';
           type = 'success';

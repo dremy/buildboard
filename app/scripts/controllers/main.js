@@ -7,14 +7,9 @@
  * # MainCtrl
  * Controller of the buildboardApp
  */
-function MainCtrl(paragraphs) {
-  this.awesomeThings = [
-    'HTML5 Boilerplate',
-    'AngularJS',
-    'Karma'
-  ];
-
+function MainCtrl(paragraphs, auth) {
   this.rows = paragraphs;
+  this.auth = auth;
 }
 
 function paragraphs() {

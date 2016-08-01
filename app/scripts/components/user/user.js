@@ -9,18 +9,18 @@
  */
 function userCtrl(
   // Scopes
+  $rootScope,
   // Route
   $state,
   // Custom Services
+  store,
   messages,
   preloader,
-  userService,
-  account,
+  auth,
   // Constants
   googleMapsUrl,
   centerOfAmerica,
   // Values
-  currentUser,  
   alert) {
 
   //Initialize variables.
@@ -31,33 +31,7 @@ function userCtrl(
   //------------------------------------
   //Perform on load.
   //------------------------------------
-  if (typeof account === 'object') {
-    
-    //Set users details.
-    user.account = account;
-    // If there is not an account picture, then use default.
-    if (!account.picture) {
-      account.picture = {
-        url: 'images/avatar_silhouette.png'
-      };
-    }
-
-    // If there isn't a first and last name, use user name.
-    account.fullName = '';
-    account.fullName = account.field_full_name.und ? account.field_full_name.und[0].given + ' ' + account.field_full_name.und[0].family : account.name;
-
-    var location = account.field_user_location.und;
-    if (location) {
-      user.location = {
-        city: location[0].locality,
-        state: location[0].administrative_area
-      };
-    }
-  } else {
-    alert.message = "Can't pull user account details. Refresh the page to try again.";
-    alert.type = 'danger';
-    messages.add(alert.message, alert.type, alert.dt);
-  }
+  user.profile = store.get('profile');
   
   //Register functions to $scope.
   //------------------------------------

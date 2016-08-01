@@ -7,48 +7,52 @@
  * # PropertyCtrl
  * Controller of the buildboardApp
  */
-function propertyEditCtrl($scope, $rootScope, $state, drupal, messages, preloader, alert) { 
+function propertyEditCtrl($state, $http, prop, messages, preloader, alert) { 
 
   // Initialize variables.
   //-------------------------------
-  var nid = $state.params.nid;
+  var property = this;
+  var id = $state.params.id;
   var types = ["Home", "Multi-Family", "Lot"];
 
+  property.details = prop.data;
   // Define functions.
   //-------------------------------
-  function cancelEditProperty() {
-    $state.go('portfolio'); //TO DO - Return to original property via params.
-  }
 
   function saveProperty() {
     preloader.setState(true);
-    this.property.title = this.property.field_address.und[0].thoroughfare + " " + this.property.field_address.und[0].locality + ", " + this.property.field_address.und[0].administrative_area + " " + this.property.field_address.und[0].postal_code;
-    console.log(this.property);
+    property.details.location.formatted = property.details.location.address;
+    property.details.location.formatted += ' ' + property.details.location.city;
+    property.details.location.formatted += ', ' + property.details.location.state;
+    property.details.location.formatted += ' ' + property.details.location.zip;
+
+    property.details.title = property.details.location.formatted;
+    console.log(property.details);
     //Save node. 
-    drupal.node_save(this.property).then(
-      function(data) {
-        alert.message = 'Congratulations! Node ' + this.property.title + ' is updated!';
-        alert.type = 'success';
-        messages.add(alert.message, alert.type, alert.dt);
-        preloader.setState(false);
-        $state.go('portfolio'); //TO DO - Return to original property via params.
-      }, function(reason) {
-        console.log(reason);
-        alert.message = 'Saving failed due to ' + reason.statusText + '. Try again later.';
-        alert.type = 'warning';
-        messages.add(alert.message, alert.type, alert.dt);
-        preloader.setState(false);
-      }
-    );
+    $http.put(location.origin + '/api/property' + '/' + id, property.details)
+      .then(
+        function(data) {
+          console.log(data);
+          alert.message = 'Congratulations! Node ' + property.details.title + ' is updated!';
+          alert.type = 'success';
+          messages.add(alert.message, alert.type, alert.dt);
+        }, function(reason) {
+          console.log(reason);
+          alert.message = 'Saving failed due to ' + reason.statusText + '. Try again later.';
+          alert.type = 'warning';
+          messages.add(alert.message, alert.type, alert.dt);
+        }
+      ).then(function() {
+          preloader.setState(false);
+          $state.go('property', {id: property.details._id}); //TO DO - Return to original property via params.
+      });
   }
 
   // Perform on load.
   //-------------------------------
-  //Set loading.
-  preloader.setState(true);
 
   //Load node.
-  drupal.node_load(nid).then(
+  /*.node_load(nid).then(
     function(node) { // SUCCESS - Node loaded.
       $scope.property = node; // Assign to scope.
       preloader.setState(false);
@@ -60,13 +64,12 @@ function propertyEditCtrl($scope, $rootScope, $state, drupal, messages, preloade
       messages.add(message, type, dt);
       preloader.setState(false);      
     }
-  );
+  );*/
 
   // Register functions to scope
   //-------------------------------
-  $scope.cancelEditProperty = cancelEditProperty;
-  $scope.saveProperty = saveProperty;
-  $scope.types = types;
+  property.saveProperty = saveProperty;
+  property.types = types;
 }
 
 angular.module('bb.property')

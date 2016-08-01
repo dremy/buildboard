@@ -9,6 +9,7 @@ var LocationSchema = new Schema({
   city: String,
   state: String,
   zip: String,
+  formatted: String,
   lat: Number,
   lng: Number,
 });

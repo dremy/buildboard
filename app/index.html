@@ -131,7 +131,7 @@
       </div>
     </div>
     <!-- Content -->
-    <header class="header" ng-controller="loggedInCtrl as check">
+    <header class="header" ng-controller="authCtrl as check">
       <div class="navbar navbar-default" role="navigation">
         <div class="container container-wide">
           <div class="navbar-header">
@@ -148,7 +148,7 @@
 
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
             <!-- Anonymous Menu-->  
-            <ul class="nav navbar-nav" ng-hide="check.user.isLoggedIn()">
+            <ul class="nav navbar-nav" ng-hide="check.auth.isAuthenticated">
               <li ng-class="{active: admin.isActive('Features')}">
                 <a ui-sref="features" ui-sref-active="active">Features</a>
               </li>
@@ -162,7 +162,7 @@
                 <a href="#" ng-click="check.auth.signin()">Sign In</a>
               </li>
             </ul>
-            <ul class="nav navbar-nav" ng-show="check.user.isLoggedIn()">
+            <ul class="nav navbar-nav" ng-show="check.auth.isAuthenticated">
               <!-- Authenticated Menu -->
               <li>
                 <a ui-sref="add.item" ui-sref-active="active">Add</a>
@@ -172,7 +172,7 @@
               </li>
               <div class="btn-group nav-login" uib-dropdown keyboard-nav is-open="status.isopen">
                 <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
-                  <img ng-show="check.user.current.picture.url" ng-src="{{check.user.current.picture.url}}" width="16"/> {{check.user.current.name.given}} <span class="caret"></span>
+                  <img ng-show="check.profile.picture" ng-src="{{check.profile.picture}}" width="16"/> {{check.profile.user_metadata.given_name}} <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
                   <li role="menuitem">
@@ -256,7 +256,8 @@
     <script src="scripts/controllers/admin.js"></script>
     <!-- User - Component -->
     <script src="scripts/components/user/user.js"></script>
-    <script src="scripts/components/user/user.current.js"></script>
+    <script src="scripts/components/user/user.service.js"></script>
+    <script src="scripts/components/user/user.auth.js"></script>
     <script src="scripts/components/user/user.edit.js"></script>
     <script src="scripts/components/user/user.register.js"></script>
     <script src="scripts/components/user/user.login.js"></script>
@@ -264,17 +265,18 @@
     <script src="scripts/components/add/add.item.js"></script>
     <script src="scripts/components/add/add.property.js"></script>
     <!-- App - Controllers -->
-    <script src="scripts/components/portfolio/portfolio.js"></script>
     <script src="scripts/controllers/activity.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/features.js"></script>
     <script src="scripts/controllers/benefits.js"></script>
     <script src="scripts/controllers/howWorks.js"></script>
     <script src="scripts/controllers/about.js"></script>
-    <!-- Property - Controllers -->
+    <!-- Property - Components -->
     <script src="scripts/components/property/property.js"></script>
+    <script src="scripts/components/property/property.service.js"></script>
     <script src="scripts/components/property/property.edit.js"></script>
     <!-- Proposal - Controllers -->
+    <script src="scripts/components/portfolio/portfolio.js"></script>
     <script src="scripts/controllers/proposal.js"></script>
     <!-- endbuild -->
 </body>

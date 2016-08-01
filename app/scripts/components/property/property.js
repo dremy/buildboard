@@ -7,22 +7,23 @@
  * # PropertyCtrl
  * Controller of the buildboardApp
  */
-function propertyCtrl($state, drupal, NgMap, messages, alert, preloader, property) { 
+function propertyCtrl($state, prop, NgMap, messages, alert, preloader) { 
   // Initialize variables.
   //-------------------------------  
-
+  var property = this;
   // Define functions.
   //-------------------------------
 
   // Perform on load.
   //-------------------------------
-  if (property) {
-    this.details = property;
+  if (prop.data) {
+    property.details = prop.data;
+    console.log(property.details);
     //Setup property address
-    this.address = property.field_address.und[0].thoroughfare;
-    this.address += ' ' + property.field_address.und[0].locality;
-    this.address += ', ' + property.field_address.und[0].administrative_area;
-    this.address += ' ' + property.field_address.und[0].postal_code;
+    property.details.location.formatted = property.details.location.address;
+    property.details.location.formatted += ' ' + property.details.location.city;
+    property.details.location.formatted += ', ' + property.details.location.state;
+    property.details.location.formatted += ' ' + property.details.location.zip;
   } else {
     alert.message = 'Adding failed due to ' + reason.statusText + '. Try again later.';
     alert.type = 'warning';

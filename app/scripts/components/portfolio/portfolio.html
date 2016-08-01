@@ -50,21 +50,21 @@
               <a ui-sref="property({nid: property.nid})">
                 <div class="card-image">
                   <img ng-src="../sites/default/files/{{property.field_feature_images.und[0].uri.replace('public://','')}}" width="258" height="189">
-                  <span class="card-title">{{property.field_address.und[0].thoroughfare}}</span>
-                  <span class="card-subtitle">{{property.field_address.und[0].locality}}, {{property.field_address.und[0].administrative_area}} {{property.field_address.und[0].postal_code}}</span>
+                  <span class="card-title">{{property.location.address}}</span>
+                  <span class="card-subtitle">{{property.location.city}}, {{property.location.state}} {{property.location.zip}}</span>
                 </div>
               </a>
               <div class="card-content">
                 <!--<p class="property-units"><label>Units:</label> {{property.field_units.und.length | number}}</p>-->
-                <p class="property-type" ng-show="property.field_property_type.und.length"><label>Type:</label> {{property.field_property_type.und[0].value}}</p>
-                <p class="property-tag" ng-show="property.field_tags.und.length"><i class="material-icons">label</i><label>Tags</label><span ng-repeat="tags in property.field_tags.und == true"> {{tag.value}}</span></p>
-                <p ng-show="property.field_purchase_price.und.length">{{property.field_purchase_price.und[0].value | currency:"$":0}}
-                <p ng-show="property.field_teaser.und.length">{{property.field_teaser.und[0].value}}</p>
+                <p class="property-type" ng-show="property.type"><label>Type:</label> {{property.type}}</p>
+                <p class="property-tag" ng-show="property.tags"><i class="material-icons">label</i><label>Tags</label><span ng-repeat="tag in property.tags == true"> {{tag}}</span></p>
+                <p ng-show="property.purchasePrice">{{property.purchasePrice | currency:"$":0}}
+                <p ng-show="property.teaser">{{property.teaser}}</p>
               </div>
               <div class="card-action">
                 <button 
                   class="btn blue-text white"
-                  ui-sref="propertyEditForm({nid: property.nid})">
+                  ui-sref="propertyEditForm({id: property._id})">
                   <i class="material-icons">mode_edit</i>
                   <span>Edit</span>
                 </button>
@@ -85,13 +85,12 @@
       zoom="11"
       scrollwheel="false"
       zoom-to-include-markers="auto"
-      center="{{property.field_address.und[0].thoroughfare}} {{property.field_address.und[0].locality}}, {{property.field_address.und[0].administrative_area}}"
       geo-fallback-center="current-location">
       <marker ng-repeat="property in properties | filter:searchKey"
-        position="{{property.field_address.und[0].thoroughfare}} {{property.field_address.und[0].locality}}, {{property.field_address.und[0].administrative_area}}"
-        title="{{property.field_address.und[0].thoroughfare}} {{property.field_address.und[0].locality}}, {{property.field_address.und[0].administrative_area}}"
+        position="{{property.title}}"
+        title="{{property.title}}"
         centered="true">
-      </marker>    
+      </marker> 
     </ng-map>
   </div>
   <div ng-show="view=='removeProperty'">

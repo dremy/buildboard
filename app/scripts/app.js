@@ -30,8 +30,8 @@ angular
     //Custom modules
     'bb.alert',
     'bb.preloader',
-    'bb.user',
-    'bb.property'
+    'bb.property',
+    'bb.user'
     // NOT READY - 'bb.message'
   ])
   // Constants

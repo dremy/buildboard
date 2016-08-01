@@ -10,7 +10,6 @@
 function adminCtrl(
   // Custom services
   currentSpot,
-  currentUser,
   preloader) {
   this.awesomeThings = [
     'HTML5 Boilerplate',

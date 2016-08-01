@@ -2,24 +2,24 @@
   class=""
   bb-active-menu=""
   bb-active-title="">
-  <div class="container container-first container-wide user user-{{user.account.uid}}">
+  <div class="container container-first container-wide user user-{{user.profile.id}}">
     <div class="row">
-      <a class="btn blue float-right" ui-sref="accountEdit({uid: user.account.uid})">Edit User</a>
+      <a class="btn blue float-right" ui-sref="accountEdit({uid: user.profile.id})">Edit User</a>
     </div>
     <div class="row" ng-cloak>
       <div class="col s12 m3 l3 user-photo">
-          <img class="tbd" ng-src="{{user.account.picture.url}}" alt="{{user.account.fullName}}" title="{{user.account.fullName}}" />
+          <img class="tbd" ng-src="{{user.profile.picture}}" alt="{{user.profile.nickname}}" title="{{user.profile.nickname}}" />
       </div>
       <div class="col s12 m9 l9">
-        <h3>{{user.account.fullName}}</h3>
-        <p ng-show="user.location.city && user.location.state"><i class="material-icons">location_on</i>
-          {{user.location.city}}, {{user.location.state}}
+        <h3>{{user.profile.user_metadata.given_name}} {{user.profile.user_metadata.family_name}}</h3>
+        <p ng-show="user.profile.user_metadata.location.formatted"><i class="material-icons">location_on</i>
+          {{user.profile.user_metadata.location.formatted}}
         </p>
-        <p ng-show="user.account.created">
+        <p ng-show="user.profile.created_at">
             <i title="Date Created" class="material-icons">av_timer</i>
-          {{ user.account.created | amFromUnix | amTimeAgo }}
+          {{ user.profile.created_at | amTimeAgo }}
         </p>
-        <!-- {{user.time | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }} -->
+        <!-- {{user.time | amFromUnix | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }} -->
       </div>
     </div>
   </div>
@@ -27,10 +27,10 @@
     <ng-map
       id="map"
       zoom="11"
-      center="{{user.location.city}}, {{user.location.state}}"
+      center="{{user.profile.user_metadata.location.city}}, {{user.profile.user_metadata.location.state}}"
       geo-fallback-center="current-location">
       <marker
-        position="{{user.location.city}}, {{user.location.state}}"
+        position="{{user.profile.user_metadata.location.city}}, {{user.profile.user_metadata.location.state}}"
         animation="Animation.BOUNCE"
         title="You are here."
         centered="true">

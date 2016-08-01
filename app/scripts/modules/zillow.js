@@ -1,9 +1,6 @@
 'use strict';
 
 function zillowZervice($http, zillow) {
-  var zillowResponse = {
-
-  };
 
   function get(param) {
     return request("GET", param);
@@ -23,7 +20,7 @@ function zillowZervice($http, zillow) {
      * 'details' = getUpdatedPropertyDetails API
      * 'address' = getDeepSearchResults API
      * */
-    var finalUrl
+    var finalUrl;
     if (param.requestType == 'details') {
       finalUrl = zillow.propertyDetailsApi + '?zpid=' + param.zpid;
       console.log('Final url:', finalUrl);

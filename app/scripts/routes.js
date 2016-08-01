@@ -98,11 +98,11 @@ angular.module('buildboardApp')
         controllerAs: 'user'
       })
       .state('account', {
-        url:'/user/:uid',
+        url:'/user',
         data: {
           requiresLogin: true
         },
-        resolve: {
+        /*resolve: {
           account: ['$stateParams', 'drupal', 'messages','alert', 
             function ($stateParams, drupal, messages, alert) {
               if ($stateParams.uid) {
@@ -113,7 +113,7 @@ angular.module('buildboardApp')
                   messages.add(alert.message, alert.type, alert.dt);
               }
           }]
-        },
+        },*/
         templateUrl: 'scripts/components/user/user.html',
         controller: 'UserCtrl',
         controllerAs: 'user'
@@ -123,24 +123,24 @@ angular.module('buildboardApp')
         data: {
           requiresLogin: true
         },
+        resolve: {
+          properties: ['$http', function($http) {
+            return $http.get(location.origin + '/api/property');
+          }]
+        },
         templateUrl: 'scripts/components/portfolio/portfolio.html',
         controller: 'PortfolioCtrl',
         controllerAs: 'portfolio'
       })
-      /*.('portfolio.map', {
-        templateUrl: 'scripts/components/portfolio/portfolio.map.html',
-        controller: 'PortfolioCtrl',
-
-      })*/
       .state('property', { // Property Profile
-        url: '/property/:nid',
+        url: '/property/:id',
         data: {
           requiresLogin: true
         },
         resolve: {
-          property: ['$stateParams', 'drupal', 
-            function ($stateParams, drupal) {
-              return drupal.node_load($stateParams.nid);
+          prop: ['$stateParams', '$http', 
+            function ($stateParams, $http) {
+              return $http.get(location.origin + '/api/property' + '/' + $stateParams.id);
             } 
           ]
         },
@@ -149,9 +149,17 @@ angular.module('buildboardApp')
         controllerAs: 'property'
       })
       .state('propertyEditForm', {
-        url:'/property/:nid/edit',
+        url:'/property/:id/edit',   
         templateUrl: componentsDir + '/property/property.edit.html',
+        resolve: {
+          prop: ['$stateParams', '$http', 
+            function ($stateParams, $http) {
+              return $http.get(location.origin + '/api/property/' + $stateParams.id);
+            } 
+          ]
+        },
         controller: 'PropertyEditCtrl',
+        controllerAs: 'property'
       })
       /*.when('/property/:nid/documents', {
         templateUrl: 'views/documents.html',

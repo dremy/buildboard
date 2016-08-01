@@ -3,6 +3,7 @@
 var express   = require('express'),
     mongoose  = require('mongoose'),
     morgan    = require('morgan'),
+    php       = require('node-php'),
     bodyParser= require('body-parser'),
     path      = require('path');
 
@@ -12,7 +13,6 @@ var app       = express(),
 
 // Route
 var Property = require('./server/routes/property')();
-var User = require('./server/routes/user')();
 
 // Some options
 var options = {
@@ -45,21 +45,14 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.text());
 app.use(bodyParser.json({text: 'application/json'}));
 
+// PHP
+// app.use('/', php.cgi('/app'));
+
 //Static files
 app.use(express.static(__dirname + '/app'));
 
 // API Routes
 //-------------------------
-// Users
-app.route('/api/user')
-  .get(User.getAll)
-  .post(User.post);
-
-app.route('/api/user/:id')
-  .get(User.getOne)
-  .delete(User.deleteById)
-  .put(User.updateById); 
-
 // Properties
 app.route('/api/property')
   .get(Property.getAll)

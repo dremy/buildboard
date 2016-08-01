@@ -4,16 +4,16 @@
   bb-active-title="">
   <div class="row">
     <a class="btn blue float-right"
-      ui-sref="propertyEditForm({nid: property.details.nid})">Edit Property</a>
+      ui-sref="propertyEditForm({id: property.details._id})">Edit Property</a>
   </div>
   <div class="row" ng-cloak>
     <div class="col s12">
-      <div class="photos" ng-repeat="image in property.details.field_feature_images.und">
+      <div class="photos" ng-repeat="image in property.details.images">
         <img class="tbd" ng-src="../sites/default/files/{{image.uri.replace('public://','')}}" alt="{{image.alt}}" title="{{image.title}}" width="258" height="189" />
       </div>
-      <h1>{{property.details.field_address.und[0].thoroughfare}}</h1>
-      <h2>{{property.details.field_address.und[0].locality}}, {{property.details.field_address.und[0].administrative_area}} {{property.details.field_address.und[0].postal_code}}</h2>
-      <label>Purchase Price</label><p>{{property.details.field_purchase_price.und[0].value | currency:"$":0}}</p>
+      <h1>{{property.details.location.address}}</h1>
+      <h2>{{property.details.location.city}}, {{property.details.location.state}} {{property.detail.location.zip}}</h2>
+      <label>Purchase Price</label><p>{{property.details.purchasePrice | currency:"$":0}}</p>
     </div>
   </div>
   <div class="row">
@@ -23,12 +23,12 @@
   <ng-map
     id="property-map"
     zoom="14"
-    center="{{property.address}}"
+    center="{{property.details.location.formatted}}"
     geo-fallback-center="current-location">
     <marker
-      position="{{property.address}}"
+      position="{{property.details.location.formatted}}"
       animation="Animation.BOUNCE"
-      title="{{property.address}}"
+      title="{{property.details.location.formatted}}"
       centered="true">
     </marker>    
   </ng-map>

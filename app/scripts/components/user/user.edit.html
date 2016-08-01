@@ -8,7 +8,7 @@
           id="first_name"
           type="text"
           class="validate"
-          ng-model="user.account.field_full_name.und[0].given">
+          ng-model="user.account.user_metadata.given_name">
         <label
           for="first_name"
           data-error="Don't try to make this up."
@@ -20,27 +20,12 @@
           id="last_name" 
           type="text" 
           class="validate" 
-          ng-model="user.account.field_full_name.und[0].family">
+          ng-model="user.account.user_metadata.family_name">
         <label 
           for="last_name"  
           data-error="C'mon buddy!" 
           data-success="New last name, huh?.">Last Name
         </label>
-      </div>
-    </div>
-    <div class="row">  
-      <div class="input-field col s12 medium-label">
-          <input
-            placeholder="info@email.com"
-            id="email"
-            type="email"
-            class="validate"
-            ng-model="user.account.mail">
-          <label 
-            for="email" 
-            data-error="Wrong!" 
-            data-success="There you go!">Email
-          </label>
       </div>
     </div>
     <div class="row">  
@@ -60,15 +45,10 @@
             data-error="Wrong"
             data-success="There you go!">Location
           </label>
-          <div ng-show="user.place">
-            Address = {{user.place.formatted_address}} <br/>
-            Location: {{user.place.geometry.location}}<br/>
-          </div>
-          <p>Location : {{user.inputLocation}}</p>
           <ng-map
-            center="{{user.mapLocation}}">
+            center="{{user.account.user_metadata.location.formatted}}">
             <marker
-              position="{{user.mapLocation}}"
+              position="{{user.account.user_metadata.location.formatted}}"
               animation="Animation.BOUNCE"
               title="You are here.">
             </marker>
@@ -78,15 +58,15 @@
     <div class="row">
       <div class="col s6">
         <button 
-        class="btn btn-large wave-effect blue"
-        ng-click="user.saveUser(user.account)"
-        ng-disabled="!user.place.geometry.location">Save
+          class="btn btn-large wave-effect blue"
+          ng-click="user.saveUser(user.account.user_metadata)"
+          >Save
         </button>
       </div>
       <div class="col s6">
         <button 
           class="btn btn-large wave-effect red" 
-          ui-sref="account({uid:user.account.uid})">Cancel
+          ui-sref="account()">Cancel
         </button>
     </div>
   </form>
