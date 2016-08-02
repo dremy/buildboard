@@ -124,8 +124,8 @@ angular.module('buildboardApp')
           requiresLogin: true
         },
         resolve: {
-          properties: ['$http', function($http) {
-            return $http.get(location.origin + '/api/property');
+          properties: ['propertyService', function(propertyService) {
+            return propertyService.getProperties();
           }]
         },
         templateUrl: 'scripts/components/portfolio/portfolio.html',
@@ -138,10 +138,10 @@ angular.module('buildboardApp')
           requiresLogin: true
         },
         resolve: {
-          prop: ['$stateParams', '$http', 
-            function ($stateParams, $http) {
-              return $http.get(location.origin + '/api/property' + '/' + $stateParams.id);
-            } 
+          prop: ['$stateParams', 'propertyService', 
+            function ($stateParams, propertyService) {
+              return propertyService.getPropertyById($stateParams.id);
+            }
           ]
         },
         templateUrl: componentsDir + '/property/property.html',
@@ -152,13 +152,26 @@ angular.module('buildboardApp')
         url:'/property/:id/edit',   
         templateUrl: componentsDir + '/property/property.edit.html',
         resolve: {
-          prop: ['$stateParams', '$http', 
-            function ($stateParams, $http) {
-              return $http.get(location.origin + '/api/property/' + $stateParams.id);
-            } 
+          prop: ['$stateParams', 'propertyService', 
+            function ($stateParams, propertyService) {
+              return propertyService.getPropertyById($stateParams.id);
+            }
           ]
         },
         controller: 'PropertyEditCtrl',
+        controllerAs: 'property'
+      })
+      .state('propertyDeleteForm', {
+        url:'/property/:id/remove',   
+        templateUrl: componentsDir + '/property/property.delete.html',
+        resolve: {
+          prop: ['$stateParams', 'propertyService', 
+            function ($stateParams, propertyService) {
+              return propertyService.getPropertyById($stateParams.id);
+            }
+          ]
+        },
+        controller: 'PropertyDeleteCtrl',
         controllerAs: 'property'
       })
       /*.when('/property/:nid/documents', {

@@ -3,7 +3,6 @@
 var express   = require('express'),
     mongoose  = require('mongoose'),
     morgan    = require('morgan'),
-    php       = require('node-php'),
     bodyParser= require('body-parser'),
     path      = require('path');
 

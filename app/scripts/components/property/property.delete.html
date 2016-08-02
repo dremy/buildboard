@@ -1,0 +1,23 @@
+<!--StartRemoveTemplate-->
+<div class="container remove-property in-modal">
+  <div class="row">
+    <h3>Delete Property <em>{{property.details.title}}</em></h3>
+  </div>
+  <div class="row">
+    <p>Are you sure you want to delete <em>{{property.details.title}}</em>?</p>
+  </div>
+  <div class="row">
+    <div class="col s6">
+        <button 
+          class="btn btn-large wave-effect blue" 
+          ui-sref="property({id:property.details._id})">
+          No
+        </button>
+        <button 
+          class="btn btn-large wave-effect red" 
+          ng-click="property.removeProperty()">
+          Yes
+        </button>
+    </div>
+  </div>
+</div>

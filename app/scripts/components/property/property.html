@@ -9,11 +9,20 @@
   <div class="row" ng-cloak>
     <div class="col s12">
       <div class="photos" ng-repeat="image in property.details.images">
-        <img class="tbd" ng-src="../sites/default/files/{{image.uri.replace('public://','')}}" alt="{{image.alt}}" title="{{image.title}}" width="258" height="189" />
+        <img 
+          ng-class="{s6:$first}"
+          class="col s3"
+          ng-src="{{image}}"
+          alt="{{property.details.title}} Photo #{{$index}}"
+          title="{{property.details.title}}"/>
       </div>
-      <h1>{{property.details.location.address}}</h1>
-      <h2>{{property.details.location.city}}, {{property.details.location.state}} {{property.detail.location.zip}}</h2>
-      <label>Purchase Price</label><p>{{property.details.purchasePrice | currency:"$":0}}</p>
+      <div class="col s12">
+        <h1>{{property.details.location.address}}</h1>
+        <h2>{{property.details.location.city}}, {{property.details.location.state}} {{property.detail.location.zip}}</h2>
+        <label>Purchase Price</label><p>{{property.details.price | currency:"$":0}}</p>
+        <p>Bedrooms: {{property.details.bedrooms}}</p>
+        <p>Bathrooms: {{property.details.bathrooms}}</p>
+      </div>
     </div>
   </div>
   <div class="row">
@@ -23,6 +32,7 @@
   <ng-map
     id="property-map"
     zoom="14"
+    scrollwheel="false"
     center="{{property.details.location.formatted}}"
     geo-fallback-center="current-location">
     <marker

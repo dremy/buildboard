@@ -9,26 +9,38 @@
   <form class="">
     <div class="row">  
       <div class="input-field col s12 medium-label">
-          <input placeholder="555 S Main St" type="text" ng-model="property.details.location.address"/>
-          <label for="location">Location</label>
+        <input 
+          placeholder="555 S Main St"
+          type="text"
+          ng-model="property.details.location.address"/>
+        <label for="location">Location</label>
       </div>
     </div>
     <div class="row">
       <div class="input-field col s4 small-label">
-          <input placeholder="New York" type="text" ng-model="property.details.location.city"/>
+          <input 
+            placeholder="New York" 
+            type="text" 
+            ng-model="property.details.location.city"/>
           <label for="city">City</label>
       </div>
       <div class="input-field col s4">
-          <input placeholder="NY" type="text" ng-model="property.details.location.state"/>
+          <input 
+            placeholder="NY" 
+            type="text" 
+            ng-model="property.details.location.state"/>
           <label for="state">State</label>
       </div>
       <div class="input-field col s4 small-label">
-          <input placeholder="10004" type="text" ng-model="property.details.location.zip"/>
+          <input 
+            placeholder="10004" 
+            type="text" 
+            ng-model="property.details.location.zip"/>
           <label for="zip">Zip</label>
       </div>
     </div>
     <div class="row">
-      <div class="input-field col s4">
+      <!--<div class="input-field col s4">
         <select
           material-select
           name="propertyType" 
@@ -40,15 +52,25 @@
             ng-attr-selected="{{property.details.type == type && 'selected'}}">{{type}}</option>
         </select>
         <label>Property Type</label>
-      </div>
+      </div>-->
       <div class="input-field col s4">
-        <input type="date" class="datepicker blue">
+        <input 
+          input-date
+          id="acquisitionDate"
+          type="text" 
+          class="datepicker"
+          ng-model="property.details.date"
+          >
         <label for="acquisitionDate">Date Acquired</label>
       </div>
     </div>
     <div class="row">
       <div class="input-field col l6 m6 s12 large-label">
-          <input placeholder="$100,000" type="text" ng-model="property.details.purchasePrice" format="currency"/>
+          <input 
+            placeholder="$100,000" 
+            type="text" 
+            ng-model="property.details.purchasePrice" 
+            format="currency"/>
           <label for="purchasePrice">Purchase Price</label>
       </div>
     </div>
@@ -57,22 +79,33 @@
         <div class="file-field input-field">
           <div class="btn blue">
             <span>Photo</span>
-            <input type="file" placeholder="img/XXXX.jpg" ng-model="property.details.images">
+            <input 
+              type="file" 
+              placeholder="img/XXXX.jpg" 
+              ng-model="property.details.images">
           </div>
           <div class="file-path-wrapper">
-            <input class="file-path validate" ng-value="property.details.images" type="text">
+            <input 
+              class="file-path validate" 
+              ng-value="property.details.images" type="text">
           </div>
         </div>
       </div>
       <div class="input-field col s12">
-          <textarea id="teaser" class="materialize-textarea" ng-model="property.details.teaser" length="120">
+          <textarea 
+            id="teaser" 
+            class="materialize-textarea" 
+            ng-model="property.details.teaser" length="120">
           </textarea>
           <label for="teaser">Teaser</label>
       </div>
     </div>
     <div class="row">
       <div class="col s6">
-        <button class="btn btn-large wave-effect blue" ng-disabled="propertyAddress==''" ng-click="property.saveProperty()">
+        <button 
+          class="btn btn-large wave-effect blue" 
+          ng-disabled="propertyAddress==''" 
+          ng-click="property.saveProperty()">
           Save
         </button>
       </div>

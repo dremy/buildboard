@@ -7,7 +7,7 @@
  * # PropertyCtrl
  * Controller of the buildboardApp
  */
-function addPropertyCtrl(zillowZervice, $state, NgMap, preloader, messages, alert, centerOfAmerica) { 
+function addPropertyCtrl(zillowZervice, propertyMaker, propertyService, $state, NgMap, preloader, messages, alert, auth) { 
 
   // Initialize variables.
   //-------------------------------
@@ -32,7 +32,6 @@ function addPropertyCtrl(zillowZervice, $state, NgMap, preloader, messages, aler
   }
 
   function confirmProperty() {
-    preloader.setState(true);
     
     //Setup our vars.
     var
@@ -40,10 +39,6 @@ function addPropertyCtrl(zillowZervice, $state, NgMap, preloader, messages, aler
     city = '',
     state = '',
     zip = '';
-
-    var
-    searchData = {},
-    detailsData = {};
 
     if (property.place.address_components) {
       for (var i = 0; i < property.place.address_components.length; i++) {
@@ -72,38 +67,26 @@ function addPropertyCtrl(zillowZervice, $state, NgMap, preloader, messages, aler
         state: state,
         zip: zip
       }
-      console.log('Location', location);
     }
     
-    // Make Zillow call for data
-    zillowZervice.getProperty(location).success(function(data) {
-      // Turn to JSON object
-      searchData = $.xml2json(data);
-      property.result = searchData.response.results.result;
-      console.log(searchData);
-
-      //Setup request for deeper details.
-      var req = {
-        zpid: property.result.zpid,
-        requestType: 'details'
-      };
-      zillowZervice.getProperty(req).success(function(data) {
-        detailsData = $.xml2json(data);
-        property.details = detailsData.response;
-        property.details.price.number = parseFloat(property.details.price.text);
-        console.log(detailsData);
-        console.log('# of Images', property.details.images.count);
-      });
-    }).then(
-      function() {
-        preloader.setState(false);
-        $state.go('add.property.confirm');
-      }
-    );
+    propertyMaker.addProperty(location).then(function(prop) {
+      console.log(prop);
+      property.info = prop;
+      property.info.uid = auth.profile.user_id;
+      $state.go('add.property.confirm');
+    });
   }
 
   function setRelationship() {
-    $state.go('add.property.relationship'); 
+    propertyService.addProperty(property.info).success(function(data) {
+      console.log(data);
+      alert.message = 'Congratulations! ' + property.info.title + ' is created!';
+      alert.type = 'success';
+      messages.add(alert.message, alert.type, alert.dt);
+      // Temporary
+      $state.go('portfolio');
+      //$state.go('add.property.relationship');
+    });
   }
 
   function addProperty() {
@@ -133,7 +116,6 @@ function addPropertyCtrl(zillowZervice, $state, NgMap, preloader, messages, aler
     property.map = map;
   });
 
-  property.centerOfAmerica = centerOfAmerica;
   property.placeChanged = placeChanged;
   property.confirmProperty = confirmProperty;
   property.setRelationship = setRelationship;

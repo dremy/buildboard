@@ -3,30 +3,55 @@ var mongoose = require('mongoose'),
       Schema = mongoose.Schema,
       ObjectId = Schema.ObjectId;
 
-// Defines the property schema.
-var LocationSchema = new Schema({
-  address: String,
-  city: String,
-  state: String,
-  zip: String,
-  formatted: String,
-  lat: Number,
-  lng: Number,
-});
-
 var propertySchema = new Schema({
   title: {
-    type: String
+    type: String,
+    unique: true
   },
   uid: {
-    type: Number,
+    type: String,
     required: true
   },
-  location: LocationSchema,
+  location: {
+    address: String,
+    city: String,
+    state: String,
+    zip: String,
+    formatted: String,
+    lat: Number,
+    lng: Number,
+  },
   images: Schema.Types.Mixed,
   bedrooms: String,
   bathrooms: String,
-  squarefootage: String,
+  FIPScounty: String,
+  finishedSqFt: String,
+  lotSizeSqFt: String,
+  yearBuilt: String,
+  zpid: String,
+  useCode: String,
+  numFloors: String,
+  parkingType: String,
+  lastSold: {
+    date: String,
+    price: String
+  },
+  taxAssessment: {
+    value: String,
+    year: String
+  },
+  zestimate: {
+    lastUpdated: String,
+    amount: String,
+    valuationRange: {
+      high: String,
+      low: String
+    },
+    valuationChange: {
+      duration: String,
+      value: String
+    }
+  },
   createdAt: {
     type: Date,
     default: Date.now

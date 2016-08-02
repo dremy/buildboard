@@ -7,7 +7,7 @@
  * # propertyService
  * Controller of the bb.property app
  */
-function propertyService($http, $state, propertyEndpointUrl, messages, preloader, alert) {
+function propertyService($http, propertyEndpointUrl, messages, preloader, alert) {
   function get(param) {
     return request("GET", param);
   }
@@ -21,8 +21,9 @@ function propertyService($http, $state, propertyEndpointUrl, messages, preloader
     return request("PUT", param, data);
   }
 
-  function del(param) {
-    return request("DELETE", param);
+  function del(data) {
+    var param = data._id;
+    return request("DELETE", param, data);
   }
 
   function request(verb, param, data) {
@@ -61,9 +62,9 @@ function propertyService($http, $state, propertyEndpointUrl, messages, preloader
     return del(id);
   }
 
-  return userService;
+  return propertyService;
 }
 
 angular.module('bb.property')
   .factory('propertyService', propertyService)
-  .constant('propertyEndpointUrl', location.origin + '/api/property');
+  .constant('propertyEndpointUrl', location.origin + '/api/property/');

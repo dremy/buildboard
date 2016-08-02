@@ -12,24 +12,20 @@ function propertyEditCtrl($state, $http, prop, messages, preloader, alert) {
   // Initialize variables.
   //-------------------------------
   var property = this;
-  var id = $state.params.id;
-  var types = ["Home", "Multi-Family", "Lot"];
 
-  property.details = prop.data;
   // Define functions.
   //-------------------------------
-
   function saveProperty() {
     preloader.setState(true);
-    property.details.location.formatted = property.details.location.address;
+/*    property.details.location.formatted = property.details.location.address;
     property.details.location.formatted += ' ' + property.details.location.city;
     property.details.location.formatted += ', ' + property.details.location.state;
     property.details.location.formatted += ' ' + property.details.location.zip;
 
-    property.details.title = property.details.location.formatted;
+    property.details.title = property.details.location.formatted;*/
     console.log(property.details);
     //Save node. 
-    $http.put(location.origin + '/api/property' + '/' + id, property.details)
+    propertyService.updateProperty(property.details)
       .then(
         function(data) {
           console.log(data);
@@ -50,26 +46,12 @@ function propertyEditCtrl($state, $http, prop, messages, preloader, alert) {
 
   // Perform on load.
   //-------------------------------
-
-  //Load node.
-  /*.node_load(nid).then(
-    function(node) { // SUCCESS - Node loaded.
-      $scope.property = node; // Assign to scope.
-      preloader.setState(false);
-    }, function(reason) { // ERROR - Node NOT loaded.
-      console.log(reason);
-      //Alert.
-      message = 'Adding failed due to ' + reason.statusText + '. Try again later.';
-      type = 'warning';
-      messages.add(message, type, dt);
-      preloader.setState(false);      
-    }
-  );*/
+  property.details = prop.data;
 
   // Register functions to scope
   //-------------------------------
   property.saveProperty = saveProperty;
-  property.types = types;
+  property.types = ["Home", "Multi-Family", "Lot"];
 }
 
 angular.module('bb.property')

@@ -2,40 +2,39 @@
 <div class="confirm">
   <h5 class="center">Is this it?</h5>
   <div class="row">
-    <div class="col 12" ng-show="property.details">
-      <div class="img">  
+    <div class="col 12" ng-show="property.info.images">
+      <div class="img">
         <img
-          ng-show="property.details.images.count > 1"
           ng-class="{s6:$first}"
           class="col s3"
-          ng-src="{{url}}"
-          alt="{{property.result.address.street}} {{property.result.address.city}}, {{property.result.address.state}} {{property.result.address.zipcode}}"
-          title="{{property.result.address.street}} {{property.result.address.city}}, {{property.result.address.state}} {{property.result.address.zipcode}}"
-          ng-repeat="url in property.details.images.image.url"
+          ng-src="{{image}}"
+          alt="{{property.info.location.formatted}} Photo #:{{$index}}"
+          title="{{property.info.location.formatted}} Photo #:{{$index}}"
+          ng-repeat="image in property.info.images"
           />
-        <img
-          ng-show="property.details.images.count == 1"
+        <!--<img
+          ng-show="property.info.images.length == 1"
           class="col s12 center"
-          ng-src="{{property.details.images.image.url}}"
-          alt="{{property.result.address.street}} {{property.result.address.city}}, {{property.result.address.state}} {{property.result.address.zipcode}}"
-          title="{{property.result.address.street}} {{property.result.address.city}}, {{property.result.address.state}} {{property.result.address.zipcode}}"
-          />
+          ng-src="{{propert.info.images}}"
+          alt="{{property.info.location.formatted}} Photo #:{{$index}}"
+          title="{{property.info.location.formatted}} Photo #:{{$index}}"
+          />-->
       </div>
     </div>
-    <div class="col s12" ng-show="property.details">
-      <h3>{{property.details.address.street}}</h3>
-      <h5>{{property.details.address.city}}, {{property.details.address.state}} {{property.details.address.zipcode}}</h5>
+    <div class="col s12" ng-show="property.info">
+      <h3>{{property.info.location.address}}</h3>
+      <h5>{{property.info.location.city}}, {{property.info.location.state}} {{property.info.location.zip}}</h5>
       <div class="details">
-        <h6 class="blue-text">{{property.details.price.number | currency:"$":0}}</h6>
+        <h6 class="blue-text">{{property.info.price | currency:"$":0}}</h6>
         <label>Last Sold Date</label>
-        <p>{{property.result.lastSoldDate}}</p>
+        <p>{{property.info.lastSoldDate}}</p>
         <label>Sq. Ft.</label>
-        <p>{{property.result.finishedSqFt | number}}</p>
+        <p>{{property.info.finishedSqFt | number}}</p>
         <p>
-          <strong>Bedrooms:</strong> {{property.result.bedrooms}}
+          <strong>Bedrooms:</strong> {{property.info.bedrooms}}
         </p>
         <p>
-          <strong>Bathrooms:</strong> {{property.result.bathrooms}}
+          <strong>Bathrooms:</strong> {{property.info.bathrooms}}
         </p>
       </div>
     </div>
@@ -43,7 +42,7 @@
   <div class="row">
     <div class="col s6">
       <button 
-        ng-disabled="!property.details"
+        ng-disabled="!property.info"
         class="btn btn-large wave-effect blue" 
         ng-click="property.setRelationship()">
         Add
