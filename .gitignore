@@ -2,5 +2,6 @@
 /dist
 /.tmp
 /.sass-cache
+/proxies
 /bower_components
 /app/.sass-cache
