@@ -62,6 +62,18 @@ module.exports = function() {
         if(err) res.send(err);
         res.json(req.body);
       });
+    },
+    /*
+     * Get route to retrieve all the properties.
+     */
+    getFiltered : function(req, res) {
+      console.log(req.body);
+      var query = Property.find(req.body);
+      query.exec(function(err, properties) {
+        if(err) res.send(err);
+        // If no errors, send back to client.
+        res.json(properties);
+      });
     }
   }
 };

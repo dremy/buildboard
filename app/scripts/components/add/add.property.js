@@ -7,7 +7,7 @@
  * # PropertyCtrl
  * Controller of the buildboardApp
  */
-function addPropertyCtrl(zillowZervice, propertyMaker, propertyService, $state, NgMap, preloader, messages, alert, auth) { 
+function addPropertyCtrl(zillowZervice, propertyMaker, propertyService, relationshipService, $state, NgMap, preloader, messages, alert, auth) { 
 
   // Initialize variables.
   //-------------------------------
@@ -18,6 +18,9 @@ function addPropertyCtrl(zillowZervice, propertyMaker, propertyService, $state, 
     state: '',
     zip: ''
   }
+  property.relationship = {
+    statuses: ["Interested", "Own", "Sold"] //If adding property one by one, not browsing by map, assume interest.
+  };
   // Define functions.
   //-------------------------------
   function placeChanged() {
@@ -77,37 +80,60 @@ function addPropertyCtrl(zillowZervice, propertyMaker, propertyService, $state, 
     });
   }
 
-  function setRelationship() {
+  function addProperty() {
+    // Save property. 
     propertyService.addProperty(property.info).success(function(data) {
       console.log(data);
-      alert.message = 'Congratulations! ' + property.info.title + ' is created!';
+      alert.message = 'Congratulations! ' + data.title + ' is created!';
       alert.type = 'success';
       messages.add(alert.message, alert.type, alert.dt);
+      property.info._id = data._id;
       // Temporary
-      $state.go('portfolio');
-      //$state.go('add.property.relationship');
+      $state.go('add.property.relationship');
     });
   }
 
-  function addProperty() {
-    //Save node.
-    /*.....then(
-      function(data) {
-          message = 'Congratulations! Node ' + node.title + ' is created!';
-          type = 'success';
-          messages.add(message, type, dt);
-          console.log(data);
-          $state.go('property', {nid: data.nid});
-      }, function(reason) {
-        message = 'Adding failed due to ' + reason.statusText + '. Try again later.';
-        type = 'success';
-        messages.add(message, type, dt);
+  function addRelationship() {
+    // Save relationship.
+    if (property.relationship.status && property.info._id) {
+      var relationship = {
+        _user: auth.profile.user_id,
+        _property: property.info._id,
+        status: {}
+      };
+      switch (property.relationship.status) {
+        case 'Interested':
+          relationship.status.interested = {
+            value: true,
+            updatedAt: Date.now()
+          };
+        break;
+        case 'Own':
+          relationship.status.own = {
+            value: true,
+            updatedAt: Date.now()
+          };
+        break;
+        case 'Sold':
+          relationship.status.sold = {
+            value: true,
+            updatedAt: Date.now()
+          };
+        break;
       }
-    ).then(
-      function() {
-        preloader.setState(false);
-      }
-    );*/
+
+      relationshipService
+        .addRelationship(relationship)
+        .success(function(data) {
+          console.log('Works', data);
+        })
+        .error(function() {
+          console.log('Doesnt work', data);
+        })
+        .then(function() {
+          $state.go('portfolio');
+        });
+    }
   }
 
   // Perform on load.
@@ -116,9 +142,10 @@ function addPropertyCtrl(zillowZervice, propertyMaker, propertyService, $state, 
     property.map = map;
   });
 
+  $('select').material_select();
   property.placeChanged = placeChanged;
   property.confirmProperty = confirmProperty;
-  property.setRelationship = setRelationship;
+  property.addRelationship = addRelationship;
   property.addProperty = addProperty;
   property.cancelAddProperty = cancelAddProperty;
 }

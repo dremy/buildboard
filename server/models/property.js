@@ -21,7 +21,14 @@ var propertySchema = new Schema({
     lat: Number,
     lng: Number,
   },
-  images: Schema.Types.Mixed,
+  images: {
+    type: Schema.Types.Mixed,
+    default: [
+      {
+        0:'/images/default-avatar-gradient-sm.jpg'
+      }
+    ]
+  },
   bedrooms: String,
   bathrooms: String,
   FIPScounty: String,

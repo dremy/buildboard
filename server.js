@@ -12,6 +12,7 @@ var app       = express(),
 
 // Route
 var Property = require('./server/routes/property')();
+var Relationship = require('./server/routes/relationship')();
 
 // Some options
 var options = {
@@ -35,8 +36,8 @@ var db = mongoose.connection;
 // If a DB error, console
 db.on('error', console.error.bind(console, 'connection error:'));
 
-/* Log with Morgan
-app.user(morgan('dev'));*/
+// Log with Morgan
+app.use(morgan('dev'));
 
 // Parse application/json and look for raw text
 app.use(bodyParser.json());
@@ -53,14 +54,33 @@ app.use(express.static(__dirname + '/app'));
 // API Routes
 //-------------------------
 // Properties
-app.route('/api/property')
+app.route('/api/properties')
   .get(Property.getAll)
   .post(Property.post);
 
-app.route('/api/property/:id')
+app.route('/api/properties/:id')
   .get(Property.getOne)
   .delete(Property.deleteById)
   .put(Property.updateById); 
+
+app.route('/api/properties/query')
+  .post(Property.getFiltered);
+
+// Properties
+app.route('/api/relationships')
+  .get(Relationship.getAll)
+  .post(Relationship.post);
+
+app.route('/api/relationships/:id')
+  .get(Relationship.getOne)
+  .delete(Relationship.deleteById)
+  .put(Relationship.updateById);
+
+app.route('/api/relationships/query')
+  .post(Relationship.getFiltered);
+
+app.route('/api/relationships/properties')
+  .post(Relationship.getRelationshipsProperties);
 
 app.listen(port);
   console.log('listening on port ' + port);

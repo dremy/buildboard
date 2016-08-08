@@ -26,6 +26,10 @@ function propertyService($http, propertyEndpointUrl, messages, preloader, alert)
     return request("DELETE", param, data);
   }
 
+  function query(filter) {
+    return request("POST", 'query', filter);
+  }
+
   function request(verb, param, data) {
     var req = {
       method: verb,
@@ -62,9 +66,13 @@ function propertyService($http, propertyEndpointUrl, messages, preloader, alert)
     return del(id);
   }
 
+  propertyService.queryProperties = function(filter) {
+    return query(filter);
+  }
+
   return propertyService;
 }
 
 angular.module('bb.property')
   .factory('propertyService', propertyService)
-  .constant('propertyEndpointUrl', location.origin + '/api/property/');
+  .constant('propertyEndpointUrl', location.origin + '/api/properties/');

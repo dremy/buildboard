@@ -99,6 +99,7 @@ body {
       > a,
       > button {
         color: $white;
+        padding: 10px 20px;
         &:hover,
         &:focus,
         &:active {
@@ -106,6 +107,9 @@ body {
           cursor: pointer;
         }
       }
+    }
+    > .divider {
+      margin: 0;
     }
   }
 }

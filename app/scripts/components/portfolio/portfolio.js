@@ -15,21 +15,22 @@ function portfolioCtrl($scope, propertyService, properties, NgMap, preloader, me
   // Define Functions
   //------------------------------------
   function refreshPortfolio() {
-    //preloader.setState(true);
-    
-    propertyService.getProperties().then(
-      function(properties) { // SUCCESS - Nodes loaded.
-        $scope.properties = properties; // Display
-        $scope.propertiesCosts = propertiesCosts(properties); // Update Costs Value 
-        preloader.setState(false);
-      }, function(reason) { // ERROR - Nodes NOT loaded.
-        console.log(reason);
-        alert.message = "Why you no like me... " + reason.statusText;
-        alert.type = 'warning';
-        messages.add(alert.message, alert.type, alert.dt);
-        preloader.setState(false);
-      }
-    );
+    preloader.setState(true);
+    setTimeout(function() {
+      propertyService.getProperties().then(
+        function(properties) { // SUCCESS - Nodes loaded.
+          $scope.properties = properties.data; // Display
+          $scope.propertiesCosts = propertiesCosts(properties); // Update Costs Value 
+          preloader.setState(false);
+        }, function(reason) { // ERROR - Nodes NOT loaded.
+          console.log(reason);
+          alert.message = "Why you no like me... " + reason.statusText;
+          alert.type = 'warning';
+          messages.add(alert.message, alert.type, alert.dt);
+          preloader.setState(false);
+        }
+      );
+    }, 2000);
   }
 
   // REPORT - UNIT COUNT: Gather total unit count

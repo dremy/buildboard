@@ -124,7 +124,23 @@ angular.module('buildboardApp')
           requiresLogin: true
         },
         resolve: {
-          properties: ['propertyService', function(propertyService) {
+          properties: ['relationshipService', 'propertyService', 'auth', function(relationshipService, propertyService, auth) {
+            var uid = {
+              uid: auth.profile.user_id
+            };
+            var pids = [];
+            // First, get all of the users relationships
+            relationshipService
+              .queryRelationships(uid)
+              .success(
+                function(data) {
+                  /*for (var i in data) {
+                    data[i]; 
+                  }*/
+                  console.log(data);
+                }
+              );
+            // THEN GET ALL PROPERTIES FROM RELATIONSHIPS
             return propertyService.getProperties();
           }]
         },

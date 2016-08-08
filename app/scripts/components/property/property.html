@@ -20,6 +20,7 @@
         <h1>{{property.details.location.address}}</h1>
         <h2>{{property.details.location.city}}, {{property.details.location.state}} {{property.detail.location.zip}}</h2>
         <label>Purchase Price</label><p>{{property.details.price | currency:"$":0}}</p>
+        <p>Created at: {{property.details.createdAt | amTimeAgo }}</p>
         <p>Bedrooms: {{property.details.bedrooms}}</p>
         <p>Bathrooms: {{property.details.bathrooms}}</p>
       </div>

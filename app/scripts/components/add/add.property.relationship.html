@@ -2,10 +2,31 @@
 <div class="relationship">
   <h5 class="center">Relationship</h5>
   <div class="row">
-    <div class="col s6"><!--ng-disabled="!property.place" -->
+    <div class="input-field col s4 center">
+        <select
+          material-select
+          class="blue-text"
+          name="relationship" 
+          ng-model="property.relationship.status">
+          <option 
+            value="" 
+            disabled>Choose your option</option>
+          <option 
+            ng-repeat="status in property.relationship.statuses"
+            class="blue-text" 
+            ng-value="{{status}}"
+            ng-attr-selected="{{property.relationship.statuses == status && 'selected'}}">{{status}}</option>
+        </select>
+        <label for="relationship">Property Type</label>
+        <p>{{property.relationship.status}}</p>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col s6"><!-- -->
       <button 
         class="btn btn-large wave-effect blue" 
-        ng-click="property.addProperty()">
+        ng-disabled="!property.info._id && !property.relationship.status"
+        ng-click="property.addRelationship()">
         Add
       </button>
     </div>
