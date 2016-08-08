@@ -4,25 +4,25 @@
   bb-active-title="">
   <div class="row">
     <a class="btn blue float-right"
-      ui-sref="propertyEditForm({id: property.details._id})">Edit Property</a>
+      ui-sref="propertyEditForm({id: property.details._property._id})">Edit Property</a>
   </div>
   <div class="row" ng-cloak>
     <div class="col s12">
-      <div class="photos" ng-repeat="image in property.details.images">
+      <div class="photos" ng-repeat="image in property.details._property.images">
         <img 
           ng-class="{s6:$first}"
           class="col s3"
           ng-src="{{image}}"
-          alt="{{property.details.title}} Photo #{{$index}}"
-          title="{{property.details.title}}"/>
+          alt="{{property.details._property.title}} Photo #{{$index}}"
+          title="{{property.details._property.title}}"/>
       </div>
       <div class="col s12">
-        <h1>{{property.details.location.address}}</h1>
-        <h2>{{property.details.location.city}}, {{property.details.location.state}} {{property.detail.location.zip}}</h2>
-        <label>Purchase Price</label><p>{{property.details.price | currency:"$":0}}</p>
-        <p>Created at: {{property.details.createdAt | amTimeAgo }}</p>
-        <p>Bedrooms: {{property.details.bedrooms}}</p>
-        <p>Bathrooms: {{property.details.bathrooms}}</p>
+        <h1>{{property.details._property.location.address}}</h1>
+        <h2>{{property.details._property.location.city}}, {{property.details._property.location.state}} {{property.detail.location.zip}}</h2>
+        <label>Purchase Price</label><p>{{property.details._property.price | currency:"$":0}}</p>
+        <p>Created at: {{property.details._property.createdAt | amTimeAgo }}</p>
+        <p>Bedrooms: {{property.details._property.bedrooms}}</p>
+        <p>Bathrooms: {{property.details._property.bathrooms}}</p>
       </div>
     </div>
   </div>
@@ -34,13 +34,20 @@
     id="property-map"
     zoom="14"
     scrollwheel="false"
-    center="{{property.details.location.formatted}}"
+    center="{{property.details._property.location.formatted}}"
     geo-fallback-center="current-location">
     <marker
-      position="{{property.details.location.formatted}}"
+      position="{{property.details._property.location.formatted}}"
       animation="Animation.BOUNCE"
-      title="{{property.details.location.formatted}}"
+      title="{{property.details._property.location.formatted}}"
       centered="true">
     </marker>    
   </ng-map>
+</div>
+<div class="container container-wide">
+  <div class="row">
+    <div class="col s12">
+      <a ui-sref="add.board">Add Board</a>
+    </div>
+  </div>
 </div>

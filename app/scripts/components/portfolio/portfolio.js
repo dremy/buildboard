@@ -8,28 +8,32 @@
  * Controller of the buildboardApp
  */
 
-function portfolioCtrl($scope, propertyService, properties, NgMap, preloader, messages, alert) {
+function portfolioCtrl($scope, relationshipService, auth, properties, NgMap, preloader, messages, alert) {
 
   //Initialize variables.
   //------------------------------------
+  var _user = {
+    _user: auth.profile.user_id
+  };
   // Define Functions
   //------------------------------------
   function refreshPortfolio() {
     preloader.setState(true);
     setTimeout(function() {
-      propertyService.getProperties().then(
+      relationshipService.queryRelationshipsProperties(_user).then(
         function(properties) { // SUCCESS - Nodes loaded.
           $scope.properties = properties.data; // Display
           $scope.propertiesCosts = propertiesCosts(properties); // Update Costs Value 
-          preloader.setState(false);
         }, function(reason) { // ERROR - Nodes NOT loaded.
           console.log(reason);
           alert.message = "Why you no like me... " + reason.statusText;
           alert.type = 'warning';
           messages.add(alert.message, alert.type, alert.dt);
-          preloader.setState(false);
         }
-      );
+      )
+      .then(function(){
+        preloader.setState(false);
+      });
     }, 2000);
   }
 
@@ -50,7 +54,8 @@ function portfolioCtrl($scope, propertyService, properties, NgMap, preloader, me
     }*/
     return propCosts;
   }
-
+  
+  console.log('working');
   //Perform on load.
   //------------------------------------
   $scope.properties = properties.data;

@@ -11,12 +11,13 @@ function propertyCtrl($state, prop, messages, alert, preloader) {
   // Initialize variables.
   //-------------------------------  
   var property = this;
+  console.log(prop);
   // Define functions.
   //-------------------------------
   // Perform on load.
   //-------------------------------
   if (prop.data) {
-    property.details = prop.data;
+    property.details = prop.data[0];
   } else {
     alert.message = 'Adding failed due to ' + reason.statusText + '. Try again later.';
     alert.type = 'warning';

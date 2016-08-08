@@ -47,53 +47,59 @@ angular.module('buildboardApp')
       })
       .state('userLogin', {
         url: '/user/login',
-        templateUrl: 'scripts/components/user/user.login.html',
+        templateUrl: componentsDir + '/user/user.login.html',
         controller: 'LoginCtrl',
         controllerAs: 'login'
       })
       .state('userRegister', {
         url: '/user/register',
-        templateUrl: 'scripts/components/user/user.register.html',
+        templateUrl: componentsDir + '/user/user.register.html',
         controller: 'RegisterCtrl',
         controllerAs: 'register'
       })
       .state('add', {
         url:'/add',
-        templateUrl: 'scripts/components/add/add.html',
+        templateUrl: componentsDir + '/add/add.html',
         data: {
           requiresLogin: true
         }
       })
       .state('add.item', {
         url: '/item',
-        templateUrl: 'scripts/components/add/add.item.html',
+        templateUrl: componentsDir + '/add/add.item.html',
         controller: 'AddItemCtrl',
         controllerAs: 'items'
       })
       .state('add.property', {
         url:'/property',
-        templateUrl: 'scripts/components/add/add.property.html',
+        templateUrl: componentsDir + '/add/add.property.html',
         controller: 'AddPropertyCtrl',
         controllerAs: 'property'
       })
       .state('add.property.address', {
         url:'/address',
-        templateUrl: 'scripts/components/add/add.property.address.html',
+        templateUrl: componentsDir + '/add/add.property.address.html',
       })
       .state('add.property.confirm', {
         url:'/confirm',
-        templateUrl: 'scripts/components/add/add.property.confirm.html',
+        templateUrl: componentsDir + '/add/add.property.confirm.html',
       })
       .state('add.property.relationship', {
         url:'/relationship',
-        templateUrl: 'scripts/components/add/add.property.relationship.html',
+        templateUrl: componentsDir + '/add/add.property.relationship.html',
+      })
+      .state('add.board', {
+        url: '/board',
+        templateUrl: componentsDir + '/add/add.board.html',
+        controller: 'BoardCtrl',
+        controllerAs: 'board'
       })
       .state('accountEdit', {
         url: '/user/:uid/edit',
         data: {
           requiresLogin: true
         },
-        templateUrl: 'scripts/components/user/user.edit.html',
+        templateUrl: componentsDir + '/user/user.edit.html',
         controller: 'UserEditCtrl',
         controllerAs: 'user'
       })
@@ -102,19 +108,7 @@ angular.module('buildboardApp')
         data: {
           requiresLogin: true
         },
-        /*resolve: {
-          account: ['$stateParams', 'drupal', 'messages','alert', 
-            function ($stateParams, drupal, messages, alert) {
-              if ($stateParams.uid) {
-                return drupal.user_load($stateParams.uid);
-              } else {
-                  alert.message = "Can't pull user account details. Refresh the page to try again.";
-                  alert.type = 'danger';
-                  messages.add(alert.message, alert.type, alert.dt);
-              }
-          }]
-        },*/
-        templateUrl: 'scripts/components/user/user.html',
+        templateUrl: componentsDir + '/user/user.html',
         controller: 'UserCtrl',
         controllerAs: 'user'
       })
@@ -124,27 +118,14 @@ angular.module('buildboardApp')
           requiresLogin: true
         },
         resolve: {
-          properties: ['relationshipService', 'propertyService', 'auth', function(relationshipService, propertyService, auth) {
-            var uid = {
-              uid: auth.profile.user_id
+          properties: ['relationshipService', 'auth', function(relationshipService, auth) {
+            var _user = {
+              _user: auth.profile.user_id
             };
-            var pids = [];
-            // First, get all of the users relationships
-            relationshipService
-              .queryRelationships(uid)
-              .success(
-                function(data) {
-                  /*for (var i in data) {
-                    data[i]; 
-                  }*/
-                  console.log(data);
-                }
-              );
-            // THEN GET ALL PROPERTIES FROM RELATIONSHIPS
-            return propertyService.getProperties();
+            return relationshipService.queryRelationshipsProperties(_user);
           }]
         },
-        templateUrl: 'scripts/components/portfolio/portfolio.html',
+        templateUrl: componentsDir + '/portfolio/portfolio.html',
         controller: 'PortfolioCtrl',
         controllerAs: 'portfolio'
       })
@@ -154,11 +135,15 @@ angular.module('buildboardApp')
           requiresLogin: true
         },
         resolve: {
-          prop: ['$stateParams', 'propertyService', 
-            function ($stateParams, propertyService) {
-              return propertyService.getPropertyById($stateParams.id);
+          prop: ['relationshipService', '$stateParams', 'auth',
+            function(relationshipService, $stateParams, auth) {
+              var query = {
+                _user: auth.profile.user_id,
+                _property: $stateParams.id
+              };
+              return relationshipService.queryRelationshipsProperties(query);
             }
-          ]
+          ]          
         },
         templateUrl: componentsDir + '/property/property.html',
         controller: 'PropertyCtrl',
@@ -190,11 +175,6 @@ angular.module('buildboardApp')
         controller: 'PropertyDeleteCtrl',
         controllerAs: 'property'
       })
-      /*.when('/property/:nid/documents', {
-        templateUrl: 'views/documents.html',
-        controller: 'DocumentsCtrl',
-        controllerAs: 'documents'
-      })*/
       .state('addProposal', { //TO DO - Very temporary
         url: '/addProposal',
         templateUrl: 'views/addProposal.html',

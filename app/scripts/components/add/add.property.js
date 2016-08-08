@@ -104,19 +104,19 @@ function addPropertyCtrl(zillowZervice, propertyMaker, propertyService, relation
       switch (property.relationship.status) {
         case 'Interested':
           relationship.status.interested = {
-            value: true,
+            value: property.relationship.status,
             updatedAt: Date.now()
           };
         break;
         case 'Own':
           relationship.status.own = {
-            value: true,
+            value: property.relationship.status,
             updatedAt: Date.now()
           };
         break;
         case 'Sold':
           relationship.status.sold = {
-            value: true,
+            value: property.relationship.status,
             updatedAt: Date.now()
           };
         break;

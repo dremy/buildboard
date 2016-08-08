@@ -14,15 +14,15 @@ var relationshipSchema = new Schema({
   },
   status: {
     interested: { // Are they interested in it?
-      value: Boolean,
+      value: String,
       updatedAt: Date
     },
     own: { // Do they own it?
-      value: Boolean,
+      value: String,
       updatedAt: Date
     },
     sold: { // Did they sell it?
-      value: Boolean,
+      value: String,
       updatedAt: Date // When was this marked?
       // If so:
       // - for how much

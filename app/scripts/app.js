@@ -31,6 +31,8 @@ angular
     'bb.alert',
     'bb.preloader',
     'bb.property',
+    'bb.board',
+    'bb.file',
     'bb.user'
     // NOT READY - 'bb.message'
   ])

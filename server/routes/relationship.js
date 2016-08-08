@@ -81,7 +81,7 @@ module.exports = function() {
     getRelationshipsProperties : function(req, res) {
       Relationship
         .find(req.body)
-        .populate('_property')
+        .populate('_property', 'title bedrooms bathrooms location images finishedSqFt')
         .exec(function(err, properties) {
         if(err) res.send(err);
         // If no errors, send back to client.

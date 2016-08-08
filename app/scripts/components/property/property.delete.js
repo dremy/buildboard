@@ -2,30 +2,33 @@
 
 /**
  * @ngdoc function
- * @name buildboardApp.controller:propertyDeleteForm
+ * @name bb.property.controller:propertyDeleteForm
  * @description
  * # propertyDeleteCtrl
- * Controller of the buildboardApp
+ * Controller of the bb.property
  */
 
-function propertyDeleteCtrl(propertyService, $state, prop, preloader, messages, alert) {
+function propertyDeleteCtrl(relationshipService, $state, prop, preloader, messages, alert) {
 
   //Initialize variables.
   //------------------------------------
-  var property = this;
+  var property = this,
+  id = {
+    _id: prop.data._id
+  };
 
   // Define Functions
   //------------------------------------
   // Setup the Form
   function cancelProperty() {
-    $state.go('property', {id: prop.data._id});
+    $state.go('property', {id: prop.data._property._id});
   }
 
   function removeProperty() {
     preloader.setState(true);
-    propertyService.removeProperty(prop.data)
+    relationshipService.removeRelationship(query)
       .success(function(data) {
-        alert.message = 'Congratulations! ' + prop.data.title + ' has been deleted!';
+        alert.message = 'Congratulations! ' + prop.data._property.title + ' has been deleted!';
         alert.type = 'success';
         messages.add(alert.message, alert.type, alert.dt);
       })
