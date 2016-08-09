@@ -51,7 +51,7 @@
     "object-assign": "^4.1.0"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "node server.js",
     "test": "karma start test/karma.conf.js",
     "postinstall": "./node_modules/bower/bin/bower install"
   }
