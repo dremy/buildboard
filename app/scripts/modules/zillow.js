@@ -189,6 +189,6 @@ angular.module('angular-zillow', [])
   .constant('zillow', {
     //searchApi: location.origin + '/proxies/searchProxy.php',
     //propertyDetailsApi: location.origin + 'proxies/detailsProxy.php'
-    searchApi: 'http://dev-buildboard.pantheonsite.io/app/' + 'searchProxy.php',
-    propertyDetailsApi: 'http://dev-buildboard.pantheonsite.io/app/' + 'detailsProxy.php'
+    searchApi: 'https://dev-buildboard.pantheonsite.io/app/' + 'searchProxy.php',
+    propertyDetailsApi: 'https://dev-buildboard.pantheonsite.io/app/' + 'detailsProxy.php'
   });
