@@ -8,6 +8,15 @@
   "dependencies": {
     "jquery": "~2.1.1",
     "angular": "1.5.8",
+    "bootstrap": "^3.2.0",
+    "angular-animate": "^1.4.0",
+    "angular-cookies": "^1.4.0",
+    "angular-messages": "^1.4.0",
+    "angular-resource": "^1.4.0",
+    "angular-route": "^1.4.0",
+    "angular-sanitize": "^1.4.0",
+    "angular-touch": "^1.4.0",
+    "angular-bootstrap": "^1.1.2",
     "object-assign": "^4.1.0"
   },
   "devDependencies": {
