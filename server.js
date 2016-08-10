@@ -30,7 +30,10 @@ var options = {
   }
 };
 
-mongoose.connect('mongodb://127.0.0.1/buildboard', options);
+// Database Configuration
+var database = process.env.MONGODB_URI || 'mongodb://127.0.0.1/buildboard';
+
+mongoose.connect(database, options);
 var db = mongoose.connection;
 
 // If a DB error, console
