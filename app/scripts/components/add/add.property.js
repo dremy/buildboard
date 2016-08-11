@@ -88,7 +88,6 @@ function addPropertyCtrl(zillowZervice, propertyMaker, propertyService, relation
       alert.type = 'success';
       messages.add(alert.message, alert.type, alert.dt);
       property.info._id = data._id;
-      // Temporary
       $state.go('add.property.relationship');
     });
   }
