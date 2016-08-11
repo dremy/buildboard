@@ -7,19 +7,7 @@ if(!process.env.ZWS_ID) {
 
 module.exports = function() {
   return {
-    search : function(req, res) {  
-      /** Build URL to request
-       * searchApi: 'http://www.zillow.com/webservice/GetDeepSearchResults.htm?
-       * Format: http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=<zws-id>&address=<address>&citystatezip=<city, state zip>
-       * Example: http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=X1-ZWz19u0t23l4i3_a6mew&address=914+Warsaw+St&citystatezip=Seattle%2C+WA
-       */
-      var url = 'http://www.zillow.com/webservice/GetDeepSearchResults.htm?';    
-      url += 'zws-id=' + process.env.ZWS_ID;
-      req.pipe(request(url)).pipe(res);
-    }
-  };
-};
-/*
+    search : function(req, res) {
       // TO DO: Consider 'https://github.com/sindresorhus/query-string'
       function getParam (sname) {
         // Validate String type.
@@ -80,7 +68,7 @@ module.exports = function() {
          * searchApi: 'http://www.zillow.com/webservice/GetDeepSearchResults.htm?
          * Format: http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=<zws-id>&address=<address>&citystatezip=<city, state zip>
          * Example: http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=X1-ZWz19u0t23l4i3_a6mew&address=914+Warsaw+St&citystatezip=Seattle%2C+WA
-         *//*
+         */
         var url = 'http://www.zillow.com/webservice/GetDeepSearchResults.htm?';    
         url += 'zws-id=' + process.env.ZWS_ID;
         url += '&address=' + address;
@@ -89,5 +77,9 @@ module.exports = function() {
       } else {
         return console.log('Not working.');
       }
+    },
+    details : function (req, res) {
+      console.log('ba humbug');
     }
-);*/
+  };
+};
