@@ -9,6 +9,7 @@ var searchProxy = require('express').Router();
 searchProxy.route('')
   .get(
     function(req, res) {  
+      // TO DO: Consider 'https://github.com/sindresorhus/query-string'
       function getParam (sname) {
         // Validate String type.
         if (typeof sname !== 'string') {

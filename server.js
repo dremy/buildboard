@@ -51,11 +51,11 @@ app.use(bodyParser.json({text: 'application/json'}));
 // Proxies
 //-------------------------
 // Search Proxy.
-var searchProxy = require('./server/proxies/searchProxy');
+/*var searchProxy = require('./server/proxies/searchProxy');
 app.use('/searchProxy', searchProxy);
 // Details Proxy.
 var detailsProxy = require('./server/proxies/detailsProxy');
-app.use('/detailsProxy', detailsProxy);
+app.use('/detailsProxy', detailsProxy);*/
 
 // Static files
 app.use(express.static(__dirname + '/app'));
