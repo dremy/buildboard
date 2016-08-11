@@ -54,12 +54,14 @@ app.use(bodyParser.json({text: 'application/json'}));
 /*var searchProxy = require('./server/proxies/searchProxy');*/
 var request = require('request');
 if(!process.env.ZWS_ID) {
+  console.log('No ZWS_ID');
   var env = require('./../env.js');
 }
+
 app.use('/searchProxy', 
   function(req, res) {  
       // TO DO: Consider 'https://github.com/sindresorhus/query-string'
-      function getParam (sname) {
+      /*function getParam (sname) {
         // Validate String type.
         if (typeof sname !== 'string') {
           return {};
@@ -120,9 +122,9 @@ app.use('/searchProxy',
          * Example: http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=X1-ZWz19u0t23l4i3_a6mew&address=914+Warsaw+St&citystatezip=Seattle%2C+WA
          */
         var url = 'http://www.zillow.com/webservice/GetDeepSearchResults.htm?';    
-        url += 'zws-id=' + process.env.ZWSID;
-        url += '&address=' + address;
-        url += '&citystatezip=' + citystatezip;
+        url += 'zws-id=' + process.env.ZWS_ID;
+        //url += '&address=' + address;
+        //url += '&citystatezip=' + citystatezip;
         req.pipe(request(url)).pipe(res);
       } else {
         return console.log('Not working.');
