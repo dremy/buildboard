@@ -149,9 +149,12 @@ function propertyMaker(zillowZervice, $q, preloader, alert, messages) {
                     if (detailsResult.images) {
                       if (parseInt(detailsResult.images.count) > 1) {
                         property.images = detailsResult.images.image.url;
+                        for (var i in property.images) {
+                          property.images[i] = property.images[i].replace('http:','https:');
+                        };
                       } else if (parseInt(detailsResult.images.count) == 1) {
                         property.images = [];
-                        property.images[0] = detailsResult.images.image.url;
+                        property.images[0] = detailsResult.images.image.url.replace('http:','https:');
                       }
                     }
                   } else {
