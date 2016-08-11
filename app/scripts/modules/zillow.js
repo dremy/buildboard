@@ -186,7 +186,13 @@ function propertyMaker(zillowZervice, $q, preloader, alert, messages) {
 angular.module('angular-zillow', [])
   .factory('zillowZervice', zillowZervice)
   .factory('propertyMaker', propertyMaker)
+  // Node.js Proxies
+  .constant('zillow', {
+    searchApi: location.origin + '/searchProxy',
+    propertyDetailsApi: location.origin + '/detailsProxy'
+  });
+/* PHP Proxies
   .constant('zillow', {
     searchApi: location.origin + '/proxies/searchProxy.php',
-    propertyDetailsApi: location.origin + 'proxies/detailsProxy.php'
-  });
+    propertyDetailsApi: location.origin + '/proxies/detailsProxy.php'
+  });*/

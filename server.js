@@ -48,10 +48,16 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.text());
 app.use(bodyParser.json({text: 'application/json'}));
 
-// PHP
-// app.use('/', php.cgi('/app'));
+// Proxies
+//-------------------------
+// Search Proxy.
+var searchProxy = require('./server/proxies/searchProxy');
+app.use('/searchProxy', searchProxy);
+// Details Proxy.
+var detailsProxy = require('./server/proxies/detailsProxy');
+app.use('/detailsProxy', detailsProxy);
 
-//Static files
+// Static files
 app.use(express.static(__dirname + '/app'));
 
 // API Routes
