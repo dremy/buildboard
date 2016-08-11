@@ -1,4 +1,4 @@
-var request = require('request');
+/*var request = require('request');
 
 if(!process.env.ZWS_ID) {
   var env = require('./../env.js');
@@ -36,7 +36,6 @@ detailsProxy.route('')
       if(getParam('zpid')) {
         // Get variables.
         var zpid = getParam('zpid');
-        var webServicesId = process.env.ZWS_ID;
 
         /** Build URL to Open
          * propertyDetailsApi: 'http://www.zillow.com/webservice/GetUpdatedPropertyDetails.htm?
@@ -44,7 +43,7 @@ detailsProxy.route('')
          * Example: http://www.zillow.com/webservice/GetUpdatedPropertyDetails.htm?zws-id=X1-ZWz19u0t23l4i3_a6mew&zpid=48768108
          */        
         var url = 'http://www.zillow.com/webservice/GetUpdatedPropertyDetails.htm?';    
-        url += 'zws-id=' + process.env.ZWSID;
+        url += 'zws-id=' + process.env.ZWS_ID;
         url += '&zpid=' + zpid;
         req.pipe(request(url)).pipe(res);
       } else {
@@ -53,4 +52,4 @@ detailsProxy.route('')
     }
 );
 
-module.exports = detailsProxy;
+module.exports = detailsProxy;*/
