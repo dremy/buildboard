@@ -1,5 +1,5 @@
 /*
- * The Property API controller
+ * The Relationship API controller
  *
  * Exports 4 methods:
  *  - getAll
@@ -82,11 +82,16 @@ module.exports = function() {
       Relationship
         .find(req.body)
         .populate('_property', 'title bedrooms bathrooms location images finishedSqFt')
+        .populate({
+          path: '_boards',
+          populate: {
+            path: '_files'
+          }})
         .exec(function(err, properties) {
         if(err) res.send(err);
         // If no errors, send back to client.
         res.json(properties);
       });
     }
-  }
+  };
 };

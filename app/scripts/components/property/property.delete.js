@@ -8,27 +8,27 @@
  * Controller of the bb.property
  */
 
-function propertyDeleteCtrl(relationshipService, $state, prop, preloader, messages, alert) {
+function propertyDeleteCtrl(relationshipService, $state, rel, preloader, messages, alert) {
 
   //Initialize variables.
   //------------------------------------
   var property = this,
   id = {
-    _id: prop.data._id
+    _id: rel.data._id
   };
 
   // Define Functions
   //------------------------------------
   // Setup the Form
   function cancelProperty() {
-    $state.go('property', {id: prop.data._property._id});
+    $state.go('property', {id: rel.data._property._id});
   }
 
   function removeProperty() {
     preloader.setState(true);
-    relationshipService.removeRelationship(query)
+    relationshipService.removeRelationship(rel.data)
       .success(function(data) {
-        alert.message = 'Congratulations! ' + prop.data._property.title + ' has been deleted!';
+        alert.message = 'Congratulations! ' + rel.data._property.title + ' has been deleted!';
         alert.type = 'success';
         messages.add(alert.message, alert.type, alert.dt);
       })
@@ -44,7 +44,7 @@ function propertyDeleteCtrl(relationshipService, $state, prop, preloader, messag
   }
   //Perform on load.
   //------------------------------------
-  property.details = prop.data;
+  property.details = rel.data;
   //Register functions to $scope.
   //------------------------------------
   property.cancelProperty = cancelProperty;

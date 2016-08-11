@@ -91,6 +91,31 @@ angular.module('buildboardApp')
       .state('add.board', {
         url: '/board',
         templateUrl: componentsDir + '/add/add.board.html',
+        resolve: {
+          /*previousState: [
+            '$state',
+            function ($state) {
+              var currentStateData = {
+                name: $state.current.name,
+                params: $state.params,
+                url: $state.href($state.current.name, $state.params)
+              };
+              return currentStateData;
+            }
+          ],*/
+          rel: [
+            '$state',
+            'relationshipService',
+            'auth',
+            function ($state, relationshipService, auth) {
+              var query = {
+                _user: auth.profile.user_id,
+                _property: $state.params.id
+              };
+              return relationshipService.queryRelationshipsProperties(query);
+            }
+          ]
+        },
         controller: 'BoardCtrl',
         controllerAs: 'board'
       })
@@ -118,7 +143,10 @@ angular.module('buildboardApp')
           requiresLogin: true
         },
         resolve: {
-          properties: ['relationshipService', 'auth', function(relationshipService, auth) {
+          properties: [
+            'relationshipService',
+            'auth',
+            function(relationshipService, auth) {
             var _user = {
               _user: auth.profile.user_id
             };
@@ -135,7 +163,10 @@ angular.module('buildboardApp')
           requiresLogin: true
         },
         resolve: {
-          prop: ['relationshipService', '$stateParams', 'auth',
+          rel: [
+            'relationshipService',
+            '$stateParams',
+            'auth',
             function(relationshipService, $stateParams, auth) {
               var query = {
                 _user: auth.profile.user_id,
@@ -166,9 +197,16 @@ angular.module('buildboardApp')
         url:'/property/:id/remove',   
         templateUrl: componentsDir + '/property/property.delete.html',
         resolve: {
-          prop: ['$stateParams', 'propertyService', 
-            function ($stateParams, propertyService) {
-              return propertyService.getPropertyById($stateParams.id);
+          rel: [
+            'relationshipService',
+            '$stateParams',
+            'auth',
+            function(relationshipService, $stateParams, auth) {
+              var query = {
+                _user: auth.profile.user_id,
+                _property: $stateParams.id
+              };
+              return relationshipService.queryRelationshipsProperties(query);
             }
           ]
         },

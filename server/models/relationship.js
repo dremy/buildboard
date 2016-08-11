@@ -32,8 +32,11 @@ var relationshipSchema = new Schema({
       // - who was involved
     }
   },
-  _boards: Schema.Types.Mixed, // Boards.
-  _plans: Schema.Types.Mixed, // Plans.
+  _boards: [{ // Boards.
+    type: Schema.Types.ObjectId,
+    ref: 'board'
+  }],
+  _plans: [Schema.Types.Mixed], // Plans.
   tags: Schema.Types.Mixed, // Tags.
   createdAt: { // How long ago was relationship created.
     type: Date,

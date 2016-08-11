@@ -39,8 +39,8 @@
           <!-- Show the thumbanil of more files -->
               <div 
                 style="margin-top:10px;" 
-                ng-repeat="thumbnail in board.data.multipleFiles">
-                <div class="col s{{12 / board.data.multipleFiles.length}}">
+                ng-repeat="thumbnail in board.files">
+                <div class="col s{{12 / board.files.length}}">
                   <a
                     href="{{thumbnail.url}}"
                     class="thumbnail"
@@ -64,7 +64,7 @@
     <div class="col s6">
       <a 
         class="btn btn-large wave-effect red" 
-        ui-sref="property({id:property.details._id})">
+        ui-sref="property({id:board.relationship._property._id})">
         Cancel
       </a>
   </div>

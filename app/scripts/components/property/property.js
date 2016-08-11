@@ -7,17 +7,20 @@
  * # PropertyCtrl
  * Controller of the buildboardApp
  */
-function propertyCtrl($state, prop, messages, alert, preloader) { 
+function propertyCtrl($state, rel, messages, alert, preloader) { 
   // Initialize variables.
   //-------------------------------  
   var property = this;
-  console.log(prop);
+  console.log('relationship', rel.data[0]);
   // Define functions.
   //-------------------------------
   // Perform on load.
   //-------------------------------
-  if (prop.data) {
-    property.details = prop.data[0];
+  if (rel.data) {
+    property.details = rel.data[0]._property;
+    property.boards = rel.data[0]._boards;
+    console.log('property', property.details);
+    console.log('boards', property.boards);
   } else {
     alert.message = 'Adding failed due to ' + reason.statusText + '. Try again later.';
     alert.type = 'warning';

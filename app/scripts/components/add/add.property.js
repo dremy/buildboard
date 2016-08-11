@@ -141,7 +141,6 @@ function addPropertyCtrl(zillowZervice, propertyMaker, propertyService, relation
     property.map = map;
   });
 
-  $('select').material_select();
   property.placeChanged = placeChanged;
   property.confirmProperty = confirmProperty;
   property.addRelationship = addRelationship;

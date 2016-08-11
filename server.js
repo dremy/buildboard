@@ -10,10 +10,6 @@ var express   = require('express'),
 var app       = express(),
     port      = process.env.PORT || 3000;
 
-// Route
-var Property = require('./server/routes/property')();
-var Relationship = require('./server/routes/relationship')();
-
 // Some options
 var options = {
   server: {
@@ -48,21 +44,17 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.text());
 app.use(bodyParser.json({text: 'application/json'}));
 
-// Proxies
-//-------------------------
-// Search Proxy.
-var Proxy = require('./server/proxies/proxy')();
-app.route('/searchProxy')
-  .get(Proxy.search);
-// Details Proxy.
-app.route('/detailsProxy')
-  .get(Proxy.details);
-
 // Static files
 app.use(express.static(__dirname + '/app'));
 
 // API Routes
 //-------------------------
+// Route Dependencies
+var Property = require('./server/routes/property')();
+var Relationship = require('./server/routes/relationship')();
+var Board = require('./server/routes/board')();
+var File = require('./server/routes/file')();
+
 // Properties
 app.route('/api/properties')
   .get(Property.getAll)
@@ -92,5 +84,52 @@ app.route('/api/relationships/query')
 app.route('/api/relationships/properties')
   .post(Relationship.getRelationshipsProperties);
 
+// Boards
+app.route('/api/boards')
+  .get(Board.getAll)
+  .post(Board.post);
+
+app.route('/api/boards/:id')
+  .get(Board.getOne)
+  .delete(Board.deleteById)
+  .put(Board.updateById);
+
+app.route('/api/boards/query')
+  .post(Board.getFiltered);
+
+app.route('/api/boards/relationship')
+  .post(Board.getBoardRelationship);
+
+app.route('/api/boards/files')
+  .post(Board.getBoardFiles);
+
+// Files
+app.route('/api/files')
+  .get(File.getAll)
+  .post(File.post);
+
+app.route('/api/files/:id')
+  .get(File.getOne)
+  .delete(File.deleteById)
+  .put(File.updateById);
+
+app.route('/api/files/query')
+  .post(File.getFiltered);
+
+app.route('/api/files/board')
+  .post(File.getFileBoard);
+
+// Proxies
+//-------------------------
+var Proxy = require('./server/proxies/proxy')();
+// Search Proxy.
+app.route('/searchProxy')
+  .get(Proxy.search);
+// Details Proxy.
+app.route('/detailsProxy')
+  .get(Proxy.details);
+
+// Execute
+//------------------------- 
 app.listen(port);
   console.log('listening on port ' + port);
