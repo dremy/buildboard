@@ -9,8 +9,16 @@ var detailsProxy = require('express').Router();
 detailsProxy.route('')
   .get(
     function(req, res) {  
-      var proxyUrl = req.url.replace('/','');
       function getParam (sname) {
+        // Validate String type.
+        if (typeof sname !== 'string') {
+          return {};
+        }
+        // Validate value is not empty.
+        if (!sname) {
+          return {};
+        }
+        var proxyUrl = req.url.replace('/','');
         var params = proxyUrl.substr(proxyUrl.indexOf("?")+1);
         var sval = "";
         params = params.split("&");
