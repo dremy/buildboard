@@ -18,7 +18,6 @@ function userCtrl(
   preloader,
   auth,
   // Constants
-  googleMapsUrl,
   centerOfAmerica,
   // Values
   alert) {
@@ -36,7 +35,6 @@ function userCtrl(
   //Register functions to $scope.
   //------------------------------------
   this.centerOfAmerica = centerOfAmerica;
-  this.googleMapsUrl = googleMapsUrl;
 }
 
 angular.module('bb.user', [

@@ -1,7 +1,7 @@
 // Grab dependencies.
 var request = require('request');
 
-if(!process.env.ZWS_ID) {
+if (process.env.STACK_ENV === 'local') {
   var env = require('./../env.js');
 }
 

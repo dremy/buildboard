@@ -38,7 +38,6 @@ angular
   ])
   // Constants
   //-----------------------------
-  .constant('googleMapsUrl','https://maps.googleapis.com/maps/api/js?libraries=placeses,places&key=AIzaSyD3fFcIkaR45zB5_H296gkHJ__RwX_zrBo')
   .constant('centerOfAmerica', {
     lat: parseFloat(39.500),
     lng: parseFloat(-98.350)

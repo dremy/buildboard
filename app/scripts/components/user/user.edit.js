@@ -22,7 +22,6 @@ function userEditCtrl(
   // Values
   alert,
   // Constants
-  googleMapsUrl,
   centerOfAmerica) {
 
   //Initialize variables.
@@ -112,7 +111,6 @@ function userEditCtrl(
 
   //Register functions to $scope.
   //------------------------------------
-  user.googleMapsUrl = googleMapsUrl;
   user.saveUser = saveUser;
   user.cancelEditUser = cancelEditUser;
   user.placeChanged = placeChanged;
