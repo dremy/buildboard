@@ -27,13 +27,13 @@ var options = {
 };
 
 // Database Configuration
-var database = process.env.MONGODB_URI || 'mongodb://127.0.0.1/buildboard';
+var dbConnection = process.env.MONGODB_URI || 'mongodb://127.0.0.1/buildboard';
 
-mongoose.connect(database, options);
+mongoose.connect(dbConnection, options);
 var db = mongoose.connection;
 
 // If a DB error, console
-db.on('error', console.error.bind(console, 'connection error:'));
+db.on('error', console.error.bind(console, 'Connection error:'));
 
 // Log with Morgan
 app.use(morgan('dev'));
