@@ -1,7 +1,7 @@
 // Grab dependencies.
 var request = require('request');
 
-if (process.env.STACK_ENV === 'local') {
+if (!process.env.STACK_ENV) {
   var env = require('./../env.js');
 }
 

@@ -6,6 +6,10 @@ var express   = require('express'),
     bodyParser= require('body-parser'),
     path      = require('path');
 
+if (!process.env.STACK_ENV) {
+  var env = require('./server/env.js');
+}
+
 // Instantiation
 var app       = express(),
     port      = process.env.PORT || 3000;
@@ -26,11 +30,10 @@ var options = {
   }
 };
 
-// Database Configuration
-var dbConnection = process.env.MONGODB_URI || 'mongodb://127.0.0.1/buildboard';
-
-mongoose.connect(dbConnection, options);
-var db = mongoose.connection;
+// Database Configuration.
+var dbConnection = process.env.MONGODB_URI; // Pull from config vars.
+mongoose.connect(dbConnection, options); // Connect to db.
+var db = mongoose.connection; //Prep for events.
 
 // If a DB error, console
 db.on('error', console.error.bind(console, 'Connection error:'));
