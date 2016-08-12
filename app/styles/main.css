@@ -776,3 +776,7 @@ a.additional-items:hover {
   position: absolute;
   bottom: 0;
 }
+/* line 669, main.scss */
+.boards .card .card-subtitle {
+  width: 190px;
+}
