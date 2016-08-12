@@ -1,3 +1,6 @@
 process.env['MONGO_URI'] = "mongodb://127.0.0.1/buildboard"
 process.env['ZWS_ID'] = "X1-ZWz19u0t23l4i3_a6mew"
 process.env['STACK_ENV'] = "local"
+process.env['FILEPICKER_KEY'] = "AbxbbjIjQuq0m1MnLf9n0z"
+process.env['AUTH0_CLIENTID'] = "tZpbTxM4xajZMUjR804mRFNCzEMy2XA4"
+process.env['GOOGLE_PLACES_KEY'] = "AIzaSyD3fFcIkaR45zB5_H296gkHJ__RwX_zrBo"
