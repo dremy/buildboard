@@ -5,20 +5,13 @@
     <div class="col 12" ng-show="property.info.images">
       <div class="img">
         <img
-          ng-class="{s6:$first}"
-          class="col s3"
+          ng-class="{l6:$first}"
+          class="col s12 m6 l3 "
           ng-src="{{image}}"
           alt="{{property.info.location.formatted}} Photo #:{{$index}}"
           title="{{property.info.location.formatted}} Photo #:{{$index}}"
           ng-repeat="image in property.info.images"
           />
-        <!--<img
-          ng-show="property.info.images.length == 1"
-          class="col s12 center"
-          ng-src="{{propert.info.images}}"
-          alt="{{property.info.location.formatted}} Photo #:{{$index}}"
-          title="{{property.info.location.formatted}} Photo #:{{$index}}"
-          />-->
       </div>
     </div>
     <div class="col s12" ng-show="property.info">

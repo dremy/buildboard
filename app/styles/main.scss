@@ -135,7 +135,7 @@ body {
 }
 
 .preloader {
-  position: absolute;
+  position: fixed;
   z-index: 999;
   width: 100%;
   height: 100%;
@@ -633,9 +633,14 @@ a.additional-items {
     h5 {
       color: #555;
     }
-    .img .col.s3 {
+    .img .col.l3 {
       margin-bottom: 16px;
     }
+  }
+}
+.property {
+  .photos .col.l3 {
+    margin-bottom: 16px;
   }
 }
 

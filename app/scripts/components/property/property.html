@@ -10,10 +10,13 @@
     <div class="col s12">
       <div class="photos" ng-repeat="image in property.details.images">
         <img 
-          ng-class="{s6:$first}"
-          class="col s3"
+          materialboxed
+          ng-class="{l6:$first}"
+          class="col s12 m6 l3 materialboxed responsive-img"
+          width="400"
           ng-src="{{image}}"
-          alt="{{property.details.title}} Photo #{{$index}}"
+          data-caption="Photo #{{$index+1}} | {{property.details.title}}"
+          alt="Photo #{{$index}} | {{property.details.title}}"
           title="{{property.details.title}}"/>
       </div>
       <div class="col s12">
@@ -69,7 +72,13 @@
             <img ng-src="{{board._files[0].url | fpConvert: {filter:'crop[dim:0,0,255,262]', w:255} }}" />
             <span class="card-title">{{board.title}}</span>
             <span class="card-subtitle">
-              <span ng-repeat="tag in board._tags">{{tag.tag}}, </span>
+              <span 
+                ng-if="board._tags.length > 0" 
+                class="glyphicon glyphicon-tag" 
+                aria-hidden="true"></span>
+              <span 
+                ng-if="board._tags.length > 0"
+                ng-repeat="tag in board._tags">{{tag.tag}}, </span>
             </span>
           </div>
         </a>

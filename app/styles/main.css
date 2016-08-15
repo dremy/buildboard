@@ -155,7 +155,7 @@ body {
 
 /* line 137, main.scss */
 .preloader {
-  position: absolute;
+  position: fixed;
   z-index: 999;
   width: 100%;
   height: 100%;
@@ -733,50 +733,55 @@ a.additional-items:hover {
   color: #555;
 }
 /* line 636, main.scss */
-.add-property .confirm .img .col.s3 {
+.add-property .confirm .img .col.l3 {
   margin-bottom: 16px;
 }
 
-/* line 643, main.scss */
+/* line 642, main.scss */
+.property .photos .col.l3 {
+  margin-bottom: 16px;
+}
+
+/* line 648, main.scss */
 .boards .add-card {
   height: 262px;
 }
-/* line 645, main.scss */
+/* line 650, main.scss */
 .boards .add-card .card-add {
   padding-top: 80px;
   min-height: 262px;
 }
-/* line 650, main.scss */
+/* line 655, main.scss */
 .boards .item {
   height: 285px;
 }
-/* line 653, main.scss */
+/* line 658, main.scss */
 .boards .card {
   height: 262px;
 }
-/* line 655, main.scss */
+/* line 660, main.scss */
 .boards .card:hover {
   -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
-/* line 658, main.scss */
+/* line 663, main.scss */
 .boards .card a:hover {
   -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
-/* line 661, main.scss */
+/* line 666, main.scss */
 .boards .card .card-image {
   height: 262px;
 }
-/* line 664, main.scss */
+/* line 669, main.scss */
 .boards .card .card-title {
   background: #444;
   position: absolute;
   bottom: 0;
 }
-/* line 669, main.scss */
+/* line 674, main.scss */
 .boards .card .card-subtitle {
   width: 190px;
 }

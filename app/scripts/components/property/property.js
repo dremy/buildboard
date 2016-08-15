@@ -19,6 +19,12 @@ function propertyCtrl($state, rel, messages, alert, preloader) {
   if (rel.data) {
     property.details = rel.data[0]._property;
     property.boards = rel.data[0]._boards;
+
+    for (var i in property.boards) {
+      if (typeof property.boards[i]._tags !== 'undefined' && property.boards[i]._tags.length > 0) {
+        console.log('tags', property.boards[i]._tags);
+      }
+    } 
     console.log('property', property.details);
     console.log('boards', property.boards);
   } else {
