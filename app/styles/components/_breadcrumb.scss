@@ -1,0 +1,20 @@
+// Breadcrumb
+// -------------------------
+.breadcrumb-nav {
+  background: lighten($secondary-blue, 10%);;
+  a.breadcrumb {
+    padding: 10px 10px 10px 0px;
+    @include border-radius(5px);
+    &:first-child {
+      padding: 10px;
+    }
+    &:hover {
+      cursor: pointer;
+      text-decoration: none;
+      @include box-shadow(inset 0px 2px 8px 2px lighten($secondary-blue, 5%));
+    }
+    img {
+      @include border-radius(50%);
+    }
+  }
+}

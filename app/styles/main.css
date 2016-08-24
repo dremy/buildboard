@@ -11,149 +11,18 @@ body {
   padding: 0;
 }
 
-/* line 17, main.scss */
-.navbar {
-  border-radius: 0px;
-  border: none;
-  box-shadow: 0px 0px 10px 0px #333;
-}
-
-/* line 23, main.scss */
-.navbar-default {
-  background: linear-gradient(to right, #296ad4 0%, #1e89e5 100%);
-  padding: 10px 0;
-}
-/* line 26, main.scss */
-.navbar-default .navbar-nav {
-  float: right;
-}
-/* line 28, main.scss */
-.navbar-default .navbar-nav > li {
-  margin: 0px 5px;
-}
-/* line 30, main.scss */
-.navbar-default .navbar-nav > li > a,
-.navbar-default .navbar-nav > li > button {
-  color: #FFF;
-  line-height: 10px;
-}
-/* line 34, main.scss */
-.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus,
-.navbar-default .navbar-nav > li > button:hover,
-.navbar-default .navbar-nav > li > button:focus {
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-  color: #FFF;
-  background: #5287de;
-}
-/* line 43, main.scss */
-.navbar-default .navbar-nav > .nav-login > a,
-.navbar-default .navbar-nav > .nav-login > button {
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-  border: 1px solid #FFF;
-  background: #4ca1ea;
-  text-transform: none;
-}
-/* line 51, main.scss */
-.navbar-default .navbar-nav .nav-login > a {
-  padding: 14px 15px;
-}
-/* line 54, main.scss */
-.navbar-default .navbar-nav .nav-login > button {
-  padding: 0px 15px;
-  height: 40px;
-}
-/* line 59, main.scss */
-.navbar-default .navbar-nav > .active > a,
-.navbar-default .navbar-nav > .active > button,
-.navbar-default .navbar-nav > .active > a:focus {
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-  color: #FFF;
-  background-color: #2155a9;
-}
-/* line 65, main.scss */
-.navbar-default .navbar-nav > .active > a:hover,
-.navbar-default .navbar-nav > .active > button:hover,
-.navbar-default .navbar-nav > .active > a:focus:hover {
-  color: #FFF;
-  background-color: #166eba;
-}
-/* line 72, main.scss */
-.navbar-default .navbar-toggle {
-  border-color: #FFF;
-}
-/* line 74, main.scss */
-.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
-  background-color: #4ca1ea;
-}
-/* line 78, main.scss */
-.navbar-default .navbar-toggle .icon-bar {
-  background-color: #FFF;
-}
-
-/* line 85, main.scss */
-.navbar-nav > li > button {
-  position: relative;
-  display: block;
-  padding: 10px 15px;
-}
-/* line 90, main.scss */
-.navbar-nav .dropdown-menu {
-  background: #4ca1ea;
-}
-/* line 93, main.scss */
-.navbar-nav .dropdown-menu > li > button {
-  padding: 3px 20px;
-  background: transparent;
-  border: none;
-  width: 100%;
-}
-/* line 99, main.scss */
-.navbar-nav .dropdown-menu > li > a,
-.navbar-nav .dropdown-menu > li > button {
-  color: #FFF;
-  padding: 10px 20px;
-}
-/* line 103, main.scss */
-.navbar-nav .dropdown-menu > li > a:hover, .navbar-nav .dropdown-menu > li > a:focus, .navbar-nav .dropdown-menu > li > a:active,
-.navbar-nav .dropdown-menu > li > button:hover,
-.navbar-nav .dropdown-menu > li > button:focus,
-.navbar-nav .dropdown-menu > li > button:active {
-  background: #79b9f0;
-  cursor: pointer;
-}
-/* line 111, main.scss */
-.navbar-nav .dropdown-menu > .divider {
-  margin: 0;
-}
-
-/* line 117, main.scss */
-.navbar-brand {
-  padding: 5px 15px;
-}
-
-/* line 121, main.scss */
-.logo {
-  height: 40px;
-}
-
 /* Everything but the jumbotron gets side spacing for mobile first views */
-/* line 129, main.scss */
+/* line 18, main.scss */
 .marketing {
   padding-left: 15px;
   padding-right: 15px;
 }
-/* line 132, main.scss */
+/* line 21, main.scss */
 .marketing img {
   max-width: 100%;
 }
 
-/* line 137, main.scss */
+/* line 26, main.scss */
 .preloader {
   position: fixed;
   z-index: 999;
@@ -162,7 +31,7 @@ body {
   top: 0;
 }
 
-/* line 144, main.scss */
+/* line 33, main.scss */
 .preloader-background {
   background: white;
   opacity: 0.5;
@@ -170,7 +39,7 @@ body {
   height: 100%;
 }
 
-/* line 150, main.scss */
+/* line 39, main.scss */
 .preloader-anchor {
   z-index: 1000;
   position: absolute;
@@ -179,7 +48,7 @@ body {
   display: table;
 }
 
-/* line 158, main.scss */
+/* line 47, main.scss */
 .preloader-modal {
   position: relative;
   display: table-cell;
@@ -187,8 +56,13 @@ body {
   vertical-align: middle;
 }
 
+/* line 54, main.scss */
+.logo {
+  height: 40px;
+}
+
 /* Custom page header */
-/* line 166, main.scss */
+/* line 59, main.scss */
 .header {
   position: absolute;
   z-index: 3;
@@ -196,7 +70,7 @@ body {
   top: 0;
   /* Make the masthead heading the same height as the navigation */
 }
-/* line 172, main.scss */
+/* line 65, main.scss */
 .header h3 {
   margin-top: 0;
   margin-bottom: 0;
@@ -205,7 +79,7 @@ body {
 }
 
 /* Custom page utility bar */
-/* line 181, main.scss */
+/* line 74, main.scss */
 .utility-bar {
   background: #f5f5f5;
   border-bottom: 1px solid #e5e5e5;
@@ -215,20 +89,20 @@ body {
 }
 
 /* Custom page footer */
-/* line 192, main.scss */
+/* line 85, main.scss */
 .footer {
   padding-top: 19px;
   color: #777;
   border-top: 1px solid #e5e5e5;
 }
 
-/* line 198, main.scss */
+/* line 91, main.scss */
 .container-narrow > hr {
   margin: 30px 0;
 }
 
 /* Main marketing message and sign up button */
-/* line 203, main.scss */
+/* line 96, main.scss */
 .jumbotron {
   text-align: center;
   border-bottom: 1px solid #e5e5e5;
@@ -239,21 +113,21 @@ body {
 }
 
 /* Supporting marketing content */
-/* line 214, main.scss */
+/* line 107, main.scss */
 .marketing {
   margin: 40px 0;
 }
-/* line 217, main.scss */
+/* line 110, main.scss */
 .marketing p + h4 {
   margin-top: 28px;
 }
 
-/* line 224, main.scss */
+/* line 117, main.scss */
 .form-register hr,
 .form-login hr {
   display: none;
 }
-/* line 228, main.scss */
+/* line 121, main.scss */
 .form-register .hr,
 .form-login .hr {
   box-sizing: border-box;
@@ -266,7 +140,7 @@ body {
   border-top: 1px #ccc solid;
   text-align: center;
 }
-/* line 238, main.scss */
+/* line 131, main.scss */
 .form-register .hr span.center-align,
 .form-login .hr span.center-align {
   box-sizing: border-box;
@@ -279,7 +153,7 @@ body {
   line-height: 1em;
   font-size: 20px;
 }
-/* line 250, main.scss */
+/* line 143, main.scss */
 .form-register .form-submit,
 .form-login .form-submit {
   margin: 0 auto;
@@ -287,156 +161,69 @@ body {
   display: block;
 }
 
-/* line 257, main.scss */
+/* line 150, main.scss */
 .content-intro {
   text-align: center;
 }
-/* line 259, main.scss */
+/* line 152, main.scss */
 .content-intro p {
   font-size: 1.5em;
 }
-/* line 262, main.scss */
+/* line 155, main.scss */
 .content-intro ul {
   width: 220px;
   margin: 0 auto;
   text-align: left;
 }
-/* line 266, main.scss */
+/* line 159, main.scss */
 .content-intro ul li {
   list-style-type: disc;
 }
 
 /* Buttons */
-/* line 273, main.scss */
+/* line 166, main.scss */
 .btn {
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-/* line 275, main.scss */
+/* line 168, main.scss */
 .btn:hover, .btn:focus {
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
   box-shadow: none;
   color: #FFF;
 }
-/* line 279, main.scss */
+/* line 172, main.scss */
 .btn:hover.blue, .btn:focus.blue {
   background-color: #296ad4;
 }
-/* line 282, main.scss */
+/* line 175, main.scss */
 .btn:hover.red, .btn:focus.red {
   background-color: #ba160a;
 }
 
-/* line 288, main.scss */
+/* line 181, main.scss */
 .btn-vertical {
   line-height: 1.2em;
 }
 
-/* Tabs */
-/* line 294, main.scss */
-.tabs .tab a.active {
-  border-bottom: 3px solid #2196F3;
-}
-/* line 297, main.scss */
-.tabs .tab a.blue-text {
-  color: #2196F3;
-}
-
-/* Cards  */
-/* line 306, main.scss */
-.card .card-action button:hover {
-  background: #FFF;
-  color: #0960a5;
-}
-/* line 310, main.scss */
-.card .card-action button.blue-text:not(.btn):not(.btn-large):not(.btn-floating) {
-  color: #2196F3;
-}
-/* line 313, main.scss */
-.card .card-action button i {
-  vertical-align: top;
-}
-/* line 316, main.scss */
-.card .card-action button span {
-  top: 2px;
-  display: inline-block;
-}
-/* line 324, main.scss */
-.card .card-image .card-title {
-  background: linear-gradient(rgba(0, 0, 0, 0), #000000);
-  width: 100%;
-  padding-bottom: 30px;
-}
-/* line 329, main.scss */
-.card .card-image .card-subtitle {
-  color: #FFF;
-  padding: 0px 0px 10px 23px;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-}
-/* line 337, main.scss */
-.card.card-add {
-  border: 1px dashed #ccc;
-  background: #f5f5f5;
-  padding-top: 120px;
-  -moz-box-shadow: none;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  padding-bottom: 20px;
-  min-height: 315px;
-}
-/* line 344, main.scss */
-.card.card-add:hover {
-  -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-}
-/* line 347, main.scss */
-button .card.card-add {
-  color: #333;
-}
-/* line 349, main.scss */
-button .card.card-add:hover {
-  color: #555;
-  background: #f3f3f3;
-}
-/* line 354, main.scss */
-.card.card-add .glyphicon-plus {
-  font-size: 4em;
-}
-
-/* line 360, main.scss */
-button.add-card {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  border: none;
-  background: transparent;
-}
-/* line 366, main.scss */
-button.add-card:hover {
-  background: transparent;
-}
-
-/* line 378, main.scss */
+/* line 192, main.scss */
 .property-tag i {
   vertical-align: middle;
 }
 
-/* line 383, main.scss */
+/* line 197, main.scss */
 .user .user-photo {
   width: 250px;
 }
-/* line 385, main.scss */
+/* line 199, main.scss */
 .user .user-photo > img {
   width: 100%;
 }
 
 /* Forms */
-/* line 391, main.scss */
+/* line 205, main.scss */
 input:not([type]):focus:not([readonly]),
 input[type=text]:focus:not([readonly]),
 input[type=password]:focus:not([readonly]),
@@ -453,7 +240,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
   border-bottom: 1px solid #2196F3;
   box-shadow: 0 1px 0 0 #2196F3;
 }
-/* line 406, main.scss */
+/* line 220, main.scss */
 input:not([type]):focus:not([readonly]).ng-dirty,
 input[type=text]:focus:not([readonly]).ng-dirty,
 input[type=password]:focus:not([readonly]).ng-dirty,
@@ -470,7 +257,7 @@ textarea.materialize-textarea:focus:not([readonly]).ng-dirty {
   border-bottom: 1px solid #F44336;
   box-shadow: 0 1px 0 0 #F44336;
 }
-/* line 410, main.scss */
+/* line 224, main.scss */
 input:not([type]):focus:not([readonly]) + label,
 input[type=text]:focus:not([readonly]) + label,
 input[type=password]:focus:not([readonly]) + label,
@@ -487,143 +274,133 @@ textarea.materialize-textarea:focus:not([readonly]) + label {
   color: #2196F3;
 }
 
-/* line 416, main.scss */
+/* line 230, main.scss */
 .extra-long-label .ng-touched {
   padding-left: 0px;
 }
-/* line 419, main.scss */
+/* line 233, main.scss */
 .extra-long-label .ng-untouched,
 .extra-long-label input:placeholder-shown {
   padding-left: 115px;
 }
 
-/* line 425, main.scss */
+/* line 239, main.scss */
 .long-label .ng-not-empty {
   padding-left: 0px;
 }
-/* line 428, main.scss */
+/* line 242, main.scss */
 .long-label .ng-empty,
 .long-label input:placeholder-shown {
   padding-left: 95px;
 }
 
-/* line 434, main.scss */
+/* line 248, main.scss */
 .medium-label .ng-not-empty {
   padding-left: 0px;
 }
-/* line 437, main.scss */
+/* line 251, main.scss */
 .medium-label .ng-empty,
 .medium-label input:placeholder-shown {
   padding-left: 75px;
 }
 
-/* line 443, main.scss */
+/* line 257, main.scss */
 .small-label .ng-not-empty {
   padding-left: 0px;
 }
-/* line 446, main.scss */
+/* line 260, main.scss */
 .small-label .ng-empty,
 .small-label input:placeholder-shown {
   padding-left: 35px;
 }
 
-/* line 451, main.scss */
+/* line 265, main.scss */
 input.ng-not-empty {
   padding-left: 0px;
 }
 
-/* line 454, main.scss */
+/* line 268, main.scss */
 input.ng-empty,
 input:placeholder-shown {
   padding-left: 55px;
 }
-/* line 457, main.scss */
+/* line 271, main.scss */
 input.ng-empty:focus, input.ng-empty.valid,
 input:placeholder-shown:focus,
 input:placeholder-shown.valid {
   padding-left: 0px;
 }
 
-/* line 464, main.scss */
+/* line 278, main.scss */
 .input-field .prefix.active.blue-text {
   color: #2196F3;
 }
 
 /* Colors */
-/* line 473, main.scss */
+/* line 287, main.scss */
 .original-blue-text {
   color: #48aafe;
 }
 
-/* line 477, main.scss */
+/* line 291, main.scss */
 .original-blue {
   background-color: #48aafe;
 }
 
-/* line 481, main.scss */
+/* line 295, main.scss */
 .primary-blue-text {
   color: #296ad4;
 }
 
-/* line 485, main.scss */
+/* line 299, main.scss */
 .secondary-blue-text {
   color: #1e89e5;
 }
 
-/* line 493, main.scss */
+/* line 307, main.scss */
 .content {
-  margin-top: 100px;
+  margin-top: 70px;
 }
 
-/* line 497, main.scss */
+/* line 311, main.scss */
 .container {
   margin: 0  auto;
 }
 
 /* Space out the masthead */
-/* line 502, main.scss */
+/* line 316, main.scss */
 .container-first {
   margin-top: 30px;
 }
 
-/* line 506, main.scss */
-.marquee {
-  background: #f5f5f5;
-  margin-top: -100px;
-}
-/* line 509, main.scss */
-.marquee .marquee-background {
-  max-width: 100%;
-}
-
-/* line 514, main.scss */
+/* line 320, main.scss */
 .float-right {
   float: right;
 }
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-  /* line 520, main.scss */
+  /* line 326, main.scss */
   .container {
     max-width: 730px;
   }
 
-  /* line 524, main.scss */
+  /* line 330, main.scss */
   .container-wide {
     max-width: 960px;
   }
 
-  /* line 528, main.scss */
+  /* line 334, main.scss */
   .container-full {
     max-width: 100%;
     width: 100%;
   }
 
-  /* line 534, main.scss */
+  /* line 340, main.scss */
   .marquee .marquee-background {
     width: 100%;
   }
-  /* line 538, main.scss */
+  /* line 344, main.scss */
   .marquee .marquee-text {
     position: absolute;
     z-index: 2;
@@ -631,18 +408,18 @@ input:placeholder-shown.valid {
     left: 15%;
     width: 480px;
   }
-  /* line 546, main.scss */
+  /* line 352, main.scss */
   .marquee h1 {
     color: #FFF;
   }
-  /* line 550, main.scss */
+  /* line 356, main.scss */
   .marquee .lead {
     color: #f5f5f5;
     text-shadow: 0px 0px 7px #333;
   }
 
   /* Remove the padding we set earlier */
-  /* line 557, main.scss */
+  /* line 363, main.scss */
   .header,
   .marketing,
   .footer {
@@ -650,18 +427,18 @@ input:placeholder-shown.valid {
     padding-right: 0;
   }
 
-  /* line 564, main.scss */
+  /* line 370, main.scss */
   .marketing img {
     width: 100%;
   }
 
   /* Remove the bottom border on the jumbotron for visual effect */
-  /* line 569, main.scss */
+  /* line 375, main.scss */
   .jumbotron {
     border-bottom: 0;
   }
 }
-/* line 574, main.scss */
+/* line 380, main.scss */
 .alert-box {
   position: absolute;
   z-index: 3;
@@ -669,7 +446,7 @@ input:placeholder-shown.valid {
   left: 15%;
 }
 
-/* line 581, main.scss */
+/* line 387, main.scss */
 a.additional-items {
   display: block;
   border: 1px solid #c3c3c3;
@@ -678,17 +455,17 @@ a.additional-items {
   height: 100px;
   border-radius: 5px;
 }
-/* line 588, main.scss */
+/* line 394, main.scss */
 a.additional-items:hover {
   background: #f3f3f3;
 }
 
 /* numbered nav items */
-/* line 594, main.scss */
+/* line 400, main.scss */
 .status-nav {
   /* we will style the span as the circled number */
 }
-/* line 595, main.scss */
+/* line 401, main.scss */
 .status-nav a {
   color: #1e89e5;
   display: inline-block;
@@ -698,17 +475,17 @@ a.additional-items:hover {
   text-transform: uppercase;
   /* active buttons blue border*/
 }
-/* line 602, main.scss */
+/* line 408, main.scss */
 .status-nav a:hover {
   text-decoration: none;
 }
-/* line 606, main.scss */
+/* line 412, main.scss */
 .status-nav a.active span {
   border: 1px solid #296ad4;
   background: #FFF;
   color: #296ad4;
 }
-/* line 613, main.scss */
+/* line 419, main.scss */
 .status-nav span {
   background: #1e89e5;
   color: #FFF;
@@ -720,7 +497,7 @@ a.additional-items:hover {
   border-radius: 50%;
 }
 
-/* line 625, main.scss */
+/* line 431, main.scss */
 .add-property .address .input-field,
 .add-property .confirm,
 .add-property .relationship {
@@ -728,62 +505,18 @@ a.additional-items:hover {
   border-radius: 10px;
   padding: 20px;
 }
-/* line 633, main.scss */
+/* line 439, main.scss */
 .add-property .confirm h5 {
   color: #555;
 }
-/* line 636, main.scss */
+/* line 442, main.scss */
 .add-property .confirm .img .col.l3 {
   margin-bottom: 16px;
 }
 
-/* line 642, main.scss */
+/* line 448, main.scss */
 .property .photos .col.l3 {
   margin-bottom: 16px;
-}
-
-/* line 648, main.scss */
-.boards .add-card {
-  height: 262px;
-}
-/* line 650, main.scss */
-.boards .add-card .card-add {
-  padding-top: 80px;
-  min-height: 262px;
-}
-/* line 655, main.scss */
-.boards .item {
-  height: 285px;
-}
-/* line 658, main.scss */
-.boards .card {
-  height: 262px;
-}
-/* line 660, main.scss */
-.boards .card:hover {
-  -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-}
-/* line 663, main.scss */
-.boards .card a:hover {
-  -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-}
-/* line 666, main.scss */
-.boards .card .card-image {
-  height: 262px;
-}
-/* line 669, main.scss */
-.boards .card .card-title {
-  background: #444;
-  position: absolute;
-  bottom: 0;
-}
-/* line 674, main.scss */
-.boards .card .card-subtitle {
-  width: 190px;
 }
 
 /* line 5, components/_accordion.scss */
@@ -794,4 +527,315 @@ a.additional-items:hover {
 /* line 13, components/_accordion.scss */
 .photos .collapsible-body .row {
   padding-top: 40px;
+}
+
+/* line 20, components/_accordion.scss */
+.details p {
+  padding: 0;
+}
+/* line 23, components/_accordion.scss */
+.details .fact {
+  font-size: 40px;
+}
+
+/* line 6, components/_card.scss */
+.card .card-action button:hover {
+  background: #FFF;
+  color: #0960a5;
+}
+/* line 10, components/_card.scss */
+.card .card-action button.blue-text:not(.btn):not(.btn-large):not(.btn-floating) {
+  color: #2196F3;
+}
+/* line 13, components/_card.scss */
+.card .card-action button i {
+  vertical-align: top;
+}
+/* line 16, components/_card.scss */
+.card .card-action button span {
+  top: 2px;
+  display: inline-block;
+}
+/* line 24, components/_card.scss */
+.card .card-image .card-title {
+  background: linear-gradient(rgba(0, 0, 0, 0), #000000);
+  width: 100%;
+  padding-bottom: 30px;
+}
+/* line 29, components/_card.scss */
+.card .card-image .card-subtitle {
+  color: #FFF;
+  padding: 0px 0px 10px 23px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+/* line 37, components/_card.scss */
+.card.card-add {
+  border: 1px dashed #ccc;
+  background: #f5f5f5;
+  padding-top: 120px;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  padding-bottom: 20px;
+  min-height: 315px;
+}
+/* line 44, components/_card.scss */
+.card.card-add:hover {
+  -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+/* line 47, components/_card.scss */
+button .card.card-add {
+  color: #333;
+}
+/* line 49, components/_card.scss */
+button .card.card-add:hover {
+  color: #555;
+  background: #f3f3f3;
+}
+/* line 54, components/_card.scss */
+.card.card-add .glyphicon-plus {
+  font-size: 4em;
+}
+
+/* line 61, components/_card.scss */
+button.add-card {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+/* line 67, components/_card.scss */
+button.add-card:hover {
+  background: transparent;
+}
+
+/* line 73, components/_card.scss */
+.boards .add-card {
+  height: 262px;
+}
+/* line 75, components/_card.scss */
+.boards .add-card .card-add {
+  padding-top: 80px;
+  min-height: 262px;
+}
+/* line 80, components/_card.scss */
+.boards .item {
+  height: 285px;
+}
+/* line 83, components/_card.scss */
+.boards .card {
+  height: 262px;
+}
+/* line 85, components/_card.scss */
+.boards .card:hover {
+  -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+/* line 88, components/_card.scss */
+.boards .card a:hover {
+  -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+/* line 91, components/_card.scss */
+.boards .card .card-image {
+  height: 262px;
+}
+/* line 94, components/_card.scss */
+.boards .card .card-title {
+  background: #444;
+  position: absolute;
+  bottom: 0;
+}
+/* line 99, components/_card.scss */
+.boards .card .card-subtitle {
+  width: 190px;
+}
+
+/* line 3, components/_breadcrumb.scss */
+.breadcrumb-nav {
+  background: #4ca1ea;
+}
+/* line 5, components/_breadcrumb.scss */
+.breadcrumb-nav a.breadcrumb {
+  padding: 10px 10px 10px 0px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+/* line 8, components/_breadcrumb.scss */
+.breadcrumb-nav a.breadcrumb:first-child {
+  padding: 10px;
+}
+/* line 11, components/_breadcrumb.scss */
+.breadcrumb-nav a.breadcrumb:hover {
+  cursor: pointer;
+  text-decoration: none;
+  -moz-box-shadow: inset 0px 2px 8px 2px #3595e8;
+  -webkit-box-shadow: inset 0px 2px 8px 2px #3595e8;
+  box-shadow: inset 0px 2px 8px 2px #3595e8;
+}
+/* line 16, components/_breadcrumb.scss */
+.breadcrumb-nav a.breadcrumb img {
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+
+/* line 3, components/_marquee.scss */
+.marquee {
+  background: #f5f5f5;
+  margin-top: -100px;
+}
+/* line 6, components/_marquee.scss */
+.marquee .marquee-background {
+  max-width: 100%;
+}
+
+/* line 4, components/_tab.scss */
+.tabs .tab a.active {
+  border-bottom: 3px solid #2196F3;
+}
+/* line 7, components/_tab.scss */
+.tabs .tab a.blue-text {
+  color: #2196F3;
+}
+
+/* line 3, components/_navbar.scss */
+.navbar {
+  border-radius: 0px;
+  border: none;
+  box-shadow: 0px 0px 10px 0px #333;
+}
+
+/* line 9, components/_navbar.scss */
+.navbar-default {
+  background: linear-gradient(to right, #296ad4 0%, #1e89e5 100%);
+  padding: 10px 0;
+}
+/* line 12, components/_navbar.scss */
+.navbar-default .navbar-nav {
+  float: right;
+}
+/* line 14, components/_navbar.scss */
+.navbar-default .navbar-nav > li {
+  margin: 0px 5px;
+}
+/* line 16, components/_navbar.scss */
+.navbar-default .navbar-nav > li > a,
+.navbar-default .navbar-nav > li > button {
+  color: #FFF;
+  line-height: 10px;
+}
+/* line 20, components/_navbar.scss */
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > li > button:hover,
+.navbar-default .navbar-nav > li > button:focus {
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  color: #FFF;
+  background: #5287de;
+}
+/* line 29, components/_navbar.scss */
+.navbar-default .navbar-nav > .nav-login > a,
+.navbar-default .navbar-nav > .nav-login > button {
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #FFF;
+  background: #4ca1ea;
+  text-transform: none;
+}
+/* line 37, components/_navbar.scss */
+.navbar-default .navbar-nav .nav-login > a {
+  padding: 14px 15px;
+}
+/* line 40, components/_navbar.scss */
+.navbar-default .navbar-nav .nav-login > button {
+  padding: 0px 15px;
+  height: 40px;
+}
+/* line 45, components/_navbar.scss */
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > button,
+.navbar-default .navbar-nav > .active > a:focus {
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  color: #FFF;
+  background-color: #2155a9;
+}
+/* line 51, components/_navbar.scss */
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > button:hover,
+.navbar-default .navbar-nav > .active > a:focus:hover {
+  color: #FFF;
+  background-color: #166eba;
+}
+/* line 58, components/_navbar.scss */
+.navbar-default .navbar-toggle {
+  border-color: #FFF;
+}
+/* line 60, components/_navbar.scss */
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+  background-color: #4ca1ea;
+}
+/* line 64, components/_navbar.scss */
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #FFF;
+}
+
+/* line 71, components/_navbar.scss */
+.navbar-nav > li > button {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+}
+/* line 76, components/_navbar.scss */
+.navbar-nav .dropdown-menu {
+  background: #4ca1ea;
+}
+/* line 79, components/_navbar.scss */
+.navbar-nav .dropdown-menu > li > button {
+  padding: 3px 20px;
+  background: transparent;
+  border: none;
+  width: 100%;
+}
+/* line 85, components/_navbar.scss */
+.navbar-nav .dropdown-menu > li > a,
+.navbar-nav .dropdown-menu > li > button {
+  color: #FFF;
+  padding: 10px 20px;
+}
+/* line 89, components/_navbar.scss */
+.navbar-nav .dropdown-menu > li > a:hover, .navbar-nav .dropdown-menu > li > a:focus, .navbar-nav .dropdown-menu > li > a:active,
+.navbar-nav .dropdown-menu > li > button:hover,
+.navbar-nav .dropdown-menu > li > button:focus,
+.navbar-nav .dropdown-menu > li > button:active {
+  background: #79b9f0;
+  cursor: pointer;
+}
+/* line 97, components/_navbar.scss */
+.navbar-nav .dropdown-menu > .divider {
+  margin: 0;
+}
+
+/* line 103, components/_navbar.scss */
+.navbar-brand {
+  padding: 5px 15px;
+}
+
+/* line 3, components/_floating-nav.scss */
+.floating-nav {
+  position: fixed;
+  left: 10px;
+  z-index: 1;
 }

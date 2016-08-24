@@ -1,0 +1,105 @@
+// Navbar
+// -------------------------
+.navbar {
+  border-radius: 0px;
+  border: none;
+  box-shadow: 0px 0px 10px 0px #333;
+}
+
+.navbar-default {
+  background: linear-gradient(to right, $primary-blue 0%, $secondary-blue 100%);
+  padding: 10px 0;
+  .navbar-nav {
+    float: right;
+    > li {
+      margin: 0px 5px;
+      > a,
+      > button {
+        color: $white;
+        line-height: 10px;        
+        &:hover,
+        &:focus {
+          @include border-radius(4px);
+          color: $white;
+          background: lighten($primary-blue, 10%);
+        }
+      }
+    }
+    > .nav-login {
+      > a,
+      > button {
+        @include border-radius(4px);
+        border: 1px solid $white;
+        background: lighten($secondary-blue, 10%);
+        text-transform: none;   
+      }
+    }
+    .nav-login > a {
+      padding: 14px 15px;
+    }
+    .nav-login > button {
+      padding: 0px 15px;
+      height: 40px;
+    }
+    > .active {
+      > a,
+      > button,
+      > a:focus {
+        @include border-radius(4px);
+        color: $white;
+        background-color: darken($primary-blue, 10%);
+        &:hover {
+          color: $white;
+          background-color: darken($secondary-blue, 10%); //lighten($primary-blue, 10%);
+        }
+      }
+    }
+  }
+  .navbar-toggle {
+    border-color: $white;
+    &:hover,
+    &:focus {
+      background-color: lighten($secondary-blue, 10%);
+    }
+    .icon-bar {
+      background-color: $white;
+    }
+  }
+}
+
+.navbar-nav {
+  > li > button {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+  }
+  .dropdown-menu {
+    background: lighten($secondary-blue, 10%);
+    > li {
+      > button {
+        padding: 3px 20px;
+        background: transparent;
+        border: none;
+        width: 100%;
+      }
+      > a,
+      > button {
+        color: $white;
+        padding: 10px 20px;
+        &:hover,
+        &:focus,
+        &:active {
+          background: lighten($secondary-blue, 20%);
+          cursor: pointer;
+        }
+      }
+    }
+    > .divider {
+      margin: 0;
+    }
+  }
+}
+
+.navbar-brand {
+  padding: 5px 15px;
+}

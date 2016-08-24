@@ -1,0 +1,10 @@
+// Tabs
+// -------------------------
+.tabs .tab a {
+  &.active {
+    border-bottom: 3px solid $material-blue;
+  }
+  &.blue-text {
+    color: $material-blue;
+  }
+}
