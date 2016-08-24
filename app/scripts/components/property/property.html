@@ -1,3 +1,27 @@
+<div class="container-full">
+  <nav class="row breadcrumb-nav">
+    <div class="nav-wrapper">
+      <div class="col s12"> 
+          <a
+            ui-sref="portfolio()"
+            class="breadcrumb">Portfolio</a>
+          <a 
+            ui-sref= "property({id: property.details._id})" 
+            class="breadcrumb">
+            <!--TO DO - Precrop and serve from Filestack -->
+            <img 
+            ng-cloak
+            class="breacrumb-thumb"
+            height="32"
+            width="32"
+            alt="{{property.details.title}}"
+            title="{{property.details.title}}"
+            ng-src="{{property.details.images[0]}}" /> <span>{{property.details.title}}</span>
+          </a>
+      </div> 
+    </div>
+  </nav>
+</div>
 <div
   class="container container-first container-wide property" 
   bb-active-menu="" 
@@ -7,13 +31,8 @@
       ui-sref="propertyEditForm({id: property.details._id})">Edit Property</a>
   </div>-->
   <div class="row">
-    <div class="col s12">  
-      <a ui-sref="portfolio()">Portfolio</a> >
-    </div> 
-  </div>
-  <div class="row">
     <div class="col s12">
-      <ul>
+      <ul class="floating-nav">
         <li>
           <a href="#details">Details</a>
         </li>
@@ -48,16 +67,16 @@
                 <p>{{property.details.price | currency:"$":0}}</p>
               </div>
               <div 
-                class="col s12 l4"
+                class="col s12 l4 center"
                 ng-show="property.details.bedrooms">
                 <label>Bedrooms</label>
-                <p>{{property.details.bedrooms}}</p>
+                <p class="bedrooms fact">{{property.details.bedrooms}}</p>
               </div>
               <div
-                class="col s12 l4"
+                class="col s12 l4 center"
                 ng-show="property.details.bathrooms">
                 <label>Bathrooms</label>
-                <p>{{property.details.bathrooms | number}}</p>
+                <p class="bathrooms fact">{{property.details.bathrooms | number}}</p>
               </div>
             </div>
           </div>
