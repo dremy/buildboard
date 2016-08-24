@@ -1,0 +1,112 @@
+<div class="container-full">         
+  <nav class="row breadcrumb-nav">
+    <div class="nav-wrapper">
+      <div class="col s12"> 
+          <a
+            ui-sref="portfolio()"
+            class="breadcrumb">Portfolio</a>
+          <a 
+            ui-sref="property({pid: board.property._id})" 
+            class="breadcrumb">
+            <img 
+            ng-cloak
+            class="breacrumb-thumb"
+            height="32"
+            width="32"
+            alt="{{board.property.title}}"
+            title="{{board.property.title}}"
+            ng-src="{{board.property.images[0]}}" /> <span>{{board.property.title}}</span>
+          </a>
+          <a 
+            ui-sref="boards({pid:board.property._id})"
+            class="breadcrumb">
+            Boards
+          </a>
+          <a 
+            ui-sref="board({pid:board.property._id, bid: board.details._id})"
+            class="breadcrumb">
+            {{board.details.title}}
+          </a>
+      </div>
+    </div>
+  </nav>
+<div class="container container-wide">   
+  <div class="row">
+    <div class="col s12">
+      <a
+        href="#!"
+        data-activates="slide-out"
+        class="side-nav-tab button-collapse">
+        <i class="material-icons white-text">menu</i>
+      </a>
+      <ul id="slide-out" class="side-nav">
+        <li>
+          <div class="userView">
+            <img class="background" ng-src="{{board.property.images[0]}}">
+            <a ui-sref="property({pid:board.property._id, '#': 'overview'})"><div class="circle"></div></a>
+            <a ui-sref="property({pid:board.property._id, '#': 'overview'})"><span class="white-text name">{{board.property.location.address}}</span></a>
+            <a ui-sref="property({pid:board.property._id, '#': 'overview'})"><span class="white-text email">{{board.property.location.city}}, {{board.property.location.state}} {{board.property.location.zip}}</span></a>
+          </div>
+        </li>
+        <li>
+          <a ui-sref="property({pid:board.property._id, '#': 'overview'})">Overview</a>
+        </li>
+        <li>
+          <div class="divider"></div>
+        </li>
+        <li>
+          <a 
+            ui-sref="property({pid:board.property._id, '#': 'details'})"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Details</a>
+        </li>
+        <li>
+          <a ui-sref="property({pid:board.property._id, '#': 'photos'})"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span> Photos</a>
+        </li>
+        <li>
+          <a ui-sref="property({pid:board.property._id, '#': 'team'})"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Team
+          </a>
+        </li>
+        <li>
+          <a ui-sref="property({pid:board.property._id, '#': 'boards'})"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> Boards</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col s12">
+      <h1>{{board.details.title}}</h1>
+    </div>
+    <div class="col l4 m6 s12 item">
+      <button
+        class="add-card">
+        <div class="card card-add center-align">
+          <span class="glyphicon glyphicon-plus"></span>
+          <div class="card-content">
+            <p>Add File</p>
+          </div>
+        </div>
+      </button>
+    </div>
+    <div 
+      ng-repeat="file in board.details._files"
+      class="col l4 m6 s12 item">
+      <a 
+        ng-href="{{file.url}}"
+        target="_blank">
+        <div class="card">
+          <div class="card-image">
+            <img ng-src="{{file.cropped | fpConvert: {w:255} }}" />
+            <span class="card-title"></span>
+            <span class="card-subtitle">
+              {{file.filename}}
+              <span 
+                ng-if="file._tags.length > 0" 
+                class="glyphicon glyphicon-tag" 
+                aria-hidden="true"></span>
+              <span 
+                ng-if="file._tags.length > 0"
+                ng-repeat="tag in board._tags">{{tag.tag}}, </span>
+            </span>-->
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

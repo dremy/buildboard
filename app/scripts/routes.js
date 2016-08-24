@@ -110,7 +110,7 @@ angular.module('buildboardApp')
             function ($state, relationshipService, auth) {
               var query = {
                 _user: auth.profile.user_id,
-                _property: $state.params.id
+                _property: $state.params.pid
               };
               return relationshipService.queryRelationshipsProperties(query);
             }
@@ -158,7 +158,7 @@ angular.module('buildboardApp')
         controllerAs: 'portfolio'
       })
       .state('property', { // Property Profile
-        url: '/property/:id',
+        url: '/property/:pid',
         data: {
           requiresLogin: true
         },
@@ -170,7 +170,7 @@ angular.module('buildboardApp')
             function(relationshipService, $stateParams, auth) {
               var query = {
                 _user: auth.profile.user_id,
-                _property: $stateParams.id
+                _property: $stateParams.pid
               };
               return relationshipService.queryRelationshipsProperties(query);
             }
@@ -181,12 +181,12 @@ angular.module('buildboardApp')
         controllerAs: 'property'
       })
       .state('propertyEditForm', {
-        url:'/property/:id/edit',   
+        url:'/property/:pid/edit',   
         templateUrl: componentsDir + '/property/property.edit.html',
         resolve: {
           prop: ['$stateParams', 'propertyService', 
             function ($stateParams, propertyService) {
-              return propertyService.getPropertyById($stateParams.id);
+              return propertyService.getPropertyById($stateParams.pid);
             }
           ]
         },
@@ -194,7 +194,7 @@ angular.module('buildboardApp')
         controllerAs: 'property'
       })
       .state('propertyDeleteForm', {
-        url:'/property/:id/remove',   
+        url:'/property/:pid/remove',   
         templateUrl: componentsDir + '/property/property.delete.html',
         resolve: {
           rel: [
@@ -204,7 +204,7 @@ angular.module('buildboardApp')
             function(relationshipService, $stateParams, auth) {
               var query = {
                 _user: auth.profile.user_id,
-                _property: $stateParams.id
+                _property: $stateParams.pid
               };
               return relationshipService.queryRelationshipsProperties(query);
             }
@@ -214,18 +214,17 @@ angular.module('buildboardApp')
         controllerAs: 'property'
       })
       .state('boards', {
-        url: '/property/:id/boards',
-        templateUrl: componentsDir + '/boards/boards.view.html',
+        url: '/property/:pid/boards',
+        templateUrl: componentsDir + '/board/boards.view.html',
         resolve: {
           rel: [
             '$state',
             'relationshipService',
             'auth',
             function ($state, relationshipService, auth) {
-              console.log($state.params);
               var query = {
                 _user: auth.profile.user_id,
-                _property: $state.params.id
+                _property: $state.params.pid
               };
               //TBD right service?
               return relationshipService.queryRelationshipsProperties(query);
@@ -233,24 +232,28 @@ angular.module('buildboardApp')
           ]
         },
         controller: 'BoardsCtrl',
-        controllerAs: 'board'
+        controllerAs: 'boards'
       })
       .state('board', {
-        url: '/property/:pid/board/:bid',
-        templateUrl: componentsDir + '/boards/board.view.html',
+        url: '/property/:pid/boards/:bid',
+        templateUrl: componentsDir + '/board/board.view.html',
         resolve: {
           brd: [
-            '$state',
+            '$stateParams',
             'boardService',
-            'auth',
-            function ($state, boardService, auth) {
-              console.log($state.params);
-              var query = {
-                _user: auth.profile.user_id,
-                _property: $state.params.id
+            function ($stateParams, boardService) {
+              var bid = {
+                _id: $stateParams.bid
               };
-              //TBD right service?
-              return relationshipService.queryRelationshipsProperties(query);
+              return boardService.queryBoardsFiles(bid);
+            }
+          ],
+          prop: [
+            '$stateParams',
+            'propertyService',
+            function ($stateParams, propertyService) {
+              var pid = $stateParams.pid;
+              return propertyService.getPropertyById(pid);
             }
           ]
         },
