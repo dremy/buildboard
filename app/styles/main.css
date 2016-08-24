@@ -785,3 +785,13 @@ a.additional-items:hover {
 .boards .card .card-subtitle {
   width: 190px;
 }
+
+/* line 5, components/_accordion.scss */
+.collapsible .collapsible-body .row {
+  padding: 0px 20px;
+}
+
+/* line 13, components/_accordion.scss */
+.photos .collapsible-body .row {
+  padding-top: 40px;
+}
