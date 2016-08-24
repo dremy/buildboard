@@ -27,9 +27,9 @@ function boardCtrl($state, $scope, filepickerService, relationshipService, board
     filepickerService.pickMultiple(
       {
         language: 'en',
-        maxFiles: 3, //pickMultiple has one more option
-        services: ['COMPUTER','DROPBOX','GOOGLE_DRIVE','IMAGE_SEARCH', 'FACEBOOK', 'INSTAGRAM'],
-        openTo: 'IMAGE_SEARCH'
+        //maxFiles: 3, //pickMultiple has one more option
+        services: ['COMPUTER','URL','DROPBOX','GOOGLE_DRIVE','IMAGE_SEARCH', 'FACEBOOK', 'INSTAGRAM'],
+        openTo: 'COMPUTER'
       },
       function(Blob){
         board.files = Blob;
