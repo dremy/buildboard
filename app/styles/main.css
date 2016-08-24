@@ -665,15 +665,16 @@ button.add-card:hover {
 /* line 5, components/_breadcrumb.scss */
 .breadcrumb-nav a.breadcrumb {
   padding: 10px 10px 10px 0px;
+  background: none;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
 }
-/* line 8, components/_breadcrumb.scss */
+/* line 9, components/_breadcrumb.scss */
 .breadcrumb-nav a.breadcrumb:first-child {
   padding: 10px;
 }
-/* line 11, components/_breadcrumb.scss */
+/* line 12, components/_breadcrumb.scss */
 .breadcrumb-nav a.breadcrumb:hover {
   cursor: pointer;
   text-decoration: none;
@@ -681,7 +682,7 @@ button.add-card:hover {
   -webkit-box-shadow: inset 0px 2px 8px 2px #3595e8;
   box-shadow: inset 0px 2px 8px 2px #3595e8;
 }
-/* line 16, components/_breadcrumb.scss */
+/* line 17, components/_breadcrumb.scss */
 .breadcrumb-nav a.breadcrumb img {
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
