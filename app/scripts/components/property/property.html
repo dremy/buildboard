@@ -7,6 +7,11 @@
       ui-sref="propertyEditForm({id: property.details._id})">Edit Property</a>
   </div>-->
   <div class="row">
+    <div class="col s12">  
+      <a ui-sref="portfolio()">Portfolio</a> >
+    </div> 
+  </div>
+  <div class="row">
     <div class="col s12">
       <ul>
         <li>
@@ -30,8 +35,7 @@
           class="details"
           name="details"
           id="details">
-          <div class="collapsible-header active grey lighten-3">
-            <strong>Details</strong>
+          <div class="collapsible-header active grey lighten-3"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>   <strong>Details</strong>
           </div>
           <div class="collapsible-body">
             <div class="row">
@@ -67,8 +71,7 @@
           name="photos"
           id="photos">
           <div class="collapsible-header grey lighten-3">
-            <!--<i class=""/> Icon -->
-            <strong>Photos</strong>
+            <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>   <strong>Photos</strong>
           </div>
           <div class="collapsible-body">
             <div class="row">
@@ -83,7 +86,23 @@
                 data-caption="Photo #{{$index+1}} | {{property.details.title}}"
                 alt="Photo #{{$index+1}} | {{property.details.title}}"
                 title="Photo #{{$index+1}} | {{property.details.title}}"/>
-              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <ul
+        class="collapsible"
+        data-collapsible="accordion">
+        <li 
+          class="team"
+          name="team"
+          id="team">
+          <div class="collapsible-header grey lighten-3">
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>   <strong>Team</strong>
+          </div>
+          <div class="collapsible-body">
+            <div class="row">
+            </div>
           </div>
         </li>
       </ul>
@@ -95,8 +114,7 @@
           name="boards"
           id="boards">
           <div class="collapsible-header grey lighten-3">
-            <!--<i class=""/> Icon -->
-            <strong>Boards</strong>
+            <span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>   <strong>Boards</strong>
           </div>
           <div class="collapsible-body">
             <div class="row">
