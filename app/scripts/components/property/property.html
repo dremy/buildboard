@@ -28,14 +28,14 @@
   bb-active-title="">
   <!--<div class="row">
     <a class="btn blue float-right"
-      ui-sref="propertyEditForm({id: property.details._id})">Edit Property</a>
+      ui-sref="propertyEditForm({pid: property.details._id})">Edit Property</a>
   </div>-->
   <div class="row">
     <div class="col s12">
       <a
         href="#!"
         data-activates="slide-out"
-        class="button-collapse blue">
+        class="side-nav-tab button-collapse">
         <i class="material-icons white-text">menu</i>
       </a>
       <ul id="slide-out" class="side-nav">
@@ -48,10 +48,14 @@
           </div>
         </li>
         <li>
+          <a ng-href="#/property/{{property.details._id}}#overview">Overview</a>
+        </li>
+        <li>
           <div class="divider"></div>
         </li>
         <li>
-          <a ng-href="#/property/{{property.details._id}}#details"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Details</a>
+          <a 
+            ng-href="#/property/{{property.details._id}}#overview"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Details</a>
         </li>
         <li>
           <a ng-href="#/property/{{property.details._id}}#photos"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span> Photos</a>
@@ -173,7 +177,7 @@
               <div 
                 ng-repeat="board in property.boards"
                 class="col l4 m6 s12 item">
-                <a href="#">
+                <a ui-sref="board({pid:property.details._id, bid: board._id})">
                   <div class="card">
                   <div class="card-image">
                     <img ng-src="{{board._files[0].url | fpConvert: {filter:'crop[dim:0,0,255,262]', w:255} }}" />
