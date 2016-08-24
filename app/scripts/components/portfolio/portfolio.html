@@ -64,7 +64,7 @@
             <div 
               class="card"
               ng-class="'property-' + property.status.own.value | lowercase">
-              <a ui-sref="property({id: property._property._id})">
+              <a ui-sref="property({pid: property._property._id})">
                 <div class="card-image">
                   <img 
                     ng-src="{{property._property.images[0]}}"
@@ -87,13 +87,13 @@
               <div class="card-action">
                 <button 
                   class="btn blue-text white"
-                  ui-sref="propertyEditForm({id: property._property._id})">
+                  ui-sref="propertyEditForm({pid: property._property._id})">
                   <i class="material-icons">mode_edit</i>
                   <span>Edit</span>
                 </button>
                 <button 
                   class="btn blue-text white"
-                  ui-sref="propertyDeleteForm({id: property._property._id})">
+                  ui-sref="propertyDeleteForm({pid: property._property._id})">
                   <i class="material-icons">delete</i>
                   <span>Remove</span>
                 </button>
