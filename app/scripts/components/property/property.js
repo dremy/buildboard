@@ -11,9 +11,29 @@ function propertyCtrl($state, rel, messages, alert, preloader) {
   // Initialize variables.
   //-------------------------------  
   var property = this;
-  console.log('relationship', rel.data[0]);
   // Define functions.
   //-------------------------------
+  function processTagCommas(i) {
+    var board = property.boards[i];
+    if (typeof board._tags !== 'undefined' && board._tags.length > 0) {
+      for (var j in board._tags) {
+        var tag = board._tags[j];
+        if (parseInt(j) !== 0) {
+          tag.tag = ', ' + tag.tag;
+        }
+      }
+    }
+  }
+
+  function processFileThumbCrops(i) {
+    var board = property.boards[i];
+    if (typeof board._files !== 'undefined' && board._files.length > 0) {
+      for (var j in board._files) {
+        var file = board._files[j];
+        file.url = 'https://process.filestackapi.com/AbxbbjIjQuq0m1MnLf9n0z/crop=d:[0,0,255,262]/' + file.url; 
+      }
+    }
+  }
   // Perform on load.
   //-------------------------------
   if (rel.data) {
@@ -21,10 +41,10 @@ function propertyCtrl($state, rel, messages, alert, preloader) {
     property.boards = rel.data[0]._boards;
 
     for (var i in property.boards) {
-      if (typeof property.boards[i]._tags !== 'undefined' && property.boards[i]._tags.length > 0) {
-        console.log('tags', property.boards[i]._tags);
-      }
-    } 
+      processFileThumbCrops(i);
+      processTagCommas(i);
+    }
+    console.log('relationship', rel.data[0]);
     console.log('property', property.details);
     console.log('boards', property.boards);
   } else {
@@ -32,6 +52,7 @@ function propertyCtrl($state, rel, messages, alert, preloader) {
     alert.type = 'warning';
     messages.add(alert.message, alert.type, alert.dt);    
   }
+  $(".button-collapse").sideNav();
 }
 
 angular.module('bb.property', [])

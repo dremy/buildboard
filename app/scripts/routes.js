@@ -116,7 +116,7 @@ angular.module('buildboardApp')
             }
           ]
         },
-        controller: 'BoardCtrl',
+        controller: 'AddBoardCtrl',
         controllerAs: 'board'
       })
       .state('accountEdit', {
@@ -212,6 +212,50 @@ angular.module('buildboardApp')
         },
         controller: 'PropertyDeleteCtrl',
         controllerAs: 'property'
+      })
+      .state('boards', {
+        url: '/property/:id/boards',
+        templateUrl: componentsDir + '/boards/boards.view.html',
+        resolve: {
+          rel: [
+            '$state',
+            'relationshipService',
+            'auth',
+            function ($state, relationshipService, auth) {
+              console.log($state.params);
+              var query = {
+                _user: auth.profile.user_id,
+                _property: $state.params.id
+              };
+              //TBD right service?
+              return relationshipService.queryRelationshipsProperties(query);
+            }
+          ]
+        },
+        controller: 'BoardsCtrl',
+        controllerAs: 'board'
+      })
+      .state('board', {
+        url: '/property/:pid/board/:bid',
+        templateUrl: componentsDir + '/boards/board.view.html',
+        resolve: {
+          brd: [
+            '$state',
+            'boardService',
+            'auth',
+            function ($state, boardService, auth) {
+              console.log($state.params);
+              var query = {
+                _user: auth.profile.user_id,
+                _property: $state.params.id
+              };
+              //TBD right service?
+              return relationshipService.queryRelationshipsProperties(query);
+            }
+          ]
+        },
+        controller: 'BoardCtrl',
+        controllerAs: 'board'
       })
       .state('addProposal', { //TO DO - Very temporary
         url: '/addProposal',

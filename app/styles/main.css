@@ -655,7 +655,7 @@ button.add-card:hover {
 }
 /* line 99, components/_card.scss */
 .boards .card .card-subtitle {
-  width: 190px;
+  width: 100%;
 }
 
 /* line 3, components/_breadcrumb.scss */
@@ -834,8 +834,15 @@ button.add-card:hover {
 }
 
 /* line 3, components/_floating-nav.scss */
-.floating-nav {
+.button-collapse {
   position: fixed;
-  left: 10px;
+  left: 0;
   z-index: 1;
+  padding: 9px 9px 5px 11px;
+  -moz-border-radius-topright: 5px;
+  -webkit-border-top-right-radius: 5px;
+  border-top-right-radius: 5px;
+  -moz-border-radius-bottomright: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 }

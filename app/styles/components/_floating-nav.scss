@@ -1,7 +1,10 @@
 // Floating Nav
 // -------------------------
-.floating-nav {
+.button-collapse {
   position: fixed;
-  left: 10px;
+  left: 0;
   z-index: 1;
+  padding: 9px 9px 5px 11px;
+  @include border-top-right-radius(5px);
+  @include border-bottom-right-radius(5px);
 }

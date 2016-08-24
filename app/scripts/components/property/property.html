@@ -32,15 +32,36 @@
   </div>-->
   <div class="row">
     <div class="col s12">
-      <ul class="floating-nav">
+      <a
+        href="#!"
+        data-activates="slide-out"
+        class="button-collapse blue">
+        <i class="material-icons white-text">menu</i>
+      </a>
+      <ul id="slide-out" class="side-nav">
         <li>
-          <a href="#details">Details</a>
+          <div class="userView">
+            <img class="background" ng-src="{{property.details.images[0]}}">
+            <a href="#!user"><div class="circle"></div></a>
+            <a ng-href="#!name"><span class="white-text name">{{property.details.location.address}}</span></a>
+            <a ng-href="#!email"><span class="white-text email">{{property.details.location.city}}, {{property.details.location.state}} {{property.details.location.zip}}</span></a>
+          </div>
         </li>
         <li>
-          <a href="#photos">Photos</a>
+          <div class="divider"></div>
         </li>
         <li>
-          <a href="#boards">Boards</a>
+          <a ng-href="#/property/{{property.details._id}}#details"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Details</a>
+        </li>
+        <li>
+          <a ng-href="#/property/{{property.details._id}}#photos"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span> Photos</a>
+        </li>
+        <li>
+          <a ng-href="#/property/{{property.details._id}}#team"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Team
+          </a>
+        </li>
+        <li>
+          <a ng-href="#/property/{{property.details._id}}#boards"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> Boards</a>
         </li>
       </ul>
     </div>
@@ -157,14 +178,14 @@
                   <div class="card-image">
                     <img ng-src="{{board._files[0].url | fpConvert: {filter:'crop[dim:0,0,255,262]', w:255} }}" />
                     <span class="card-title">{{board.title}}</span>
-                    <span class="card-subtitle">
+                    <span 
+                      class="card-subtitle"
+                      ng-if="board._tags.length > 0">
                       <span 
-                        ng-if="board._tags.length > 0" 
                         class="glyphicon glyphicon-tag" 
                         aria-hidden="true"></span>
                       <span 
-                        ng-if="board._tags.length > 0"
-                        ng-repeat="tag in board._tags">{{tag.tag}}, </span>
+                        ng-repeat="tag in board._tags | limitTo:3">{{tag.tag}}</span>
                     </span>
                   </div>
                 </a>
