@@ -834,15 +834,21 @@ button.add-card:hover {
 }
 
 /* line 3, components/_floating-nav.scss */
-.button-collapse {
+.side-nav-tab {
   position: fixed;
   left: 0;
   z-index: 1;
   padding: 9px 9px 5px 11px;
+  background: #4ca1ea;
   -moz-border-radius-topright: 5px;
   -webkit-border-top-right-radius: 5px;
   border-top-right-radius: 5px;
   -moz-border-radius-bottomright: 5px;
   -webkit-border-bottom-right-radius: 5px;
   border-bottom-right-radius: 5px;
+}
+
+/* line 15, components/_floating-nav.scss */
+.side-nav a:hover {
+  text-decoration: none;
 }

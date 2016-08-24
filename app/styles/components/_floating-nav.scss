@@ -1,10 +1,19 @@
 // Floating Nav
 // -------------------------
-.button-collapse {
+.side-nav-tab {
   position: fixed;
   left: 0;
   z-index: 1;
   padding: 9px 9px 5px 11px;
+  background: lighten($secondary-blue, 10%);
   @include border-top-right-radius(5px);
   @include border-bottom-right-radius(5px);
+}
+
+.side-nav {
+  a {
+    &:hover {
+      text-decoration: none;
+    }
+  }
 }
