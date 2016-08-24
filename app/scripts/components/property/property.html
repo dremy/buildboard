@@ -2,38 +2,146 @@
   class="container container-first container-wide property" 
   bb-active-menu="" 
   bb-active-title="">
-  <div class="row">
+  <!--<div class="row">
     <a class="btn blue float-right"
       ui-sref="propertyEditForm({id: property.details._id})">Edit Property</a>
+  </div>-->
+  <div class="row">
+    <div class="col s12">
+      <ul>
+        <li>
+          <a href="#details">Details</a>
+        </li>
+        <li>
+          <a href="#photos">Photos</a>
+        </li>
+        <li>
+          <a href="#boards">Boards</a>
+        </li>
+      </ul>
+    </div>
   </div>
   <div class="row" ng-cloak>
     <div class="col s12">
-      <div class="photos" ng-repeat="image in property.details.images">
-        <img 
-          materialboxed
-          ng-class="{l6:$first}"
-          class="col s12 m6 l3 materialboxed responsive-img"
-          width="400"
-          ng-src="{{image}}"
-          data-caption="Photo #{{$index+1}} | {{property.details.title}}"
-          alt="Photo #{{$index}} | {{property.details.title}}"
-          title="{{property.details.title}}"/>
-      </div>
-      <div class="col s12">
-        <h1>{{property.details.location.address}}</h1>
-        <h2>{{property.details.location.city}}, {{property.details.location.state}} {{property.detail.location.zip}}</h2>
-        <label>Purchase Price</label><p>{{property.details.price | currency:"$":0}}</p>
-        <p>Created at: {{property.details.createdAt | amTimeAgo }}</p>
-        <p>Bedrooms: {{property.details.bedrooms}}</p>
-        <p>Bathrooms: {{property.details.bathrooms}}</p>
-      </div>
+      <ul 
+        class="collapsible"
+        data-collapsible="accordion">
+        <li 
+          class="details"
+          name="details"
+          id="details">
+          <div class="collapsible-header active grey lighten-3">
+            <strong>Details</strong>
+          </div>
+          <div class="collapsible-body">
+            <div class="row">
+              <h1>{{property.details.location.address}}</h1>
+              <h2>{{property.details.location.city}}, {{property.details.location.state}} {{property.detail.location.zip}}</h2>
+              <div 
+                class="col s12 l4" 
+                ng-show="property.details.price">
+                <label>Purchase Price</label>
+                <p>{{property.details.price | currency:"$":0}}</p>
+              </div>
+              <div 
+                class="col s12 l4"
+                ng-show="property.details.bedrooms">
+                <label>Bedrooms</label>
+                <p>{{property.details.bedrooms}}</p>
+              </div>
+              <div
+                class="col s12 l4"
+                ng-show="property.details.bathrooms">
+                <label>Bathrooms</label>
+                <p>{{property.details.bathrooms | number}}</p>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <ul
+        class="collapsible"
+        data-collapsible="accordion">
+        <li 
+          class="photos"
+          name="photos"
+          id="photos">
+          <div class="collapsible-header grey lighten-3">
+            <!--<i class=""/> Icon -->
+            <strong>Photos</strong>
+          </div>
+          <div class="collapsible-body">
+            <div class="row">
+              <img
+                ng-repeat="image in property.details.images" 
+                materialboxed
+                ng-cloak
+                ng-class="{l6:$first}"
+                class="col s12 m6 l3 materialboxed responsive-img"
+                width="400"
+                ng-src="{{image}}"
+                data-caption="Photo #{{$index+1}} | {{property.details.title}}"
+                alt="Photo #{{$index+1}} | {{property.details.title}}"
+                title="Photo #{{$index+1}} | {{property.details.title}}"/>
+              </div>
+          </div>
+        </li>
+      </ul>
+      <ul
+        class="collapsible"
+        data-collapsible="accordion">
+        <li 
+          class="boards"
+          name="boards"
+          id="boards">
+          <div class="collapsible-header grey lighten-3">
+            <!--<i class=""/> Icon -->
+            <strong>Boards</strong>
+          </div>
+          <div class="collapsible-body">
+            <div class="row">
+              <div class="col l4 m6 s12 item">
+                <button
+                  class="add-card" 
+                  ui-sref="add.board">
+                  <div class="card card-add center-align">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <div class="card-content">
+                      <p>Add Board</p>
+                    </div>
+                  </div>
+                </button>
+              </div>
+              <div 
+                ng-repeat="board in property.boards"
+                class="col l4 m6 s12 item">
+                <a href="#">
+                  <div class="card">
+                  <div class="card-image">
+                    <img ng-src="{{board._files[0].url | fpConvert: {filter:'crop[dim:0,0,255,262]', w:255} }}" />
+                    <span class="card-title">{{board.title}}</span>
+                    <span class="card-subtitle">
+                      <span 
+                        ng-if="board._tags.length > 0" 
+                        class="glyphicon glyphicon-tag" 
+                        aria-hidden="true"></span>
+                      <span 
+                        ng-if="board._tags.length > 0"
+                        ng-repeat="tag in board._tags">{{tag.tag}}, </span>
+                    </span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
-  </div>
-  <div class="row">
   </div>
 </div>
 <div class="container-full">
   <ng-map
+    ng-cloak
     id="property-map"
     zoom="14"
     scrollwheel="false"
@@ -46,43 +154,4 @@
       centered="true">
     </marker>    
   </ng-map>
-</div>
-<div class="container container-wide">
-  <div class="row boards">
-    <h5>Boards</h5>
-    <div class="col s12">
-      <div class="col l4 m6 s12 item">
-        <button
-          class="add-card" 
-          ui-sref="add.board">
-          <div class="card card-add center-align">
-            <span class="glyphicon glyphicon-plus"></span>
-            <div class="card-content">
-              <p>Add Board</p>
-            </div>
-          </div>
-        </button>
-      </div>
-      <div 
-        ng-repeat="board in property.boards"
-        class="col l4 m6 s12 item">
-        <a href="#">
-          <div class="card">
-          <div class="card-image">
-            <img ng-src="{{board._files[0].url | fpConvert: {filter:'crop[dim:0,0,255,262]', w:255} }}" />
-            <span class="card-title">{{board.title}}</span>
-            <span class="card-subtitle">
-              <span 
-                ng-if="board._tags.length > 0" 
-                class="glyphicon glyphicon-tag" 
-                aria-hidden="true"></span>
-              <span 
-                ng-if="board._tags.length > 0"
-                ng-repeat="tag in board._tags">{{tag.tag}}, </span>
-            </span>
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
 </div>
