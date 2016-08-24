@@ -36,7 +36,7 @@ function propertyCtrl($state, rel, messages, alert, preloader) {
   }
   // Perform on load.
   //-------------------------------
-  if (rel.data) {
+  if (rel.data[0]) {
     property.details = rel.data[0]._property;
     property.boards = rel.data[0]._boards;
 
