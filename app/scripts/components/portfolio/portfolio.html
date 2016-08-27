@@ -58,48 +58,12 @@
               </div>
             </button>
           </div>
-          <div 
+          <property-card
+            property="property._property"
+            status="property.status"
             class="col l4 m6 s12" 
             ng-repeat="property in properties | filter:searchKey">
-            <div 
-              class="card"
-              ng-class="'property-' + property.status.own.value | lowercase">
-              <a ui-sref="property({pid: property._property._id})">
-                <div class="card-image">
-                  <img 
-                    ng-src="{{property._property.images[0]}}"
-                    width="258"
-                    height="189">
-                  <span class="card-title">{{property._property.location.address}}</span>
-                  <span class="card-subtitle">{{property._property.location.city}}, {{property._property.location.state}} {{property._property.location.zip}}</span>
-                </div>
-              </a>
-              <div class="card-content">
-                <p class="property-type" ng-show="property._property.type"><label>Type:</label> {{property._property.type}}</p>
-                <p class="property-tag" ng-show="property._property.tags"><i class="material-icons">label</i><label>Tags</label><span ng-repeat="tag in property._property.tags == true"> {{tag}}</span></p>
-                <p ng-show="property._property.price">{{property._property.price | currency:"$":0}}</p>
-                <p ng-show="property._property.teaser">{{property._property.teaser}}</p>
-                <p>Sq. Ft. {{property._property.finishedSqFt | number}}</p> 
-                <p>Bedrooms: {{property._property.bedrooms}}</p>
-                <p>Bathrooms: {{property._property.bathrooms}}</p>
-                <p>Status: {{property.status.own.value}}</p>
-              </div>
-              <div class="card-action">
-                <button 
-                  class="btn blue-text white"
-                  ui-sref="propertyEditForm({pid: property._property._id})">
-                  <i class="material-icons">mode_edit</i>
-                  <span>Edit</span>
-                </button>
-                <button 
-                  class="btn blue-text white"
-                  ui-sref="propertyDeleteForm({pid: property._property._id})">
-                  <i class="material-icons">delete</i>
-                  <span>Remove</span>
-                </button>
-              </div>
-            </div>
-          </div>
+          </property-card>
         </div>
       </div>
     </div>

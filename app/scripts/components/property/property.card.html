@@ -1,0 +1,38 @@
+<div 
+  class="card"
+  ng-class="'property-' + $ctrl.status.own.value | lowercase">
+  <a ui-sref="property({pid: $ctrl.property._id})">
+    <div class="card-image">
+      <img 
+        ng-src="{{$ctrl.property.images[0]}}"
+        width="258"
+        height="189">
+      <span class="card-title">{{$ctrl.property.location.address}}</span>
+      <span class="card-subtitle">{{$ctrl.property.location.city}}, {{$ctrl.property.location.state}} {{$ctrl.property.location.zip}}</span>
+    </div>
+  </a>
+  <div class="card-content">
+    <p class="property-type" ng-show="$ctrl.property.type"><label>Type:</label> {{$ctrl.property.type}}</p>
+    <p class="property-tag" ng-show="$ctrl.property.tags"><i class="material-icons">label</i><label>Tags</label><span ng-repeat="tag in $ctrl.property.tags == true"> {{tag}}</span></p>
+    <p ng-show="$ctrl.property.price">{{$ctrl.property.price | currency:"$":0}}</p>
+    <p ng-show="$ctrl.property.teaser">{{$ctrl.property.teaser}}</p>
+    <p>Sq. Ft. {{$ctrl.property.finishedSqFt | number}}</p> 
+    <p>Bedrooms: {{$ctrl.property.bedrooms}}</p>
+    <p>Bathrooms: {{$ctrl.property.bathrooms}}</p>
+    <p>Status: {{$ctrl.status.own.value}}</p>
+  </div>
+  <div class="card-action">
+    <button 
+      class="btn blue-text white"
+      ui-sref="propertyEditForm({pid: $ctrl.property._id})">
+      <i class="material-icons">mode_edit</i>
+      <span>Edit</span>
+    </button>
+    <button 
+      class="btn blue-text white"
+      ui-sref="propertyDeleteForm({pid: $ctrl.property._id})">
+      <i class="material-icons">delete</i>
+      <span>Remove</span>
+    </button>
+  </div>
+</div>
