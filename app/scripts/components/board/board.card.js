@@ -18,4 +18,7 @@ angular.module('bb.board')
       board: '<',
       property: '<'
     }
+  })
+  .component('addBoardCard', {
+    templateUrl: 'scripts/components/board/add.board.card.html'
   });

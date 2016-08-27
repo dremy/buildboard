@@ -48,7 +48,6 @@ function boardCtrl(brd, prop, messages, alert, preloader) {
     alert.type = 'warning';
     messages.add(alert.message, alert.type, alert.dt);    
   }
-  $(".button-collapse").sideNav();
 }
 
 angular.module('bb.board')

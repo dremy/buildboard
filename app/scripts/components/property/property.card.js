@@ -7,15 +7,18 @@
  * # Property Card Component
  * Controller of the buildboardApp
  */
-function cardCtrl() {  
+function propertyCardCtrl() {  
 }
 
 angular.module('bb.property')
   .component('propertyCard', {
     templateUrl: 'scripts/components/property/property.card.html',
-    controller: cardCtrl,
+    controller: propertyCardCtrl,
     bindings: {
       property: '<',
       status: '<'
     }
+  })
+  .component('addPropertyCard', {
+    templateUrl: 'scripts/components/property/add.property.card.html'
   });

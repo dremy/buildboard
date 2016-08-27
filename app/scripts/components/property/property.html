@@ -106,18 +106,7 @@
           </div>
           <div class="collapsible-body">
             <div class="row">
-              <div class="col l4 m6 s12 item">
-                <button
-                  class="add-card" 
-                  ui-sref="add.board">
-                  <div class="card card-add center-align">
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <div class="card-content">
-                      <p>Add Board</p>
-                    </div>
-                  </div>
-                </button>
-              </div>
+              <add-board-card></add-board-card>
               <board-card
                 ng-repeat="board in property.boards"
                 board="board"
