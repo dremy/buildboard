@@ -1,0 +1,17 @@
+<a ui-sref="board({pid:$ctrl.property._id, bid: $ctrl.board._id})">
+  <div class="card">
+    <div class="card-image">
+      <img ng-src="{{$ctrl.board._files[0].url | fpConvert: {filter:'crop[dim:0,0,255,262]', w:255} }}" />
+      <span class="card-title">{{$ctrl.board.title}}</span>
+      <span 
+        class="card-subtitle"
+        ng-if="$ctrl.board._tags.length > 0">
+        <span 
+          class="glyphicon glyphicon-tag" 
+          aria-hidden="true"></span>
+        <span 
+          ng-repeat="tag in $ctrl.board._tags | limitTo:3">{{tag.tag}}</span>
+      </span>
+    </div>
+  </div>
+</a>

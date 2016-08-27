@@ -18,13 +18,13 @@
           ng-src="{{$ctrl.property.images[0]}}" /> <span>{{$ctrl.property.title}}</span>
         </a>
         <a
-          ng-show="$ctrl.state(['boards','board'])"
+          ng-show="$ctrl.stateCheck(['boards','board'])"
           ui-sref="boards({pid:$ctrl.property._id})"
           class="breadcrumb">
           Boards
         </a>
         <a
-          ng-show="$ctrl.state(['board'])"
+          ng-show="$ctrl.stateCheck(['board'])"
           ui-sref="board({pid:$ctrl.property._id, bid: $ctrl.board._id})"
           class="breadcrumb">
           {{$ctrl.board.title}}

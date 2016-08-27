@@ -118,27 +118,12 @@
                   </div>
                 </button>
               </div>
-              <div 
+              <board-card
                 ng-repeat="board in property.boards"
+                board="board"
+                property="property.details"
                 class="col l4 m6 s12 item">
-                <a ui-sref="board({pid:property.details._id, bid: board._id})">
-                  <div class="card">
-                    <div class="card-image">
-                      <img ng-src="{{board._files[0].url | fpConvert: {filter:'crop[dim:0,0,255,262]', w:255} }}" />
-                      <span class="card-title">{{board.title}}</span>
-                      <span 
-                        class="card-subtitle"
-                        ng-if="board._tags.length > 0">
-                        <span 
-                          class="glyphicon glyphicon-tag" 
-                          aria-hidden="true"></span>
-                        <span 
-                          ng-repeat="tag in board._tags | limitTo:3">{{tag.tag}}</span>
-                      </span>
-                    </div>
-                  </div>
-                </a>
-              </div>
+              </board-card>
             </div>
           </div>
         </li>
