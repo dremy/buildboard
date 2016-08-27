@@ -1,0 +1,36 @@
+<a
+  href="#!"
+  data-activates="slide-out"
+  class="side-nav-tab button-collapse">
+  <i class="material-icons white-text">menu</i>
+</a>
+<ul id="slide-out" class="side-nav">
+  <li>
+    <div class="userView">
+      <img class="background" ng-src="{{$ctrl.property.images[0]}}">
+      <a ui-sref="property({pid:$ctrl.property._id, '#': 'overview'})"><div class="circle"></div></a>
+      <a ui-sref="property({pid:$ctrl.property._id, '#': 'overview'})"><span class="white-text name">{{$ctrl.property.location.address}}</span></a>
+      <a ui-sref="property({pid:$ctrl.property._id, '#': 'overview'})"><span class="white-text email">{{$ctrl.property.location.city}}, {{$ctrl.property.location.state}} {{$ctrl.property.location.zip}}</span></a>
+    </div>
+  </li>
+  <li>
+    <a ui-sref="property({pid:$ctrl.property, '#': 'overview'})">Overview</a>
+  </li>
+  <li>
+    <div class="divider"></div>
+  </li>
+  <li>
+    <a 
+      ui-sref="property({pid:$ctrl.property._id, '#': 'details'})"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Details</a>
+  </li>
+  <li>
+    <a ui-sref="property({pid:$ctrl.property._id, '#': 'photos'})"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span> Photos</a>
+  </li>
+  <li>
+    <a ui-sref="property({pid:$ctrl.property._id, '#': 'team'})"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Team
+    </a>
+  </li>
+  <li>
+    <a ui-sref="property({pid:$ctrl.property._id, '#': 'boards'})"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> Boards</a>
+  </li>
+</ul>

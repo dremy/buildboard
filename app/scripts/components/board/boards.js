@@ -30,7 +30,7 @@ function boardsCtrl($state, rel, messages, alert, preloader) {
     if (typeof board._files !== 'undefined' && board._files.length > 0) {
       for (var j in board._files) {
         var file = board._files[j];
-        file.url = 'https://process.filestackapi.com/AbxbbjIjQuq0m1MnLf9n0z/crop=d:[0,0,255,262]/' + file.url; 
+        file.cropped = 'https://process.filestackapi.com/AbxbbjIjQuq0m1MnLf9n0z/crop=d:[0,0,255,262]/' + file.url; 
       }
     }
   }

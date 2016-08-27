@@ -8,23 +8,13 @@
  * Controller of the bb.user module
  */
 function userCtrl(
-  // Scopes
-  $rootScope,
-  // Route
-  $state,
   // Custom Services
   store,
-  messages,
-  preloader,
-  auth,
   // Constants
-  centerOfAmerica,
-  // Values
-  alert) {
+  centerOfAmerica) {
 
   //Initialize variables.
   //------------------------------------
-  //Pull uid from path.
   var user = this;
   // Define Functions
   //------------------------------------
@@ -34,7 +24,7 @@ function userCtrl(
   
   //Register functions to $scope.
   //------------------------------------
-  this.centerOfAmerica = centerOfAmerica;
+  user.centerOfAmerica = centerOfAmerica;
 }
 
 angular.module('bb.user', [

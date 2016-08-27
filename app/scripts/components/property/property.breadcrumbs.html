@@ -1,0 +1,35 @@
+<nav class="row breadcrumb-nav">
+  <div class="nav-wrapper">
+    <div class="col s12"> 
+        <a
+          ui-sref="portfolio()"
+          class="breadcrumb">Portfolio</a>
+        <a 
+          ui-sref= "property({pid:$ctrl.property._id})" 
+          class="breadcrumb">
+          <!--TO DO - Precrop and serve from Filestack -->
+          <img 
+          ng-cloak
+          class="breacrumb-thumb"
+          height="32"
+          width="32"
+          alt="{{$ctrl.property.title}}"
+          title="{{$ctrl.property.title}}"
+          ng-src="{{$ctrl.property.images[0]}}" /> <span>{{$ctrl.property.title}}</span>
+        </a>
+        <a
+          ng-show="$ctrl.state(['boards','board'])"
+          ui-sref="boards({pid:$ctrl.property._id})"
+          class="breadcrumb">
+          Boards
+        </a>
+        <a
+          ng-show="$ctrl.state(['board'])"
+          ui-sref="board({pid:$ctrl.property._id, bid: $ctrl.board._id})"
+          class="breadcrumb">
+          {{$ctrl.board.title}}
+        </a>
+        </span>
+    </div> 
+  </div>
+</nav>

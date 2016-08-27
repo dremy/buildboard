@@ -7,6 +7,7 @@
  * # PropertyCtrl
  * Controller of the buildboardApp
  */
+(function(angular) {
 function propertyCtrl($state, rel, messages, alert, preloader) { 
   // Initialize variables.
   //-------------------------------  
@@ -52,8 +53,8 @@ function propertyCtrl($state, rel, messages, alert, preloader) {
     alert.type = 'warning';
     messages.add(alert.message, alert.type, alert.dt);    
   }
-  $(".button-collapse").sideNav();
 }
 
 angular.module('bb.property', [])
   .controller('PropertyCtrl', propertyCtrl);
+})(angular);  

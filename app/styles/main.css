@@ -614,47 +614,56 @@ button.add-card:hover {
   background: transparent;
 }
 
-/* line 73, components/_card.scss */
-.boards .add-card {
+/* line 74, components/_card.scss */
+.boards .add-card,
+.files .add-card {
   height: 262px;
 }
-/* line 75, components/_card.scss */
-.boards .add-card .card-add {
+/* line 76, components/_card.scss */
+.boards .add-card .card-add,
+.files .add-card .card-add {
   padding-top: 80px;
   min-height: 262px;
 }
-/* line 80, components/_card.scss */
-.boards .item {
+/* line 81, components/_card.scss */
+.boards .item,
+.files .item {
   height: 285px;
 }
-/* line 83, components/_card.scss */
-.boards .card {
+/* line 84, components/_card.scss */
+.boards .card,
+.files .card {
   height: 262px;
 }
-/* line 85, components/_card.scss */
-.boards .card:hover {
+/* line 86, components/_card.scss */
+.boards .card:hover,
+.files .card:hover {
   -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
-/* line 88, components/_card.scss */
-.boards .card a:hover {
+/* line 89, components/_card.scss */
+.boards .card a:hover,
+.files .card a:hover {
   -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
-/* line 91, components/_card.scss */
-.boards .card .card-image {
+/* line 92, components/_card.scss */
+.boards .card .card-image,
+.files .card .card-image {
   height: 262px;
 }
-/* line 94, components/_card.scss */
-.boards .card .card-title {
+/* line 95, components/_card.scss */
+.boards .card .card-title,
+.files .card .card-title {
   background: #444;
   position: absolute;
   bottom: 0;
 }
-/* line 99, components/_card.scss */
-.boards .card .card-subtitle {
+/* line 100, components/_card.scss */
+.boards .card .card-subtitle,
+.files .card .card-subtitle {
   width: 100%;
 }
 
