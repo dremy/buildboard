@@ -7,10 +7,12 @@
 <ul id="slide-out" class="side-nav">
   <li>
     <div class="userView">
-      <img class="background" ng-src="{{$ctrl.property.images[0]}}">
-      <a ui-sref="property({pid:$ctrl.property._id, '#': 'overview'})"><div class="circle"></div></a>
-      <a ui-sref="property({pid:$ctrl.property._id, '#': 'overview'})"><span class="white-text name">{{$ctrl.property.location.address}}</span></a>
-      <a ui-sref="property({pid:$ctrl.property._id, '#': 'overview'})"><span class="white-text email">{{$ctrl.property.location.city}}, {{$ctrl.property.location.state}} {{$ctrl.property.location.zip}}</span></a>
+      <a ui-sref="property({pid:$ctrl.property._id, '#': 'overview'})">
+        <img class="background" ng-src="{{$ctrl.property.images[0]}}">
+        <div class="circle"></div>
+        <span class="white-text name">{{$ctrl.property.location.address}}</span>
+        <span class="white-text email">{{$ctrl.property.location.city}}, {{$ctrl.property.location.state}} {{$ctrl.property.location.zip}}</span>
+      </a>
     </div>
   </li>
   <li>
@@ -34,6 +36,9 @@
     <a ui-sref="property({pid:$ctrl.property._id, '#': 'boards'})"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> Boards</a>
   </li>
   <li>
-    <a ui-sref="property({pid:$ctrl.property._id, '#': 'property-map'})"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Map</a>
+    <a ui-sref="property({pid:$ctrl.property._id, '#': 'map'})"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Map</a>
+  </li>
+  <li>
+    <a ui-sref="property({pid:$ctrl.property._id, '#': 'calendar'})"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Calendar</a>
   </li>
 </ul>
