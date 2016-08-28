@@ -41,7 +41,7 @@ angular.module('buildboardApp')
   .run(function($rootScope, $state, auth, store, jwtHelper, preloader) {
     //eventsHook
     auth.hookEvents();
-
+    // Maintain authentication & turn on preloader 
     $rootScope.$on('$locationChangeStart', function() {
       preloader.setState(true);
       if (!auth.isAuthenticated) {
@@ -55,7 +55,7 @@ angular.module('buildboardApp')
         }
       }
     });
-
+    // Turn off preloader.
     $rootScope.$on('$locationChangeSuccess', function() {
       preloader.setState(false);
     });
