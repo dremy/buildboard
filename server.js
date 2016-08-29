@@ -55,6 +55,7 @@ app.use(express.static(__dirname + '/app'));
 // Route Dependencies
 var Property = require('./server/routes/property')();
 var Relationship = require('./server/routes/relationship')();
+var Event = require('./server/routes/event')();
 var Board = require('./server/routes/board')();
 var File = require('./server/routes/file')();
 
@@ -71,7 +72,7 @@ app.route('/api/properties/:id')
 app.route('/api/properties/query')
   .post(Property.getFiltered);
 
-// Properties
+// Relationships
 app.route('/api/relationships')
   .get(Relationship.getAll)
   .post(Relationship.post);
@@ -86,6 +87,25 @@ app.route('/api/relationships/query')
 
 app.route('/api/relationships/properties')
   .post(Relationship.getRelationshipsProperties);
+
+// Events
+app.route('/api/events')
+  .get(Event.getAll)
+  .post(Event.post);
+
+app.route('/api/events/:id')
+  .get(Event.getOne)
+  .delete(Event.deleteById)
+  .put(Event.updateById);
+
+app.route('/api/events/query')
+  .post(Event.getFiltered);
+
+app.route('/api/events/relationship')
+  .post(Event.getEventRelationship);
+
+app.route('/api/events/files')
+  .post(Event.getEventFiles);
 
 // Boards
 app.route('/api/boards')

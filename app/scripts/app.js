@@ -18,6 +18,7 @@ angular
     // Theme
     'ui.bootstrap',
     'ui.materialize',
+    'ui.calendar',
     // Ng Config
     'angular-storage',
     'angular-jwt',

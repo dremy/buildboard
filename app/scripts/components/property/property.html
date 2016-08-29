@@ -1,5 +1,37 @@
 <div class="container-full">
   <breadcrumbs property="property.details"></breadcrumbs>
+  <div 
+    class="container-full grey lighten-3"
+    style="margin-top: -18px;">
+    <div class="container container-wide">
+      <div class="row">
+        <div class="col s12">
+          <div class="col s12 l6">
+            <h4>{{property.details.location.address}}</h4>
+            <h5>{{property.details.location.city}}, {{property.details.location.state}} {{property.detail.location.zip}}</h5>
+          </div>
+          <div 
+            class="col s12 l2" 
+            ng-show="property.details.price">
+            <label>Purchase Price</label>
+            <p>{{property.details.price | currency:"$":0}}</p>
+          </div>
+          <div 
+            class="col s12 l2 center"
+            ng-show="property.details.bedrooms">
+            <label>Bedrooms</label>
+            <p class="bedrooms fact">{{property.details.bedrooms}}</p>
+          </div>
+          <div
+            class="col s12 l2 center"
+            ng-show="property.details.bathrooms">
+            <label>Bathrooms</label>
+            <p class="bathrooms fact">{{property.details.bathrooms | number}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <div
   class="container container-first container-wide property" 
@@ -18,42 +50,36 @@
     <div class="col s12">
       <ul 
         class="collapsible"
-        data-collapsible="accordion">
+        data-collapsible="expandable">
         <li 
           class="details"
           name="details"
           id="details">
-          <div class="collapsible-header active grey lighten-3"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>   <strong>Details</strong>
+          <div class="collapsible-header  grey lighten-3"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>   <strong>Details</strong>
           </div>
           <div class="collapsible-body">
             <div class="row">
-              <h1>{{property.details.location.address}}</h1>
-              <h2>{{property.details.location.city}}, {{property.details.location.state}} {{property.detail.location.zip}}</h2>
               <div 
                 class="col s12 l4" 
-                ng-show="property.details.price">
-                <label>Purchase Price</label>
-                <p>{{property.details.price | currency:"$":0}}</p>
+                ng-show="property.details.lotSizeSqFt">
+                <label>Lot Size (Sq. Ft.)</label>
+                <p>{{property.details.lotSizeSqFt | number}}</p>
               </div>
               <div 
                 class="col s12 l4 center"
-                ng-show="property.details.bedrooms">
-                <label>Bedrooms</label>
-                <p class="bedrooms fact">{{property.details.bedrooms}}</p>
+                ng-show="property.details.zestimate.amount">
+                <label>Zestimate</label>
+                <p class="zestimate fact">{{property.details.zestimate.amount | currency:"$":0}}</p>
               </div>
               <div
                 class="col s12 l4 center"
-                ng-show="property.details.bathrooms">
-                <label>Bathrooms</label>
-                <p class="bathrooms fact">{{property.details.bathrooms | number}}</p>
+                ng-show="property.details.yearBuilt">
+                <label>Year Built</label>
+                <p class="year-built fact">{{property.details.yearBuilt | number}}</p>
               </div>
             </div>
           </div>
         </li>
-      </ul>
-      <ul
-        class="collapsible"
-        data-collapsible="accordion">
         <li 
           class="photos"
           name="photos"
@@ -77,10 +103,6 @@
             </div>
           </div>
         </li>
-      </ul>
-      <ul
-        class="collapsible"
-        data-collapsible="accordion">
         <li 
           class="team"
           name="team"
@@ -93,10 +115,6 @@
             </div>
           </div>
         </li>
-      </ul>
-      <ul
-        class="collapsible"
-        data-collapsible="accordion">
         <li 
           class="boards"
           name="boards"
@@ -116,7 +134,42 @@
             </div>
           </div>
         </li>
+        <li 
+          class="events"
+          name="events"
+          id="events">
+          <div 
+            class="collapsible-header grey lighten-3"
+            ng-click="property.renderCalendar('propertyCalendar');">
+            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>   <strong>Events</strong><i class="material-icons right more">more_vert</i>
+          </div>
+          <div class="collapsible-body">
+            <div class="row">
+              <div
+                ui-calendar
+                class="calendar"
+                ng-if="property.eventSources"
+                calendar="propertyCalendar"
+                ng-model="property.eventSources"></div>
+            </div>
+          </div>
+        </li>
       </ul>
+      <!-- Modal Trigger -->
+      <a
+        class="waves-effect waves-light btn blue"
+        ng-href="#modal1"
+        modal>Add Event</a>
+      <!-- Modal Structure -->
+      <div id="modal1" class="modal">
+        <div class="modal-content">
+          <h4>Modal Header</h4>
+          <p>A bunch of text</p>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+        </div>
+      </div>
     </div>
   </div>
 </div>
