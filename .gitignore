@@ -6,3 +6,4 @@
 /bower_components
 /app/.sass-cache
 /server/env.js
+/scripts
