@@ -12,6 +12,18 @@ var relationshipSchema = new Schema({
     ref: 'property', //Tie the knot.
     required: true
   },
+  _boards: [{ // Boards.
+    type: Schema.Types.ObjectId,
+    ref: 'board'
+  }],
+  _events: [{ // Events.
+    type: Schema.Types.ObjectId,
+    ref: 'event'
+  }],
+  _plans: [{ // Plans.
+    type: Schema.Types.ObjectId,
+    ref: 'plan'
+  }],
   status: {
     interested: { // Are they interested in it?
       value: String,
@@ -32,11 +44,6 @@ var relationshipSchema = new Schema({
       // - who was involved
     }
   },
-  _boards: [{ // Boards.
-    type: Schema.Types.ObjectId,
-    ref: 'board'
-  }],
-  _plans: [Schema.Types.Mixed], // Plans.
   tags: Schema.Types.Mixed, // Tags.
   createdAt: { // How long ago was relationship created.
     type: Date,

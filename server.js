@@ -88,6 +88,9 @@ app.route('/api/relationships/query')
 app.route('/api/relationships/properties')
   .post(Relationship.getRelationshipsProperties);
 
+app.route('/api/relationships/events')
+  .post(Relationship.getRelationshipsEvents);
+
 // Events
 app.route('/api/events')
   .get(Event.getAll)

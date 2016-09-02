@@ -76,7 +76,7 @@ module.exports = function() {
       });
     },
     /*
-     * Post route to retrieve filtered relationships.
+     * Post route to retrieve filtered relationships for properties.
      */
     getRelationshipsProperties : function(req, res) {
       Relationship
@@ -91,6 +91,20 @@ module.exports = function() {
         if(err) res.send(err);
         // If no errors, send back to client.
         res.json(properties);
+      });
+    },
+    /*
+     * Post route to retrieve filtered relationships for events.
+     */
+    getRelationshipsEvents : function(req, res) {
+      Relationship
+        .find(req.body)
+        .populate('_events')
+        .populate('_property', 'title images')
+        .exec(function(err, events) {
+        if(err) res.send(err);
+        // If no errors, send back to client.
+        res.json(events);
       });
     }
   };

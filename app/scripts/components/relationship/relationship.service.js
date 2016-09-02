@@ -34,6 +34,10 @@ function relationshipService($http, relationshipEndpointUrl, messages, preloader
     return request("POST", 'properties', filter);
   }
 
+  function queryEvents(filter) {
+    return request("POST", 'events', filter);
+  }
+
   function request(verb, param, data) {
     var req = {
       method: verb,
@@ -76,6 +80,10 @@ function relationshipService($http, relationshipEndpointUrl, messages, preloader
 
   relationshipService.queryRelationshipsProperties = function(filter) {
     return queryProps(filter);
+  }
+
+  relationshipService.queryRelationshipsEvents = function(filter) {
+    return queryEvents(filter);
   }
 
   return relationshipService;
