@@ -168,7 +168,8 @@ angular.module('buildboardApp')
             'auth',
             function(relationshipService, auth) {
               var query = {
-                _user: auth.profile.user_id
+                _user: auth.profile.user_id,
+                _events: { "$ne": null }
               };
               return relationshipService.queryRelationshipsEvents(query);
             }
