@@ -1,0 +1,84 @@
+<!-- Anonymous Menu--> 
+<ul
+  class="nav navbar-nav"
+  ng-hide="$ctrl.auth.isAuthenticated">
+  <li>
+    <a
+      ui-sref="features"
+      ui-sref-active="active">Features</a>
+  </li>
+  <li>
+    <a 
+      ui-sref="benefits"
+      ui-sref-active="active">Benefits</a>
+  </li>
+  <li>
+    <a
+      ui-sref="howItWorks"
+      ui-sref-active="active">How It Works</a>
+  </li>
+  <li class="nav-login">
+    <a
+      ng-href="#"
+      ng-click="$ctrl.auth.signin()">Sign In</a>
+  </li>
+</ul>
+<ul 
+  class="nav navbar-nav"
+  ng-show="$ctrl.auth.isAuthenticated">
+  <!-- Authenticated Menu -->
+  <li>
+    <a 
+      ui-sref="add.item"
+      ui-sref-active="active">Add</a>
+  </li>
+  <li>
+    <a 
+      ui-sref="calendars"
+      ui-sref-active="active">Calendars</a>
+  </li>
+  <li>
+    <a
+      ui-sref="portfolio"
+      ui-sref-active="active">Portfolio</a>
+  </li>
+  <div
+    class="btn-group nav-login"
+    uib-dropdown
+    keyboard-nav
+    is-open="status.isopen">
+    <button
+      id="single-button"
+      type="button"
+      class="btn btn-primary"
+      uib-dropdown-toggle
+      ng-disabled="disabled">
+      <img
+        ng-show="$ctrl.profile.picture"
+        ng-src="{{$ctrl.profile.picture}}" width="16"/> {{$ctrl.profile.user_metadata.given_name}} <span class="caret"></span>
+    </button>
+    <ul
+      class="dropdown-menu"
+      uib-dropdown-menu
+      role="menu"
+      aria-labelledby="single-button">
+      <li role="menuitem">
+        <a
+          ui-sref="account({uid: $ctrl.profile.user_id})"
+          ui-sref-active="active">My Profile</a>
+      </li>
+      <li role="menuitem">
+        <a 
+          ui-sref="accountEdit({uid: $ctrl.profile.user_id})"
+          ui-sref-active="active">Edit Account</a>
+      </li>
+      <li class="divider"></li>
+      <li role="menuitem">
+        <a
+          ng-href="#"
+          ng-click="$ctrl.logOut()">Log Out</a>
+      </li>
+    </ul>
+  </div>
+  </li>
+</ul>

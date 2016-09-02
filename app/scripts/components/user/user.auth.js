@@ -6,23 +6,13 @@ function authCtrl($state, $rootScope, auth, store, preloader) {
   //------------------------------------
   var check = this;
   check.profile = {};
-  
-  // Define Functions
-  //------------------------------------  
-  function logOut() {
-    auth.signout();
-    store.remove('profile');
-    store.remove('token');
-    $state.go('userLogin');
-  }
 
   //Register functions to $scope.
   //------------------------------------
-  check.auth = auth;  
-  check.logOut = logOut;
+  check.auth = auth;
   $rootScope.$on('auth0.authenticated', function(e) {
-    console.log('Auth?', auth.profile);
     check.profile = auth.profile;
+    console.log('Check.profile', check.profile);
     preloader.setState(false);
   });
 }
