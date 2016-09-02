@@ -32,6 +32,7 @@ angular
     'bb.alert',
     'bb.preloader',
     'bb.property',
+    'bb.calendar',
     'bb.board',
     'bb.file',
     'bb.user'

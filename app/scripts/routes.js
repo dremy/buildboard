@@ -157,6 +157,27 @@ angular.module('buildboardApp')
         controller: 'PortfolioCtrl',
         controllerAs: 'portfolio'
       })
+      .state('calendars', {
+        url: '/calendars',
+        data: {
+          requiresLogin: true
+        },
+        resolve: {
+          rel: [
+            'relationshipService',
+            'auth',
+            function(relationshipService, auth) {
+              var query = {
+                _user: auth.profile.user_id
+              };
+              return relationshipService.queryRelationshipsEvents(query);
+            }
+          ]
+        },
+        templateUrl: componentsDir + '/calendar/calendars.view.html',
+        controller: 'CalendarsCtrl',
+        controllerAs: 'calendars'        
+      })
       .state('property', { // Property Profile
         url: '/property/:pid',
         data: {

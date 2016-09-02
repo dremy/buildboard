@@ -13,11 +13,11 @@ angular.module('buildboardApp')
     });
 
     //Called when login is successful
-    authProvider.on('loginSuccess', function($state, profilePromise, idToken, store) {
-      console.log("Login Success");
+    authProvider.on('loginSuccess', function($rootScope, $state, profilePromise, idToken, store) {
       profilePromise.then(function(profile) {
         store.set('profile', profile);
         store.set('token', idToken);
+        $rootScope.$broadcast('auth0.authenticated');
       });
       $state.go('home');
     });
