@@ -88,6 +88,24 @@ angular.module('buildboardApp')
         url:'/relationship',
         templateUrl: componentsDir + '/add/add.property.relationship.html',
       })
+      .state('add.event', {
+        url: '/event',
+        templateUrl: componentsDir + '/add/add.event.html',
+        resolve: {
+          rel: [
+            'relationshipService',
+            'auth',
+            function ($relationshipService, auth) {
+              var query = {
+                _user: auth.profile.user_id,
+              };
+              return relationshipService.queryRelationshipsProperties(query);
+            }
+          ]
+        },
+        controller: 'AddEventCtrl',
+        controllerAs: 'Event'
+      })
       .state('add.board', {
         url: '/board',
         templateUrl: componentsDir + '/add/add.board.html',

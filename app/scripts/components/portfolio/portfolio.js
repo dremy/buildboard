@@ -55,7 +55,6 @@ function portfolioCtrl($scope, relationshipService, auth, properties, NgMap, pre
     return propCosts;
   }
   
-  console.log('working');
   //Perform on load.
   //------------------------------------
   $scope.properties = properties.data;

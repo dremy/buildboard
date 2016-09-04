@@ -12,6 +12,12 @@ function addItemCtrl($scope, filepickerService) {
     state: 'add.property.address'
   },
   {
+    icon: 'perm_contact_calendar',
+    title: 'Event',
+    info: 'Add an event related to your properties on your calendar',
+    state: 'add.event'
+  },
+  {
     icon: 'note_add',
     title: 'Note',
     info: 'Some info about notes',
