@@ -13,23 +13,39 @@ function addEventCtrl($state, $scope, relationshipService, rel, messages, alert,
   var Event = this;
   Event.data = {
     title: '',
-    _tags: '',
-    desciption: ''
+    desciption: '',
+    location: '',
+    allDay: false,
+    startDate: moment(),
+    startTime: moment().format('LT'),
+    endDate: moment(),
+    endTime: moment().format('LT'),
   };
-  var relationship = rel.data;
-  Event.relationship = relationship;
+  /*if (pid) {
+    Event.data._property = ;
+  }*/
 
-  Event.properties = []; 
-  console.log('rel', rel.data);
+  if (rel.data) {
+    Event.relationship = rel.data;
+    console.log('Event', Event);
+  }
   // Define functions.
   //-------------------------------
+  function placeChanged() {
+    Event.place = this.getPlace();
+  }
 
   function saveEvent() {
-    Event.data._tags = $('#chips').material_chip('data');
+    var startDate = Event.data.startDate + ' ' + Event.data.startTime;
+    console.log(startDate);
+    var SD = moment(startDate, "D MMMM, YYYY hh:mmA");
+    console.log(SD);
+    Event.data.start = SD;
+    console.log(Event.data);
     // Set the relationship ID
-    Event.data._relationship = relationship._id;
+    // Event.data._relationship = relationship._id;
     // Create the board.
-    eventService.addEvent(event.data)
+    /*eventService.addEvent(event.data)
       .success(
         function(data) {
           if (!data.error) {
@@ -54,17 +70,11 @@ function addEventCtrl($state, $scope, relationshipService, rel, messages, alert,
       )
       .error(function(data) {
         console.log('Failed', data);
-      });
+      });*/
   }
   // Perform on load.
   //-------------------------------
-  $('#chips').material_chip({
-    placeholder: 'Enter a tag',
-    secondaryPlaceholder: 'Add a tag. Press Enter.',
-    data:[]
-  });
-  Event.currentDate = new Date();
-  Event.currentTime = new Date();
+  Event.placeChanged = placeChanged;
   Event.saveEvent = saveEvent;
 }
 

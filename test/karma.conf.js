@@ -51,6 +51,10 @@ module.exports = function(config) {
       'bower_components/auth0-angular/build/auth0-angular.js',
       'bower_components/a0-angular-storage/dist/angular-storage.js',
       'bower_components/jquery.xml2json/src/jquery.xml2json.js',
+      'bower_components/momentjs/moment.js',
+      'bower_components/angular-aria/angular-aria.js',
+      'bower_components/angular-material/angular-material.js',
+      'bower_components/angular-material-datetimepicker/js/angular-material-datetimepicker.min.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

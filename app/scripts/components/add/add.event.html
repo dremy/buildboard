@@ -11,9 +11,10 @@
         class=""
         id="property"
         name="property"
-        ng-model="Event.data.property"
+        ng-model="Event.data._property"
+        required
         material-select>
-          <option value="" disabled>Select a property.</option>
+          <option value="" disabled>Select an affiliated property.</option>
           <option value="{{value._property._id}}" ng-repeat="value in Event.relationship">{{value._property.title}}</option>
       </select>
       <label for="property">Property</label>
@@ -22,7 +23,8 @@
       <input  
         type="text"
         name="title" 
-        ng-model="Event.data.title" required/>
+        ng-model="Event.data.title"
+        required/>
       <label for="title">Title</label>
     </div>
     <div class="input-field col s12">
@@ -33,29 +35,92 @@
           length="120"></textarea>
         <label for="description">Description</label>
     </div>
-    <div class="input-field col s12 l6">
-      <input input-date
-        type="text"
-        name="startDate"
-        id="startDate"
-        ng-model="Event.currentDate"
-        select-years="15" />
-      <label for="startDate">Date</label>
+    <div class="input-field col s12 medium-label">
+        <input 
+          places-auto-complete
+          id="location"
+          class="validate"
+          size="80"
+          ng-model="Event.data.location"
+          placeholder="555 S Main St"            
+          component-restrictions="{country:'us'}"
+          on-place-changed="Event.placeChanged()" />
+        <label ng-class="{active:Event.data.location.length}" for="location">Location</label>
     </div>
-    <div class="input-field col s12 l6">
-      <input 
-        id="startTime"
-        name="startTime"
-        input-clock
-        ng-model="Event.currentTime"
-        data-twelvehour="true"
-        type="text" />
-      <label for="startTime">Time</label>  
+  </div>
+  <div class="row">
+    <div class="col s12">
+      <h5 for="allDay">All-day</h5>
     </div>
     <div class="input-field col s12">
-        <div 
-          id="chips"
-          class="chips chips-placeholder"></div>
+      <!-- Switch -->
+      <div class="switch">
+        <label>
+          True
+          <input
+            type="checkbox"
+            ng-model="Event.data.allDay">
+          <span class="lever"></span>
+          False
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 m6 l6">
+      <h5>Start</h5>
+      <div 
+        ng-class="{l6: !Event.data.allDay}"
+        class="input-field col s12">
+        <input input-date
+          type="text"
+          name="startDate"
+          id="startDate"
+          ng-model="Event.data.startDate"
+          required
+          select-years="15" />
+        <label for="startDate">Date</label>
+      </div>
+      <div 
+        ng-hide="Event.data.allDay"
+        class="input-field col s12 l6">
+        <input 
+          id="startTime"
+          name="startTime"
+          input-clock
+          ng-model="Event.data.startTime"
+          data-twelvehour="true"
+          type="text" />
+        <label for="startTime">Time</label>  
+      </div>
+    </div>
+    <div class="col s12 m6 l6">
+      <div class="row">
+      <h5>End</h5>
+      <div 
+        ng-class="{l6: !Event.data.allDay}"      
+        class="input-field col s12">
+        <input input-date
+          type="text"
+          name="endDate"
+          id="endDate"
+          ng-model="Event.data.endDate"
+          required
+          select-years="15" />
+        <label for="endDate">Date</label>
+      </div>
+      <div 
+        ng-hide="Event.data.allDay"
+        class="input-field col s12 l6">
+        <input 
+          id="EndTime"
+          name="endTime"
+          input-clock
+          ng-model="Event.data.endTime"
+          data-twelvehour="true"
+          type="text" />
+        <label for="endTime">Time</label>  
+      </div>
     </div>
   </div>
   <div class="row">
@@ -63,7 +128,7 @@
       <button 
         class="btn btn-large wave-effect blue" 
         ng-disabled="Event.data.title.length < 3" 
-        ng-click="Event.saveBoard()">
+        ng-click="Event.saveEvent()">
         Save
       </button>
     </div>
