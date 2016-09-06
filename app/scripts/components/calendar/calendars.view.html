@@ -1,8 +1,22 @@
-<div class="container container-wide">   
+<div class="container container-wide calendar-view">
+  <div class="row">
+  </div>
+  <side-nav relationships="calendar.relationships"></side-nav>
+  <div class="row">
+    <strong>Labels</strong>
+    <ul class="labels">
+      <li ng-repeat="property in calendars.relationships">
+        <i class="material-icons {{'property-'+$index}}">label</i> {{property._property.title}}</li>
+    </ul>
+    <button 
+      class="btn wave-effect blue right"
+      ui-sref="add.event">Add Event</button>
+    </ul>
+  </div>
   <div class="row">
     <div class="calendars">
       <div
-        ui-calendar
+        ui-calendar="calendars.uiConfig.calendar"
         class="calendar"
         ng-if="calendars.eventSources"
         calendar="masterCalendar"

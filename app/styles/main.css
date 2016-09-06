@@ -862,3 +862,20 @@ button.add-card:hover {
 .side-nav a:hover {
   text-decoration: none;
 }
+
+/* line 5, components/_calendar.scss */
+.calendar-view .calendar .property-0 {
+  background: blue;
+}
+/* line 8, components/_calendar.scss */
+.calendar-view .calendar .property-1 {
+  background: yellow;
+}
+/* line 13, components/_calendar.scss */
+.calendar-view .labels .property-0 {
+  color: blue;
+}
+/* line 16, components/_calendar.scss */
+.calendar-view .labels .property-1 {
+  color: yellow;
+}

@@ -5,7 +5,12 @@ angular.module('bb.alert',[])
   .factory('messages', messages)
   .value('alert', {
     message: '',
-    type: '',
+    type: {
+      success: 'success',
+      warning: 'warning',
+      danger: 'danger',
+      info: 'info'
+    },
     dt: 3000
     }
   );
@@ -26,7 +31,7 @@ function messages() {
   var messages = {};
 
   messages.list = [];
-  messages.add = function(message, type, dt) {
+  messages.add = function(message, type, dt = 3000) {
     messages.list.push(
       {
         id: messages.list.length,

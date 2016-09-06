@@ -11,11 +11,11 @@
         class=""
         id="property"
         name="property"
-        ng-model="Event.data._property"
+        ng-model="Event.data._relationship"
         required
         material-select>
           <option value="" disabled>Select an affiliated property.</option>
-          <option value="{{value._property._id}}" ng-repeat="value in Event.relationship">{{value._property.title}}</option>
+          <option value="{{value._id}}" ng-repeat="value in Event.relationships">{{value._property.title}}</option>
       </select>
       <label for="property">Property</label>
     </div>
@@ -56,12 +56,12 @@
       <!-- Switch -->
       <div class="switch">
         <label>
-          True
+          False
           <input
             type="checkbox"
             ng-model="Event.data.allDay">
           <span class="lever"></span>
-          False
+          True
         </label>
       </div>
     </div>
