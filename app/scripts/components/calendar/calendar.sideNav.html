@@ -1,0 +1,35 @@
+<a
+  href="#!"
+  data-activates="slide-out"
+  class="side-nav-tab button-collapse">
+  <i class="material-icons white-text">menu</i>
+</a>
+<ul
+  id="slide-out"
+  class="side-nav">
+  <!--<li>
+    <a ui-sref="add.event">
+      <i
+        aria-hidden="true" 
+        class="material-icons">today</i> Add Event
+    </a>
+  </li>-->
+  <li>
+    <a class='btn blue' ng-href='#demoModal' modal>
+      <i
+        aria-hidden="true" 
+        class="material-icons white-text">today</i>Add Event</a>
+  </li>
+  <li>
+    <div class="divider"></div>
+  </li>
+  <li 
+    class="labels"
+    ng-repeat="property in $ctrl.relationships">
+    <a 
+      ui-sref="property({pid: property._property._id})"
+      class="truncate">
+      <i class="material-icons {{'property-'+$index}}">label</i> {{property._property.title}}
+    </a>
+  </li>
+</ul>

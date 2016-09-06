@@ -7,23 +7,14 @@
  * # calendarsCtrl
  * Controller of the bb.calendar
  */
-function calendarsCtrl($state, rel, uiCalendarConfig, messages, alert, preloader) { 
+(function(angular) {
+function calendarsCtrl($state, rel, uiCalendarConfig, calendarDefault, messages, alert, preloader) { 
   // Initialize variables.
   //-------------------------------  
   var calendars = this;
   calendars.eventSources = [{
     events: []
   }];
-  calendars.uiConfig = {
-    calendar: {
-      editable: true,
-      header: {
-        left: 'month agendaWeek agendaDay',
-        center: 'title',
-        right: 'today prev,next' 
-      }
-    }
-  };
   // Date helpers.
   var date = new Date();
   var d = date.getDate();
@@ -44,7 +35,6 @@ function calendarsCtrl($state, rel, uiCalendarConfig, messages, alert, preloader
       // For each event, push into eventSources
       for (var k = 0; k < events.length; k++) {
         events[k].className = 'property-'+i;
-        console.log(events[k]);
         calendars.eventSources[0].events.push(events[k]);
       }
     }
@@ -53,7 +43,45 @@ function calendarsCtrl($state, rel, uiCalendarConfig, messages, alert, preloader
     alert.type = 'warning';
     messages.add(alert.message, alert.type);    
   }
+  // Set some configuration details.
+  calendars.uiConfig = {
+    calendar: calendarDefault
+  };
+
+  calendars.uiConfig.calendar.defaultView = 'agendaWeek';
+}
+
+function eventChanged(event, delta, revertFunc, jsEvent, ui, view) {
+  console.log('delta', delta);
+  console.log('event', event);
+}
+
+function eventClick(date, jsEvent, view) {
+  console.log(date.title + ' was clicked.');
+}
+
+function eventRendered( event, element, view ) { 
+  element.attr({'tooltip': event.title, 'tooltip-append-to-body': true});
+  //$compile(element)($scope);
 }
 
 angular.module('bb.calendar', [])
-  .controller('CalendarsCtrl', calendarsCtrl);
+  .controller('CalendarsCtrl', calendarsCtrl)
+  .value('calendarDefault', {
+      selectable: true,
+      editable: true,
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek, listWeek'
+      },
+      views: {
+        listWeek: { buttonText: 'list week' }
+      },
+      eventLimit: true,
+      eventClick: eventClick,
+      eventDrop: eventChanged,
+      eventResize: eventChanged,
+      eventRender: eventRendered
+    });
+})(angular);

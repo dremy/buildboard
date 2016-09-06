@@ -20,13 +20,19 @@
             class="col s12 l2 center"
             ng-show="property.details.bedrooms">
             <label>Bedrooms</label>
-            <p class="bedrooms fact">{{property.details.bedrooms}}</p>
+            <p class="bedrooms fact">
+              <i
+                aria-hidden="true" 
+                class="material-icons">hotel</i> {{property.details.bedrooms}}</p>
           </div>
           <div
             class="col s12 l2 center"
             ng-show="property.details.bathrooms">
             <label>Bathrooms</label>
-            <p class="bathrooms fact">{{property.details.bathrooms | number}}</p>
+            <p class="bathrooms fact">
+              <i
+                aria-hidden="true" 
+                class="material-icons">wc</i> {{property.details.bathrooms | number}}</p>
           </div>
         </div>
       </div>
@@ -145,8 +151,10 @@
           </div>
           <div class="collapsible-body">
             <div class="row">
+            </div>
+            <div class="row">
               <div
-                ui-calendar
+                ui-calendar="property.uiConfig.calendar"
                 class="calendar"
                 ng-if="property.eventSources"
                 calendar="propertyCalendar"

@@ -17,3 +17,13 @@
     }
   }
 }
+.calendar-view {
+  .side-nav {
+    a.btn {
+      padding: 0px 17px;
+      > span {
+        float: left;
+      }
+    }
+  }
+}

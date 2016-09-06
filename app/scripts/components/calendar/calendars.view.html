@@ -1,17 +1,19 @@
 <div class="container container-wide calendar-view">
   <div class="row">
+    <!-- Modal Structure -->
+    <div id="demoModal" class="modal">
+        <div class="modal-content">
+            <h4>Modal header</h4>
+            <p>A bunch of text</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class=" modal-action modal-close waves-effect waves-blue btn-flat">Agree</a>
+        </div>
+    </div>
   </div>
-  <side-nav relationships="calendar.relationships"></side-nav>
+    <side-nav-cal relationships="calendars.relationships"></side-nav-cal>
   <div class="row">
-    <strong>Labels</strong>
-    <ul class="labels">
-      <li ng-repeat="property in calendars.relationships">
-        <i class="material-icons {{'property-'+$index}}">label</i> {{property._property.title}}</li>
-    </ul>
-    <button 
-      class="btn wave-effect blue right"
-      ui-sref="add.event">Add Event</button>
-    </ul>
+    <side-nav-cal relationships="calendars.relationships"></side-nav-cal>
   </div>
   <div class="row">
     <div class="calendars">

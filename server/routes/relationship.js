@@ -82,6 +82,7 @@ module.exports = function() {
       Relationship
         .find(req.body)
         .populate('_property', 'title bedrooms bathrooms location images finishedSqFt')
+        .populate('_events')
         .populate({
           path: '_boards',
           populate: {

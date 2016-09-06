@@ -1,20 +1,55 @@
 // Calendar
 // -------------------------
 .calendar-view {
-  .calendar {
+  .fc-agenda-view,
+  .fc-basic-view {
     .property-0 {
-      background: blue;
+      background: $secondary-blue;
     }
     .property-1 {
-      background: yellow;
+      background: $burnt-orange;
+    }
+    .property-2 {
+      background: $sunset-yellow;
+    }
+    .property-3 {
+      background: $material-red;      
+    }
+  }
+  .fc-list-view {
+    .property-0 {
+      .fc-event-dot {
+        background-color: $secondary-blue;
+      }
+    }
+    .property-1 {
+      .fc-event-dot {
+        background-color: $burnt-orange;
+      }
+    }
+    .property-2 {
+      .fc-event-dot {
+        background-color: $sunset-yellow;
+      }
+    }
+    .property-3 {
+      .fc-event-dot {      
+        background-color: $material-red;
+      }
     }
   }
   .labels {
     .property-0 {
-      color: blue;
+      color: $secondary-blue;
     }
     .property-1 {
-      color: yellow;
+      color: $burnt-orange;
+    }
+    .property-2 {
+      color: $sunset-yellow;
+    }
+    .property-3 {
+      color: $material-red;      
     }
   }
 }
