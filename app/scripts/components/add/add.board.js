@@ -73,7 +73,7 @@ function addBoardCtrl($state, $scope, filepickerService, relationshipService, bo
                 console.log('Updated Relationship', data);
               })
               .then(function() {
-                $state.go('property', {id: relationship._property._id})
+                $state.go('property', {pid: relationship._property._id})
               });
           } else {
             console.log('Failed', data);
