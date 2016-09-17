@@ -71,12 +71,14 @@ angular.module('bb.calendar', [])
       selectable: true,
       editable: true,
       header: {
-        left: 'prev,next today',
+        left: 'prev,today,next',
         center: 'title',
-        right: 'month,agendaWeek, listWeek'
+        right: 'month,agendaWeek,listWeek'
       },
       views: {
-        listWeek: { buttonText: 'list week' }
+        month: { buttonText: 'Month' },
+        agendaWeek: { buttonText: 'Week' },
+        listWeek: { buttonText: 'List' }
       },
       eventLimit: true,
       eventClick: eventClick,
