@@ -146,6 +146,7 @@ function propertyMaker(zillowZervice, $q, preloader, alert, messages) {
                     if (detailsResult.numFloors) property.numFloors = detailsResult.numFloors;
                     if (detailsResult.parkingType) property.parkingType = detailsResult.parkingType;
                     if (detailsResult.price) property.price = detailsResult.price.text;
+                    if (detailsResult.homeDescription) property.description = detailsResult.homeDescription;
                     if (detailsResult.images) {
                       if (parseInt(detailsResult.images.count) > 1) {
                         property.images = detailsResult.images.image.url;

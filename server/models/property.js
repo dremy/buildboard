@@ -29,6 +29,7 @@ var propertySchema = new Schema({
       }
     ]
   },
+  description: String,
   bedrooms: String,
   bathrooms: String,
   FIPScounty: String,
