@@ -7,7 +7,7 @@
     <h3>Edit Property {{property.details.title}}</h3>
   </div>
   <form class="">
-    <div class="row">  
+    <!--<div class="row">  
       <div class="input-field col s12 medium-label">
         <input 
           places-auto-complete
@@ -19,21 +19,21 @@
           component-restrictions="{country:'us'}"
           on-place-changed="property.placeChanged()" />
       </div>
-    </div>
+    </div>-->
     <div class="row">
-      <!--<div class="input-field col s4">
+      <div class="input-field col s4">
         <select
           material-select
           name="propertyType" 
-          ng-model="property.details.type">
+          ng-model="property.details.useCode">
           <option value="" disabled>Choose your option</option>
           <option 
-            ng-repeat="type in property.types" 
-            ng-value="{{type}}"
-            ng-attr-selected="{{property.details.type == type && 'selected'}}">{{type}}</option>
+            ng-repeat="type in property.useCodes" 
+            value="{{type.key}}">{{type.value}}</option>
         </select>
         <label>Property Type</label>
-      </div>-->
+      </div>
+      <!--
       <div class="input-field col s4">
         <input 
           input-date
@@ -44,18 +44,19 @@
           >
         <label for="acquisitionDate">Date Acquired</label>
       </div>
-    </div>
+    </div>-->
     <div class="row">
       <div class="input-field col l6 m6 s12 large-label">
           <input 
             placeholder="$100,000" 
             type="text" 
-            ng-model="property.details._property.price" 
+            ng-model="property.details.price" 
             format="currency"/>
           <label for="purchasePrice">Purchase Price</label>
       </div>
     </div>
     <div class="row">
+    <!--
       <div 
         class="input-field col s12"
         ng-repeat="image in property.details.images"> 
@@ -74,12 +75,12 @@
               ng-value="image" type="text">
           </div>
         </div>
-      </div>
+      </div>-->
       <div class="input-field col s12">
           <textarea 
             id="teaser" 
             class="materialize-textarea" 
-            ng-model="property.details.teaser" length="120">
+            ng-model="property.details.description" length="120">
           </textarea>
           <label for="teaser">Teaser</label>
       </div>
@@ -87,8 +88,7 @@
     <div class="row">
       <div class="col s6">
         <button 
-          class="btn btn-large wave-effect blue" 
-          ng-disabled="propertyAddress==''" 
+          class="btn btn-large wave-effect blue"
           ng-click="property.saveProperty()">
           Save
         </button>
@@ -96,7 +96,7 @@
       <div class="col s6">
         <a 
           class="btn btn-large wave-effect red" 
-          ui-sref="property({id:property.details._id})">
+          ui-sref="property({pid:property.details._id})">
           Cancel
         </a>
     </div>

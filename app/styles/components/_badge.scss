@@ -1,0 +1,25 @@
+/* ==========================================================================
+  Badge
+  ========================================================================== */
+.badge {
+  z-index: 1;
+  &.badge-left {
+    left: 15px;
+    display: table;
+  }
+  &.badge-bottom {
+    bottom: 0px;
+  }
+  &.badge-right {
+    right: -10px;
+  }
+  &.badge-rectangle {
+    @include border-radius(2px);
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: $white;
+    .material-icons {
+      margin: 8px 0px 10px 0px;
+    }
+  }
+}

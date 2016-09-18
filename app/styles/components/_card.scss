@@ -1,15 +1,33 @@
-// Card
-// -------------------------
+/* ==========================================================================
+  Card
+  ========================================================================== */
 .cards-container {
-  column-break-inside: avoid;
+  @include column-count(1); 
+  @include breakpoint($bp--large-up) {
+    @include column-count(2);
+  }
+  @include breakpoint($bp--xlarge-up) {
+    @include column-count(3);
+  }
+}
+
+.cards-container {
+  @include break-inside(avoid);
+  .item {
+    display: block;
+  }
   .card {
     display: inline-block;
     overflow: visible;
+    width: 100%;
   }
 }
 
 .card {
   .card-action {
+    .row {
+      margin-bottom: 0px;
+    }
     span p {
       margin: 0 0 5px;
     }

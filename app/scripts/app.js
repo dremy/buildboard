@@ -23,6 +23,7 @@ angular
     // Ng Config
     'angular-storage',
     'angular-jwt',
+    'ngAnimate',
     // Services
     'angular-zillow',
     'angular-filepicker',

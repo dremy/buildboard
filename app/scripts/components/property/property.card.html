@@ -1,12 +1,44 @@
 <div 
-  class="card"
-  ng-class="'property-' + $ctrl.status.own.value | lowercase">
+  class="card hoverable"
+  ng-mouseover="$ctrl.hoverIn()"
+  ng-mouseleave="$ctrl.hoverOut()"
+  ng-class="{'property-own': $ctrl.status.own.value, 'property-sold': $ctrl.status.sold.value, 'property-interested': $ctrl.status.interested.value }">
   <a ui-sref="property({pid: $ctrl.property._id})">
     <div class="card-image">
+      <!--business-->
+      <span 
+        ng-if="$ctrl.property.useCode == 'SingleFamily'"
+        class="blue badge badge-rectangle badge-left">
+        <i
+          aria-hidden="true"
+          title="House" 
+          class="material-icons">home</i>
+      </span>
+      <!--business-->
+      <span 
+        ng-if="$ctrl.property.useCode == 'VacantResidentialLand'"
+        class="green badge badge-rectangle badge-left">
+        <i
+          aria-hidden="true"
+          title="Land" 
+          class="material-icons">landscape</i>
+      </span>
+      <!--business-->
+      <button 
+        ng-show="$ctrl.hover"
+        ng-href="#"
+        class="btn-floating right waves-effect waves-light white">
+        <i class="material-icons red-text">favorite_border</i>
+      </button>
+      <span 
+        ng-show="$ctrl.hover"
+        class="badge badge-bottom badge-right transparent">
+        <i class="material-icons white-text">more_vert</i>
+      </span>
       <img 
         ng-src="{{$ctrl.property.images[0]}}"
         width="258"
-        height="189">
+        height="189" />
       <span class="card-title">{{$ctrl.property.location.address}}</span>
       <span class="card-subtitle">{{$ctrl.property.location.city}}, {{$ctrl.property.location.state}} {{$ctrl.property.location.zip}}</span>
     </div>
@@ -14,9 +46,39 @@
   <div class="card-content">
     <span
       ng-if="$ctrl.property.price"
-      class="card-title grey-text text-darken-4">{{$ctrl.property.price | currency:"$":0}}<i class="material-icons right">more_vert</i></span>
-    <p class="property-type" ng-show="$ctrl.property.type"><label>Type:</label> {{$ctrl.property.type}}</p>
-    <p>Status: {{$ctrl.status.own.value}}</p>
+      class="card-title grey-text text-darken-4">{{$ctrl.property.price | currency:"$":0}}
+    </span>    
+    <span
+      ng-if="$ctrl.property.zestimate"
+      class="card-title grey-text text-darken-4">
+      {{$ctrl.property.zestimate.amount | currency:"$":0}}
+      <!--<img
+      ng-src="http://www.zillow.com/widgets/GetVersionedResource.htm?path=/static/logos/Zillowlogo_200x50.gif"
+      width="100"
+      height="25"
+      alt="Zillow Real Estate Search" />-->
+    </span>
+    <label ng-if="$ctrl.property.zestimate">Zestimate</label>
+    <span
+        class="badge badge-rectangle transparent">
+        <i
+          ng-if="$ctrl.status.interested.value"
+          title="{{$ctrl.status.interested.value}}" 
+          class="material-icons red-text">favorite</i>
+        <i 
+          ng-if="$ctrl.status.own.value"
+          title="{{$ctrl.status.own.value}}"           
+          class="material-icons blue-text">vpn_key</i>
+        <i 
+          ng-if="$ctrl.status.sold.value"
+          title="{{$ctrl.status.sold.value}}" 
+          class="material-icons amber-text text-lighten-1">attach_money</i>
+      </span>
+    <p
+      class="property-type"
+      ng-show="$ctrl.property.type">
+      <label>Type:</label> {{$ctrl.property.type}}
+    </p>
     <p 
       ng-if="$ctrl.property.description">{{$ctrl.property.description | characters: 120}}</p>
     <p 
@@ -41,7 +103,7 @@
       </span>
       <span 
         class="col s3 center"
-        ng-if="$ctrl.property.bedrooms">
+        ng-if="$ctrl.property.bedrooms > 0">
         <p>
           {{$ctrl.property.bedrooms | number}}
         </p>
@@ -52,7 +114,7 @@
       </span>
       <span
         class="col s3 center"
-        ng-if="$ctrl.property.bathrooms">
+        ng-if="$ctrl.property.bathrooms > 0">
         <p>{{$ctrl.property.bathrooms | number}}
         </p>
         <i

@@ -29,7 +29,7 @@ function propertyEditCtrl($state, $http, prop, messages, preloader, alert) {
       .then(
         function(data) {
           console.log(data);
-          alert.message = 'Congratulations! Node ' + property.details.title + ' is updated!';
+          alert.message = 'Congratulations! ' + property.details.title + ' is updated!';
           alert.type = 'success';
           messages.add(alert.message, alert.type, alert.dt);
         }, function(reason) {
@@ -40,18 +40,31 @@ function propertyEditCtrl($state, $http, prop, messages, preloader, alert) {
         }
       ).then(function() {
           preloader.setState(false);
-          $state.go('property', {id: property.details._id}); //TO DO - Return to original property via params.
+          $state.go('property', {pid: property.details._id}); //TO DO - Return to original property via params.
       });
   }
 
   // Perform on load.
   //-------------------------------
   property.details = prop.data;
+  console.log(property.details);
+  property.useCodes = [
+    {
+      key: "SingleFamily",
+      value: "House"
+    },
+    {
+      key: "VacantResidentialLand",
+      value: "Land"
+    },
+    {
+      key: "",
+      value: "Multi-Family"
+    }];
 
   // Register functions to scope
   //-------------------------------
   property.saveProperty = saveProperty;
-  property.types = ["Home", "Multi-Family", "Lot"];
 }
 
 angular.module('bb.property')

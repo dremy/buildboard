@@ -81,7 +81,7 @@ module.exports = function() {
     getRelationshipsProperties : function(req, res) {
       Relationship
         .find(req.body)
-        .populate('_property', 'title bedrooms bathrooms location images finishedSqFt description')
+        .populate('_property', 'title bedrooms bathrooms location images finishedSqFt description zestimate.amount useCode')
         .populate('_events')
         .populate({
           path: '_boards',

@@ -1,0 +1,69 @@
+// Mixins
+//
+// A mixin is a special kind of multiple inheritance.
+//
+// @bg - Background color
+// @color - Foreground color
+// @transition - transition animations
+// @font-size - change the font size based on rem's
+// @icon - FontAwesome mixin
+// @alpha-attribute - transparency
+// @clearfix - clear both
+// @container - wrap elements with padding
+// @word-wrap - wrap words within the containing element
+// @ellipsis - automatically apply an ellipsis
+// @flex - Flexbox
+//
+// Style guide: code.mixins
+
+/* CSS Transition
+  Usage: @include transition(width,0.3s,ease-out);
+ */
+@mixin transition($transition-property, $transition-time, $method) {
+    -webkit-transition: $transition-property $transition-time $method;
+    -moz-transition: $transition-property $transition-time $method;
+    -ms-transition: $transition-property $transition-time $method;
+    -o-transition: $transition-property $transition-time $method;
+    transition: $transition-property $transition-time $method;
+}
+
+/* CSS Animation
+  Usage: @include animation(changeBgColor 4s ease);
+ */
+@mixin keyframes($animation-name) {
+    @-webkit-keyframes #{$animation-name} {
+        @content;
+    }
+
+    @-moz-keyframes #{$animation-name} {
+        @content;
+    }
+
+    @-ms-keyframes #{$animation-name} {
+        @content;
+    }
+
+    @-o-keyframes #{$animation-name} {
+        @content;
+    }
+
+    @keyframes #{$animation-name} {
+        @content;
+    }
+}
+
+@mixin animation($str) {
+    -webkit-animation: #{$str};
+    -moz-animation: #{$str};
+    -ms-animation: #{$str};
+    -o-animation: #{$str};
+    animation: #{$str};
+}
+
+/* Rem Unit font sizes with relative fallback http:/seesparkbox.com/foundry/scss_rem_mixin_now_with_a_better_fallback
+  Usage: @include font-size(1, large);
+*/
+@mixin font-size($sizeValue: 1.6) {
+    font-size: $sizeValue * 10 + px;
+    font-size: $sizeValue + rem;
+}

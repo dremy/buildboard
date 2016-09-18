@@ -6,33 +6,51 @@
     <div class="container container-wide">
       <div class="row">
         <div class="col s12">
-          <div class="col s12 l6">
-            <h4>{{property.details.location.address}}</h4>
-            <h5>{{property.details.location.city}}, {{property.details.location.state}} {{property.detail.location.zip}}</h5>
+          <div class="row">
           </div>
-          <div 
-            class="col s12 l2" 
-            ng-show="property.details.price">
-            <label>Purchase Price</label>
-            <p>{{property.details.price | currency:"$":0}}</p>
-          </div>
-          <div 
-            class="col s12 l2 center"
-            ng-show="property.details.bedrooms">
-            <label>Bedrooms</label>
-            <p class="bedrooms fact">
-              <i
-                aria-hidden="true" 
-                class="material-icons">hotel</i> {{property.details.bedrooms}}</p>
-          </div>
-          <div
-            class="col s12 l2 center"
-            ng-show="property.details.bathrooms">
-            <label>Bathrooms</label>
-            <p class="bathrooms fact">
-              <i
-                aria-hidden="true" 
-                class="material-icons">wc</i> {{property.details.bathrooms | number}}</p>
+          <div class="row">
+            <div class="col s12 l6">
+              <h4>{{property.details.location.address}}</h4>
+              <h5>{{property.details.location.city}}, {{property.details.location.state}} {{property.detail.location.zip}}</h5>
+            </div>
+            <div 
+              class="col s12 l2" 
+              ng-show="property.details.price">
+              <label>Purchase Price</label>
+              <p>{{property.details.price | currency:"$":0}}</p>
+            </div>
+            <div 
+              class="col s12 l2 center"
+              ng-show="property.details.bedrooms">
+              <h5 class="bedrooms fact">
+                {{property.details.bedrooms}}
+              </h5>
+              <p>
+                <i
+                  aria-hidden="true"
+                  title="Bedrooms"
+                  class="material-icons">hotel</i>
+              </p>
+              <p>
+                <label>Bedrooms</label>
+              </p>
+            </div>
+            <div
+              class="col s12 l2 center"
+              ng-show="property.details.bathrooms">
+              <h5 class="bathrooms fact">
+                {{property.details.bathrooms | number}}
+              </h5>
+              <p>
+                <i
+                  aria-hidden="true"
+                  title="Bathrooms" 
+                  class="material-icons">opacity</i>
+              </p>
+              <p>
+                <label>Bathrooms</label>
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -43,13 +61,28 @@
   class="container container-first container-wide property" 
   bb-active-menu="" 
   bb-active-title="">
-  <!--<div class="row">
+  <div class="row">
     <a class="btn blue float-right"
       ui-sref="propertyEditForm({pid: property.details._id})">Edit Property</a>
-  </div>-->
+  </div>
   <div class="row">
     <div class="col s12">
       <side-nav property="property.details"></side-nav>
+    </div>
+  </div>
+  <div class="row" ng-cloak>
+    <div class="col s12">
+      <img
+        ng-repeat="image in property.details.images" 
+        materialboxed
+        ng-cloak
+        ng-class="{l6:$first}"
+        class="col s12 m6 l3 materialboxed responsive-img"
+        width="400"
+        ng-src="{{image}}"
+        data-caption="Photo #{{$index+1}} | {{property.details.title}}"
+        alt="Photo #{{$index+1}} | {{property.details.title}}"
+        title="Photo #{{$index+1}} | {{property.details.title}}"/>
     </div>
   </div>
   <div class="row" ng-cloak>
@@ -65,6 +98,7 @@
           </div>
           <div class="collapsible-body">
             <div class="row">
+              <p>{{property.details.description}}</p>
               <div 
                 class="col s12 l4" 
                 ng-show="property.details.lotSizeSqFt">
@@ -83,29 +117,6 @@
                 <label>Year Built</label>
                 <p class="year-built fact">{{property.details.yearBuilt | number}}</p>
               </div>
-            </div>
-          </div>
-        </li>
-        <li 
-          class="photos"
-          name="photos"
-          id="photos">
-          <div class="collapsible-header grey lighten-3">
-            <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>   <strong>Photos</strong>
-          </div>
-          <div class="collapsible-body">
-            <div class="row">
-              <img
-                ng-repeat="image in property.details.images" 
-                materialboxed
-                ng-cloak
-                ng-class="{l6:$first}"
-                class="col s12 m6 l3 materialboxed responsive-img"
-                width="400"
-                ng-src="{{image}}"
-                data-caption="Photo #{{$index+1}} | {{property.details.title}}"
-                alt="Photo #{{$index+1}} | {{property.details.title}}"
-                title="Photo #{{$index+1}} | {{property.details.title}}"/>
             </div>
           </div>
         </li>

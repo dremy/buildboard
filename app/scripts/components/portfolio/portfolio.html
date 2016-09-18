@@ -30,6 +30,8 @@
   </div>-->
   <div class="container container-wide">      
     <div class="row">
+    </div>
+    <div class="row">
       <div class="col s12">
         <div class="row center-align">
           <div class="col l4 m4 s12">
@@ -37,22 +39,78 @@
             <p><strong>Properties</strong></p>
           </div>
           <div class="col l4 m4 s12">
-            <h2 class="blue-text">{{propertiesUnits}}</h2>
-            <p><strong>Units</strong></p>
+            <h2 class="blue-text">{{props | sumOfArea:'properties' | number}}</h2>
+            <p><strong>Sq. Ft.</strong></p>
           </div>
           <div class="col l4 m4 s12">
-            <h2 class="blue-text">{{propertiesCosts | currency:"$":0}}</h2>
-            <p><strong>Cost</strong></p>
+            <h2 class="blue-text">{{props | sumOfPropertyAmount:'properties' | currency:"$":0}}</h2>
+            <p><strong>Value</strong></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col m6 s12">
+            <label for="propertySearch">Search</label>
+            <input
+              type="text" 
+              ng-model="searchKey"/>
+          </div>
+          <div class="col m3 s12">
+            <label for="relationship">Relationship</label>
+            <select
+              material-select
+              class="blue-text"
+              name="relationship" 
+              ng-model="relationshipKey">
+              <option value="" > - Any - </option>
+              <option 
+                ng-repeat="status in relationshipStatuses"
+                class="blue-text" 
+                ng-value="{{status}}"
+                ng-attr-selected="{{relationshipStatuses == status && 'selected'}}">{{status}}</option>
+            </select>
+          </div>
+          <div class="col m3 s12">
+            <label for="type">Type</label>
+            <select
+              material-select
+              class="blue-text"
+              name="type" 
+              ng-model="typeKey">
+              <option value="" > - Any - </option>
+              <option 
+                ng-repeat="type in useCodes"
+                class="blue-text"
+                value="{{type.key}}"> {{type.value}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <a ng-href="#">
+              <i 
+                class="material-icons grey-text text-darken-3"
+                title="Boards">dashboard</i>
+            </a>
+            <a ng-href="#">
+              <i 
+                class="material-icons grey-text text-darken-3"
+                title="Map">map</i>
+            </a>
+            <a ng-href="#">
+              <i 
+                class="material-icons grey-text text-darken-3"
+                title="List">view_list</i>
+            </a>
           </div>
         </div>
         <div class="row cards-container">
           <add-property-card
-            class="col l4 m6 s12"></add-property-card>
+            class="item"></add-property-card>
           <property-card
             property="property._property"
             status="property.status"
-            class="col l4 m6 s12" 
-            ng-repeat="property in properties | filter:searchKey">
+            class="item"
+            ng-repeat="property in props=(properties | filter: searchKey | filter: relationshipKey | filter: typeKey)">
           </property-card>
         </div>
       </div>
@@ -64,7 +122,7 @@
       scrollwheel="false"
       zoom-to-include-markers="auto"
       geo-fallback-center="current-location">
-      <marker ng-repeat="property in properties | filter:searchKey"
+      <marker ng-repeat="property in properties | filter:searchKey | filter: relationshipKey | filter: typeKey"
         position="{{property._property.location.formatted}}"
         title="{{property._property.title}}"
         centered="true">

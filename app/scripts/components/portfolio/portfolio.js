@@ -23,7 +23,6 @@ function portfolioCtrl($scope, relationshipService, auth, properties, NgMap, pre
       relationshipService.queryRelationshipsProperties(_user).then(
         function(properties) { // SUCCESS - Nodes loaded.
           $scope.properties = properties.data; // Display
-          $scope.propertiesCosts = propertiesCosts(properties); // Update Costs Value 
         }, function(reason) { // ERROR - Nodes NOT loaded.
           console.log(reason);
           alert.message = "Why you no like me... " + reason.statusText;
@@ -37,34 +36,72 @@ function portfolioCtrl($scope, relationshipService, auth, properties, NgMap, pre
     }, 2000);
   }
 
-  // REPORT - UNIT COUNT: Gather total unit count
-  function propertiesUnits(properties) {
-    var propUnits = 0;
-    /*TO DO - for (var i = 0; i < $scope.properties.length; i++) {
-      propUnits += properties[i].field_units.und.length;
-    }*/
-    return propUnits;
-  }
-
-  // REPORT - COSTS COUNT:  Gather total costs
-  function propertiesCosts(properties) {
-    var propCosts = 0;
-    /*for (var i = 0; i < $scope.properties.length; i++) {
-      propCosts += parseInt(properties[i].field_purchase_price.und[0].value);
-    }*/
-    return propCosts;
-  }
+  //Register functions to $scope.
+  //------------------------------------
+  $scope.refreshPortfolio = refreshPortfolio;
   
   //Perform on load.
   //------------------------------------
   $scope.properties = properties.data;
-  $scope.propertiesUnits = 0;
-  $scope.propertiesCosts = 0;
-
-  //Register functions to $scope.
-  //------------------------------------
-  $scope.refreshPortfolio = refreshPortfolio;
+  $scope.relationshipStatuses = ["Interested", "Own", "Sold"];
+  $scope.useCodes = [
+    {
+      key: "SingleFamily",
+      value: "House"
+    },
+    {
+      key: "VacantResidentialLand",
+      value: "Land"
+    },
+    {
+      key: "",
+      value: "Multi-Family"
+    }];
 }
 
 angular.module('buildboardApp')
-  .controller('PortfolioCtrl', portfolioCtrl);
+  .controller('PortfolioCtrl', portfolioCtrl)
+  .filter('sumOfValue', function () {
+    return function (data, key) {        
+      if (angular.isUndefined(data) && angular.isUndefined(key))
+          return 0;        
+      var sum = 0;        
+      angular.forEach(data,function(value){
+          sum = sum + parseInt(value[key]);
+      });     
+      return sum;
+    }
+  })
+  .filter('sumOfPropertyAmount', function () {
+    return function (data, key) {        
+      if (angular.isUndefined(data) && angular.isUndefined(key))
+          return 0;        
+      var sum = 0;        
+      angular.forEach(data,function(value, key){
+          if(value._property.zestimate) sum = sum + parseInt(value._property.zestimate.amount);
+      });     
+      return sum;
+    }
+  })
+  .filter('sumOfArea', function () {
+    return function (data, key) {        
+      if (angular.isUndefined(data) && angular.isUndefined(key))
+          return 0;        
+      var sum = 0;        
+      angular.forEach(data,function(value, key){
+          if(value._property.finishedSqFt) sum = sum + parseInt(value._property.finishedSqFt);
+      });     
+      return sum;
+    }
+  })
+  .filter('totalSumPriceQty', function () {
+    return function (data, key1, key2) {        
+      if (angular.isUndefined(data) && angular.isUndefined(key1)  && angular.isUndefined(key2)) 
+          return 0;        
+      var sum = 0;
+      angular.forEach(data,function(value){
+          sum = sum + (parseInt(value[key1]) * parseInt(value[key2]));
+      });
+      return sum;
+    }
+  });

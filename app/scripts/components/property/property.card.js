@@ -7,7 +7,18 @@
  * # Property Card Component
  * Controller of the buildboardApp
  */
-function propertyCardCtrl() {  
+function propertyCardCtrl() {
+  
+  function hoverIn() {
+    this.hover = true;
+  }
+
+  function hoverOut() {
+    this.hover = false;
+  }
+
+  this.hoverIn = hoverIn;
+  this.hoverOut = hoverOut;
 }
 
 angular.module('bb.property')
