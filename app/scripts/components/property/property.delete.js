@@ -14,7 +14,7 @@ function propertyDeleteCtrl(relationshipService, $state, rel, preloader, message
   //------------------------------------
   var property = this,
   id = {
-    _id: rel.data._id
+    _id: rel.data[0]._id
   };
 
   // Define Functions
@@ -26,9 +26,9 @@ function propertyDeleteCtrl(relationshipService, $state, rel, preloader, message
 
   function removeProperty() {
     preloader.setState(true);
-    relationshipService.removeRelationship(rel.data)
+    relationshipService.removeRelationship(id)
       .success(function(data) {
-        alert.message = 'Congratulations! ' + rel.data._property.title + ' has been deleted!';
+        alert.message = 'Congratulations! ' + property.details.title + ' has been deleted!';
         alert.type = 'success';
         messages.add(alert.message, alert.type, alert.dt);
       })
@@ -44,7 +44,8 @@ function propertyDeleteCtrl(relationshipService, $state, rel, preloader, message
   }
   //Perform on load.
   //------------------------------------
-  property.details = rel.data;
+  console.log(rel.data[0]._property);
+  property.details = rel.data[0]._property;
   //Register functions to $scope.
   //------------------------------------
   property.cancelProperty = cancelProperty;
