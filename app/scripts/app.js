@@ -19,6 +19,7 @@ angular
     'ui.bootstrap',
     'ui.materialize',
     'ui.calendar',
+    'truncate',
     // Ng Config
     'angular-storage',
     'angular-jwt',

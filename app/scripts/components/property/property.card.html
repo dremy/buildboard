@@ -12,27 +12,70 @@
     </div>
   </a>
   <div class="card-content">
+    <span
+      ng-if="$ctrl.property.price"
+      class="card-title grey-text text-darken-4">{{$ctrl.property.price | currency:"$":0}}<i class="material-icons right">more_vert</i></span>
     <p class="property-type" ng-show="$ctrl.property.type"><label>Type:</label> {{$ctrl.property.type}}</p>
-    <p class="property-tag" ng-show="$ctrl.property.tags"><i class="material-icons">label</i><label>Tags</label><span ng-repeat="tag in $ctrl.property.tags == true"> {{tag}}</span></p>
-    <p ng-show="$ctrl.property.price">{{$ctrl.property.price | currency:"$":0}}</p>
-    <p ng-show="$ctrl.property.teaser">{{$ctrl.property.teaser}}</p>
-    <p>Sq. Ft. {{$ctrl.property.finishedSqFt | number}}</p> 
-    <p>Bedrooms: {{$ctrl.property.bedrooms}}</p>
-    <p>Bathrooms: {{$ctrl.property.bathrooms}}</p>
     <p>Status: {{$ctrl.status.own.value}}</p>
+    <p 
+      ng-if="$ctrl.property.description">{{$ctrl.property.description | characters: 120}}</p>
+    <p 
+      class="property-tag"
+      ng-show="$ctrl.property.tags">
+      <i class="material-icons">label</i>
+      <label>Tags</label>
+      <span ng-repeat="tag in $ctrl.property.tags == true"> {{tag}}</span>
+    </p>
   </div>
   <div class="card-action">
-    <!--<button 
+    <div class="row">  
+      <span 
+        class="col s6 center"
+        ng-if="$ctrl.property.finishedSqFt">
+        <p>{{$ctrl.property.finishedSqFt | number}} sq. ft.
+        </p>
+        <i
+        aria-hidden="true"
+        title="Sq. Ft."
+        class="material-icons">straighten</i>
+      </span>
+      <span 
+        class="col s3 center"
+        ng-if="$ctrl.property.bedrooms">
+        <p>
+          {{$ctrl.property.bedrooms | number}}
+        </p>
+        <i
+        aria-hidden="true"
+        title="Bedrooms"
+        class="material-icons">hotel</i>
+      </span>
+      <span
+        class="col s3 center"
+        ng-if="$ctrl.property.bathrooms">
+        <p>{{$ctrl.property.bathrooms | number}}
+        </p>
+        <i
+          aria-hidden="true"
+          title="Bathrooms" 
+          class="material-icons">opacity</i>
+      </span>
+    </div>
+    <!--<i
+      aria-hidden="true"
+      title="Bathrooms" 
+      class="material-icons red-text">favorite_border</i>
+    <button 
       class="btn blue-text white"
       ui-sref="propertyEditForm({pid: $ctrl.property._id})">
       <i class="material-icons">mode_edit</i>
       <span>Edit</span>
-    </button>-->
+    </button>
     <button 
       class="btn blue-text white"
       ui-sref="propertyDeleteForm({pid: $ctrl.property._id})">
       <i class="material-icons">delete</i>
       <span>Remove</span>
-    </button>
+    </button>-->
   </div>
 </div>
