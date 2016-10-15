@@ -3,6 +3,12 @@
 This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
 version 0.15.1.
 
+## Initial Setup
+Run `npm install` to install node & bower modules.
+Create an `env.js` file to store specific environment variables.
+Install mongodb with homebrew `brew install mongodb`
+Run `node server.js`
+
 ## Build & development
 
 Run `bower install [package-name] --save` to update bower.json
