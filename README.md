@@ -4,10 +4,11 @@ This project is generated with [yo angular generator](https://github.com/yeoman/
 version 0.15.1.
 
 ## Initial Setup
-Run `npm install` to install node & bower modules.
-Create an `env.js` file to store specific environment variables.
-Install mongodb with homebrew `brew install mongodb`
-Run `node server.js`
+1. Run `npm install` to install node & bower modules.
+2. Create an `env.js` file to store specific environment variables.
+3. Install mongodb with homebrew `brew install mongodb`
+4. Add heroku remote `git remote add heroku https://git.heroku.com/bb-prod.git`
+5. Run `node server.js`
 
 ## Build & development
 
