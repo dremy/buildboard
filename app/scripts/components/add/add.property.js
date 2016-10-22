@@ -11,6 +11,8 @@ function addPropertyCtrl(zillowZervice, propertyMaker, propertyService, relation
 
   // Initialize variables.
   //-------------------------------
+
+  // TO DO - Use let.
   var property = this;
   var location = {
     address: '',
@@ -18,6 +20,8 @@ function addPropertyCtrl(zillowZervice, propertyMaker, propertyService, relation
     state: '',
     zip: ''
   }
+
+  // TO DO - Import const RELATIONSHIP_STATUSES and assign.
   property.relationship = {
     statuses: ["Interested", "Own", "Sold"] //If adding property one by one, not browsing by map, assume interest.
   };
@@ -27,50 +31,58 @@ function addPropertyCtrl(zillowZervice, propertyMaker, propertyService, relation
     property.place = this.getPlace();
     property.map.setCenter(property.place.geometry.location);
     property.markers = [];
-    property.markers.push({pos:[property.place.geometry.location.lat(), property.place.geometry.location.lng()]})
+    property.markers.push({pos:[property.place.geometry.location.lat(), property.place.geometry.location.lng()]}) 
   }
 
   function cancelAddProperty() {
     $state.go('portfolio');
   }
 
-  function confirmProperty() {
-    
-    //Setup our vars.
-    var
-    address = '',
-    city = '',
-    state = '',
-    zip = '';
-
-    if (property.place.address_components) {
-      for (var i = 0; i < property.place.address_components.length; i++) {
-        switch (property.place.address_components[i].types[0]) {
+  function buildLocation(addressComponents = {}) {
+    if (addressComponents) {
+      //Setup our vars.
+      var location, streetNumber, route, address, city, state, zip, requestType;
+      // For each component, check for each...
+      for (let i = 0; i < addressComponents.length; i++) {
+        switch (addressComponents[i].types[0]) { 
           case 'street_number':
-            address += property.place.address_components[i].long_name;
+            streetNumber = addressComponents[i].long_name;
           break;
           case 'route':
-            address += ' ' + property.place.address_components[i].short_name;
+            route = addressComponents[i].short_name;
           break;
           case 'locality':
-            city = property.place.address_components[i].long_name;
+            city = addressComponents[i].long_name;
           break;
           case 'administrative_area_level_1':
-            state = property.place.address_components[i].short_name;
+            state = addressComponents[i].short_name;
           break;
           case 'postal_code':
-            zip = property.place.address_components[i].long_name;
+            zip = addressComponents[i].long_name;
           break;
         }
       }
+
+      // Setup address & request type.
+      address = `${streetNumber} ${route}`;
+      requestType = 'address';
+
+      // Setup location object.
       location = {
-        requestType: 'address',
-        address: address,
-        city: city,
-        state: state,
-        zip: zip
-      }
+        requestType,
+        address,
+        city,
+        state,
+        zip
+      };
+
+    // Return setup location  
+    return location;
     }
+  }
+
+  function confirmProperty() {
+    let location = buildLocation(property.place.address_components);
     
     propertyMaker.addProperty(location).then(function(prop) {
       console.log(prop);
@@ -84,7 +96,7 @@ function addPropertyCtrl(zillowZervice, propertyMaker, propertyService, relation
     // Save property. 
     propertyService.addProperty(property.info).success(function(data) {
       console.log(data);
-      alert.message = 'Congratulations! ' + data.title + ' is created!';
+      alert.message = `Congratulations! ${data.title} is created!`;
       alert.type = 'success';
       messages.add(alert.message, alert.type, alert.dt);
       property.info._id = data._id;
