@@ -27,11 +27,9 @@ function alertingCtrl(messages) {
 }
 
 function messages() {
-
-  var messages = {};
-
+  messages = {}
   messages.list = [];
-  messages.add = function(message, type, dt = 3000) {
+  messages.add = (message, type, dt = 3000) => {
     messages.list.push(
       {
         id: messages.list.length,

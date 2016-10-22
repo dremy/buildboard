@@ -176,7 +176,8 @@
     </header>
 
     <section class="content" ng-cloak>
-      <div ng-controller="AlertingCtrl as alerting" class="container container-wide" ng-class="{'alert-box': admin.isActive('Home')}" ng-show="alerting.alerts != ''">
+      <!--Alert-->
+      <div ng-controller="AlertingCtrl as alerting" class="container-full" ng-class="{'alert-box': admin.isActive('Home')}" ng-show="alerting.alerts != ''">
         <div class="row">
           <uib-alert 
             ng-repeat="alert in alerting.alerts" 
@@ -185,11 +186,13 @@
             close="alerting.closeAlert($index)">{{alert.message}}</uib-alert>
         </div>
       </div>
+      <!-- Title -->
       <div class="container container-wide" ng-show="!admin.isActive('')">
         <div class="row">
           <h3>{{getTitle()}}</h3>
         </div>
       </div>
+      <!-- Content -->
       <div ui-view=""></div>
     </section>
 

@@ -529,6 +529,13 @@ a.additional-items:hover {
   margin-bottom: 16px;
 }
 
+/* line 1, components/_alert.scss */
+.alert {
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+}
+
 /* line 5, components/_accordion.scss */
 .collapsible .collapsible-body .row {
   padding: 0px 20px;
